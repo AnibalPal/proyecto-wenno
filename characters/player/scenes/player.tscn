@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://buc8t17kjk5nj"]
+
+[ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="1_hd4n7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ittr2"]
+atlas = ExtResource("1_hd4n7")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_41mm0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ittr2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36bgg"]
+radius = 12.0
+height = 56.0
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="StateMachine"]
+
+[node name="Run" type="Node" parent="StateMachine"]
+
+[node name="Jump" type="Node" parent="StateMachine"]
+
+[node name="ShouldRotate" type="Node2D" parent="."]
+
+[node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
+scale = Vector2(0.25, 0.5)
+sprite_frames = SubResource("SpriteFrames_41mm0")
+animation = &"Idle"
+
+[node name="ShouldNotRotate" type="Node2D" parent="."]
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_36bgg")
