@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=11 format=3 uid="uid://buc8t17kjk5nj"]
 
-[ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="1_hd4n7"]
+[ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
+[ext_resource type="Script" uid="uid://bpql5lf4gvpvd" path="res://characters/player/scripts/state_machine.gd" id="2_41mm0"]
+[ext_resource type="Script" uid="uid://cm0wive07ip7b" path="res://characters/player/scripts/idle.gd" id="3_2pynv"]
+[ext_resource type="Script" uid="uid://cbdohtxa72b10" path="res://characters/player/scripts/run.gd" id="4_ejf8q"]
+[ext_resource type="Script" uid="uid://c05dfnjnbqsrt" path="res://characters/player/scripts/jump.gd" id="5_p04ig"]
+[ext_resource type="Script" uid="uid://idypv88idqi8" path="res://characters/player/scripts/fall.gd" id="6_2kdo7"]
+[ext_resource type="Texture2D" uid="uid://bfmpto1uslv1u" path="res://assets/prototype/beige_block48x64.png" id="7_2kdo7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ittr2"]
-atlas = ExtResource("1_hd4n7")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2suro"]
+atlas = ExtResource("7_2kdo7")
+region = Rect2(0, 0, 48, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_41mm0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ittr2")
+"texture": SubResource("AtlasTexture_2suro")
 }],
 "loop": true,
 "name": &"Idle",
@@ -18,23 +24,31 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36bgg"]
-radius = 12.0
-height = 56.0
+radius = 16.0
+height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_ittr2")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_41mm0")
+initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_2pynv")
 
 [node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("4_ejf8q")
 
 [node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("5_p04ig")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("6_2kdo7")
 
 [node name="ShouldRotate" type="Node2D" parent="."]
 
 [node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
-scale = Vector2(0.25, 0.5)
 sprite_frames = SubResource("SpriteFrames_41mm0")
 animation = &"Idle"
 
