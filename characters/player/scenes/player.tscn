@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=13 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
-[ext_resource type="Script" uid="uid://bpql5lf4gvpvd" path="res://characters/player/scripts/state_machine.gd" id="2_41mm0"]
-[ext_resource type="Script" uid="uid://cm0wive07ip7b" path="res://characters/player/scripts/idle.gd" id="3_2pynv"]
-[ext_resource type="Script" uid="uid://cbdohtxa72b10" path="res://characters/player/scripts/run.gd" id="4_ejf8q"]
-[ext_resource type="Script" uid="uid://c05dfnjnbqsrt" path="res://characters/player/scripts/jump.gd" id="5_p04ig"]
-[ext_resource type="Script" uid="uid://idypv88idqi8" path="res://characters/player/scripts/fall.gd" id="6_2kdo7"]
+[ext_resource type="Script" uid="uid://bpql5lf4gvpvd" path="res://characters/state_machine/state_machine.gd" id="2_41mm0"]
+[ext_resource type="Script" uid="uid://cm0wive07ip7b" path="res://characters/player/scripts/states/idle.gd" id="3_2pynv"]
+[ext_resource type="Script" uid="uid://cbdohtxa72b10" path="res://characters/player/scripts/states/run.gd" id="4_ejf8q"]
+[ext_resource type="Script" uid="uid://c05dfnjnbqsrt" path="res://characters/player/scripts/states/jump.gd" id="5_p04ig"]
+[ext_resource type="Script" uid="uid://idypv88idqi8" path="res://characters/player/scripts/states/fall.gd" id="6_2kdo7"]
 [ext_resource type="Texture2D" uid="uid://bfmpto1uslv1u" path="res://assets/prototype/beige_block48x64.png" id="7_2kdo7"]
+[ext_resource type="Script" uid="uid://4lddnoeaxjeo" path="res://characters/player/scripts/states/dash.gd" id="7_2suro"]
+[ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2suro"]
 atlas = ExtResource("7_2kdo7")
@@ -23,12 +25,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36bgg"]
-radius = 16.0
-height = 64.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2suro"]
+size = Vector2(32, 48)
 
 [node name="Player" type="CharacterBody2D"]
+floor_constant_speed = true
+floor_snap_length = 5.0
 script = ExtResource("1_ittr2")
+speed = 300
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_41mm0")
@@ -46,13 +50,61 @@ script = ExtResource("5_p04ig")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("6_2kdo7")
 
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("7_2suro")
+
 [node name="ShouldRotate" type="Node2D" parent="."]
 
-[node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
+[node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 sprite_frames = SubResource("SpriteFrames_41mm0")
 animation = &"Idle"
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_36bgg")
+shape = SubResource("RectangleShape2D_2suro")
+
+[node name="DebugInfo" type="CanvasLayer" parent="." node_paths=PackedStringArray("entity", "entity_state_machine")]
+visible = false
+script = ExtResource("9_gy3q1")
+entity = NodePath("..")
+entity_state_machine = NodePath("../StateMachine")
+
+[node name="InfoContainer" type="VBoxContainer" parent="DebugInfo"]
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 143.0
+offset_bottom = 101.0
+
+[node name="XVelocityContainer" type="HBoxContainer" parent="DebugInfo/InfoContainer"]
+layout_mode = 2
+
+[node name="XVelocity" type="Label" parent="DebugInfo/InfoContainer/XVelocityContainer"]
+layout_mode = 2
+text = "Velocidad x: "
+
+[node name="Value" type="Label" parent="DebugInfo/InfoContainer/XVelocityContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="YVelocityContainer" type="HBoxContainer" parent="DebugInfo/InfoContainer"]
+layout_mode = 2
+
+[node name="YVelocity" type="Label" parent="DebugInfo/InfoContainer/YVelocityContainer"]
+layout_mode = 2
+text = "Velocidad y: "
+
+[node name="Value" type="Label" parent="DebugInfo/InfoContainer/YVelocityContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="StateContainer" type="HBoxContainer" parent="DebugInfo/InfoContainer"]
+layout_mode = 2
+
+[node name="State" type="Label" parent="DebugInfo/InfoContainer/StateContainer"]
+layout_mode = 2
+text = "Estado: "
+
+[node name="Value" type="Label" parent="DebugInfo/InfoContainer/StateContainer"]
+layout_mode = 2
+text = "Idle"

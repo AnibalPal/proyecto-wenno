@@ -10,16 +10,14 @@ func state_process(_delta: float) -> void:
 	return
 
 func state_physics_process(_delta: float) -> void:
-	player.velocity.y += player.gravity * _delta
-	
-	var x_direction = Input.get_axis("left", "right")
-	player.velocity.x = player.speed * x_direction
-	
+	player.enable_gravity(_delta)
+	player.enable_x_movement()
+	handle_transitions()	
+	player.move_and_slide()
+
+func handle_transitions() -> void:
 	if(player.is_on_floor()):
-		if(is_equal_approx(x_direction, 0.0)):
+		if(is_equal_approx(player.velocity.x, 0.0)):
 			s_finished.emit(IDLE)
 		else:
 			s_finished.emit(RUN)
-	
-		
-	player.move_and_slide()
