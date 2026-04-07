@@ -4,7 +4,12 @@ extends PlayerState
 func enter(_data: Dictionary) -> void:
 	if(_data.has("trigger_jump")):
 		if(_data["trigger_jump"]):
-			s_finished.emit(state_data.JUMP)
+			# Go down logic when holding down from the input buffer case
+			if(player.floor_detection.is_colliding() and Input.is_action_pressed("down")):
+				player.position.y += 1
+				s_finished.emit(state_data.FALL)
+			else:
+				s_finished.emit(state_data.JUMP)
 			return
 
 func state_ready() -> void:
@@ -24,6 +29,13 @@ func handle_transitions() -> void:
 	if(!player.is_on_floor()):
 		s_finished.emit(state_data.FALL, {"activate_coyote": true})
 		return
+
+	if(player.floor_detection.is_colliding()):
+		# Go down logic normally
+		if(Input.is_action_just_pressed("jump") and Input.is_action_pressed("down")):
+			player.position.y += 1
+			s_finished.emit(state_data.FALL)
+			return
 
 	if(Input.is_action_just_pressed("jump")):
 		s_finished.emit(state_data.JUMP)

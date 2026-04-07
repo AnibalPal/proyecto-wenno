@@ -69,6 +69,10 @@ animation = &"Idle"
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
 
+[node name="FloorDetection" type="RayCast2D" parent="ShouldNotRotate"]
+position = Vector2(0, 24)
+target_position = Vector2(0, 16)
+
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2suro")
 

@@ -8,7 +8,6 @@ func _ready() -> void:
 	state_machine_ready()
 
 func is_transition_active(from: String, to: String) -> bool:
-	print(from, to)
 	if(state_data.transitions[from].has(to)):
 		return state_data.transitions[from][to]
 	else:

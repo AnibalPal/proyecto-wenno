@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var jump_impulse := 200
 
 @onready var should_rotate := $"ShouldRotate"
+@onready var floor_detection: RayCast2D = $ShouldNotRotate/FloorDetection
 
 # Globar vars
 var facing_right := true
