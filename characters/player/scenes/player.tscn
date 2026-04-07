@@ -50,6 +50,10 @@ script = ExtResource("5_p04ig")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("6_2kdo7")
 
+[node name="CoyoteTime" type="Timer" parent="StateMachine/Fall"]
+wait_time = 0.15
+one_shot = true
+
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("7_2suro")
 
@@ -108,3 +112,5 @@ text = "Estado: "
 [node name="Value" type="Label" parent="DebugInfo/InfoContainer/StateContainer"]
 layout_mode = 2
 text = "Idle"
+
+[connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]

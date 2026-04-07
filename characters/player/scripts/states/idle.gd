@@ -18,7 +18,7 @@ func state_physics_process(_delta: float) -> void:
 
 func handle_transitions() -> void:
 	if(!player.is_on_floor()):
-		s_finished.emit(state_data.FALL)
+		s_finished.emit(state_data.FALL, {"activate_coyote": true})
 		return
 	
 	if(Input.is_action_just_pressed("jump")):

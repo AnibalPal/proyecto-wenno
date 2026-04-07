@@ -19,6 +19,7 @@ static var transitions = {
 		FALL: {
 			IDLE: true,
 			RUN: true,
+			JUMP: true
 		},
 		JUMP: {
 			FALL: true,

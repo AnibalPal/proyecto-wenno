@@ -2,7 +2,7 @@
 extends PlayerState
 
 func enter(_data: Dictionary) -> void:
-	return
+	reset_state()
 
 func state_ready() -> void:
 	return
@@ -18,4 +18,8 @@ func state_physics_process(_delta: float) -> void:
 		player.move_and_slide()
 
 func handle_transitions() -> void:
+	pass
+
+# Use if there are variables that should be reset when entering this state
+func reset_state()  -> void:
 	pass
