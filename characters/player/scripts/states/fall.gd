@@ -12,6 +12,7 @@ func enter(_data: Dictionary) -> void:
 	if(_data.has("activate_coyote")):
 		coyote_jump_available = true
 		coyote_time.start()
+	player.velocity.y = 0.0
 
 func state_ready() -> void:
 	return
