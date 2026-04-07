@@ -2,6 +2,10 @@
 extends PlayerState
 
 func enter(_data: Dictionary) -> void:
+	if(_data.has("trigger_jump")):
+		if(_data["trigger_jump"]):
+			s_finished.emit(state_data.JUMP)
+			return
 	player.velocity = Vector2.ZERO
 
 func state_ready() -> void:

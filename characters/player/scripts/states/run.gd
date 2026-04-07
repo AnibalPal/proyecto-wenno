@@ -2,7 +2,10 @@
 extends PlayerState
 
 func enter(_data: Dictionary) -> void:
-	return
+	if(_data.has("trigger_jump")):
+		if(_data["trigger_jump"]):
+			s_finished.emit(state_data.JUMP)
+			return
 
 func state_ready() -> void:
 	return

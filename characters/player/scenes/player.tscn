@@ -54,6 +54,10 @@ script = ExtResource("6_2kdo7")
 wait_time = 0.15
 one_shot = true
 
+[node name="InputBuffer" type="Timer" parent="StateMachine/Fall"]
+wait_time = 0.15
+one_shot = true
+
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("7_2suro")
 
@@ -114,3 +118,4 @@ layout_mode = 2
 text = "Idle"
 
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
+[connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]

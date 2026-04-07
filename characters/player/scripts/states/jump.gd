@@ -18,5 +18,6 @@ func state_physics_process(_delta: float) -> void:
 		player.move_and_slide()
 
 func handle_transitions() -> void:
+	
 	if(player.velocity.y > 0):
 		s_finished.emit(state_data.FALL)

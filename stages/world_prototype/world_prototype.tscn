@@ -36,7 +36,10 @@ tile_set = SubResource("TileSet_2i1t4")
 position = Vector2(80, 64)
 debug_mode = true
 speed = 200
-gravity = 500
+gravity = 400
 jump_impulse = 300
+
+[node name="InputBuffer" parent="Player/StateMachine/Fall" index="1"]
+wait_time = 0.1
 
 [editable path="Player"]
