@@ -36,4 +36,7 @@ tile_set = SubResource("TileSet_2i1t4")
 position = Vector2(80, 64)
 debug_mode = true
 speed = 200
+gravity = 500
 jump_impulse = 300
+
+[editable path="Player"]

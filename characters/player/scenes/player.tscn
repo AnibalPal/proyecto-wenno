@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
-[ext_resource type="Script" uid="uid://bpql5lf4gvpvd" path="res://characters/state_machine/state_machine.gd" id="2_41mm0"]
+[ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
 [ext_resource type="Script" uid="uid://cm0wive07ip7b" path="res://characters/player/scripts/states/idle.gd" id="3_2pynv"]
 [ext_resource type="Script" uid="uid://cbdohtxa72b10" path="res://characters/player/scripts/states/run.gd" id="4_ejf8q"]
 [ext_resource type="Script" uid="uid://c05dfnjnbqsrt" path="res://characters/player/scripts/states/jump.gd" id="5_p04ig"]
@@ -35,7 +35,7 @@ script = ExtResource("1_ittr2")
 speed = 300
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_41mm0")
+script = ExtResource("2_gy3q1")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]

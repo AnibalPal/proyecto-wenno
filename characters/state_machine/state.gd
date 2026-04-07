@@ -4,6 +4,18 @@ extends Node
 
 signal s_finished
 
+@export var active := true:
+	set(value):
+		active = value
+		update_configuration_warnings()
+
+func _get_configuration_warnings():
+	if !active:
+		return ["This node is inactive"]
+	else:
+		return []
+
+
 func enter(_data: Dictionary) -> void:
 	return
 

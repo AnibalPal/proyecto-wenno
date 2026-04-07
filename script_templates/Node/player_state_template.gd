@@ -1,3 +1,4 @@
+@tool
 extends PlayerState
 
 func enter(_data: Dictionary) -> void:
@@ -10,10 +11,11 @@ func state_process(_delta: float) -> void:
 	return
 
 func state_physics_process(_delta: float) -> void:
-	# player.enable_gravity(_delta)
-	# player.enable_x_movement()
-	handle_transitions()
-	player.move_and_slide()
+	if(!active):
+		# player.enable_gravity(_delta)
+		# player.enable_x_movement()
+		handle_transitions()
+		player.move_and_slide()
 
 func handle_transitions() -> void:
 	pass
