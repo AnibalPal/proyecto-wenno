@@ -2,19 +2,37 @@
 extends Node2D
 class_name CameraParams
 
+@export var draw_guideline := true
+@export var guideline_color := Color.RED
+@export var guideline_width := 6
+
 @export var line_color := Color.GREEN
 @export var line_width := 3
 
 @onready var top_left: Node2D = $TopLeft
 @onready var bottom_right: Node2D = $BottomRight
-@onready var camera_icon: Sprite2D = $CameraChangeTrigger/CameraIcon
-@onready var camera_collision: CollisionShape2D = $CameraChangeTrigger/CameraCollision
-@onready var camera_change_trigger: Area2D = $CameraChangeTrigger
+@onready var camera_triggers: Node2D = $CameraTriggers
 
 signal s_camera_params_changed(params: Dictionary)
 
+func _ready() -> void:
+	for camera_change_trigger: CameraChangeTrigger in camera_triggers.get_children():
+		camera_change_trigger.area_entered.connect(_on_camera_change_trigger_area_entered)
+
 func _draw() -> void:
 	if(Engine.is_editor_hint()):
+		# Draw project size guideline
+		if(draw_guideline):
+			var base_width = ProjectSettings.get_setting("display/window/size/viewport_width")
+			var base_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+			var base_size = Vector2(base_width, base_height)
+			var base_rect_viewport = Rect2(
+				Vector2.ZERO,
+				base_size
+			)
+			draw_rect(base_rect_viewport, guideline_color, false, guideline_width)
+		
+		# Draw camera bounds
 		var rect_to_draw = Rect2(
 			top_left.position, 
 			bottom_right.position - top_left.position, 
@@ -23,12 +41,13 @@ func _draw() -> void:
 
 func _process(_delta: float) -> void:
 	if(Engine.is_editor_hint()):
-		camera_icon.show()
-		camera_icon.modulate = line_color
-		camera_collision.debug_color = Color(line_color, 0.2)
+		for camera_change_trigger: CameraChangeTrigger in camera_triggers.get_children():
+			camera_change_trigger.show_camera_icon()
+			camera_change_trigger.set_colors(line_color)
 		queue_redraw()
 	else:
-		camera_icon.hide()
+		for camera_change_trigger: CameraChangeTrigger in camera_triggers.get_children():
+			camera_change_trigger.hide_camera_icon()
 
 func get_bounds():
 	return {
