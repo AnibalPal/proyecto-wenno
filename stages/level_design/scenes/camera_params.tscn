@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3qgmya5ej67y"]
+
+[ext_resource type="Script" uid="uid://cia73211sbs5j" path="res://stages/level_design/scripts/camera_params.gd" id="1_ug6ff"]
+[ext_resource type="Texture2D" uid="uid://b70eyfbg51noy" path="res://assets/icons/camera_icon32.png" id="2_vswps"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vswps"]
+size = Vector2(48, 48)
+
+[node name="CameraParams" type="Node2D"]
+script = ExtResource("1_ug6ff")
+
+[node name="TopLeft" type="Node2D" parent="."]
+
+[node name="BottomRight" type="Node2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="CameraChangeTrigger" type="Area2D" parent="."]
+position = Vector2(320, 192)
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CameraCollision" type="CollisionShape2D" parent="CameraChangeTrigger"]
+shape = SubResource("RectangleShape2D_vswps")
+debug_color = Color(0, 1, 0, 0.2)
+
+[node name="CameraIcon" type="Sprite2D" parent="CameraChangeTrigger"]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_vswps")
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="CameraChangeTrigger" to="." method="_on_camera_change_trigger_area_entered"]

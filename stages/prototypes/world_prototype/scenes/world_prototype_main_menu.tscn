@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://drf86gl11r0v7"]
 
-[ext_resource type="Script" uid="uid://bw7bi1oqeuc3y" path="res://stages/world_prototype/scripts/world_prototype_main_menu.gd" id="1_bich8"]
+[ext_resource type="Script" uid="uid://bw7bi1oqeuc3y" path="res://stages/prototypes/world_prototype/scripts/world_prototype_main_menu.gd" id="1_bich8"]
 
 [node name="WorldPrototypeMainMenu" type="Control"]
 layout_mode = 3

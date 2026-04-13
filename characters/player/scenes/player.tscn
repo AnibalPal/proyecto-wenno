@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=14 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -24,6 +24,9 @@ animations = [{
 "name": &"Idle",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy3q1"]
+size = Vector2(32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2suro"]
 size = Vector2(32, 48)
@@ -73,6 +76,14 @@ animation = &"Idle"
 position = Vector2(0, 24)
 target_position = Vector2(0, 16)
 collision_mask = 2
+
+[node name="PlayerTrigger" type="Area2D" parent="ShouldNotRotate"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="ShouldNotRotate/PlayerTrigger"]
+shape = SubResource("RectangleShape2D_gy3q1")
+debug_color = Color(0.3023559, 0.7224286, 0.47187412, 0.41960785)
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2suro")
