@@ -1,6 +1,7 @@
 extends Node
 class_name CameraManager
 
+@export var tween_duration := 2.0
 @export var player_camera : Camera2D
 @export var initial_params : CameraParams
 
@@ -40,7 +41,7 @@ func on_player_camera_entered(camera_params: Dictionary):
 	if(current_tween):
 		current_tween.kill()
 	current_tween = get_tree().create_tween()
-	current_tween.parallel().tween_property(player_camera, "limit_top", camera_params["top"], 1.0)
-	current_tween.parallel().tween_property(player_camera, "limit_right", camera_params["right"], 1.0)
-	current_tween.parallel().tween_property(player_camera, "limit_bottom", camera_params["bottom"], 1.0)
-	current_tween.parallel().tween_property(player_camera, "limit_left", camera_params["left"], 1.0)
+	current_tween.parallel().tween_property(player_camera, "limit_top", camera_params["top"], tween_duration)
+	current_tween.parallel().tween_property(player_camera, "limit_right", camera_params["right"], tween_duration)
+	current_tween.parallel().tween_property(player_camera, "limit_bottom", camera_params["bottom"], tween_duration)
+	current_tween.parallel().tween_property(player_camera, "limit_left", camera_params["left"], tween_duration)
