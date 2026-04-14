@@ -2,15 +2,7 @@
 extends PlayerState
 
 func enter(_data: Dictionary) -> void:
-	if(_data.has("trigger_jump")):
-		if(_data["trigger_jump"]):
-			# Go down logic when holding down from the input buffer case
-			if(player.floor_detection.is_colliding() and Input.is_action_pressed("down")):
-				player.position.y += 1
-				s_finished.emit(state_data.FALL)
-			else:
-				s_finished.emit(state_data.JUMP)
-			return
+	player.player_animations.play("run")
 
 func state_ready() -> void:
 	return
@@ -41,6 +33,10 @@ func handle_transitions() -> void:
 		s_finished.emit(state_data.JUMP)
 		return
 		
+	if(Input.is_action_just_pressed("attack")):
+		s_finished.emit(state_data.ATTACK)
+		return
+	
 	if(is_equal_approx(player.velocity.x, 0.0)):
 		s_finished.emit(state_data.IDLE)
 		return

@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 @onready var should_rotate := $"ShouldRotate"
 @onready var floor_detection: RayCast2D = $ShouldNotRotate/FloorDetection
+@onready var player_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations
 
 # Globar vars
 var facing_right := true

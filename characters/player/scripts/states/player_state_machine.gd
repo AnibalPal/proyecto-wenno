@@ -11,6 +11,7 @@ func is_transition_active(from: String, to: String) -> bool:
 	if(state_data.transitions[from].has(to)):
 		return state_data.transitions[from][to]
 	else:
+		push_warning("TRANSICION NO EXISTENTE: " + from + " -> " + to)
 		return false
 
 # NOTE: override from StateMachine to add transition check

@@ -2,6 +2,7 @@
 extends PlayerState
 
 func enter(_data: Dictionary) -> void:
+	player.player_animations.play("jump")
 	player.velocity.y = -player.jump_impulse
 
 func state_ready() -> void:
