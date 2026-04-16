@@ -6,7 +6,6 @@ extends PlayerState
 
 var coyote_jump_available := false
 var should_trigger_jump := false
-var should_trigger_attack := false
 
 func enter(_data: Dictionary) -> void:
 	reset_state()
@@ -14,7 +13,6 @@ func enter(_data: Dictionary) -> void:
 	if(_data.has("activate_coyote")):
 		coyote_jump_available = true
 		coyote_time.start()
-	player.velocity.y = 0.0
 
 func state_ready() -> void:
 	return
@@ -37,11 +35,12 @@ func handle_transitions() -> void:
 	if(Input.is_action_just_pressed("jump")):
 		should_trigger_jump = true
 		input_buffer.start()
+		return
 	
 	if(Input.is_action_just_pressed("attack")):
-		should_trigger_attack = true
-		input_buffer.start()
-	
+		s_finished.emit(state_data.AIRATTACK)
+		return
+		
 	if(player.is_on_floor()):
 		# Jump input buffer transitions
 		if(should_trigger_jump):
@@ -51,11 +50,6 @@ func handle_transitions() -> void:
 			else:
 				s_finished.emit(state_data.JUMP)
 			return
-			
-		# Attack input buffer transitions	
-		if(should_trigger_attack):
-			s_finished.emit(state_data.ATTACK)
-			return 
 			
 		# Normal fall transitions
 		if(is_equal_approx(player.velocity.x, 0.0)):
@@ -67,11 +61,9 @@ func handle_transitions() -> void:
 func reset_state() -> void:
 	coyote_jump_available = false
 	should_trigger_jump = false
-	should_trigger_attack = false
 
 func _on_coyote_time_timeout() -> void:
 	coyote_jump_available = false
 
 func _on_input_buffer_timeout() -> void:
 	should_trigger_jump = false
-	should_trigger_attack = false

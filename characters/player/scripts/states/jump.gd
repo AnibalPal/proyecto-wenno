@@ -3,7 +3,12 @@ extends PlayerState
 
 func enter(_data: Dictionary) -> void:
 	player.player_animations.play("jump")
-	player.velocity.y = -player.jump_impulse
+	if(_data.has("no_impulse")):
+		if(_data["no_impulse"]):
+			player.velocity.y = 0
+	else:
+		player.velocity.y = -player.jump_impulse
+		
 
 func state_ready() -> void:
 	return
@@ -20,7 +25,12 @@ func state_physics_process(_delta: float) -> void:
 
 func handle_transitions() -> void:
 	if(!Input.is_action_pressed("jump")):
+		player.velocity.y = 0.0
 		s_finished.emit(state_data.FALL)
+		return
+	
+	if(Input.is_action_just_pressed("attack")):
+		s_finished.emit(state_data.AIRATTACK)
 		return
 	
 	if(player.velocity.y > 0):
