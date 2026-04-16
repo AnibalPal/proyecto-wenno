@@ -8,10 +8,6 @@ func enter(_data: Dictionary) -> void:
 			player.velocity.y = 0
 	else:
 		player.velocity.y = -player.jump_impulse
-		
-
-func state_ready() -> void:
-	return
 
 func state_process(_delta: float) -> void:
 	return

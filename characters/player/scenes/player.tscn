@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=32 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://jj30loc2lgea" path="res://assets/spritesheets/beige_block156x156.png" id="8_xvinq"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
 [ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scenes/air_attack.gd" id="9_usdan"]
+[ext_resource type="Script" uid="uid://4ja3ch1gsmx6" path="res://characters/collisions/hitbox.gd" id="12_eigjl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgtyq"]
 atlas = ExtResource("8_xvinq")
@@ -137,6 +138,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fx0v"]
+size = Vector2(96, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inse1"]
+size = Vector2(32, 56)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy3q1"]
 size = Vector2(32, 48)
 
@@ -176,8 +183,10 @@ one_shot = true
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("7_2suro")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("8_3mujp")
+hitbox = NodePath("../../ShouldRotate/Hitboxes/AttackHitbox")
+animation_name = "attack"
 
 [node name="AirAttack" type="Node" parent="StateMachine"]
 script = ExtResource("9_usdan")
@@ -186,7 +195,26 @@ script = ExtResource("9_usdan")
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 sprite_frames = SubResource("SpriteFrames_41mm0")
-animation = &"air_attack"
+animation = &"attack"
+frame = 2
+frame_progress = 1.0
+
+[node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
+
+[node name="AttackHitbox" type="Area2D" parent="ShouldRotate/Hitboxes"]
+script = ExtResource("12_eigjl")
+
+[node name="UpperShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
+position = Vector2(40, -56)
+shape = SubResource("RectangleShape2D_2fx0v")
+disabled = true
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
+[node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
+position = Vector2(72, -4)
+shape = SubResource("RectangleShape2D_inse1")
+disabled = true
+debug_color = Color(0.9670288, 0.15206921, 0.26652095, 0.41960785)
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
 
@@ -253,5 +281,4 @@ text = "Idle"
 
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]
-[connection signal="animation_finished" from="ShouldRotate/PlayerAnimations" to="StateMachine/Attack" method="_on_player_animations_animation_finished"]
 [connection signal="animation_finished" from="ShouldRotate/PlayerAnimations" to="StateMachine/AirAttack" method="_on_player_animations_animation_finished"]

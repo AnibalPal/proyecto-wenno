@@ -8,9 +8,6 @@ func enter(_data: Dictionary) -> void:
 	player.player_animations.play("air_attack")
 	reset_state()
 
-func state_ready() -> void:
-	return
-
 func state_process(_delta: float) -> void:
 	return
 

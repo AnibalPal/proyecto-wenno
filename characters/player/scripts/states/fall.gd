@@ -14,9 +14,6 @@ func enter(_data: Dictionary) -> void:
 		coyote_jump_available = true
 		coyote_time.start()
 
-func state_ready() -> void:
-	return
-
 func state_process(_delta: float) -> void:
 	return
 

@@ -8,13 +8,11 @@ func state_physics_process(_delta: float) -> void:
 		handle_transitions()
 		player.move_and_slide()
 
+# Functions to override
+# Transitions when the attack animation finishes
 func handle_attack_finished_transitions() -> void:
-	if(Input.is_action_pressed("right") or Input.is_action_pressed("left")):
-		hitbox.disable()
-		s_finished.emit(state_data.RUN)
-	else:
-		hitbox.disable()
-		s_finished.emit(state_data.IDLE)
-	
+	pass
+
+# Normal transitions	
 func handle_attack_transitions() -> void:
 	pass

@@ -21,8 +21,6 @@ func state_machine_ready():
 	for state_node: State in get_children():
 		if(state_node):
 			state_node.s_finished.connect(transition_to_next_state)
-	if(current_state):
-		current_state.state_ready()
 
 func transition_to_next_state(next_state_path: String, data := {}) -> void:
 	current_state = get_node(next_state_path)

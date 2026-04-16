@@ -4,9 +4,6 @@ extends PlayerState
 func enter(_data: Dictionary) -> void:
 	return
 
-func state_ready() -> void:
-	return
-
 func state_process(_delta: float) -> void:
 	return
 
