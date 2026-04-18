@@ -42,7 +42,8 @@ func on_animation_frame_changed() -> void:
 		if(player.player_animations.frame == active_start_frame):
 			hitbox.enable()
 			return
-		if(player.player_animations.frame == active_end_frame):
+		if(player.player_animations.frame >= active_end_frame):
+			print("DISABLE")
 			hitbox.disable()
 			return
 
@@ -52,3 +53,8 @@ func handle_attack_finished_transitions() -> void:
 
 func handle_attack_transitions() -> void:
 	pass
+
+# Wrapper for the state finished transition in order to disable hitboxes before changing state
+func attack_state_finished(new_state: String, data := {}) -> void:
+	hitbox.disable()
+	s_finished.emit(new_state, data)

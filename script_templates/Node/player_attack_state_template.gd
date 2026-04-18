@@ -16,3 +16,7 @@ func handle_attack_finished_transitions() -> void:
 # Normal transitions	
 func handle_attack_transitions() -> void:
 	pass
+	
+# To override the resetter in case more variables are needed in the state
+#func reset_state()  -> void:
+	#attack_finished = false

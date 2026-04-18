@@ -1,15 +1,8 @@
 @tool
-extends PlayerState
+extends PlayerAttackState
 
 var enable_x_movement := true
 var start_fall := false
-
-func enter(_data: Dictionary) -> void:
-	player.player_animations.play("air_attack")
-	reset_state()
-
-func state_process(_delta: float) -> void:
-	return
 
 func state_physics_process(_delta: float) -> void:
 	if(active):
@@ -32,25 +25,22 @@ func state_physics_process(_delta: float) -> void:
 		
 		player.move_and_slide()
 
-func handle_transitions() -> void:
+func handle_attack_finished_transitions() -> void:
+	if(player.is_on_floor()):
+		if(is_equal_approx(player.velocity.x, 0.0)):
+			attack_state_finished(state_data.IDLE)
+		else:
+			attack_state_finished(state_data.RUN)
+	else:
+		if(player.velocity.y <= 0):
+			attack_state_finished(state_data.JUMP, { "no_impulse": true })
+		else:
+			attack_state_finished(state_data.FALL)
+
+func handle_attack_transitions() -> void:
 	pass
 
-# Use if there are variables that should be reset when entering this state
 func reset_state()  -> void:
+	attack_finished = false
 	enable_x_movement = true
 	start_fall = false
-
-func _on_player_animations_animation_finished() -> void:
-	if(player.player_animations.animation == "air_attack"):
-		if(player.is_on_floor()):
-			if(is_equal_approx(player.velocity.x, 0.0)):
-				s_finished.emit(state_data.IDLE)
-			else:
-				s_finished.emit(state_data.RUN)
-		else:
-			if(player.velocity.y <= 0):
-				s_finished.emit(state_data.JUMP, { "no_impulse": true })
-			else:
-				s_finished.emit(state_data.FALL)
-				
-				
