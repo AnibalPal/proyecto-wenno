@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dc0bjv7lybf1w"]
+[gd_scene load_steps=18 format=4 uid="uid://dc0bjv7lybf1w"]
 
 [ext_resource type="Script" uid="uid://c55ygpi0stsms" path="res://stages/prototypes/world_prototype/scripts/world_prototype.gd" id="1_b6msb"]
 [ext_resource type="Texture2D" uid="uid://doha7ysfejs78" path="res://assets/prototype/prototype_tilemap32x32.png" id="1_x6vbp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="3_imxai"]
 [ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/scenes/camera_change_trigger.tscn" id="4_76g1l"]
 [ext_resource type="PackedScene" uid="uid://bpso0ne2h4hid" path="res://stages/prototypes/world_prototype/scenes/breakable_wall.tscn" id="6_trair"]
+[ext_resource type="PackedScene" uid="uid://bj2ee2effkp6v" path="res://characters/enemies/enemy.tscn" id="8_hruo8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76g1l"]
 size = Vector2(48, 264)
@@ -169,12 +170,17 @@ texture = ExtResource("3_imxai")
 shape = SubResource("RectangleShape2D_imxai")
 debug_color = Color(1.0107458e-06, 0.63131064, 0.46683365, 0.41960785)
 
+[node name="Enemies" type="Node2D" parent="World"]
+
+[node name="Enemy" parent="World/Enemies" instance=ExtResource("8_hruo8")]
+position = Vector2(384, 200)
+
 [node name="Player" parent="." instance=ExtResource("2_b6msb")]
 position = Vector2(104, 248)
-debug_mode = true
 speed = 200
 gravity = 400
 jump_impulse = 300
+debug_mode = true
 metadata/_edit_group_ = true
 
 [node name="InputBuffer" parent="Player/StateMachine/Fall" index="1"]

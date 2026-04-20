@@ -1,0 +1,38 @@
+@tool
+class_name CharacterEntity
+extends CharacterBody2D
+
+# Variable used inside class children to show important data
+@export var debug_mode := false
+
+# Only required node
+@onready var should_rotate := $"ShouldRotate"
+
+# Global vars
+@export var facing_right := true:
+	set(value):
+		facing_right = value
+		if(Engine.is_editor_hint()):
+			if(value):
+				should_rotate.transform.x = Vector2(1.0, 0.0)
+			else:
+				should_rotate.transform.x = Vector2(-1.0, 0.0)
+	get:
+		return facing_right
+
+# Utility functions to be used inside PlayerState scripts
+func turn_around() -> void:
+	if(facing_right):
+		turn_left()
+	else:
+		turn_right()
+
+func turn_right() -> void:
+	if(facing_right): return
+	facing_right = true
+	should_rotate.transform.x = Vector2(1.0, 0.0)
+
+func turn_left() -> void:
+	if(!facing_right): return
+	facing_right = false
+	should_rotate.transform.x = Vector2(-1.0, 0.0)

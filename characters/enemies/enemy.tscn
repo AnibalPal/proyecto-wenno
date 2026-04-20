@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://bj2ee2effkp6v"]
+
+[ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/enemy.gd" id="1_uy33a"]
+[ext_resource type="Texture2D" uid="uid://dphmwdm8uw18l" path="res://assets/prototype/mean_face_side128.png" id="2_jfoax"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jfoax"]
+radius = 45.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfoax"]
+atlas = ExtResource("2_jfoax")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lc82"]
+atlas = ExtResource("2_jfoax")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_008bi"]
+atlas = ExtResource("2_jfoax")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vt6o"]
+atlas = ExtResource("2_jfoax")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi512"]
+atlas = ExtResource("2_jfoax")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wor85"]
+atlas = ExtResource("2_jfoax")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_008bi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfoax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lc82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_008bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vt6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi512")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wor85")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfoax"]
+size = Vector2(16, 96)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_uy33a")
+facing_right = false
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jfoax")
+
+[node name="ShouldRotate" type="Node2D" parent="."]
+rotation = 3.1415927
+scale = Vector2(1, -1)
+
+[node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
+sprite_frames = SubResource("SpriteFrames_008bi")
+animation = &"attack"
+frame = 4
+frame_progress = 1.0
+flip_h = true
+
+[node name="WallDetection" type="RayCast2D" parent="ShouldRotate"]
+target_position = Vector2(64, 0)
+
+[node name="PlayerDetection" type="Area2D" parent="ShouldRotate"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/PlayerDetection"]
+position = Vector2(64, 0)
+shape = SubResource("RectangleShape2D_jfoax")
+
+[connection signal="area_entered" from="ShouldRotate/PlayerDetection" to="." method="_on_player_detection_area_entered"]

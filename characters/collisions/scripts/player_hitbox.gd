@@ -9,8 +9,7 @@ func get_damage() -> int:
 	return damage
 
 func _ready() -> void:
-	for collision_shape: CollisionShape2D in get_children():
-		collision_shape.disabled = true
+	disable()
 
 func _process(_delta: float) -> void:
 	if(Engine.is_editor_hint()):
