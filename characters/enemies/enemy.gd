@@ -2,8 +2,40 @@
 class_name Enemy 
 extends CharacterEntity
 
+# Create a state machine with all states in variables instead of the usual state machine pattern
+# if the entity is small, a rule of thumb would be to use the big state machine pattern on bosses
+# and use the simple state machine pattern for common enemies. For this simple enemy I will put
+# all needed code here, then maybe refactor it depending on the needs of the project
+
+@onready var sprite_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
+
+enum States {
+	IDLE,
+	CHASE,
+	ATTACK
+}
+
+func _physics_process(_delta: float) -> void:
+	pass
+
+func _on_player_detection_area_entered(_area: Area2D) -> void:
+	sprite_animations.play("attack")
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Code from another project that might be useful here
 ## Functionality that should be shared amongst all enemies
 #class_name IEnemy extends CharacterBody2D
 #
@@ -222,7 +254,3 @@ extends CharacterEntity
 #func apply_gravity(delta: float) -> void:
 	#if(not is_on_floor()):
 		#velocity.y += get_gravity().y * delta
-
-
-func _on_player_detection_area_entered(_area: Area2D) -> void:
-	turn_around()
