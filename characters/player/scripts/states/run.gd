@@ -16,24 +16,24 @@ func state_physics_process(_delta: float) -> void:
 
 func handle_transitions() -> void:
 	if(!player.is_on_floor()):
-		s_finished.emit(state_data.FALL, {"activate_coyote": true})
+		transition_to(state_data.FALL, {"activate_coyote": true})
 		return
 
 	if(player.floor_detection.is_colliding()):
 		# Go down logic normally
 		if(Input.is_action_just_pressed("jump") and Input.is_action_pressed("down")):
 			player.position.y += 1
-			s_finished.emit(state_data.FALL)
+			transition_to(state_data.FALL)
 			return
 
 	if(Input.is_action_just_pressed("jump")):
-		s_finished.emit(state_data.JUMP)
+		transition_to(state_data.JUMP)
 		return
 		
 	if(Input.is_action_just_pressed("attack")):
-		s_finished.emit(state_data.ATTACK)
+		transition_to(state_data.ATTACK)
 		return
 	
 	if(is_equal_approx(player.velocity.x, 0.0)):
-		s_finished.emit(state_data.IDLE)
+		transition_to(state_data.IDLE)
 		return

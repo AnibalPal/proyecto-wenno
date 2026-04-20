@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c05dfnjnbqsrt" path="res://characters/player/scripts/states/jump.gd" id="5_p04ig"]
 [ext_resource type="Script" uid="uid://idypv88idqi8" path="res://characters/player/scripts/states/fall.gd" id="6_2kdo7"]
 [ext_resource type="Script" uid="uid://4lddnoeaxjeo" path="res://characters/player/scripts/states/dash.gd" id="7_2suro"]
-[ext_resource type="Script" path="res://characters/player/scripts/states/attack.gd" id="8_3mujp"]
+[ext_resource type="Script" uid="uid://cr64hn4qxtuok" path="res://characters/player/scripts/states/attack.gd" id="8_3mujp"]
 [ext_resource type="Texture2D" uid="uid://jj30loc2lgea" path="res://assets/spritesheets/beige_block156x156.png" id="8_xvinq"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
 [ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scenes/air_attack.gd" id="9_usdan"]

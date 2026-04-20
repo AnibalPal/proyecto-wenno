@@ -27,3 +27,7 @@ func state_process(_delta: float) -> void:
 
 func state_physics_process(_delta: float) -> void:
 	return
+
+# Wrapper for the s_finished signal emit
+func transition_to(state_name: String, data = {}) -> void:
+	s_finished.emit(state_name, data)

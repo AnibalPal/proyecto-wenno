@@ -22,13 +22,13 @@ func state_physics_process(_delta: float) -> void:
 func handle_transitions() -> void:
 	if(!Input.is_action_pressed("jump")):
 		player.velocity.y = 0.0
-		s_finished.emit(state_data.FALL)
+		transition_to(state_data.FALL)
 		return
 	
 	if(Input.is_action_just_pressed("attack")):
-		s_finished.emit(state_data.AIRATTACK)
+		transition_to(state_data.AIRATTACK)
 		return
 	
 	if(player.velocity.y > 0):
-		s_finished.emit(state_data.FALL)
+		transition_to(state_data.FALL)
 		return

@@ -26,7 +26,7 @@ func state_physics_process(_delta: float) -> void:
 
 func handle_transitions() -> void:
 	if(Input.is_action_just_pressed("jump") and coyote_jump_available):
-		s_finished.emit(state_data.JUMP)
+		transition_to(state_data.JUMP)
 		return
 	
 	if(Input.is_action_just_pressed("jump")):
@@ -35,7 +35,7 @@ func handle_transitions() -> void:
 		return
 	
 	if(Input.is_action_just_pressed("attack")):
-		s_finished.emit(state_data.AIRATTACK)
+		transition_to(state_data.AIRATTACK)
 		return
 		
 	if(player.is_on_floor()):
@@ -43,16 +43,16 @@ func handle_transitions() -> void:
 		if(should_trigger_jump):
 			if(player.floor_detection.is_colliding() and Input.is_action_pressed("down")):
 				player.position.y += 1
-				s_finished.emit(state_data.FALL)
+				transition_to(state_data.FALL)
 			else:
-				s_finished.emit(state_data.JUMP)
+				transition_to(state_data.JUMP)
 			return
 			
 		# Normal fall transitions
 		if(is_equal_approx(player.velocity.x, 0.0)):
-			s_finished.emit(state_data.IDLE)
+			transition_to(state_data.IDLE)
 		else:
-			s_finished.emit(state_data.RUN)
+			transition_to(state_data.RUN)
 		return
 
 func reset_state() -> void:

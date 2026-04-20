@@ -28,14 +28,14 @@ func state_physics_process(_delta: float) -> void:
 func handle_attack_finished_transitions() -> void:
 	if(player.is_on_floor()):
 		if(is_equal_approx(player.velocity.x, 0.0)):
-			attack_state_finished(state_data.IDLE)
+			transition_to(state_data.IDLE)
 		else:
-			attack_state_finished(state_data.RUN)
+			transition_to(state_data.RUN)
 	else:
 		if(player.velocity.y <= 0):
-			attack_state_finished(state_data.JUMP, { "no_impulse": true })
+			transition_to(state_data.JUMP, { "no_impulse": true })
 		else:
-			attack_state_finished(state_data.FALL)
+			transition_to(state_data.FALL)
 
 func handle_attack_transitions() -> void:
 	pass

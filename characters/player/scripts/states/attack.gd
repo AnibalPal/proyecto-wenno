@@ -10,9 +10,9 @@ func state_physics_process(_delta: float) -> void:
 
 func handle_attack_finished_transitions() -> void:
 	if(Input.is_action_pressed("right") or Input.is_action_pressed("left")):
-		attack_state_finished(state_data.RUN)
+		transition_to(state_data.RUN)
 	else:
-		attack_state_finished(state_data.IDLE)
+		transition_to(state_data.IDLE)
 	
 func handle_attack_transitions() -> void:
 	pass
