@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=35 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
 [ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scenes/air_attack.gd" id="9_usdan"]
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/attack_hitbox.tscn" id="11_eigjl"]
+[ext_resource type="Script" uid="uid://btocf3ip48yi5" path="res://characters/collisions/player_hurtbox.gd" id="12_eigjl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgtyq"]
 atlas = ExtResource("8_xvinq")
@@ -149,6 +150,9 @@ size = Vector2(32, 54)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eigjl"]
 size = Vector2(98, 26)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ronts"]
+size = Vector2(42, 58)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy3q1"]
 size = Vector2(32, 48)
 
@@ -202,7 +206,7 @@ animation_name = "air_attack"
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 sprite_frames = SubResource("SpriteFrames_41mm0")
-animation = &"air_attack"
+animation = &"idle"
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
@@ -230,6 +234,16 @@ debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 position = Vector2(39, 51)
 shape = SubResource("RectangleShape2D_eigjl")
 debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
+
+[node name="Hurtbox" type="Area2D" parent="ShouldRotate"]
+collision_layer = 8
+collision_mask = 32
+script = ExtResource("12_eigjl")
+collision_color = Color(0.6105231, 0.36463746, 1, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hurtbox"]
+shape = SubResource("RectangleShape2D_ronts")
+debug_color = Color(0.6105231, 0.36463746, 1, 0.41960785)
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
 

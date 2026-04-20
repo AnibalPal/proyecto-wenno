@@ -2,7 +2,7 @@
 extends PlayerState
 class_name PlayerAttackState
 
-@export var hitbox : HitBox
+@export var hitbox : PlayerHitBox
 @export var animation_name: String
 @export var active_start_frame := 2
 @export var active_end_frame := 3
