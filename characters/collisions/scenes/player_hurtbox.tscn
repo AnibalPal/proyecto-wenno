@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://duupkg4fs536n"]
+
+[ext_resource type="Script" uid="uid://btocf3ip48yi5" path="res://characters/collisions/scripts/player_hurtbox.gd" id="1_n2r1b"]
+
+[node name="PlayerHurtbox" type="Area2D"]
+collision_layer = 8
+collision_mask = 32
+script = ExtResource("1_n2r1b")
+collision_color = Color(0.6105231, 0.36463746, 1, 0.41960785)
