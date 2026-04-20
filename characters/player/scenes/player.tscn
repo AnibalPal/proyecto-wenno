@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://jj30loc2lgea" path="res://assets/spritesheets/beige_block156x156.png" id="8_xvinq"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
 [ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scenes/air_attack.gd" id="9_usdan"]
-[ext_resource type="Script" uid="uid://4ja3ch1gsmx6" path="res://characters/collisions/hitbox.gd" id="12_eigjl"]
+[ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/attack_hitbox.tscn" id="11_eigjl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgtyq"]
 atlas = ExtResource("8_xvinq")
@@ -138,10 +138,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fx0v"]
-size = Vector2(96, 32)
+size = Vector2(32, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_inse1"]
-size = Vector2(32, 56)
+size = Vector2(98, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usdan"]
 size = Vector2(32, 54)
@@ -206,35 +206,30 @@ animation = &"air_attack"
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
-[node name="AttackHitbox" type="Area2D" parent="ShouldRotate/Hitboxes"]
-script = ExtResource("12_eigjl")
-
-[node name="UpperShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
-position = Vector2(40, -56)
-shape = SubResource("RectangleShape2D_2fx0v")
-disabled = true
-debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+[node name="AttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
 position = Vector2(72, -4)
-shape = SubResource("RectangleShape2D_inse1")
-disabled = true
-debug_color = Color(0.9670288, 0.15206921, 0.26652095, 0.41960785)
+shape = SubResource("RectangleShape2D_2fx0v")
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
 
-[node name="AirAttackHitbox" type="Area2D" parent="ShouldRotate/Hitboxes"]
-script = ExtResource("12_eigjl")
+[node name="LowerShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
+position = Vector2(39, -59)
+shape = SubResource("RectangleShape2D_inse1")
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
+[node name="AirAttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
+collision_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AirAttackHitbox"]
 position = Vector2(72, -4)
 shape = SubResource("RectangleShape2D_usdan")
-disabled = true
-debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 
 [node name="LowerShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AirAttackHitbox"]
 position = Vector2(39, 51)
 shape = SubResource("RectangleShape2D_eigjl")
-disabled = true
-debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
 

@@ -66,8 +66,14 @@ attack={
 
 [layer_names]
 
-2d_physics/layer_1="Floor"
+2d_physics/layer_1="floor"
 2d_physics/layer_2="player_trigger"
+2d_physics/layer_3="player_hitbox"
+2d_physics/layer_4="player_hurtbox"
+2d_physics/layer_5="enemy_hurtbox"
+2d_physics/layer_6="enemy_hitbox"
+2d_physics/layer_7="enemy_hurtbox"
+2d_physics/layer_8="enemy_proyectile"
 
 [rendering]
 
