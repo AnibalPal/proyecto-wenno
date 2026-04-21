@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=36 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://jj30loc2lgea" path="res://assets/spritesheets/beige_block156x156.png" id="8_xvinq"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
 [ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scenes/air_attack.gd" id="9_usdan"]
+[ext_resource type="Script" uid="uid://c8bsm6n28c07o" path="res://characters/player/scripts/states/hit.gd" id="10_2fx0v"]
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
 
@@ -80,7 +81,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"air_attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -94,7 +95,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -203,13 +204,14 @@ script = ExtResource("9_usdan")
 hitbox = NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox")
 animation_name = "air_attack"
 
+[node name="Hit" type="Node" parent="StateMachine"]
+script = ExtResource("10_2fx0v")
+
 [node name="ShouldRotate" type="Node2D" parent="."]
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 sprite_frames = SubResource("SpriteFrames_41mm0")
-animation = &"attack"
-frame = 2
-frame_progress = 0.5118674
+animation = &"air_attack"
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
@@ -314,3 +316,4 @@ text = "Idle"
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]
 [connection signal="animation_finished" from="ShouldRotate/PlayerAnimations" to="StateMachine/AirAttack" method="_on_player_animations_animation_finished"]
+[connection signal="area_entered" from="ShouldRotate/Hurtbox" to="StateMachine" method="_on_hurtbox_area_entered"]

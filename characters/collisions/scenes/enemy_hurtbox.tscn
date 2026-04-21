@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1ju3d0glq21y"]
+
+[ext_resource type="Script" uid="uid://cb0tywgdqk0ua" path="res://characters/collisions/scripts/enemy_hurtbox.gd" id="1_amr4o"]
+
+[node name="EnemyHurtbox" type="Area2D"]
+script = ExtResource("1_amr4o")

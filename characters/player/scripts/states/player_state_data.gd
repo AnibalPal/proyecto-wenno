@@ -1,11 +1,15 @@
 class_name PlayerStateData
 
+# Special transition
+const ALL := "All"
+
 const IDLE := "Idle"
 const RUN := "Run"
 const JUMP := "Jump"
 const FALL := "Fall"
 const ATTACK := "Attack"
 const AIRATTACK := "AirAttack"
+const HIT := "Hit"
 
 static var transitions = {
 		IDLE: {
@@ -40,5 +44,11 @@ static var transitions = {
 			RUN: true,
 			JUMP: true,
 			FALL: true
+		},
+		ALL: {
+			HIT: true
+		},
+		HIT: {
+			ALL: true
 		}
 }

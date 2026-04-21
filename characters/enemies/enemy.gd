@@ -7,20 +7,63 @@ extends CharacterEntity
 # and use the simple state machine pattern for common enemies. For this simple enemy I will put
 # all needed code here, then maybe refactor it depending on the needs of the project
 
+@export var speed := 100
+@export var gravity := 300 
+
+@onready var hitbox: EnemyHitBox = $ShouldRotate/EnemyHitbox
+@onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
 @onready var sprite_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
 
 enum States {
 	IDLE,
-	CHASE,
+	MOVE,
 	ATTACK
 }
 
+var current_state := States.MOVE
+
 func _physics_process(_delta: float) -> void:
-	pass
+	if(Engine.is_editor_hint()):
+		pass
+	else:
+		if(facing_right):
+			velocity.x = speed
+		else:
+			velocity.x = -speed
+		velocity.y += gravity * _delta
+		handle_state_process()
+		move_and_slide()
+
+func handle_state_process() -> void:
+	match current_state:
+		States.IDLE:
+			pass
+		States.MOVE:
+			if(wall_detection.is_colliding()):
+				turn_around()
+		States.ATTACK:
+			velocity = Vector2.ZERO
+		_:
+			pass
+		
+
+func handle_transition(new_state : States) -> void:
+	if(new_state == States.ATTACK):
+		sprite_animations.play("attack")
+	current_state = new_state
 
 func _on_player_detection_area_entered(_area: Area2D) -> void:
-	sprite_animations.play("attack")
+	handle_transition(States.ATTACK)
 
+func _on_sprite_animations_frame_changed() -> void:
+	if(sprite_animations.animation == "attack"):
+		if(sprite_animations.frame == 4):
+			hitbox.enable()
+
+func _on_sprite_animations_animation_finished() -> void:
+	if(sprite_animations.animation == "attack"):
+		handle_transition(States.MOVE)
+		hitbox.disable()
 
 
 

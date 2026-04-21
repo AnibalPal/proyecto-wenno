@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bj2ee2effkp6v"]
+[gd_scene load_steps=16 format=3 uid="uid://bj2ee2effkp6v"]
 
 [ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/enemy.gd" id="1_uy33a"]
 [ext_resource type="Texture2D" uid="uid://dphmwdm8uw18l" path="res://assets/prototype/mean_face_side128.png" id="2_jfoax"]
+[ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="3_008bi"]
+[ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="4_3vt6o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jfoax"]
 radius = 45.0
@@ -62,7 +64,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfoax"]
-size = Vector2(16, 96)
+size = Vector2(88, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi512"]
+size = Vector2(63.999985, 112.00001)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_008bi"]
+radius = 56.0
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 0
@@ -91,7 +99,22 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/PlayerDetection"]
-position = Vector2(64, 0)
+position = Vector2(100, 0)
 shape = SubResource("RectangleShape2D_jfoax")
 
+[node name="EnemyHitbox" parent="ShouldRotate" instance=ExtResource("3_008bi")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHitbox"]
+position = Vector2(96, 8.392586e-06)
+shape = SubResource("RectangleShape2D_bi512")
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
+[node name="EnemyHurtbox" parent="ShouldRotate" instance=ExtResource("4_3vt6o")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHurtbox"]
+shape = SubResource("CircleShape2D_008bi")
+debug_color = Color(0.6117647, 0.3647059, 1, 0.41960785)
+
+[connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_animation_finished"]
+[connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_frame_changed"]
 [connection signal="area_entered" from="ShouldRotate/PlayerDetection" to="." method="_on_player_detection_area_entered"]

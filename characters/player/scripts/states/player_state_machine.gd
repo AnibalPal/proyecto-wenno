@@ -8,6 +8,13 @@ func _ready() -> void:
 	state_machine_ready()
 
 func is_transition_active(from: String, to: String) -> bool:
+	# Check if its a special state that can be accesed from and to any state
+	if(state_data.transitions[PlayerStateData.ALL].has(to)):
+		return state_data.transitions[PlayerStateData.ALL][to]
+	
+	if(state_data.transitions[from].has(PlayerStateData.ALL)):
+		return state_data.transitions[from][PlayerStateData.ALL]
+	
 	if(state_data.transitions[from].has(to)):
 		return state_data.transitions[from][to]
 	else:
@@ -22,6 +29,10 @@ func transition_to_next_state(next_state_path: String, data := {}) -> void:
 			current_state.enter(data)
 
 func disable_state(to_disable: String) -> void:
+	# Disable the "all" states
+	if(state_data.transitions[state_data.ALL].has(to_disable)):
+		state_data.transitions[state_data.ALL][to_disable] = false
+	
 	# Disable all states that point to the to_disable state
 	for from_state in state_data.transitions:
 		if state_data.transitions[from_state].has(to_disable):
@@ -36,3 +47,6 @@ func check_state_machine() -> void:
 		assert(child is PlayerState, "ERROR: Child is not of type PlayerState, make sure that all the PlayerStateMachine children are of type PlayerState")
 		if(!child.active):
 			disable_state(child.name)
+
+func _on_hurtbox_area_entered(_area: Area2D) -> void:
+	transition_to_next_state(state_data.HIT)
