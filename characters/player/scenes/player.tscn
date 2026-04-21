@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=37 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -15,69 +15,73 @@
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qgtyq"]
-atlas = ExtResource("8_xvinq")
-region = Rect2(1092, 0, 156, 156)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_prd1v"]
-atlas = ExtResource("8_xvinq")
-region = Rect2(1248, 0, 156, 156)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1queg"]
-atlas = ExtResource("8_xvinq")
-region = Rect2(1404, 0, 156, 156)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3mujp"]
-atlas = ExtResource("8_xvinq")
-region = Rect2(1092, 0, 156, 156)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_usdan"]
-atlas = ExtResource("8_xvinq")
-region = Rect2(1248, 0, 156, 156)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eigjl"]
-atlas = ExtResource("8_xvinq")
-region = Rect2(1404, 0, 156, 156)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fx0v"]
 atlas = ExtResource("8_xvinq")
-region = Rect2(780, 0, 156, 156)
+region = Rect2(1248, 0, 156, 156)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_inse1"]
 atlas = ExtResource("8_xvinq")
+region = Rect2(1404, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ronts"]
+atlas = ExtResource("8_xvinq")
+region = Rect2(1560, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alequ"]
+atlas = ExtResource("8_xvinq")
+region = Rect2(1248, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0t3c"]
+atlas = ExtResource("8_xvinq")
+region = Rect2(1404, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2wwh"]
+atlas = ExtResource("8_xvinq")
+region = Rect2(1560, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgtyq"]
+atlas = ExtResource("8_xvinq")
 region = Rect2(936, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prd1v"]
+atlas = ExtResource("8_xvinq")
+region = Rect2(1092, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1queg"]
+atlas = ExtResource("8_xvinq")
+region = Rect2(156, 0, 156, 156)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_is67l"]
 atlas = ExtResource("8_xvinq")
 region = Rect2(0, 0, 156, 156)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ronts"]
-atlas = ExtResource("8_xvinq")
-region = Rect2(468, 0, 156, 156)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_alequ"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnoiw"]
 atlas = ExtResource("8_xvinq")
 region = Rect2(624, 0, 156, 156)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t0t3c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4a5y"]
 atlas = ExtResource("8_xvinq")
-region = Rect2(156, 0, 156, 156)
+region = Rect2(780, 0, 156, 156)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j2wwh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vob2n"]
 atlas = ExtResource("8_xvinq")
 region = Rect2(312, 0, 156, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wudow"]
+atlas = ExtResource("8_xvinq")
+region = Rect2(468, 0, 156, 156)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_41mm0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qgtyq")
+"texture": SubResource("AtlasTexture_2fx0v")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_prd1v")
+"texture": SubResource("AtlasTexture_inse1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1queg")
+"texture": SubResource("AtlasTexture_ronts")
 }],
 "loop": false,
 "name": &"air_attack",
@@ -85,13 +89,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3mujp")
+"texture": SubResource("AtlasTexture_alequ")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_usdan")
+"texture": SubResource("AtlasTexture_t0t3c")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eigjl")
+"texture": SubResource("AtlasTexture_j2wwh")
 }],
 "loop": false,
 "name": &"attack",
@@ -99,13 +103,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2fx0v")
+"texture": SubResource("AtlasTexture_qgtyq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_inse1")
+"texture": SubResource("AtlasTexture_prd1v")
 }],
 "loop": false,
 "name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1queg")
+}],
+"loop": true,
+"name": &"hit",
 "speed": 5.0
 }, {
 "frames": [{
@@ -118,10 +130,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ronts")
+"texture": SubResource("AtlasTexture_rnoiw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_alequ")
+"texture": SubResource("AtlasTexture_y4a5y")
 }],
 "loop": false,
 "name": &"jump",
@@ -129,10 +141,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t0t3c")
+"texture": SubResource("AtlasTexture_vob2n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j2wwh")
+"texture": SubResource("AtlasTexture_wudow")
 }],
 "loop": true,
 "name": &"run",
@@ -204,14 +216,20 @@ script = ExtResource("9_usdan")
 hitbox = NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox")
 animation_name = "air_attack"
 
-[node name="Hit" type="Node" parent="StateMachine"]
+[node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("10_2fx0v")
+player_hurtbox = NodePath("../../ShouldRotate/Hurtbox")
+pushback_velocity = null
+
+[node name="Duration" type="Timer" parent="StateMachine/Hit"]
+wait_time = 0.5
+one_shot = true
 
 [node name="ShouldRotate" type="Node2D" parent="."]
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 sprite_frames = SubResource("SpriteFrames_41mm0")
-animation = &"air_attack"
+animation = &"idle"
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
@@ -315,5 +333,6 @@ text = "Idle"
 
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]
+[connection signal="timeout" from="StateMachine/Hit/Duration" to="StateMachine/Hit" method="_on_duration_timeout"]
 [connection signal="animation_finished" from="ShouldRotate/PlayerAnimations" to="StateMachine/AirAttack" method="_on_player_animations_animation_finished"]
 [connection signal="area_entered" from="ShouldRotate/Hurtbox" to="StateMachine" method="_on_hurtbox_area_entered"]

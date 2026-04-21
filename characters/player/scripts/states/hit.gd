@@ -1,10 +1,23 @@
 @tool
 extends PlayerState
 
+@export var player_hurtbox : PlayerHurtBox
+@export var pushback_velocity := Vector2(-200,-100)
+
+@onready var duration: Timer = $Duration
+
+var hit_end := false
+
 func enter(_data: Dictionary) -> void:
+	assert(player_hurtbox, "Hit state: No player hurtbox set!")
 	reset_state()
-	print("ENTER HIT")
-	transition_to(state_data.IDLE)
+	duration.start()
+	if(player.facing_right):
+		player.velocity = pushback_velocity
+	else:
+		player.velocity = Vector2(-pushback_velocity.x, pushback_velocity.y)
+	player_hurtbox.disable()
+	player.player_animations.play("hit")
 
 func state_process(_delta: float) -> void:
 	return
@@ -17,8 +30,16 @@ func state_physics_process(_delta: float) -> void:
 		player.move_and_slide()
 
 func handle_transitions() -> void:
-	pass
+	if(hit_end):
+		if(player.is_on_floor()):
+			transition_to(state_data.IDLE)
+		else:
+			transition_to(state_data.FALL)
 
 # Use if there are variables that should be reset when entering this state
 func reset_state()  -> void:
-	pass
+	hit_end = false
+
+func _on_duration_timeout() -> void:
+	player_hurtbox.enable()
+	hit_end = true
