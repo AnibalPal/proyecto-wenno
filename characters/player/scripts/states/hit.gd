@@ -12,10 +12,14 @@ func enter(_data: Dictionary) -> void:
 	assert(player_hurtbox, "Hit state: No player hurtbox set!")
 	reset_state()
 	duration.start()
-	if(player.facing_right):
-		player.velocity = pushback_velocity
-	else:
-		player.velocity = Vector2(-pushback_velocity.x, pushback_velocity.y)
+	if(_data.has("interaction_data")):
+		var is_area_right_of_player := player.global_position.direction_to(_data["interaction_data"]["area_position"]).x > 0
+		if(is_area_right_of_player):
+			player.turn_right()
+			player.velocity = pushback_velocity
+		else:
+			player.turn_left()
+			player.velocity = Vector2(-pushback_velocity.x, pushback_velocity.y)
 	player_hurtbox.disable()
 	player.player_animations.play("hit")
 

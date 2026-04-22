@@ -48,5 +48,13 @@ func check_state_machine() -> void:
 		if(!child.active):
 			disable_state(child.name)
 
+# Hurtbox and hitbox events
+# Will probably have to make a function to iterate over all hitboxes to connect the event signal to the proper function instead of doing this on every hitbox
 func _on_hurtbox_area_entered(_area: Area2D) -> void:
-	transition_to_next_state(state_data.HIT)
+	transition_to_next_state(state_data.HIT, 
+		{
+			"interaction_data" : {
+				"area_position" : _area.global_position
+			}
+		}
+	)

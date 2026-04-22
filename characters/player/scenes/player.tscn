@@ -219,7 +219,6 @@ animation_name = "air_attack"
 [node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("10_2fx0v")
 player_hurtbox = NodePath("../../ShouldRotate/Hurtbox")
-pushback_velocity = null
 
 [node name="Duration" type="Timer" parent="StateMachine/Hit"]
 wait_time = 0.5
