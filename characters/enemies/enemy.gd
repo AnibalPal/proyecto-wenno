@@ -7,12 +7,16 @@ extends CharacterEntity
 # and use the simple state machine pattern for common enemies. For this simple enemy I will put
 # all needed code here, then maybe refactor it depending on the needs of the project
 
+@export var health := 1
 @export var speed := 100
 @export var gravity := 300 
 
 @onready var hitbox: EnemyHitBox = $ShouldRotate/EnemyHitbox
 @onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
 @onready var sprite_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
+@onready var vfx: AnimationPlayer = $VFX
+
+var vulnerable := false
 
 enum States {
 	IDLE,
@@ -52,6 +56,16 @@ func handle_transition(new_state : States) -> void:
 		sprite_animations.play("attack")
 	current_state = new_state
 
+func hit_reaction(damage: int) -> void:
+	vfx.play("hit_effect")
+	if(vulnerable):
+		# Add animation interrupt
+		health -= damage * 2
+	else:
+		health -= damage
+	if(health <= 0):
+		queue_free()
+
 func _on_player_detection_area_entered(_area: Area2D) -> void:
 	handle_transition(States.ATTACK)
 
@@ -65,6 +79,9 @@ func _on_sprite_animations_animation_finished() -> void:
 		handle_transition(States.MOVE)
 		hitbox.disable()
 
+func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
+	if(_area as PlayerHitBox):
+		hit_reaction(_area.get_damage())
 
 
 

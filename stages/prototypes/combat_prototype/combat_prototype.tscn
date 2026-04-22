@@ -17,3 +17,4 @@ position = Vector2(120, 240)
 
 [node name="Enemy" parent="." instance=ExtResource("3_ph2t8")]
 position = Vector2(488, 240)
+health = 3
