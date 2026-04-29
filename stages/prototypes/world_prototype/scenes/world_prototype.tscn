@@ -112,6 +112,8 @@ metadata/_edit_lock_ = true
 
 [node name="StageCompleteArea" type="Area2D" parent="World"]
 position = Vector2(4672, -1504)
+collision_layer = 2
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="World/StageCompleteArea"]
@@ -125,7 +127,7 @@ debug_color = Color(1.0107458e-06, 0.63131064, 0.46683365, 0.41960785)
 [node name="Enemies" type="Node2D" parent="World"]
 
 [node name="Player" parent="." instance=ExtResource("2_b6msb")]
-position = Vector2(104, 248)
+position = Vector2(104, 200)
 speed = 200
 gravity = 400
 jump_impulse = 300
@@ -144,7 +146,7 @@ limit_top = 0
 limit_right = 4192
 limit_bottom = 360
 
-[connection signal="body_entered" from="World/StageCompleteArea" to="." method="_on_stage_complete_area_body_entered"]
+[connection signal="area_entered" from="World/StageCompleteArea" to="." method="_on_stage_complete_area_body_entered"]
 
 [editable path="World/CameraManager/CameraParams"]
 [editable path="World/CameraManager/CameraParams/CameraTriggers/CameraChangeTrigger"]

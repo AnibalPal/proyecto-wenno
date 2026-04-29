@@ -43,7 +43,6 @@ func on_animation_frame_changed() -> void:
 			hitbox.enable()
 			return
 		if(player.player_animations.frame >= active_end_frame):
-			print("DISABLE")
 			hitbox.disable()
 			return
 
