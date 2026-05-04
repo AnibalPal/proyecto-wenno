@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bj2ee2effkp6v"]
+[gd_scene load_steps=24 format=3 uid="uid://bj2ee2effkp6v"]
 
 [ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/enemy.gd" id="1_uy33a"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_3vt6o"]
@@ -41,6 +41,14 @@ region = Rect2(64, 0, 64, 128)
 atlas = ExtResource("3_3vt6o")
 region = Rect2(128, 0, 64, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vt6o"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(448, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhmxs"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(512, 0, 64, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_008bi"]
 animations = [{
 "frames": [{
@@ -72,6 +80,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vt6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhmxs")
+}],
+"loop": false,
+"name": &"stunned",
 "speed": 5.0
 }]
 
@@ -135,9 +154,7 @@ shape = SubResource("RectangleShape2D_3vt6o")
 material = SubResource("ShaderMaterial_bi512")
 scale = Vector2(2.5000002, 2.625)
 sprite_frames = SubResource("SpriteFrames_008bi")
-animation = &"attack"
-frame = 3
-frame_progress = 1.0
+animation = &"run"
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate"]
 target_position = Vector2(64, 0)
@@ -169,7 +186,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_wor85")
 }
 
+[node name="StunnedDuration" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_animation_finished"]
 [connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_frame_changed"]
 [connection signal="area_entered" from="ShouldRotate/PlayerDetection" to="." method="_on_player_detection_area_entered"]
 [connection signal="area_entered" from="ShouldRotate/EnemyHurtbox" to="." method="_on_enemy_hurtbox_area_entered"]
+[connection signal="timeout" from="StunnedDuration" to="." method="_on_stunned_duration_timeout"]

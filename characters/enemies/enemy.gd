@@ -14,17 +14,25 @@ extends CharacterEntity
 @onready var hitbox: EnemyHitBox = $ShouldRotate/EnemyHitbox
 @onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
 @onready var sprite_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
+@onready var player_detection_collision: CollisionShape2D = $ShouldRotate/PlayerDetection/CollisionShape2D
 @onready var vfx: AnimationPlayer = $VFX
+
+@onready var stunned_duration: Timer = $StunnedDuration
 
 var vulnerable := false
 
 enum States {
 	IDLE,
 	MOVE,
-	ATTACK
+	ATTACK,
+	STUNNED
 }
 
 var current_state := States.MOVE
+
+func _ready() -> void:
+	if(!Engine.is_editor_hint()):
+		sprite_animations.play("run")
 
 func _physics_process(_delta: float) -> void:
 	if(Engine.is_editor_hint()):
@@ -47,22 +55,43 @@ func handle_state_process() -> void:
 				turn_around()
 		States.ATTACK:
 			pass
+		States.STUNNED:
+			velocity.x *= 0.9
 		_:
 			pass
 		
 
 func handle_transition(new_state : States) -> void:
 	if(new_state == States.ATTACK):
+		player_detection_collision.set_deferred("disabled", true)
 		velocity = Vector2.ZERO
+		vulnerable = true
 		sprite_animations.play("attack")
 	if(new_state == States.MOVE):
+		hitbox.disable()
+		player_detection_collision.set_deferred("disabled", false)
+		vulnerable = false
 		sprite_animations.play("run")
+	if(new_state == States.STUNNED):
+		stunned_duration.start()
+		hitbox.disable()
+		player_detection_collision.set_deferred("disabled", true)
+		vulnerable = false
+		sprite_animations.play("stunned")
 	current_state = new_state
 
-func hit_reaction(damage: int) -> void:
+func hit_reaction(area: PlayerHitBox) -> void:
+	var damage = area.get_damage()
 	vfx.play("hit_effect")
 	if(vulnerable):
-		# Add animation interrupt
+		handle_transition(States.STUNNED)
+		var direction = global_position.direction_to(area.global_position)
+		if(direction.x > 0): 
+			turn_right()
+			velocity.x = -float(speed) * 3
+		else:
+			turn_left()
+			velocity.x = float(speed) * 3
 		health -= damage * 2
 	else:
 		health -= damage
@@ -82,21 +111,22 @@ func _on_sprite_animations_frame_changed() -> void:
 					velocity.x = -speed * 5
 				hitbox.enable()
 			else:
-				hitbox.disable()
 				velocity.x = 0
+				hitbox.disable()
 
 func _on_sprite_animations_animation_finished() -> void:
 	if(!Engine.is_editor_hint()):
 		if(sprite_animations.animation == "attack"):
 			handle_transition(States.MOVE)
-			hitbox.disable()
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
 	if(!Engine.is_editor_hint()):
 		if(_area as PlayerHitBox):
-			hit_reaction(_area.get_damage())
+			hit_reaction(_area)
 
-
+func _on_stunned_duration_timeout() -> void:
+	if(!Engine.is_editor_hint()):
+		handle_transition(States.MOVE)
 
 
 
