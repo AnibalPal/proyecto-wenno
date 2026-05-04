@@ -12,6 +12,7 @@ extends CharacterEntity
 @export var gravity := 300 
 
 @onready var hitbox: EnemyHitBox = $ShouldRotate/EnemyHitbox
+@onready var hurtbox: EnemyHurtBox = $ShouldRotate/EnemyHurtbox
 @onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
 @onready var sprite_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
 @onready var player_detection_collision: CollisionShape2D = $ShouldRotate/PlayerDetection/CollisionShape2D
@@ -86,6 +87,7 @@ func handle_transition(new_state : States) -> void:
 		sprite_animations.play("stunned")
 	if(new_state == States.DEATH):
 		hitbox.disable()
+		hurtbox.disable()
 		player_detection_collision.set_deferred("disabled", true)
 		stunned_duration.stop()
 		sprite_animations.play("death")

@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://chpk7a5fc0pj1"]
+
+[ext_resource type="Script" uid="uid://ddoui20l6iegb" path="res://VFX/player_hit_effect.gd" id="1_g0scf"]
+[ext_resource type="Texture2D" uid="uid://no7tv5aw0xix" path="res://assets/prototype/prototype_hit_effects32x32.png" id="1_l8ayw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2j6k"]
+atlas = ExtResource("1_l8ayw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt2bl"]
+atlas = ExtResource("1_l8ayw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxm1l"]
+atlas = ExtResource("1_l8ayw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wd5i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2j6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yt2bl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxm1l")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="PlayerHitEffect" type="Node2D"]
+script = ExtResource("1_g0scf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4wd5i")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -280,6 +280,7 @@ script = ExtResource("7_2suro")
 script = ExtResource("8_3mujp")
 hitbox = NodePath("../../ShouldRotate/Hitboxes/AttackHitbox")
 animation_name = "attack"
+active_end_frame = 4
 
 [node name="AirAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("9_usdan")
@@ -299,9 +300,7 @@ one_shot = true
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_41mm0")
-animation = &"air_attack"
-frame = 3
-frame_progress = 1.0
+animation = &"attack"
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 

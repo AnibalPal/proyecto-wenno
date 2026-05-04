@@ -142,7 +142,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfoax"]
-size = Vector2(40, 96)
+size = Vector2(112, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bi512"]
 size = Vector2(32, 64)
@@ -211,7 +211,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/PlayerDetection"]
-position = Vector2(52, 0)
+position = Vector2(88, 0)
 shape = SubResource("RectangleShape2D_jfoax")
 
 [node name="EnemyHitbox" parent="ShouldRotate" instance=ExtResource("3_008bi")]

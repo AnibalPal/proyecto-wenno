@@ -1,9 +1,12 @@
 class_name PlayerStateMachine
 extends StateMachine
 
+@onready var hitboxes: Node2D = $"../ShouldRotate/Hitboxes"
+
 var state_data = PlayerStateData
 
 func _ready() -> void:
+	prepare_hitboxes()
 	check_state_machine()
 	state_machine_ready()
 
@@ -47,6 +50,21 @@ func check_state_machine() -> void:
 		assert(child is PlayerState, "ERROR: Child is not of type PlayerState, make sure that all the PlayerStateMachine children are of type PlayerState")
 		if(!child.active):
 			disable_state(child.name)
+
+# TODO: Complete then add it to instance_hit_effect function to place the effect in the proper position
+func get_collision_points_between_areas(_area1: Area2D, _area2: Area2D) -> Array:
+	return []
+
+func instantiate_hit_effect(_area: Area2D):
+	var vfx_position := (hitboxes.global_position + _area.global_position)/2 
+	var packed_scene := load("res://VFX/player_hit_effect.tscn")
+	var vfx_instance = packed_scene.instantiate()
+	vfx_instance.global_position = vfx_position
+	get_tree().root.add_child(vfx_instance)
+
+func prepare_hitboxes():
+	for hitbox: PlayerHitBox in hitboxes.get_children():
+		hitbox.area_entered.connect(instantiate_hit_effect)
 
 # Hurtbox and hitbox events
 # Will probably have to make a function to iterate over all hitboxes to connect the event signal to the proper function instead of doing this on every hitbox
