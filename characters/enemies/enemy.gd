@@ -32,6 +32,8 @@ var current_state := States.MOVE
 
 func _ready() -> void:
 	if(!Engine.is_editor_hint()):
+		# PATCH: Add this line to allow copy pasting without repeating the effect when an enemy is hit
+		sprite_animations.material = sprite_animations.material.duplicate(true)
 		sprite_animations.play("run")
 
 func _physics_process(_delta: float) -> void:
