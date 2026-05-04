@@ -30,10 +30,6 @@ func _physics_process(_delta: float) -> void:
 	if(Engine.is_editor_hint()):
 		pass
 	else:
-		if(facing_right):
-			velocity.x = speed
-		else:
-			velocity.x = -speed
 		velocity.y += gravity * _delta
 		handle_state_process()
 		move_and_slide()
@@ -43,17 +39,24 @@ func handle_state_process() -> void:
 		States.IDLE:
 			pass
 		States.MOVE:
+			if(facing_right):
+				velocity.x = speed
+			else:
+				velocity.x = -speed
 			if(wall_detection.is_colliding()):
 				turn_around()
 		States.ATTACK:
-			velocity = Vector2.ZERO
+			pass
 		_:
 			pass
 		
 
 func handle_transition(new_state : States) -> void:
 	if(new_state == States.ATTACK):
+		velocity = Vector2.ZERO
 		sprite_animations.play("attack")
+	if(new_state == States.MOVE):
+		sprite_animations.play("run")
 	current_state = new_state
 
 func hit_reaction(damage: int) -> void:
@@ -70,18 +73,28 @@ func _on_player_detection_area_entered(_area: Area2D) -> void:
 	handle_transition(States.ATTACK)
 
 func _on_sprite_animations_frame_changed() -> void:
-	if(sprite_animations.animation == "attack"):
-		if(sprite_animations.frame == 4):
-			hitbox.enable()
+	if(!Engine.is_editor_hint()):
+		if(sprite_animations.animation == "attack"):
+			if(sprite_animations.frame == 2):
+				if(facing_right):
+					velocity.x = speed * 5
+				else:
+					velocity.x = -speed * 5
+				hitbox.enable()
+			else:
+				hitbox.disable()
+				velocity.x = 0
 
 func _on_sprite_animations_animation_finished() -> void:
-	if(sprite_animations.animation == "attack"):
-		handle_transition(States.MOVE)
-		hitbox.disable()
+	if(!Engine.is_editor_hint()):
+		if(sprite_animations.animation == "attack"):
+			handle_transition(States.MOVE)
+			hitbox.disable()
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
-	if(_area as PlayerHitBox):
-		hit_reaction(_area.get_damage())
+	if(!Engine.is_editor_hint()):
+		if(_area as PlayerHitBox):
+			hit_reaction(_area.get_damage())
 
 
 
