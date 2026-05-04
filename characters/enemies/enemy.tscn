@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bj2ee2effkp6v"]
+[gd_scene load_steps=30 format=3 uid="uid://bj2ee2effkp6v"]
 
 [ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/enemy.gd" id="1_uy33a"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_3vt6o"]
@@ -28,6 +28,30 @@ region = Rect2(320, 0, 64, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8wml"]
 atlas = ExtResource("3_3vt6o")
 region = Rect2(384, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2rlq"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(576, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft2fp"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(640, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02b5a"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(704, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ooaa"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(768, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flmvf"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(832, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mmo8"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(896, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpapd"]
 atlas = ExtResource("3_3vt6o")
@@ -67,6 +91,29 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2rlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ft2fp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02b5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ooaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flmvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mmo8")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,

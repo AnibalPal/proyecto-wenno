@@ -25,7 +25,8 @@ enum States {
 	IDLE,
 	MOVE,
 	ATTACK,
-	STUNNED
+	STUNNED,
+	DEATH
 }
 
 var current_state := States.MOVE
@@ -59,6 +60,9 @@ func handle_state_process() -> void:
 			pass
 		States.STUNNED:
 			velocity.x *= 0.9
+		States.DEATH:
+			velocity.x = 0.0
+			pass
 		_:
 			pass
 		
@@ -80,6 +84,11 @@ func handle_transition(new_state : States) -> void:
 		player_detection_collision.set_deferred("disabled", true)
 		vulnerable = false
 		sprite_animations.play("stunned")
+	if(new_state == States.DEATH):
+		hitbox.disable()
+		player_detection_collision.set_deferred("disabled", true)
+		stunned_duration.stop()
+		sprite_animations.play("death")
 	current_state = new_state
 
 func hit_reaction(area: PlayerHitBox) -> void:
@@ -98,7 +107,7 @@ func hit_reaction(area: PlayerHitBox) -> void:
 	else:
 		health -= damage
 	if(health <= 0):
-		queue_free()
+		handle_transition(States.DEATH)
 
 func _on_player_detection_area_entered(_area: Area2D) -> void:
 	handle_transition(States.ATTACK)
@@ -120,6 +129,8 @@ func _on_sprite_animations_animation_finished() -> void:
 	if(!Engine.is_editor_hint()):
 		if(sprite_animations.animation == "attack"):
 			handle_transition(States.MOVE)
+		if(sprite_animations.animation == "death"):
+			queue_free()
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
 	if(!Engine.is_editor_hint()):
