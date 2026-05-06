@@ -55,8 +55,11 @@ func check_state_machine() -> void:
 func get_collision_points_between_areas(_area1: Area2D, _area2: Area2D) -> Array:
 	return []
 
-func instantiate_hit_effect(_area: Area2D):
-	var vfx_position := (hitboxes.global_position + _area.global_position)/2 
+func get_collision_shape_from_idx(area: Area2D, index: int) -> CollisionShape2D:
+	return area.get_children()[index]	
+	
+func instantiate_hit_effect(pos1: Vector2, pos2: Vector2):
+	var vfx_position := (pos1 + pos2)/2 
 	var packed_scene := load("res://VFX/player_hit_effect.tscn")
 	var vfx_instance = packed_scene.instantiate()
 	vfx_instance.global_position = vfx_position
@@ -64,7 +67,8 @@ func instantiate_hit_effect(_area: Area2D):
 
 func prepare_hitboxes():
 	for hitbox: PlayerHitBox in hitboxes.get_children():
-		hitbox.area_entered.connect(instantiate_hit_effect)
+		#hitbox.area_entered.connect(instantiate_hit_effect)
+		hitbox.area_shape_entered.connect(_on_area_shape_entered.bind(hitbox))
 
 # Hurtbox and hitbox events
 # Will probably have to make a function to iterate over all hitboxes to connect the event signal to the proper function instead of doing this on every hitbox
@@ -76,3 +80,9 @@ func _on_hurtbox_area_entered(_area: Area2D) -> void:
 			}
 		}
 	)
+
+# Handle weapon VFX when attacking an enemy mostly
+func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_idx: int, local_shape_idx: int, local_area: Area2D):
+	var hitbox_shape = get_collision_shape_from_idx(local_area, local_shape_idx)
+	var hurtbox_shape = get_collision_shape_from_idx(area, area_shape_idx)
+	instantiate_hit_effect(hitbox_shape.global_position, hurtbox_shape.global_position)
