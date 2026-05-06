@@ -2,10 +2,9 @@
 extends PlayerState
 class_name PlayerAttackState
 
-@export var hitbox : PlayerHitBox
 @export var animation_name: String
-@export var active_start_frame := 2
-@export var active_end_frame := 3
+
+@export var hitbox_collision_shapes : Array[HitboxCollision] = []
 
 var attack_finished := false
 
@@ -14,10 +13,11 @@ var attack_finished := false
 # - Connect animation signals to disable / enable hitboxes automatically
 	
 func player_state_ready():
-	assert(hitbox, name + ": Falta hitbox")
+	assert(len(hitbox_collision_shapes) > 0, name + ": Falta agregar colisiones")
 	assert(animation_name, name + ": Falta nombre de animación")
 	player.player_animations.frame_changed.connect(on_animation_frame_changed)
 	player.player_animations.animation_finished.connect(on_animation_finished)
+	
 	
 func enter(_data: Dictionary) -> void:
 	player.player_animations.play(animation_name)
@@ -39,12 +39,11 @@ func on_animation_finished() -> void:
 
 func on_animation_frame_changed() -> void:
 	if(player.player_animations.animation == animation_name):
-		if(player.player_animations.frame == active_start_frame):
-			hitbox.enable()
-			return
-		if(player.player_animations.frame >= active_end_frame):
-			hitbox.disable()
-			return
+		for hitbox_collision: HitboxCollision in hitbox_collision_shapes:
+			if(player.player_animations.frame == hitbox_collision.start_frame):
+				hitbox_collision.set_deferred("disabled", false)
+			if(player.player_animations.frame == hitbox_collision.end_frame):
+				hitbox_collision.set_deferred("disabled", true)
 
 # Override in children
 func handle_attack_finished_transitions() -> void:
@@ -55,5 +54,6 @@ func handle_attack_transitions() -> void:
 
 # Override the transition function for the attack state to disable collisions when changing state
 func transition_to(new_state: String, data := {}) -> void:
-	hitbox.disable()
+	for hitbox_collision in hitbox_collision_shapes:
+		hitbox_collision.set_deferred("disabled", true)
 	s_finished.emit(new_state, data)

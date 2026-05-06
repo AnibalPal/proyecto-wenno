@@ -33,6 +33,7 @@ animations = [{
 }]
 
 [node name="PlayerHitEffect" type="Node2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_g0scf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

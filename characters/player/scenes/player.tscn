@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=51 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -14,22 +14,31 @@
 [ext_resource type="Texture2D" uid="uid://dwfae5y0t2ng7" path="res://assets/prototype/prototype_man_32x32.png" id="11_2fx0v"]
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
+[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fx0v"]
 atlas = ExtResource("11_2fx0v")
-region = Rect2(640, 0, 32, 32)
+region = Rect2(672, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_inse1"]
 atlas = ExtResource("11_2fx0v")
-region = Rect2(672, 0, 32, 32)
+region = Rect2(704, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ronts"]
 atlas = ExtResource("11_2fx0v")
-region = Rect2(704, 0, 32, 32)
+region = Rect2(736, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_alequ"]
 atlas = ExtResource("11_2fx0v")
-region = Rect2(736, 0, 32, 32)
+region = Rect2(768, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0t3c"]
+atlas = ExtResource("11_2fx0v")
+region = Rect2(800, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2wwh"]
+atlas = ExtResource("11_2fx0v")
+region = Rect2(832, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgtyq"]
 atlas = ExtResource("11_2fx0v")
@@ -51,13 +60,17 @@ region = Rect2(576, 0, 32, 32)
 atlas = ExtResource("11_2fx0v")
 region = Rect2(608, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vob2n"]
+atlas = ExtResource("11_2fx0v")
+region = Rect2(640, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4a5y"]
 atlas = ExtResource("11_2fx0v")
 region = Rect2(256, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t0t3c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihilf"]
 atlas = ExtResource("11_2fx0v")
-region = Rect2(768, 0, 32, 32)
+region = Rect2(864, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wudow"]
 atlas = ExtResource("11_2fx0v")
@@ -120,11 +133,17 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_inse1")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_ronts")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_alequ")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0t3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2wwh")
 }],
 "loop": false,
 "name": &"air_attack",
@@ -140,11 +159,14 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1queg")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_is67l")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_rnoiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vob2n")
 }],
 "loop": false,
 "name": &"attack",
@@ -160,7 +182,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t0t3c")
+"texture": SubResource("AtlasTexture_ihilf")
 }],
 "loop": true,
 "name": &"hit",
@@ -222,16 +244,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fx0v"]
-size = Vector2(48, 64)
+size = Vector2(56, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_inse1"]
-size = Vector2(104, 32)
+size = Vector2(72, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usdan"]
 size = Vector2(48, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eigjl"]
-size = Vector2(120, 40)
+size = Vector2(112, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ronts"]
 size = Vector2(16, 48)
@@ -276,16 +298,21 @@ one_shot = true
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("7_2suro")
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox", "hitbox_collision_shapes")]
 script = ExtResource("8_3mujp")
-hitbox = NodePath("../../ShouldRotate/Hitboxes/AttackHitbox")
 animation_name = "attack"
-active_end_frame = 4
+hitbox = NodePath("../../ShouldRotate/Hitboxes/AttackHitbox")
+active_start_frame = 2
+active_end_frame = 5
+hitbox_collision_shapes = [NodePath("../../ShouldRotate/Hitboxes/AttackHitbox/FrontShape"), NodePath("../../ShouldRotate/Hitboxes/AttackHitbox/UpperShape")]
 
-[node name="AirAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="AirAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox", "hitbox_collision_shapes")]
 script = ExtResource("9_usdan")
-hitbox = NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox")
 animation_name = "air_attack"
+hitbox = NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox")
+active_start_frame = 1
+active_end_frame = 4
+hitbox_collision_shapes = [NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox/FrontShape"), NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox/LowerShape")]
 
 [node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("10_2fx0v")
@@ -301,22 +328,30 @@ one_shot = true
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_41mm0")
 animation = &"attack"
+frame = 5
+frame_progress = 1.0
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
 [node name="AttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
-position = Vector2(40, -8)
+position = Vector2(44, -12)
 shape = SubResource("RectangleShape2D_2fx0v")
 disabled = true
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+script = ExtResource("13_inse1")
+start_frame = 3
+end_frame = 4
 
 [node name="UpperShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
-position = Vector2(-4, -40)
+position = Vector2(-20, -40)
 shape = SubResource("RectangleShape2D_inse1")
 disabled = true
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+script = ExtResource("13_inse1")
+start_frame = 4
+end_frame = 5
 
 [node name="AirAttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
 collision_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
@@ -326,12 +361,18 @@ position = Vector2(40, 4)
 shape = SubResource("RectangleShape2D_usdan")
 disabled = true
 debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
+script = ExtResource("13_inse1")
+start_frame = 1
+end_frame = 2
 
 [node name="LowerShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AirAttackHitbox"]
-position = Vector2(-4, 44)
+position = Vector2(-8, 48)
 shape = SubResource("RectangleShape2D_eigjl")
 disabled = true
 debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
+script = ExtResource("13_inse1")
+start_frame = 2
+end_frame = 3
 
 [node name="Hurtbox" parent="ShouldRotate" instance=ExtResource("12_eigjl")]
 

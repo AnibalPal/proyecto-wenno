@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://2vm8xwfc824i"]
 
-[ext_resource type="Script" uid="uid://cwury0hu0ay0p" path="res://stages/prototypes/combat_prototype/combat_prototype.gd" id="1_emawt"]
+[ext_resource type="Script" path="res://stages/prototypes/combat_prototype/combat_prototype.gd" id="1_emawt"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_i2a4u"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_ajev4"]
 [ext_resource type="PackedScene" uid="uid://bj2ee2effkp6v" path="res://characters/enemies/enemy.tscn" id="3_ph2t8"]
