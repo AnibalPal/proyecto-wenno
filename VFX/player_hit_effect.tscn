@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://chpk7a5fc0pj1"]
 
-[ext_resource type="Script" uid="uid://ddoui20l6iegb" path="res://VFX/player_hit_effect.gd" id="1_g0scf"]
+[ext_resource type="Script" uid="uid://ddoui20l6iegb" path="res://VFX/base_effect.gd" id="1_g0scf"]
 [ext_resource type="Texture2D" uid="uid://no7tv5aw0xix" path="res://assets/prototype/prototype_hit_effects32x32.png" id="1_l8ayw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x2j6k"]

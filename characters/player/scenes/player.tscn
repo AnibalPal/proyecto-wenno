@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=42 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -8,90 +8,99 @@
 [ext_resource type="Script" uid="uid://idypv88idqi8" path="res://characters/player/scripts/states/fall.gd" id="6_2kdo7"]
 [ext_resource type="Script" uid="uid://4lddnoeaxjeo" path="res://characters/player/scripts/states/dash.gd" id="7_2suro"]
 [ext_resource type="Script" uid="uid://cr64hn4qxtuok" path="res://characters/player/scripts/states/attack.gd" id="8_inse1"]
-[ext_resource type="Texture2D" uid="uid://cq3mkhere8adf" path="res://assets/prototype/player_spritesheet_42x42.png" id="9_eigjl"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
 [ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scripts/states/air_attack.gd" id="9_ronts"]
 [ext_resource type="Script" uid="uid://c8bsm6n28c07o" path="res://characters/player/scripts/states/hit.gd" id="10_2fx0v"]
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
+[ext_resource type="Script" uid="uid://cpjguobpn02om" path="res://characters/player/scripts/states/recoil.gd" id="11_ronts"]
+[ext_resource type="Texture2D" uid="uid://ccx0vpid7qdd4" path="res://assets/prototype/player_spritesheet_60x42.png" id="12_alequ"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
 [ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2fx0v"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(672, 0, 42, 42)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2wwh"]
+atlas = ExtResource("12_alequ")
+region = Rect2(1140, 0, 60, 42)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_inse1"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(714, 0, 42, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ronts"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(588, 0, 42, 42)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnoiw"]
+atlas = ExtResource("12_alequ")
+region = Rect2(1200, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_alequ"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(630, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(900, 0, 60, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ukde"]
+atlas = ExtResource("12_alequ")
+region = Rect2(960, 0, 60, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ronts"]
+atlas = ExtResource("12_alequ")
+region = Rect2(780, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t0t3c"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(504, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(1260, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgtyq"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(756, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(0, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prd1v"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(0, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(60, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1queg"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(42, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(120, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_is67l"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(84, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(180, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4a5y"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(420, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(660, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vob2n"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(462, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(720, 0, 60, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi8ke"]
+atlas = ExtResource("12_alequ")
+region = Rect2(600, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wudow"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(126, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(240, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g207k"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(168, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(300, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fiwvx"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(210, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(360, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7t1dx"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(252, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(420, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0pqbg"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(294, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(480, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xa022"]
-atlas = ExtResource("9_eigjl")
-region = Rect2(336, 0, 42, 42)
+atlas = ExtResource("12_alequ")
+region = Rect2(540, 0, 60, 42)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_41mm0"]
 animations = [{
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_2fx0v")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2wwh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_inse1")
+"texture": SubResource("AtlasTexture_rnoiw")
 }],
 "loop": false,
 "name": &"air_attack",
@@ -99,10 +108,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ronts")
+"texture": SubResource("AtlasTexture_alequ")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_alequ")
+"texture": SubResource("AtlasTexture_0ukde")
 }],
 "loop": false,
 "name": &"attack",
@@ -110,7 +119,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t0t3c")
+"texture": SubResource("AtlasTexture_ronts")
 }],
 "loop": false,
 "name": &"fall",
@@ -118,13 +127,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qgtyq")
+"texture": SubResource("AtlasTexture_t0t3c")
 }],
 "loop": true,
 "name": &"hit",
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgtyq")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_prd1v")
 }, {
@@ -148,6 +160,14 @@ animations = [{
 "loop": false,
 "name": &"jump",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi8ke")
+}],
+"loop": true,
+"name": &"recoil",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -235,10 +255,17 @@ hitbox_collision_shapes = [NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox
 [node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("10_2fx0v")
 player_hurtbox = NodePath("../../ShouldRotate/Hurtbox")
-stop_duration = 0.2
 
 [node name="Duration" type="Timer" parent="StateMachine/Hit"]
 wait_time = 0.5
+one_shot = true
+
+[node name="Recoil" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
+script = ExtResource("11_ronts")
+player_hurtbox = NodePath("../../ShouldRotate/Hurtbox")
+
+[node name="Duration" type="Timer" parent="StateMachine/Recoil"]
+wait_time = 0.3
 one_shot = true
 
 [node name="ShouldRotate" type="Node2D" parent="."]
@@ -247,11 +274,11 @@ one_shot = true
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_41mm0")
 animation = &"run"
-frame_progress = 0.21673715
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
 [node name="AttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
+collision_mask = 48
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
 position = Vector2(32, -4)
@@ -263,6 +290,7 @@ start_frame = 1
 end_frame = 2
 
 [node name="AirAttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
+collision_mask = 48
 collision_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AirAttackHitbox"]
@@ -349,4 +377,5 @@ text = "Idle"
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]
 [connection signal="timeout" from="StateMachine/Hit/Duration" to="StateMachine/Hit" method="_on_duration_timeout"]
+[connection signal="timeout" from="StateMachine/Recoil/Duration" to="StateMachine/Recoil" method="_on_duration_timeout"]
 [connection signal="area_entered" from="ShouldRotate/Hurtbox" to="StateMachine" method="_on_hurtbox_area_entered"]

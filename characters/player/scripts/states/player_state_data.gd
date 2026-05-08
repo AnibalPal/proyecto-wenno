@@ -10,6 +10,7 @@ const FALL := "Fall"
 const ATTACK := "Attack"
 const AIRATTACK := "AirAttack"
 const HIT := "Hit"
+const RECOIL := "Recoil"
 
 static var transitions = {
 		IDLE: {
@@ -46,9 +47,13 @@ static var transitions = {
 			FALL: true
 		},
 		ALL: {
-			HIT: true
+			HIT: true,
+			RECOIL: true
 		},
 		HIT: {
+			ALL: true
+		},
+		RECOIL: {
 			ALL: true
 		}
 }

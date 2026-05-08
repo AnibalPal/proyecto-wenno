@@ -18,7 +18,15 @@ extends CharacterEntity
 @onready var player_detection_collision: CollisionShape2D = $ShouldRotate/PlayerDetection/CollisionShape2D
 @onready var vfx: AnimationPlayer = $VFX
 
-@onready var stunned_duration: Timer = $StunnedDuration
+@onready var attack_cooldown : Timer = $Timers/AttackCooldown
+
+@onready var stunned_duration: Timer = $Timers/StunnedDuration
+@onready var stunned_slowdown_rate := 0.9
+@onready var counter_pushback_rate := 3
+
+@onready var recoil_duration: Timer = $Timers/RecoilDuration
+@onready var clash_slowdown_rate := 0.95
+@onready var clash_pushback_rate := 4
 
 var vulnerable := false
 
@@ -27,7 +35,8 @@ enum States {
 	MOVE,
 	ATTACK,
 	STUNNED,
-	DEATH
+	DEATH,
+	RECOIL
 }
 
 var current_state := States.MOVE
@@ -60,9 +69,14 @@ func handle_state_process() -> void:
 		States.ATTACK:
 			pass
 		States.STUNNED:
-			velocity.x *= 0.9
+			velocity.x *= stunned_slowdown_rate
 		States.DEATH:
 			velocity.x = 0.0
+			pass
+		States.RECOIL:
+			velocity.x *= clash_slowdown_rate
+			if(is_equal_approx(velocity.x, 0)):
+				handle_transition(States.MOVE)
 			pass
 		_:
 			pass
@@ -84,7 +98,7 @@ func handle_transition(new_state : States) -> void:
 		sprite_animations.play("attack")
 	if(new_state == States.MOVE):
 		hitbox.disable()
-		player_detection_collision.set_deferred("disabled", false)
+		attack_cooldown.start()
 		vulnerable = false
 		sprite_animations.play("run")
 	if(new_state == States.STUNNED):
@@ -93,6 +107,12 @@ func handle_transition(new_state : States) -> void:
 		player_detection_collision.set_deferred("disabled", true)
 		vulnerable = false
 		sprite_animations.play("stunned")
+	if(new_state == States.RECOIL):
+		recoil_duration.start()
+		hitbox.disable()
+		player_detection_collision.set_deferred("disabled", true)
+		vulnerable = false
+		sprite_animations.play("recoil")
 	current_state = new_state
 
 func hit_reaction(area: PlayerHitBox) -> void:
@@ -100,19 +120,30 @@ func hit_reaction(area: PlayerHitBox) -> void:
 	vfx.play("hit_effect")
 	if(vulnerable):
 		GlobalVFXs.hitstop()
-		handle_transition(States.STUNNED)
 		var direction = global_position.direction_to(area.global_position)
 		if(direction.x > 0): 
 			turn_right()
-			velocity.x = -float(speed) * 3
+			velocity.x = -float(speed) * counter_pushback_rate
 		else:
 			turn_left()
-			velocity.x = float(speed) * 3
+			velocity.x = float(speed) * counter_pushback_rate
+		handle_transition(States.STUNNED)
 		health -= damage * 2
 	else:
 		health -= damage
 	if(health <= 0):
 		handle_transition(States.DEATH)
+
+func clash_reaction(_area: Area2D) -> void:
+	var direction = global_position.direction_to(_area.global_position)
+	if(direction.x > 0): 
+		turn_right()
+		velocity.x = -float(speed) * clash_pushback_rate
+	else:
+		turn_left()
+		velocity.x = float(speed) * clash_pushback_rate
+	handle_transition(States.RECOIL)
+	
 
 func _on_player_detection_area_entered(_area: Area2D) -> void:
 	handle_transition(States.ATTACK)
@@ -139,16 +170,25 @@ func _on_sprite_animations_animation_finished() -> void:
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
 	if(!Engine.is_editor_hint()):
-		if(_area as PlayerHitBox):
+		if(_area is PlayerHitBox):
 			hit_reaction(_area)
+
+func _on_enemy_hitbox_area_entered(_area: Area2D) -> void:
+	if(!Engine.is_editor_hint()):
+		if(_area is PlayerHitBox):
+			clash_reaction(_area)
+
 
 func _on_stunned_duration_timeout() -> void:
 	if(!Engine.is_editor_hint()):
 		handle_transition(States.MOVE)
 
+func _on_recoil_duration_timeout() -> void:
+	if(!Engine.is_editor_hint()):
+		handle_transition(States.MOVE)
 
-
-
+func _on_attack_cooldown_timeout() -> void:
+	player_detection_collision.set_deferred("disabled", false)
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bj2ee2effkp6v"]
+[gd_scene load_steps=31 format=3 uid="uid://bj2ee2effkp6v"]
 
 [ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/enemy.gd" id="1_uy33a"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_3vt6o"]
@@ -52,6 +52,10 @@ region = Rect2(832, 0, 64, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8mmo8"]
 atlas = ExtResource("3_3vt6o")
 region = Rect2(896, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brphm"]
+atlas = ExtResource("3_3vt6o")
+region = Rect2(448, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpapd"]
 atlas = ExtResource("3_3vt6o")
@@ -114,6 +118,14 @@ animations = [{
 "loop": false,
 "name": &"death",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brphm")
+}],
+"loop": true,
+"name": &"recoil",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -201,7 +213,7 @@ shape = SubResource("RectangleShape2D_3vt6o")
 material = SubResource("ShaderMaterial_bi512")
 scale = Vector2(2.5000002, 2.625)
 sprite_frames = SubResource("SpriteFrames_008bi")
-animation = &"run"
+animation = &"recoil"
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate"]
 target_position = Vector2(64, 0)
@@ -215,6 +227,7 @@ position = Vector2(88, 0)
 shape = SubResource("RectangleShape2D_jfoax")
 
 [node name="EnemyHitbox" parent="ShouldRotate" instance=ExtResource("3_008bi")]
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHitbox"]
 position = Vector2(48, 0)
@@ -233,11 +246,23 @@ libraries = {
 &"": SubResource("AnimationLibrary_wor85")
 }
 
-[node name="StunnedDuration" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="AttackCooldown" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="StunnedDuration" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="RecoilDuration" type="Timer" parent="Timers"]
+wait_time = 0.3
 one_shot = true
 
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_animation_finished"]
 [connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_frame_changed"]
 [connection signal="area_entered" from="ShouldRotate/PlayerDetection" to="." method="_on_player_detection_area_entered"]
+[connection signal="area_entered" from="ShouldRotate/EnemyHitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="area_entered" from="ShouldRotate/EnemyHurtbox" to="." method="_on_enemy_hurtbox_area_entered"]
-[connection signal="timeout" from="StunnedDuration" to="." method="_on_stunned_duration_timeout"]
+[connection signal="timeout" from="Timers/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Timers/StunnedDuration" to="." method="_on_stunned_duration_timeout"]
+[connection signal="timeout" from="Timers/RecoilDuration" to="." method="_on_recoil_duration_timeout"]
