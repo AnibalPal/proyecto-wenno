@@ -69,6 +69,14 @@ func handle_state_process() -> void:
 		
 
 func handle_transition(new_state : States) -> void:
+	if(health <= 0 or new_state == States.DEATH):
+		hitbox.disable()
+		hurtbox.disable()
+		player_detection_collision.set_deferred("disabled", true)
+		stunned_duration.stop()
+		sprite_animations.play("death")
+		current_state = States.DEATH
+		return
 	if(new_state == States.ATTACK):
 		player_detection_collision.set_deferred("disabled", true)
 		velocity = Vector2.ZERO
@@ -85,12 +93,6 @@ func handle_transition(new_state : States) -> void:
 		player_detection_collision.set_deferred("disabled", true)
 		vulnerable = false
 		sprite_animations.play("stunned")
-	if(new_state == States.DEATH):
-		hitbox.disable()
-		hurtbox.disable()
-		player_detection_collision.set_deferred("disabled", true)
-		stunned_duration.stop()
-		sprite_animations.play("death")
 	current_state = new_state
 
 func hit_reaction(area: PlayerHitBox) -> void:
@@ -129,10 +131,10 @@ func _on_sprite_animations_frame_changed() -> void:
 
 func _on_sprite_animations_animation_finished() -> void:
 	if(!Engine.is_editor_hint()):
-		if(sprite_animations.animation == "attack"):
-			handle_transition(States.MOVE)
 		if(sprite_animations.animation == "death"):
 			queue_free()
+		if(sprite_animations.animation == "attack"):
+			handle_transition(States.MOVE)
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
 	if(!Engine.is_editor_hint()):

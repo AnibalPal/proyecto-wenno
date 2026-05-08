@@ -3,10 +3,7 @@ extends PlayerState
 
 func enter(_data: Dictionary) -> void:
 	player.player_animations.play("jump")
-	if(_data.has("no_impulse")):
-		if(_data["no_impulse"]):
-			player.velocity.y = 0
-	else:
+	if(!_data.has("no_impulse")):
 		player.velocity.y = -player.jump_impulse
 
 func state_process(_delta: float) -> void:
