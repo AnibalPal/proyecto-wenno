@@ -10,6 +10,7 @@ var hit_end := false
 
 func enter(_data: Dictionary) -> void:
 	assert(player_hurtbox, "Hit state: No player hurtbox set!")
+	GlobalVFXs.hitstop()
 	player.disable_hitboxes()
 	reset_state()
 	duration.start()

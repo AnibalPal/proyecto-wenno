@@ -15,6 +15,10 @@ run/main_scene="uid://drf86gl11r0v7"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalVFXs="*res://autoloads/global_vfxs.tscn"
+
 [display]
 
 window/size/viewport_width=640

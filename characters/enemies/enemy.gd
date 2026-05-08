@@ -99,6 +99,7 @@ func hit_reaction(area: PlayerHitBox) -> void:
 	var damage = area.get_damage()
 	vfx.play("hit_effect")
 	if(vulnerable):
+		GlobalVFXs.hitstop()
 		handle_transition(States.STUNNED)
 		var direction = global_position.direction_to(area.global_position)
 		if(direction.x > 0): 
