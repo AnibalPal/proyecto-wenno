@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalVFXs="*res://autoloads/global_vfxs.tscn"
+CombatManager="*res://autoloads/combat_manager.gd"
 
 [display]
 

@@ -1,5 +1,5 @@
-extends Area2D
 class_name Box
+extends Area2D
 
 @export var interaction_priority := 0 # lowest priority
 

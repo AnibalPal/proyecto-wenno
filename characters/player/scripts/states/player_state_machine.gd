@@ -2,6 +2,7 @@ class_name PlayerStateMachine
 extends StateMachine
 
 @onready var hitboxes: Node2D = $"../ShouldRotate/Hitboxes"
+@onready var hurtbox: PlayerHurtBox = $"../ShouldRotate/Hurtbox"
 
 var state_data = PlayerStateData
 
@@ -57,28 +58,42 @@ func get_collision_points_between_areas(_area1: Area2D, _area2: Area2D) -> Array
 
 func get_collision_shape_from_idx(area: Area2D, index: int) -> CollisionShape2D:
 	return area.get_children()[index]	
-	
-func instantiate_hit_effect(pos1: Vector2, pos2: Vector2, vfx_path: String):
-	var vfx_position := (pos1 + pos2)/2 
-	var packed_scene := load(vfx_path)
-	var vfx_instance = packed_scene.instantiate()
-	vfx_instance.global_position = vfx_position
-	get_tree().root.add_child(vfx_instance)
 
-func prepare_hitboxes():
+func prepare_hitboxes() -> void:
 	for hitbox: PlayerHitBox in hitboxes.get_children():
 		hitbox.area_shape_entered.connect(_on_area_shape_entered.bind(hitbox))
 
-# Hurtbox and hitbox events
-# Will probably have to make a function to iterate over all hitboxes to connect the event signal to the proper function instead of doing this on every hitbox
-func _on_hurtbox_area_entered(_area: Area2D) -> void:
+func on_damaged(_damage: int, enemy_position: Vector2) -> void:
 	transition_to_next_state(state_data.HIT, 
 		{
 			"interaction_data" : {
-				"area_position" : _area.global_position
+				"area_position" : enemy_position
 			}
 		}
 	)
+	pass
+
+func on_hit() -> void:
+	pass
+		
+func on_clash(enemy_collision_position: Vector2) -> void:
+	transition_to_next_state(state_data.RECOIL, {
+		"interaction_data" : {
+			"area_position" : enemy_collision_position
+		}
+	})
+
+# Hurtbox and hitbox events
+# Will probably have to make a function to iterate over all hitboxes to connect the event signal to the proper function instead of doing this on every hitbox
+func _on_hurtbox_area_entered(_area: EnemyHitBox) -> void:
+	# Getting hit event
+	CombatManager.subscribe(CombatManager.CombatEventType.DAMAGE, _area.owner, owner, {
+		"damage": _area.get_damage(),
+		"collision_info": {
+			"entity1": hurtbox.global_position,
+			"entity2": _area.global_position,
+		}
+	})
 
 # Handle weapon VFX when attacking an enemy mostly
 func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_idx: int, local_shape_idx: int, local_area: Area2D):
@@ -86,14 +101,22 @@ func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_idx: int, l
 	var other_shape = get_collision_shape_from_idx(area, area_shape_idx)
 	
 	if(area is EnemyHitBox):
-		instantiate_hit_effect(local_shape.global_position, other_shape.global_position, "res://VFX/clash_effect.tscn")
-		transition_to_next_state(state_data.RECOIL, {
-			"interaction_data" : {
-				"area_position" : area.global_position
+		# Clash event
+		CombatManager.subscribe(CombatManager.CombatEventType.CLASH, owner, area.owner, {
+			"collision_info": {
+				"entity1": local_shape.global_position,
+				"entity2": other_shape.global_position,
 			}
 		})
 		return
 	
 	if(area is EnemyHurtBox):
-		instantiate_hit_effect(local_shape.global_position, other_shape.global_position, "res://VFX/player_hit_effect.tscn")
+		# Hitting an enemy event
+		CombatManager.subscribe(CombatManager.CombatEventType.DAMAGE, owner, area.owner, {
+			"damage": local_area.get_damage(),
+			"collision_info": {
+				"entity1": local_shape.global_position,
+				"entity2": other_shape.global_position,
+			}
+		})
 		return

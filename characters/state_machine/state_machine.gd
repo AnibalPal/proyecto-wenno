@@ -1,4 +1,4 @@
-# Virtual State class, the functions here should be overriden in the proper state
+# Virtual State class, the functions here should be overridden in the proper state
 class_name StateMachine
 extends Node
 

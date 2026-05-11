@@ -115,12 +115,11 @@ func handle_transition(new_state : States) -> void:
 		sprite_animations.play("recoil")
 	current_state = new_state
 
-func hit_reaction(area: PlayerHitBox) -> void:
-	var damage = area.get_damage()
+func on_damaged(damage, attacker_position) -> void:
 	vfx.play("hit_effect")
 	if(vulnerable):
 		GlobalVFXs.hitstop()
-		var direction = global_position.direction_to(area.global_position)
+		var direction = global_position.direction_to(attacker_position)
 		if(direction.x > 0): 
 			turn_right()
 			velocity.x = -float(speed) * counter_pushback_rate
@@ -134,8 +133,11 @@ func hit_reaction(area: PlayerHitBox) -> void:
 	if(health <= 0):
 		handle_transition(States.DEATH)
 
-func clash_reaction(_area: Area2D) -> void:
-	var direction = global_position.direction_to(_area.global_position)
+func on_hit() -> void:
+	pass
+
+func on_clash(other_position: Vector2) -> void:
+	var direction = global_position.direction_to(other_position)
 	if(direction.x > 0): 
 		turn_right()
 		velocity.x = -float(speed) * clash_pushback_rate
@@ -169,14 +171,17 @@ func _on_sprite_animations_animation_finished() -> void:
 			handle_transition(States.MOVE)
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
-	if(!Engine.is_editor_hint()):
-		if(_area is PlayerHitBox):
-			hit_reaction(_area)
+	pass
+	#if(!Engine.is_editor_hint()):
+		#if(_area is PlayerHitBox):
+			#on_damaged(_area)
 
 func _on_enemy_hitbox_area_entered(_area: Area2D) -> void:
-	if(!Engine.is_editor_hint()):
-		if(_area is PlayerHitBox):
-			clash_reaction(_area)
+	pass
+	#if(!Engine.is_editor_hint()):
+		#if(_area is PlayerHitBox):
+			## Only the player can subscribe clash events
+			#on_clash(_area)
 
 
 func _on_stunned_duration_timeout() -> void:
