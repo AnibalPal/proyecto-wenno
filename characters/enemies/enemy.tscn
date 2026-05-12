@@ -216,7 +216,11 @@ sprite_frames = SubResource("SpriteFrames_008bi")
 animation = &"recoil"
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate"]
-target_position = Vector2(64, 0)
+target_position = Vector2(24, 0)
+
+[node name="FloorDetection" type="RayCast2D" parent="ShouldRotate"]
+position = Vector2(16, 32)
+target_position = Vector2(0, 24)
 
 [node name="PlayerDetection" type="Area2D" parent="ShouldRotate"]
 collision_layer = 0

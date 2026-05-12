@@ -20,7 +20,7 @@ extends CharacterBody2D
 	get:
 		return facing_right
 
-# Utility functions to be used inside PlayerState scripts
+# Utility functions to be used inside PlayerState or Enemy scripts
 func turn_around() -> void:
 	if(facing_right):
 		turn_left()
@@ -38,11 +38,11 @@ func turn_left() -> void:
 	should_rotate.transform.x = Vector2(-1.0, 0.0)
 
 # Virtual functions used in the CombatManager class
-func on_damaged(_damage: int, _enemy_position: Vector2) -> void:
+func on_damaged(_damage: int, _other_entity_position: Vector2) -> void:
 	pass
 
 func on_hit() -> void:
 	pass
 		
-func on_clash(_enemy_collision_position: Vector2) -> void:
+func on_clash(_other_collision_position: Vector2) -> void:
 	pass

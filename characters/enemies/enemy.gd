@@ -14,6 +14,7 @@ extends CharacterEntity
 @onready var hitbox: EnemyHitBox = $ShouldRotate/EnemyHitbox
 @onready var hurtbox: EnemyHurtBox = $ShouldRotate/EnemyHurtbox
 @onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
+@onready var floor_detection: RayCast2D = $ShouldRotate/FloorDetection
 @onready var sprite_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
 @onready var player_detection_collision: CollisionShape2D = $ShouldRotate/PlayerDetection/CollisionShape2D
 @onready var vfx: AnimationPlayer = $VFX
@@ -65,6 +66,8 @@ func handle_state_process() -> void:
 			else:
 				velocity.x = -speed
 			if(wall_detection.is_colliding()):
+				turn_around()
+			if(is_on_floor() and !floor_detection.is_colliding()):
 				turn_around()
 		States.ATTACK:
 			pass
@@ -148,6 +151,8 @@ func on_clash(other_position: Vector2) -> void:
 	
 
 func _on_player_detection_area_entered(_area: Area2D) -> void:
+	if(CombatManager.verify_area_detection(global_position, _area.global_position)):
+		return
 	handle_transition(States.ATTACK)
 
 func _on_sprite_animations_frame_changed() -> void:
@@ -194,6 +199,13 @@ func _on_recoil_duration_timeout() -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	player_detection_collision.set_deferred("disabled", false)
+
+
+
+
+
+
+
 
 
 
