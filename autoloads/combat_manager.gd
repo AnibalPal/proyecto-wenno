@@ -5,7 +5,9 @@ enum CombatEventType {
 	DAMAGE, # 1 hitbox and 1 hurtbox
 }
 
-var event_queue: Array[CombatEvent] = []
+# Sadly cant put the type I want because godot limitation but the type should be
+# something like Dictionary[String, Array[CombatEvent]]
+var event_queue = {}
 
 func _physics_process(_delta: float) -> void:
 	call_deferred("resolve_event_queue")
@@ -22,9 +24,14 @@ func instantiate_hit_effect(pos1: Vector2, pos2: Vector2, vfx_path: String):
 	vfx_instance.global_position = vfx_position
 	get_tree().root.add_child(vfx_instance)
 
-func subscribe(event_type: CombatEventType, emmiting_entity, receiving_entity, data := {}):
-	var combat_event = CombatEvent.new(event_type, emmiting_entity, receiving_entity, data)
-	event_queue.append(combat_event)
+func subscribe(event_type: CombatEventType, emitting_entity, receiving_entity, data := {}):
+	var combat_event = CombatEvent.new(event_type, emitting_entity, receiving_entity, data)
+	var event_group_key = emitting_entity.name + receiving_entity.name
+	if(event_queue.has(event_group_key)):
+		event_queue[event_group_key].append(combat_event)
+	else:
+		event_queue[event_group_key] = [combat_event]
+	#event_queue.append(combat_event)
 
 func resolve_damage(event: CombatEvent):
 	event.emitter.on_hit()
@@ -38,7 +45,6 @@ func resolve_damage(event: CombatEvent):
 		)
 
 func resolve_clash(event: CombatEvent) -> void:
-	print("RESOLVE_CLASH")
 	if(event.data.has("collision_info")):
 		event.emitter.on_clash(event.data["collision_info"]["entity2"])
 		event.receiver.on_clash(event.data["collision_info"]["entity1"])
@@ -49,19 +55,17 @@ func resolve_clash(event: CombatEvent) -> void:
 		)
 
 func resolve_event_queue():
-	if(len(event_queue) > 0):
-		print("EVENTS FOR THIS FRAME: ", len(event_queue))
-		event_queue.sort_custom(event_priority_sort)
-		for event:CombatEvent in event_queue:
-			event._print()
-			match event.type:
-				# REFACTOR: Consider just passing the event to the function instead
-				CombatEventType.CLASH:
-					resolve_clash(event)
-					event_queue.clear()
-					return
-				CombatEventType.DAMAGE:
-					resolve_damage(event)
+	if(event_queue.size() > 0):
+		for event_id in event_queue:
+			var event_group = event_queue[event_id]
+			event_group.sort_custom(event_priority_sort)
+			for event:CombatEvent in event_group:
+				match event.type:
+					CombatEventType.CLASH:
+						resolve_clash(event)
+						break
+					CombatEventType.DAMAGE:
+						resolve_damage(event)
 		event_queue.clear()
 
 class CombatEvent:
