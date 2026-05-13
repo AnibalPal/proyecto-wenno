@@ -79,10 +79,9 @@ func handle_state_process() -> void:
 				var move_direction := global_position.direction_to(chase_target.global_position)
 				if(move_direction.x < 0):
 					turn_left()
-					velocity.x = -chase_speed
 				else:
 					turn_right()
-					velocity.x = chase_speed
+				move_forward(chase_speed)
 				if(abs(global_position.x - chase_target.global_position.x) < 100):
 					velocity.x = 0.0
 					sprite_animations.play("idle")
@@ -154,10 +153,9 @@ func on_damaged(damage, attacker_position) -> void:
 		var direction = global_position.direction_to(attacker_position)
 		if(direction.x > 0): 
 			turn_right()
-			velocity.x = -float(speed) * counter_pushback_rate
 		else:
 			turn_left()
-			velocity.x = float(speed) * counter_pushback_rate
+		move_backwards(float(speed) * counter_pushback_rate)
 		handle_transition(States.STUNNED)
 		health -= damage * 2
 	else:
@@ -172,10 +170,9 @@ func on_clash(other_position: Vector2) -> void:
 	var direction = global_position.direction_to(other_position)
 	if(direction.x > 0): 
 		turn_right()
-		velocity.x = -float(speed) * clash_pushback_rate
 	else:
 		turn_left()
-		velocity.x = float(speed) * clash_pushback_rate
+	move_backwards(float(speed) * clash_pushback_rate)
 	handle_transition(States.RECOIL)
 
 func _on_player_detection_area_entered(area: Area2D) -> void:
@@ -196,10 +193,7 @@ func _on_sprite_animations_frame_changed() -> void:
 	if(!Engine.is_editor_hint()):
 		if(sprite_animations.animation == "attack"):
 			if(sprite_animations.frame == 2):
-				if(facing_right):
-					velocity.x = speed * 10
-				else:
-					velocity.x = -speed * 10
+				move_forward(speed * 10)
 				hitbox.enable()
 			else:
 				velocity.x = 0
@@ -216,17 +210,6 @@ func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
 	# NOTE: THIS IS A PATCH, the proper solution is to change the combat manager to get the entities
 	# in contact instead of just the position
 	chase_target = _area.owner
-	#if(!Engine.is_editor_hint()):
-		#if(_area is PlayerHitBox):
-			#on_damaged(_area)
-
-func _on_enemy_hitbox_area_entered(_area: Area2D) -> void:
-	pass
-	#if(!Engine.is_editor_hint()):
-		#if(_area is PlayerHitBox):
-			## Only the player can subscribe clash events
-			#on_clash(_area)
-
 
 func _on_stunned_duration_timeout() -> void:
 	if(!Engine.is_editor_hint()):

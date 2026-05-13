@@ -37,6 +37,19 @@ func turn_left() -> void:
 	facing_right = false
 	should_rotate.transform.x = Vector2(-1.0, 0.0)
 
+# Move forward based on a positive speed value (scalar value)
+func move_forward(speed: float) -> void:
+	if(facing_right):
+		velocity.x = speed
+	else:
+		velocity.x = -speed
+
+func move_backwards(speed: float) -> void:
+	if(facing_right):
+		velocity.x = -speed
+	else:
+		velocity.x = speed
+
 # Virtual functions used in the CombatManager class
 func on_damaged(_damage: int, _other_entity_position: Vector2) -> void:
 	pass

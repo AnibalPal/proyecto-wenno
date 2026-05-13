@@ -316,7 +316,6 @@ one_shot = true
 [connection signal="area_entered" from="ShouldRotate/PlayerDetection" to="." method="_on_player_detection_area_entered"]
 [connection signal="area_exited" from="ShouldRotate/PlayerAwareness" to="." method="_on_player_awareness_area_exited"]
 [connection signal="area_entered" from="ShouldRotate/AttackDetection" to="." method="_on_attack_detection_area_entered"]
-[connection signal="area_entered" from="ShouldRotate/EnemyHitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="area_entered" from="ShouldRotate/EnemyHurtbox" to="." method="_on_enemy_hurtbox_area_entered"]
 [connection signal="timeout" from="Timers/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="Timers/StunnedDuration" to="." method="_on_stunned_duration_timeout"]
