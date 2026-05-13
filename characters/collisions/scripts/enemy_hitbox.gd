@@ -1,5 +1,5 @@
 @tool
-class_name EnemyHitBox
+class_name EnemyHitbox
 extends Box
 
 @export var collision_color := Color("#f727446b")

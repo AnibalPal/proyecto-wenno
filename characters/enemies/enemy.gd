@@ -13,8 +13,8 @@ extends CharacterEntity
 @export var gravity := 300 
 @export var vulnerable := false
 
-@onready var hitbox: EnemyHitBox = $ShouldRotate/EnemyHitbox
-@onready var hurtbox: EnemyHurtBox = $ShouldRotate/EnemyHurtbox
+@onready var hitbox: EnemyHitbox = $ShouldRotate/EnemyHitbox
+@onready var hurtbox: EnemyHurtbox = $ShouldRotate/EnemyHurtbox
 @onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
 @onready var floor_detection: RayCast2D = $ShouldRotate/FloorDetection
 @onready var sprite_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
@@ -73,7 +73,7 @@ func handle_state_process() -> void:
 				turn_around()
 		States.CHASE:
 			if(chase_target):
-				if(CombatManager.verify_area_detection(global_position, chase_target.global_position)):
+				if(Helpers.is_wall_between(global_position, chase_target.global_position)):
 					handle_transition(States.PASSIVE)
 					return
 				var move_direction := global_position.direction_to(chase_target.global_position)
@@ -160,6 +160,11 @@ func on_damaged(damage, attacker_position) -> void:
 		health -= damage * 2
 	else:
 		health -= damage
+		var direction = global_position.direction_to(attacker_position)
+		if(direction.x > 0): 
+			turn_right()
+		else:
+			turn_left()
 	if(health <= 0):
 		handle_transition(States.DEATH)
 
@@ -176,7 +181,7 @@ func on_clash(other_position: Vector2) -> void:
 	handle_transition(States.RECOIL)
 
 func _on_player_detection_area_entered(area: Area2D) -> void:
-	if(CombatManager.verify_area_detection(global_position, area.global_position)):
+	if(Helpers.is_wall_between(global_position, area.global_position)):
 		return
 	chase_target = area.owner
 	handle_transition(States.CHASE)
@@ -185,7 +190,7 @@ func _on_player_awareness_area_exited(_area: Area2D) -> void:
 	handle_transition(States.PASSIVE)
 
 func _on_attack_detection_area_entered(_area: Area2D) -> void:
-	if(CombatManager.verify_area_detection(global_position, _area.global_position)):
+	if(Helpers.is_wall_between(global_position, _area.global_position)):
 		return
 	handle_transition(States.ATTACK)
 

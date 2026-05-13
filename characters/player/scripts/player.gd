@@ -24,7 +24,7 @@ func enable_x_movement():
 	velocity.x = speed * x_direction
 
 func disable_hitboxes():
-	for hitbox: PlayerHitBox in hitboxes.get_children():
+	for hitbox: PlayerHitbox in hitboxes.get_children():
 		hitbox.disable()	
 
 # Used in combat resolution

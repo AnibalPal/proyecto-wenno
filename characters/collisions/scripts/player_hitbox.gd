@@ -1,6 +1,6 @@
 @tool
 extends Box
-class_name PlayerHitBox
+class_name PlayerHitbox
 
 @export var collision_color := Color("#f727446b")
 @export var damage := 1

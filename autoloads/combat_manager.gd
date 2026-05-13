@@ -27,17 +27,9 @@ func instantiate_hit_effect(pos1: Vector2, pos2: Vector2, vfx_path: String) -> v
 	vfx_instance.global_position = vfx_position
 	get_tree().root.add_child(vfx_instance)
 
-#NOTE: Used inside other scripts like player or enemies
-func verify_area_detection(emitter_entity_pos: Vector2, receiver_entity_pos: Vector2) -> bool:
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(emitter_entity_pos, receiver_entity_pos)
-	var result = space_state.intersect_ray(query)
-	# return true if there is a collision with a wall
-	return !result.is_empty()
-
 # Combat event queue functions
 func subscribe(event_type: CombatEventType, emitting_entity, receiving_entity, data := {}) -> void:
-	if verify_area_detection(emitting_entity.global_position, receiving_entity.global_position):
+	if Helpers.is_wall_between(emitting_entity.global_position, receiving_entity.global_position):
 		return
 	var combat_event = CombatEvent.new(event_type, emitting_entity, receiving_entity, data)
 	var event_group_key = emitting_entity.name + receiving_entity.name

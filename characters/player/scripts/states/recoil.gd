@@ -1,7 +1,7 @@
 @tool
 extends PlayerState
 
-@export var player_hurtbox : PlayerHurtBox
+@export var player_hurtbox : PlayerHurtbox
 @export var pushback_velocity := Vector2(-300,0)
 
 @onready var duration: Timer = $Duration

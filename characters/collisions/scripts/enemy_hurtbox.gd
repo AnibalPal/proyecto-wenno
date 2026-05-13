@@ -1,6 +1,6 @@
 @tool
 extends Box
-class_name EnemyHurtBox
+class_name EnemyHurtbox
 
 @export var collision_color := Color("#9c5dff6b")
 

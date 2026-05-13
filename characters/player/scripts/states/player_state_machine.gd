@@ -2,7 +2,7 @@ class_name PlayerStateMachine
 extends StateMachine
 
 @onready var hitboxes: Node2D = $"../ShouldRotate/Hitboxes"
-@onready var hurtbox: PlayerHurtBox = $"../ShouldRotate/Hurtbox"
+@onready var hurtbox: PlayerHurtbox = $"../ShouldRotate/Hurtbox"
 
 var state_data = PlayerStateData
 
@@ -60,7 +60,7 @@ func get_collision_shape_from_idx(area: Area2D, index: int) -> CollisionShape2D:
 	return area.get_children()[index]	
 
 func prepare_hitboxes() -> void:
-	for hitbox: PlayerHitBox in hitboxes.get_children():
+	for hitbox: PlayerHitbox in hitboxes.get_children():
 		hitbox.area_shape_entered.connect(_on_area_shape_entered.bind(hitbox))
 
 func on_damaged(_damage: int, enemy_position: Vector2) -> void:
@@ -85,7 +85,7 @@ func on_clash(enemy_collision_position: Vector2) -> void:
 
 # Hurtbox and hitbox events
 # Will probably have to make a function to iterate over all hitboxes to connect the event signal to the proper function instead of doing this on every hitbox
-func _on_hurtbox_area_entered(_area: EnemyHitBox) -> void:
+func _on_hurtbox_area_entered(_area: EnemyHitbox) -> void:
 	# Getting hit event
 	CombatManager.subscribe(CombatManager.CombatEventType.DAMAGE, _area.owner, owner, {
 		"damage": _area.get_damage(),
@@ -100,7 +100,7 @@ func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_idx: int, l
 	var local_shape = get_collision_shape_from_idx(local_area, local_shape_idx)
 	var other_shape = get_collision_shape_from_idx(area, area_shape_idx)
 	
-	if(area is EnemyHitBox):
+	if(area is EnemyHitbox):
 		# Clash event
 		CombatManager.subscribe(CombatManager.CombatEventType.CLASH, owner, area.owner, {
 			"collision_info": {
@@ -110,7 +110,7 @@ func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_idx: int, l
 		})
 		return
 	
-	if(area is EnemyHurtBox):
+	if(area is EnemyHurtbox):
 		# Hitting an enemy event
 		CombatManager.subscribe(CombatManager.CombatEventType.DAMAGE, owner, area.owner, {
 			"damage": local_area.get_damage(),
