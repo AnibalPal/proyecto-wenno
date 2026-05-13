@@ -1,5 +1,5 @@
 @tool
-class_name Enemy 
+class_name PrototypeEnemyBear 
 extends CharacterEntity
 
 # Create a state machine with all states in variables instead of the usual state machine pattern
@@ -21,7 +21,7 @@ extends CharacterEntity
 @onready var attack_detection_collision: CollisionShape2D = $ShouldRotate/AttackDetection/CollisionShape2D
 @onready var player_detection_collision: CollisionPolygon2D = $ShouldRotate/PlayerDetection/CollisionPolygon2D
 @onready var player_awareness_collision: CollisionShape2D = $ShouldRotate/PlayerAwareness/CollisionShape2D
-@onready var vfx: AnimationPlayer = $VFX
+@onready var on_damaged_vfx: AnimationPlayer = $VFXs/OnDamagedVFX
 
 @onready var attack_cooldown : Timer = $Timers/AttackCooldown
 
@@ -113,7 +113,7 @@ func handle_transition(new_state : States) -> void:
 		current_state = States.DEATH
 		return
 	if(new_state == States.PASSIVE):
-		vulnerable = true
+		vulnerable = false
 		attack_detection_collision.set_deferred("disabled", true)
 		player_awareness_collision.set_deferred("disabled", true)
 		player_detection_collision.set_deferred("disabled", false)
@@ -147,7 +147,7 @@ func handle_transition(new_state : States) -> void:
 	current_state = new_state
 
 func on_damaged(damage, attacker_position) -> void:
-	vfx.play("hit_effect")
+	on_damaged_vfx.play("on_damaged_effect")
 	if(vulnerable):
 		GlobalVFXs.hitstop()
 		var direction = global_position.direction_to(attacker_position)

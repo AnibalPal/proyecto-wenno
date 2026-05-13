@@ -213,6 +213,8 @@ collision_layer = 0
 floor_constant_speed = true
 floor_snap_length = 5.0
 script = ExtResource("1_ittr2")
+max_health = null
+current_health = null
 speed = 300
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -278,7 +280,6 @@ animation = &"run"
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
 [node name="AttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
-collision_mask = 48
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
 position = Vector2(32, -4)
@@ -290,7 +291,6 @@ start_frame = 1
 end_frame = 2
 
 [node name="AirAttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
-collision_mask = 48
 collision_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AirAttackHitbox"]
@@ -373,6 +373,29 @@ text = "Estado: "
 [node name="Value" type="Label" parent="DebugInfo/InfoContainer/StateContainer"]
 layout_mode = 2
 text = "Idle"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 56.0
+color = Color(0, 0, 0, 0.34509805)
+
+[node name="HealthContainer" type="HBoxContainer" parent="UI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 73.0
+offset_bottom = 56.0
+
+[node name="Health" type="Label" parent="UI/HealthContainer"]
+layout_mode = 2
+text = "Vida: "
+
+[node name="Amount" type="Label" parent="UI/HealthContainer"]
+layout_mode = 2
+text = "0"
 
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]

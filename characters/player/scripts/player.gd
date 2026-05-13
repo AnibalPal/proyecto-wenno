@@ -2,6 +2,9 @@
 class_name Player
 extends CharacterEntity
 
+@export var max_health := 5
+@export var current_health := 5
+
 @export var speed := 100
 @export var gravity := 300
 @export var jump_impulse := 200
@@ -10,7 +13,12 @@ extends CharacterEntity
 @onready var player_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations
 @onready var hitboxes: Node2D = $ShouldRotate/Hitboxes
 
+@onready var health_amount: Label = $UI/HealthContainer/Amount
+
 @onready var state_machine: PlayerStateMachine = $StateMachine
+
+func _ready() -> void:
+	health_amount.text = str(current_health)
 
 func enable_gravity(_delta: float):
 	velocity.y += gravity * _delta
@@ -27,8 +35,15 @@ func disable_hitboxes():
 	for hitbox: PlayerHitbox in hitboxes.get_children():
 		hitbox.disable()	
 
+func death():
+	queue_free()
+
 # Used in combat resolution
 func on_damaged(damage: int, enemy_position: Vector2) -> void:
+	current_health -= damage
+	if(current_health <= 0):
+		death()
+	health_amount.text = str(current_health)
 	state_machine.on_damaged(damage, enemy_position)
 
 func on_hit() -> void:
