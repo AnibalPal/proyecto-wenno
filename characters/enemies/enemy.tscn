@@ -233,6 +233,7 @@ collision_layer = 0
 floor_constant_speed = true
 floor_snap_length = 20.0
 script = ExtResource("1_uy33a")
+vulnerable = true
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

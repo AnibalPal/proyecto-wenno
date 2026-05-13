@@ -11,6 +11,7 @@ extends CharacterEntity
 @export var speed := 50
 @export var chase_speed := 75
 @export var gravity := 300 
+@export var vulnerable := false
 
 @onready var hitbox: EnemyHitBox = $ShouldRotate/EnemyHitbox
 @onready var hurtbox: EnemyHurtBox = $ShouldRotate/EnemyHurtbox
@@ -25,15 +26,14 @@ extends CharacterEntity
 @onready var attack_cooldown : Timer = $Timers/AttackCooldown
 
 @onready var stunned_duration: Timer = $Timers/StunnedDuration
-@onready var stunned_slowdown_rate := 0.9
-@onready var counter_pushback_rate := 6
+var stunned_slowdown_rate := 0.9
+var counter_pushback_rate := 10
 
 @onready var recoil_duration: Timer = $Timers/RecoilDuration
-@onready var clash_slowdown_rate := 0.95
-@onready var clash_pushback_rate := 8
+var clash_slowdown_rate := 0.95
+var clash_pushback_rate := 10
 
-var vulnerable := false
-var chase_target : Area2D = null
+var chase_target : Player = null
 
 enum States {
 	PASSIVE,
@@ -114,6 +114,7 @@ func handle_transition(new_state : States) -> void:
 		current_state = States.DEATH
 		return
 	if(new_state == States.PASSIVE):
+		vulnerable = true
 		attack_detection_collision.set_deferred("disabled", true)
 		player_awareness_collision.set_deferred("disabled", true)
 		player_detection_collision.set_deferred("disabled", false)
@@ -135,6 +136,7 @@ func handle_transition(new_state : States) -> void:
 		stunned_duration.start()
 		hitbox.disable()
 		attack_detection_collision.set_deferred("disabled", true)
+		player_detection_collision.set_deferred("disabled", true)
 		vulnerable = false
 		sprite_animations.play("stunned")
 	if(new_state == States.RECOIL):
@@ -179,7 +181,7 @@ func on_clash(other_position: Vector2) -> void:
 func _on_player_detection_area_entered(area: Area2D) -> void:
 	if(CombatManager.verify_area_detection(global_position, area.global_position)):
 		return
-	chase_target = area
+	chase_target = area.owner
 	handle_transition(States.CHASE)
 
 func _on_player_awareness_area_exited(_area: Area2D) -> void:
@@ -211,7 +213,9 @@ func _on_sprite_animations_animation_finished() -> void:
 			handle_transition(States.CHASE)
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
-	pass
+	# NOTE: THIS IS A PATCH, the proper solution is to change the combat manager to get the entities
+	# in contact instead of just the position
+	chase_target = _area.owner
 	#if(!Engine.is_editor_hint()):
 		#if(_area is PlayerHitBox):
 			#on_damaged(_area)
