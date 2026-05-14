@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bj2ee2effkp6v"]
+[gd_scene load_steps=50 format=3 uid="uid://bj2ee2effkp6v"]
 
 [ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/prototype_enemy_bear/prototype_bear_enemy.gd" id="1_uy33a"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_3vt6o"]
@@ -31,19 +31,19 @@ region = Rect2(576, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q7drq"]
 atlas = ExtResource("3_3vt6o")
-region = Rect2(576, 0, 64, 128)
+region = Rect2(640, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gasu5"]
 atlas = ExtResource("3_3vt6o")
-region = Rect2(640, 0, 64, 128)
+region = Rect2(704, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kmbd5"]
 atlas = ExtResource("3_3vt6o")
-region = Rect2(704, 0, 64, 128)
+region = Rect2(768, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dp1pg"]
 atlas = ExtResource("3_3vt6o")
-region = Rect2(768, 0, 64, 128)
+region = Rect2(832, 0, 64, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kkmm4"]
 atlas = ExtResource("3_3vt6o")
@@ -168,13 +168,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q7drq")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_gasu5")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kmbd5")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_dp1pg")
 }],
 "loop": false,
@@ -306,6 +306,9 @@ size = Vector2(128, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bi512"]
 size = Vector2(32, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5m4w0"]
+size = Vector2(48, 80)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wor85"]
 size = Vector2(32, 80)
 
@@ -362,7 +365,7 @@ shape = SubResource("RectangleShape2D_3vt6o")
 material = SubResource("ShaderMaterial_bi512")
 scale = Vector2(2.5000002, 2.625)
 sprite_frames = SubResource("SpriteFrames_008bi")
-animation = &"attack3finisher"
+animation = &"attack2"
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate"]
 target_position = Vector2(24, 0)
@@ -403,6 +406,14 @@ position = Vector2(48, 0)
 shape = SubResource("RectangleShape2D_bi512")
 disabled = true
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
+[node name="EnemyHitbox2" parent="ShouldRotate" instance=ExtResource("3_008bi")]
+collision_color = Color(0.78983027, 0.32163396, 0.73282814, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHitbox2"]
+position = Vector2(48, 0)
+shape = SubResource("RectangleShape2D_5m4w0")
+debug_color = Color(0.78983027, 0.32163396, 0.73282814, 0.41960785)
 
 [node name="EnemyHurtbox" parent="ShouldRotate" instance=ExtResource("4_3vt6o")]
 

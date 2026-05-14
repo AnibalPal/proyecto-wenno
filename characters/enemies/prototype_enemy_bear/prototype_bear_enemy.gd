@@ -14,6 +14,7 @@ extends CharacterEntity
 @export var vulnerable := false
 
 @onready var hitbox: EnemyHitbox = $ShouldRotate/EnemyHitbox
+@onready var hitbox2: EnemyHitbox = $ShouldRotate/EnemyHitbox2
 @onready var hurtbox: EnemyHurtbox = $ShouldRotate/EnemyHurtbox
 @onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
 @onready var floor_detection: RayCast2D = $ShouldRotate/FloorDetection
@@ -38,7 +39,9 @@ var chase_target : Player = null
 enum States {
 	PASSIVE,
 	CHASE,
-	ATTACK,
+	ATTACK1,
+	ATTACK2,
+	ATTACK3,
 	STUNNED,
 	DEATH,
 	RECOIL
@@ -59,6 +62,10 @@ func _physics_process(_delta: float) -> void:
 		velocity.y += gravity * _delta
 		handle_state_process()
 		move_and_slide()
+
+func disable_hitboxes() -> void:
+	hitbox.disable()
+	hitbox2.disable()
 
 func handle_state_process() -> void:
 	match current_state:
@@ -87,7 +94,9 @@ func handle_state_process() -> void:
 					sprite_animations.play("idle")
 				else:
 					sprite_animations.play("run")
-		States.ATTACK:
+		States.ATTACK1:
+			pass
+		States.ATTACK2:
 			pass
 		States.STUNNED:
 			velocity.x *= stunned_slowdown_rate
@@ -105,7 +114,7 @@ func handle_state_process() -> void:
 
 func handle_transition(new_state : States) -> void:
 	if(health <= 0 or new_state == States.DEATH):
-		hitbox.disable()
+		disable_hitboxes()
 		hurtbox.disable()
 		attack_detection_collision.set_deferred("disabled", true)
 		stunned_duration.stop()
@@ -119,28 +128,33 @@ func handle_transition(new_state : States) -> void:
 		player_detection_collision.set_deferred("disabled", false)
 		chase_target = null
 		sprite_animations.play("walk")
-	if(new_state == States.ATTACK):
+	if(new_state == States.ATTACK1):
 		attack_detection_collision.set_deferred("disabled", true)
 		velocity = Vector2.ZERO
 		vulnerable = true
 		sprite_animations.play("attack1")
+	if(new_state == States.ATTACK2):
+		attack_detection_collision.set_deferred("disabled", true)
+		velocity = Vector2.ZERO
+		vulnerable = true
+		sprite_animations.play("attack2")
 	if(new_state == States.CHASE):
 		player_detection_collision.set_deferred("disabled", true)
 		player_awareness_collision.set_deferred("disabled", false)
-		hitbox.disable()
+		disable_hitboxes()
 		attack_cooldown.start()
 		vulnerable = false
 		sprite_animations.play("run")
 	if(new_state == States.STUNNED):
 		stunned_duration.start()
-		hitbox.disable()
+		disable_hitboxes()
 		attack_detection_collision.set_deferred("disabled", true)
 		player_detection_collision.set_deferred("disabled", true)
 		vulnerable = false
 		sprite_animations.play("stunned")
 	if(new_state == States.RECOIL):
 		recoil_duration.start()
-		hitbox.disable()
+		disable_hitboxes()
 		attack_detection_collision.set_deferred("disabled", true)
 		vulnerable = false
 		sprite_animations.play("recoil")
@@ -192,23 +206,28 @@ func _on_player_awareness_area_exited(_area: Area2D) -> void:
 func _on_attack_detection_area_entered(_area: Area2D) -> void:
 	if(Helpers.is_wall_between(global_position, _area.global_position)):
 		return
-	handle_transition(States.ATTACK)
+	handle_transition(States.ATTACK1)
 
 func _on_sprite_animations_frame_changed() -> void:
 	if(!Engine.is_editor_hint()):
 		if(sprite_animations.animation == "attack1"):
 			if(sprite_animations.frame == 2):
-				move_forward(speed * 10)
 				hitbox.enable()
 			else:
-				velocity.x = 0
 				hitbox.disable()
+		if(sprite_animations.animation == "attack2"):
+			if(sprite_animations.frame == 2):
+				hitbox2.enable()
+			else:
+				hitbox2.disable()
 
 func _on_sprite_animations_animation_finished() -> void:
 	if(!Engine.is_editor_hint()):
 		if(sprite_animations.animation == "death"):
 			queue_free()
 		if(sprite_animations.animation == "attack1"):
+			handle_transition(States.ATTACK2)
+		if(sprite_animations.animation == "attack2" and sprite_animations.frame > 0):
 			handle_transition(States.CHASE)
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
