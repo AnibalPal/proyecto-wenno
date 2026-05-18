@@ -2,7 +2,8 @@
 extends PlayerState
 
 @export var player_hurtbox : PlayerHurtbox
-@export var pushback_velocity := Vector2(-300,0)
+@export var pushback_velocity := Vector2(300,0)
+@export var pushback_slowdown_rate := 0.95
 
 @onready var duration: Timer = $Duration
 
@@ -18,10 +19,10 @@ func enter(_data: Dictionary) -> void:
 		var is_area_right_of_player := player.global_position.direction_to(_data["interaction_data"]["area_position"]).x > 0
 		if(is_area_right_of_player):
 			player.turn_right()
-			player.velocity = pushback_velocity
 		else:
 			player.turn_left()
-			player.velocity = Vector2(-pushback_velocity.x, pushback_velocity.y)
+		player.move_backwards(pushback_velocity.x)
+		player.velocity.y = pushback_velocity.y
 	player_hurtbox.disable()
 	player.player_animations.play("recoil")
 
@@ -33,6 +34,7 @@ func state_physics_process(_delta: float) -> void:
 		player.enable_gravity(_delta)
 		# player.enable_x_movement()
 		handle_transitions()
+		player.velocity.x *= pushback_slowdown_rate
 		player.move_and_slide()
 
 func handle_transitions() -> void:

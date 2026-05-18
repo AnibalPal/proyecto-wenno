@@ -301,13 +301,13 @@ animations = [{
 size = Vector2(704, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfoax"]
-size = Vector2(128, 80)
+size = Vector2(64, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bi512"]
-size = Vector2(32, 64)
+size = Vector2(56, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5m4w0"]
-size = Vector2(48, 80)
+size = Vector2(64, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wor85"]
 size = Vector2(32, 80)
@@ -395,14 +395,14 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/AttackDetection"]
-position = Vector2(80, 0)
+position = Vector2(48, 0)
 shape = SubResource("RectangleShape2D_jfoax")
 disabled = true
 
 [node name="EnemyHitbox" parent="ShouldRotate" instance=ExtResource("3_008bi")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHitbox"]
-position = Vector2(48, 0)
+position = Vector2(36, 0)
 shape = SubResource("RectangleShape2D_bi512")
 disabled = true
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
@@ -411,8 +411,9 @@ debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
 collision_color = Color(0.78983027, 0.32163396, 0.73282814, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHitbox2"]
-position = Vector2(48, 0)
+position = Vector2(40, 0)
 shape = SubResource("RectangleShape2D_5m4w0")
+disabled = true
 debug_color = Color(0.78983027, 0.32163396, 0.73282814, 0.41960785)
 
 [node name="EnemyHurtbox" parent="ShouldRotate" instance=ExtResource("4_3vt6o")]
@@ -442,6 +443,28 @@ one_shot = true
 [node name="RecoilDuration" type="Timer" parent="Timers"]
 wait_time = 0.3
 one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(7.556528e-06, 0.7376328, 0.48131084, 1)
+offset_left = -32.0
+offset_top = -64.0
+offset_right = 48.0
+offset_bottom = -59.0
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+modulate = Color(0.7372549, 0.43137255, 0.60784316, 1)
+offset_left = -32.0
+offset_top = -54.0
+offset_right = 48.0
+offset_bottom = -50.0
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
 
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_animation_finished"]
 [connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="." method="_on_sprite_animations_frame_changed"]

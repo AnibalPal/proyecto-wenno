@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=43 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -9,13 +9,13 @@
 [ext_resource type="Script" uid="uid://4lddnoeaxjeo" path="res://characters/player/scripts/states/dash.gd" id="7_2suro"]
 [ext_resource type="Script" uid="uid://cr64hn4qxtuok" path="res://characters/player/scripts/states/attack.gd" id="8_inse1"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
-[ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scripts/states/air_attack.gd" id="9_ronts"]
+[ext_resource type="Script" path="res://characters/player/scripts/states/air_attack.gd" id="9_ronts"]
 [ext_resource type="Script" uid="uid://c8bsm6n28c07o" path="res://characters/player/scripts/states/hit.gd" id="10_2fx0v"]
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
 [ext_resource type="Script" uid="uid://cpjguobpn02om" path="res://characters/player/scripts/states/recoil.gd" id="11_ronts"]
 [ext_resource type="Texture2D" uid="uid://ccx0vpid7qdd4" path="res://assets/prototype/player_spritesheet_60x42.png" id="12_alequ"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
-[ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2wwh"]
 atlas = ExtResource("12_alequ")
@@ -32,6 +32,10 @@ region = Rect2(900, 0, 60, 42)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ukde"]
 atlas = ExtResource("12_alequ")
 region = Rect2(960, 0, 60, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlp34"]
+atlas = ExtResource("12_alequ")
+region = Rect2(1020, 0, 60, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ronts"]
 atlas = ExtResource("12_alequ")
@@ -112,6 +116,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0ukde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlp34")
 }],
 "loop": false,
 "name": &"attack",
@@ -265,6 +272,7 @@ one_shot = true
 [node name="Recoil" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("11_ronts")
 player_hurtbox = NodePath("../../ShouldRotate/Hurtbox")
+pushback_slowdown_rate = null
 
 [node name="Duration" type="Timer" parent="StateMachine/Recoil"]
 wait_time = 0.3
@@ -275,7 +283,7 @@ one_shot = true
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_41mm0")
-animation = &"run"
+animation = &"air_attack"
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
