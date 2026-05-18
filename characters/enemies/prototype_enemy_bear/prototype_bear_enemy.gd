@@ -17,6 +17,8 @@ extends CharacterEntity
 
 @onready var hitbox: EnemyHitbox = $ShouldRotate/EnemyHitbox
 @onready var hitbox2: EnemyHitbox = $ShouldRotate/EnemyHitbox2
+@onready var hitbox3: EnemyHitbox = $ShouldRotate/EnemyHitbox3
+@onready var hitbox3end: EnemyHitbox = $ShouldRotate/EnemyHitbox3end
 @onready var hurtbox: EnemyHurtbox = $ShouldRotate/EnemyHurtbox
 @onready var wall_detection: RayCast2D = $ShouldRotate/WallDetection
 @onready var floor_detection: RayCast2D = $ShouldRotate/FloorDetection
@@ -39,6 +41,8 @@ var counter_pushback_rate := 10
 var clash_slowdown_rate := 0.95
 var clash_pushback_rate := 10
 
+@onready var attack_3_duration: Timer = $Timers/Attack3Duration
+
 @onready var timers: Node = $Timers
 
 var chase_target : Player = null
@@ -49,6 +53,7 @@ enum States {
 	ATTACK1,
 	ATTACK2,
 	ATTACK3,
+	ATTACK3END,
 	STUNNED,
 	DEATH,
 	RECOIL
@@ -76,6 +81,8 @@ func _physics_process(_delta: float) -> void:
 func disable_hitboxes() -> void:
 	hitbox.disable()
 	hitbox2.disable()
+	hitbox3.disable()
+	hitbox3end.disable()
 
 func update_current_stamina(value:int) -> void:
 	current_stamina = value
@@ -123,6 +130,10 @@ func handle_state_process() -> void:
 			pass
 		States.ATTACK2:
 			pass
+		States.ATTACK3:
+			pass
+		States.ATTACK3END:
+			pass
 		States.STUNNED:
 			velocity.x *= stunned_slowdown_rate
 		States.DEATH:
@@ -167,6 +178,22 @@ func handle_transition(new_state : States) -> void:
 		velocity = Vector2.ZERO
 		counter_hit_state = true
 		sprite_animations.play("attack2")
+	if(new_state == States.ATTACK3):
+		attack_3_duration.start()
+		if(chase_target):
+			turn_towards(chase_target.global_position)
+		hitbox3.enable()
+		attack_detection_collision.set_deferred("disabled", true)
+		move_forward(100)
+		counter_hit_state = true
+		sprite_animations.play("attack3")
+	if(new_state == States.ATTACK3END):
+		hitbox3.disable()
+		hitbox3end.enable()
+		attack_detection_collision.set_deferred("disabled", true)
+		velocity = Vector2.ZERO
+		counter_hit_state = true
+		sprite_animations.play("attack3finisher")
 	if(new_state == States.CHASE):
 		player_detection_collision.set_deferred("disabled", true)
 		player_awareness_collision.set_deferred("disabled", false)
@@ -195,6 +222,7 @@ func handle_transition(new_state : States) -> void:
 func on_damaged(damage, attacker_position) -> void:
 	on_damaged_vfx.play("on_damaged_effect")
 	if(counter_hit_state):
+		attack_3_duration.stop()
 		GlobalVFXs.hitstop()
 		var direction = global_position.direction_to(attacker_position)
 		if(direction.x > 0): 
@@ -227,6 +255,7 @@ func on_hit() -> void:
 	pass
 
 func on_clash(other_position: Vector2) -> void:
+	stop_timers()
 	# Should be another value but I am not sure if this will be implemented
 	var direction = global_position.direction_to(other_position)
 	if(direction.x > 0): 
@@ -252,7 +281,8 @@ func _on_player_awareness_area_exited(_area: Area2D) -> void:
 func _on_attack_detection_area_entered(_area: Area2D) -> void:
 	if(Helpers.is_wall_between(global_position, _area.global_position)):
 		return
-	handle_transition(States.ATTACK1)
+	if(chase_target):
+		handle_transition(States.ATTACK3)
 
 func _on_sprite_animations_frame_changed() -> void:
 	if(!Engine.is_editor_hint()):
@@ -275,6 +305,8 @@ func _on_sprite_animations_animation_finished() -> void:
 			handle_transition(States.ATTACK2)
 		if(sprite_animations.animation == "attack2" and sprite_animations.frame > 0):
 			handle_transition(States.CHASE)
+		if(sprite_animations.animation == "attack3finisher" and sprite_animations.frame > 0):
+			handle_transition(States.CHASE)
 
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
 	# NOTE: THIS IS A PATCH, the proper solution is to change the combat manager to get the entities
@@ -294,3 +326,6 @@ func _on_recoil_duration_timeout() -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	attack_detection_collision.set_deferred("disabled", false)
+
+func _on_attack_3_duration_timeout() -> void:
+	handle_transition(States.ATTACK3END)

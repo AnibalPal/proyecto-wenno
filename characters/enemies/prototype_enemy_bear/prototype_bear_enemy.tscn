@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bj2ee2effkp6v"]
+[gd_scene load_steps=52 format=3 uid="uid://bj2ee2effkp6v"]
 
 [ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/prototype_enemy_bear/prototype_bear_enemy.gd" id="1_uy33a"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_3vt6o"]
@@ -301,13 +301,19 @@ animations = [{
 size = Vector2(704, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfoax"]
-size = Vector2(64, 80)
+size = Vector2(192, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bi512"]
 size = Vector2(56, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5m4w0"]
 size = Vector2(64, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jg3pa"]
+size = Vector2(48, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80oi7"]
+size = Vector2(56, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wor85"]
 size = Vector2(32, 80)
@@ -365,7 +371,7 @@ shape = SubResource("RectangleShape2D_3vt6o")
 material = SubResource("ShaderMaterial_bi512")
 scale = Vector2(2.5000002, 2.625)
 sprite_frames = SubResource("SpriteFrames_008bi")
-animation = &"attack2"
+animation = &"attack3finisher"
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate"]
 target_position = Vector2(24, 0)
@@ -395,7 +401,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/AttackDetection"]
-position = Vector2(48, 0)
+position = Vector2(112, 0)
 shape = SubResource("RectangleShape2D_jfoax")
 disabled = true
 
@@ -416,6 +422,22 @@ shape = SubResource("RectangleShape2D_5m4w0")
 disabled = true
 debug_color = Color(0.78983027, 0.32163396, 0.73282814, 0.41960785)
 
+[node name="EnemyHitbox3" parent="ShouldRotate" instance=ExtResource("3_008bi")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHitbox3"]
+position = Vector2(24, 32)
+shape = SubResource("RectangleShape2D_jg3pa")
+disabled = true
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
+[node name="EnemyHitbox3end" parent="ShouldRotate" instance=ExtResource("3_008bi")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHitbox3end"]
+position = Vector2(44, -4)
+shape = SubResource("RectangleShape2D_80oi7")
+disabled = true
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
 [node name="EnemyHurtbox" parent="ShouldRotate" instance=ExtResource("4_3vt6o")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHurtbox"]
@@ -435,6 +457,9 @@ libraries = {
 [node name="Timers" type="Node" parent="."]
 
 [node name="AttackCooldown" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="Attack3Duration" type="Timer" parent="Timers"]
 one_shot = true
 
 [node name="StunnedDuration" type="Timer" parent="Timers"]
@@ -473,5 +498,6 @@ show_percentage = false
 [connection signal="area_entered" from="ShouldRotate/AttackDetection" to="." method="_on_attack_detection_area_entered"]
 [connection signal="area_entered" from="ShouldRotate/EnemyHurtbox" to="." method="_on_enemy_hurtbox_area_entered"]
 [connection signal="timeout" from="Timers/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Timers/Attack3Duration" to="." method="_on_attack_3_duration_timeout"]
 [connection signal="timeout" from="Timers/StunnedDuration" to="." method="_on_stunned_duration_timeout"]
 [connection signal="timeout" from="Timers/RecoilDuration" to="." method="_on_recoil_duration_timeout"]
