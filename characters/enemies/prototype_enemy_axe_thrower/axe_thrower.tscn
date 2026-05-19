@@ -1,0 +1,220 @@
+[gd_scene load_steps=27 format=3 uid="uid://pvgqrdvw4ldb"]
+
+[ext_resource type="Script" uid="uid://dc30rstv8kg3e" path="res://characters/enemies/prototype_enemy_axe_thrower/axe_thrower.gd" id="1_h4bk0"]
+[ext_resource type="Texture2D" uid="uid://3g7uney1pp8k" path="res://assets/prototype/trauco_fleaman_32x32_spritesheet.png" id="1_stnio"]
+[ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_baisa"]
+[ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="3_tl2ip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4bk0"]
+size = Vector2(17, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ciie0"]
+shader = ExtResource("2_baisa")
+shader_parameter/active = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl2ip"]
+atlas = ExtResource("1_stnio")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baisa"]
+atlas = ExtResource("1_stnio")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ciie0"]
+atlas = ExtResource("1_stnio")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03d82"]
+atlas = ExtResource("1_stnio")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2abgq"]
+atlas = ExtResource("1_stnio")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqrm1"]
+atlas = ExtResource("1_stnio")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78iow"]
+atlas = ExtResource("1_stnio")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i5xc"]
+atlas = ExtResource("1_stnio")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpqn4"]
+atlas = ExtResource("1_stnio")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ripg"]
+atlas = ExtResource("1_stnio")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1i5r"]
+atlas = ExtResource("1_stnio")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bntvw"]
+atlas = ExtResource("1_stnio")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jefdp"]
+atlas = ExtResource("1_stnio")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v46q5"]
+atlas = ExtResource("1_stnio")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lfnba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl2ip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baisa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ciie0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03d82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2abgq")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqrm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78iow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i5xc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpqn4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ripg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1i5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bntvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jefdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v46q5")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_baisa"]
+size = Vector2(30, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tl2ip"]
+size = Vector2(131, 58)
+
+[sub_resource type="Animation" id="Animation_baisa"]
+resource_name = "on_damaged_effect"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ciie0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03d82"]
+_data = {
+&"RESET": SubResource("Animation_ciie0"),
+&"on_damaged_effect": SubResource("Animation_baisa")
+}
+
+[node name="AxeThrower" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_h4bk0")
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, 11)
+shape = SubResource("RectangleShape2D_h4bk0")
+
+[node name="ShouldRotate" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShouldRotate"]
+material = SubResource("ShaderMaterial_ciie0")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_lfnba")
+animation = &"jump"
+
+[node name="EnemyHurtbox" parent="ShouldRotate" instance=ExtResource("3_tl2ip")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/EnemyHurtbox"]
+position = Vector2(-4, 1)
+shape = SubResource("RectangleShape2D_baisa")
+debug_color = Color(0.6117647, 0.3647059, 1, 0.41960785)
+
+[node name="PlayerDetection" type="Area2D" parent="ShouldRotate"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/PlayerDetection"]
+position = Vector2(69.5, -11)
+shape = SubResource("RectangleShape2D_tl2ip")
+
+[node name="VFXs" type="Node" parent="."]
+
+[node name="OnDamagedVFX" type="AnimationPlayer" parent="VFXs"]
+libraries = {
+&"": SubResource("AnimationLibrary_03d82")
+}
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpCooldown" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="frame_changed" from="ShouldRotate/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="area_entered" from="ShouldRotate/PlayerDetection" to="." method="_on_player_detection_area_entered"]
+[connection signal="timeout" from="Timers/JumpCooldown" to="." method="_on_jump_cooldown_timeout"]

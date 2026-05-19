@@ -30,8 +30,8 @@ extends CharacterEntity
 @onready var player_awareness_collision: CollisionShape2D = $ShouldRotate/PlayerAwareness/CollisionShape2D
 @onready var on_damaged_vfx: AnimationPlayer = $VFXs/OnDamagedVFX
 
-@onready var health_bar: ProgressBar = $HealthBar
-@onready var stamina_bar: ProgressBar = $StaminaBar
+@onready var health_bar: ProgressBar = $UI/HealthBar
+@onready var stamina_bar: ProgressBar = $UI/StaminaBar
 
 @onready var attack_cooldown : Timer = $Timers/AttackCooldown
 

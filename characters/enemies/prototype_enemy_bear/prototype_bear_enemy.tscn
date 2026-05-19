@@ -360,8 +360,6 @@ collision_layer = 0
 floor_constant_speed = true
 floor_snap_length = 20.0
 script = ExtResource("1_uy33a")
-attack3_speed = null
-distance_to_attack3 = null
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -472,8 +470,13 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
 modulate = Color(7.556528e-06, 0.7376328, 0.48131084, 1)
+layout_mode = 0
 offset_left = -32.0
 offset_top = -64.0
 offset_right = 48.0
@@ -483,8 +486,9 @@ step = 1.0
 value = 5.0
 show_percentage = false
 
-[node name="StaminaBar" type="ProgressBar" parent="."]
+[node name="StaminaBar" type="ProgressBar" parent="UI"]
 modulate = Color(0.7372549, 0.43137255, 0.60784316, 1)
+layout_mode = 0
 offset_left = -32.0
 offset_top = -54.0
 offset_right = 48.0
