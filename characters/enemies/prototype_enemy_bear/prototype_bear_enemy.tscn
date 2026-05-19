@@ -360,6 +360,8 @@ collision_layer = 0
 floor_constant_speed = true
 floor_snap_length = 20.0
 script = ExtResource("1_uy33a")
+attack3_speed = null
+distance_to_attack3 = null
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -463,6 +465,7 @@ one_shot = true
 one_shot = true
 
 [node name="StunnedDuration" type="Timer" parent="Timers"]
+wait_time = 2.0
 one_shot = true
 
 [node name="RecoilDuration" type="Timer" parent="Timers"]

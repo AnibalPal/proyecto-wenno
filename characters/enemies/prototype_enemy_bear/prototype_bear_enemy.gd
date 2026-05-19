@@ -11,8 +11,10 @@ extends CharacterEntity
 @export var stamina := 10
 @export var speed := 50
 @export var chase_speed := 75
+@export var attack3_speed := 150
 @export var gravity := 300 
 @export var distance_to_stop := 50
+@export var distance_to_attack3 := 100
 @export var counter_hit_state := false
 
 @onready var hitbox: EnemyHitbox = $ShouldRotate/EnemyHitbox
@@ -184,7 +186,7 @@ func handle_transition(new_state : States) -> void:
 			turn_towards(chase_target.global_position)
 		hitbox3.enable()
 		attack_detection_collision.set_deferred("disabled", true)
-		move_forward(100)
+		move_forward(attack3_speed)
 		counter_hit_state = true
 		sprite_animations.play("attack3")
 	if(new_state == States.ATTACK3END):
@@ -282,7 +284,11 @@ func _on_attack_detection_area_entered(_area: Area2D) -> void:
 	if(Helpers.is_wall_between(global_position, _area.global_position)):
 		return
 	if(chase_target):
-		handle_transition(States.ATTACK3)
+		var distance_to_target := global_position.distance_to(chase_target.global_position)
+		if(distance_to_target > distance_to_attack3):
+			handle_transition(States.ATTACK3)
+		else:
+			handle_transition(States.ATTACK1)
 
 func _on_sprite_animations_frame_changed() -> void:
 	if(!Engine.is_editor_hint()):
@@ -302,7 +308,14 @@ func _on_sprite_animations_animation_finished() -> void:
 		if(sprite_animations.animation == "death"):
 			queue_free()
 		if(sprite_animations.animation == "attack1"):
-			handle_transition(States.ATTACK2)
+			if(chase_target):
+				var distance_to_target := global_position.distance_to(chase_target.global_position)
+				if(distance_to_target > distance_to_attack3):
+					handle_transition(States.ATTACK3)
+				else:
+					handle_transition(States.ATTACK2)
+			else:
+				handle_transition(States.ATTACK2)
 		if(sprite_animations.animation == "attack2" and sprite_animations.frame > 0):
 			handle_transition(States.CHASE)
 		if(sprite_animations.animation == "attack3finisher" and sprite_animations.frame > 0):
