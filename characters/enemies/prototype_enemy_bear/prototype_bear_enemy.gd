@@ -64,7 +64,7 @@ enum States {
 var current_state := States.PASSIVE
 var current_stamina := stamina
 
-func _ready() -> void:
+func character_ready() -> void:
 	if(!Engine.is_editor_hint()):
 		# PATCH: Add this line to allow copy pasting without repeating the effect when an enemy is hit
 		sprite_animations.material = sprite_animations.material.duplicate(true)

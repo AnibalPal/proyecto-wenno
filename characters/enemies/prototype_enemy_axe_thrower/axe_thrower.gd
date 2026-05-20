@@ -26,7 +26,7 @@ var player = null
 var jump_available := true
 var current_state := States.PASSIVE
 
-func _ready() -> void:
+func character_ready() -> void:
 	assert(projectile, "Axe thrower: NO PROJECTILE SET!!")
 	if(!Engine.is_editor_hint()):
 		animated_sprite_2d.play("idle")

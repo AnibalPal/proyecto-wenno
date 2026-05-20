@@ -28,9 +28,11 @@ position = Vector2(488, 104)
 [node name="Enemy" parent="." instance=ExtResource("3_ph2t8")]
 position = Vector2(488, 240)
 health = 10
+facing_right = false
 
 [node name="AxeThrower" parent="." instance=ExtResource("5_5s32b")]
-position = Vector2(200, 256)
+position = Vector2(544, 256)
 jump_force = 400
 move_speed = 100
 proyectile_velocity = Vector2(100, -100)
+facing_right = false

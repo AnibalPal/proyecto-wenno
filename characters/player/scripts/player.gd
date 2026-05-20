@@ -17,7 +17,7 @@ extends CharacterEntity
 
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
-func _ready() -> void:
+func character_ready() -> void:
 	health_amount.text = str(current_health)
 
 func enable_gravity(_delta: float):

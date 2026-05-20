@@ -20,7 +20,23 @@ extends CharacterBody2D
 	get:
 		return facing_right
 
+
+func _ready() -> void:
+	# Apply the initial rotation to the should_rotate node, this is only neccesary for the node
+	# to be consistent with the editor because I could not do it in the setter coz godot things
+	if(facing_right):
+		should_rotate.transform.x = Vector2(1.0, 0.0)
+	else:
+		should_rotate.transform.x = Vector2(-1.0, 0.0)
+	character_ready()
+
+# Custom ready func to be overriden in children if needed	
+func character_ready() -> void:
+	pass
+
+
 # Utility functions to be used inside PlayerState or Enemy scripts
+
 func turn_around() -> void:
 	if(facing_right):
 		turn_left()
