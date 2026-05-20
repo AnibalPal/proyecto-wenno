@@ -50,9 +50,16 @@ func resolve_damage(event: CombatEvent) -> void:
 		)
 
 func resolve_clash(event: CombatEvent) -> void:
+	var emitter_clash_strength = event.emitter.clash_strength
+	var receiver_clash_strength = event.receiver.clash_strength
 	if(event.data.has("collision_info")):
-		event.emitter.on_clash(event.data["collision_info"]["entity2"])
-		event.receiver.on_clash(event.data["collision_info"]["entity1"])
+		if(emitter_clash_strength > receiver_clash_strength):
+			event.receiver.on_clash(event.data["collision_info"]["entity1"])
+		elif (emitter_clash_strength < receiver_clash_strength):
+			event.emitter.on_clash(event.data["collision_info"]["entity2"])
+		else:
+			event.receiver.on_clash(event.data["collision_info"]["entity1"])
+			event.emitter.on_clash(event.data["collision_info"]["entity2"])	
 		instantiate_hit_effect(
 			event.data["collision_info"]["entity1"], 
 			event.data["collision_info"]["entity2"],  

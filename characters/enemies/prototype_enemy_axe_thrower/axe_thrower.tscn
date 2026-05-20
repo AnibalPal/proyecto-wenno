@@ -140,7 +140,7 @@ animations = [{
 size = Vector2(30, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tl2ip"]
-size = Vector2(131, 58)
+size = Vector2(324, 138)
 
 [sub_resource type="Animation" id="Animation_ciie0"]
 length = 0.001
@@ -216,7 +216,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/PlayerDetection"]
-position = Vector2(69.5, -11)
+position = Vector2(166, -51)
 shape = SubResource("RectangleShape2D_tl2ip")
 
 [node name="AxeSpawnPosition" type="Node2D" parent="ShouldRotate"]

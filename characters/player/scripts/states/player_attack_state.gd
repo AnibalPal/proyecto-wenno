@@ -15,6 +15,7 @@ var attack_finished := false
 func player_state_ready():
 	assert(len(hitbox_collision_shapes) > 0, name + ": Falta agregar colisiones")
 	assert(animation_name, name + ": Falta nombre de animación")
+	player.player_animations.animation_changed.connect(on_animation_animation_changed)
 	player.player_animations.frame_changed.connect(on_animation_frame_changed)
 	player.player_animations.animation_finished.connect(on_animation_finished)
 	
@@ -36,6 +37,13 @@ func reset_state()  -> void:
 func on_animation_finished() -> void:
 	if(player.player_animations.animation == animation_name):
 		attack_finished = true
+
+# Mostly used to start collision changes in frame 0
+func on_animation_animation_changed() -> void:
+	if(player.player_animations.animation == animation_name):
+		for hitbox_collision: HitboxCollision in hitbox_collision_shapes:
+			if(player.player_animations.frame == hitbox_collision.start_frame):
+				hitbox_collision.set_deferred("disabled", false)
 
 func on_animation_frame_changed() -> void:
 	if(player.player_animations.animation == animation_name):

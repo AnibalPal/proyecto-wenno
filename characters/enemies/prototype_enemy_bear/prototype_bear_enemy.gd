@@ -9,6 +9,11 @@ extends CharacterEntity
 
 @export var health := 1
 @export var stamina := 10
+@export var clash_strength := 2
+@export var attack_1_clash_strength := 2
+@export var attack_2_clash_strength := 2
+@export var attack_3_clash_strength := 1
+@export var attack_3_end_clash_strength := 3
 @export var speed := 50
 @export var chase_speed := 75
 @export var attack3_speed := 150
@@ -62,14 +67,16 @@ enum States {
 }
 
 var current_state := States.PASSIVE
-var current_stamina := stamina
+@onready var current_stamina := stamina
 
 func character_ready() -> void:
 	if(!Engine.is_editor_hint()):
 		# PATCH: Add this line to allow copy pasting without repeating the effect when an enemy is hit
 		sprite_animations.material = sprite_animations.material.duplicate(true)
-		stamina_bar.value = current_stamina
+		health_bar.max_value = health
 		health_bar.value = health
+		stamina_bar.max_value = current_stamina
+		stamina_bar.value = current_stamina
 		sprite_animations.play("walk")
 
 func _physics_process(_delta: float) -> void:
@@ -184,12 +191,14 @@ func handle_transition(new_state : States) -> void:
 		attack_3_duration.start()
 		if(chase_target):
 			turn_towards(chase_target.global_position)
+		clash_strength = attack_3_clash_strength
 		hitbox3.enable()
 		attack_detection_collision.set_deferred("disabled", true)
 		move_forward(attack3_speed)
 		counter_hit_state = true
 		sprite_animations.play("attack3")
 	if(new_state == States.ATTACK3END):
+		clash_strength = attack_3_end_clash_strength
 		hitbox3.disable()
 		hitbox3end.enable()
 		attack_detection_collision.set_deferred("disabled", true)
@@ -294,11 +303,13 @@ func _on_sprite_animations_frame_changed() -> void:
 	if(!Engine.is_editor_hint()):
 		if(sprite_animations.animation == "attack1"):
 			if(sprite_animations.frame == 2):
+				clash_strength = attack_1_clash_strength
 				hitbox.enable()
 			else:
 				hitbox.disable()
 		if(sprite_animations.animation == "attack2"):
 			if(sprite_animations.frame == 2):
+				clash_strength = attack_2_clash_strength
 				hitbox2.enable()
 			else:
 				hitbox2.disable()

@@ -4,6 +4,7 @@ extends CharacterEntity
 
 @export var max_health := 5
 @export var current_health := 5
+@export var clash_strength := 1
 
 @export var speed := 100
 @export var gravity := 300

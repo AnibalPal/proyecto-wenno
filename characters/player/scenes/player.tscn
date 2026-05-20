@@ -220,6 +220,7 @@ collision_layer = 0
 floor_constant_speed = true
 floor_snap_length = 5.0
 script = ExtResource("1_ittr2")
+clash_strength = null
 speed = 300
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -304,8 +305,7 @@ shape = SubResource("RectangleShape2D_usdan")
 disabled = true
 debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 script = ExtResource("13_inse1")
-start_frame = 1
-end_frame = 2
+end_frame = 1
 
 [node name="Hurtbox" parent="ShouldRotate" instance=ExtResource("12_eigjl")]
 

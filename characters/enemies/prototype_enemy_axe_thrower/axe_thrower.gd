@@ -8,6 +8,8 @@ extends CharacterEntity
 @export var projectile : PackedScene
 @export var proyectile_velocity := Vector2(100,-100)
 
+@export var min_distance_to_player := 200
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $ShouldRotate/BodyAnimations
 @onready var arm_animations: AnimatedSprite2D = $ShouldRotate/ArmAnimations
 @onready var on_damaged_vfx: AnimationPlayer = $VFXs/OnDamagedVFX
@@ -59,15 +61,16 @@ func jump() -> void:
 			turn_left()
 	animated_sprite_2d.play("jump")
 	jump_cooldown.start()
-	var movement_choice := randf()
-	var movement_strength_rate := randf_range(0.1, 1)
-	var jump_height_strength_rate := randf_range(0.5, 1)
-	velocity.y = -jump_force * jump_height_strength_rate
-	# Randomize jump pattern x movement
-	if(movement_choice >= 0.5):
-		move_backwards(move_speed * movement_strength_rate)
-	else:
-		move_forward(move_speed * movement_strength_rate)
+	if(player):
+		var move_away_from_player = true if abs(global_position.x - player.global_position.x) < min_distance_to_player else false
+		var movement_strength_rate := randf_range(0.1, 1)
+		var jump_height_strength_rate := randf_range(0.5, 1)
+		velocity.y = -jump_force * jump_height_strength_rate
+		# Randomize jump pattern x movement
+		if(move_away_from_player):
+			move_backwards(move_speed * movement_strength_rate)
+		else:
+			move_forward(move_speed * movement_strength_rate)
 
 func handle_state_process() -> void:
 	match current_state:

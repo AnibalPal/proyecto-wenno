@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://2vm8xwfc824i"]
+[gd_scene load_steps=5 format=4 uid="uid://2vm8xwfc824i"]
 
 [ext_resource type="Script" uid="uid://cwury0hu0ay0p" path="res://stages/prototypes/combat_prototype/combat_prototype.gd" id="1_emawt"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_i2a4u"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_ajev4"]
 [ext_resource type="PackedScene" uid="uid://bj2ee2effkp6v" path="res://characters/enemies/prototype_enemy_bear/prototype_bear_enemy.tscn" id="3_ph2t8"]
-[ext_resource type="PackedScene" uid="uid://pvgqrdvw4ldb" path="res://characters/enemies/prototype_enemy_axe_thrower/axe_thrower.tscn" id="5_5s32b"]
 
 [node name="CombatPrototype" type="Node2D"]
 script = ExtResource("1_emawt")
@@ -18,6 +17,7 @@ tile_set = ExtResource("1_i2a4u")
 
 [node name="Player" parent="." instance=ExtResource("2_ajev4")]
 position = Vector2(120, 240)
+clash_strength = 1
 speed = 200
 gravity = 400
 jump_impulse = 300
@@ -27,12 +27,10 @@ position = Vector2(488, 104)
 
 [node name="Enemy" parent="." instance=ExtResource("3_ph2t8")]
 position = Vector2(488, 240)
-health = 10
-facing_right = false
-
-[node name="AxeThrower" parent="." instance=ExtResource("5_5s32b")]
-position = Vector2(544, 256)
-jump_force = 400
-move_speed = 100
-proyectile_velocity = Vector2(100, -100)
+health = 6
+stamina = 4
+attack_1_clash_strength = 2
+attack_2_clash_strength = 2
+attack_3_clash_strength = 0
+attack_3_end_clash_strength = 3
 facing_right = false

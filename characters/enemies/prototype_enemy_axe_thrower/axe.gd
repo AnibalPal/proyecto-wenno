@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var gravity := 300
 
+@export var clash_strength := 0
+
 func _physics_process(_delta: float) -> void:
 	if(is_on_floor() or is_on_ceiling() or is_on_wall()):
 		queue_free()
