@@ -2,6 +2,7 @@
 class_name EnemyHitbox
 extends Box
 
+@export var start_disabled := true
 @export var collision_color := Color("#f727446b")
 @export var damage := 1
 
@@ -9,7 +10,9 @@ func get_damage() -> int:
 	return damage
 
 func _ready() -> void:
-	disable()
+	if(!Engine.is_editor_hint()):
+		if(start_disabled):
+			disable()
 
 func _process(_delta: float) -> void:
 	if(Engine.is_editor_hint()):

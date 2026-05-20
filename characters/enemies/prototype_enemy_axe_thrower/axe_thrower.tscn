@@ -1,9 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://pvgqrdvw4ldb"]
+[gd_scene load_steps=30 format=3 uid="uid://pvgqrdvw4ldb"]
 
 [ext_resource type="Script" uid="uid://dc30rstv8kg3e" path="res://characters/enemies/prototype_enemy_axe_thrower/axe_thrower.gd" id="1_h4bk0"]
 [ext_resource type="Texture2D" uid="uid://3g7uney1pp8k" path="res://assets/prototype/trauco_fleaman_32x32_spritesheet.png" id="1_stnio"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_baisa"]
+[ext_resource type="PackedScene" uid="uid://cv0nf6y7i6qaq" path="res://characters/enemies/prototype_enemy_axe_thrower/axe.tscn" id="2_ciie0"]
 [ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="3_tl2ip"]
+[ext_resource type="Texture2D" uid="uid://dc3kafg03g2y8" path="res://assets/prototype/trauco_axe_arm_32x32_spritesheet.png" id="5_03d82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4bk0"]
 size = Vector2(17, 10)
@@ -11,26 +13,6 @@ size = Vector2(17, 10)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ciie0"]
 shader = ExtResource("2_baisa")
 shader_parameter/active = false
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tl2ip"]
-atlas = ExtResource("1_stnio")
-region = Rect2(288, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_baisa"]
-atlas = ExtResource("1_stnio")
-region = Rect2(320, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ciie0"]
-atlas = ExtResource("1_stnio")
-region = Rect2(352, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_03d82"]
-atlas = ExtResource("1_stnio")
-region = Rect2(384, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2abgq"]
-atlas = ExtResource("1_stnio")
-region = Rect2(416, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gqrm1"]
 atlas = ExtResource("1_stnio")
@@ -72,26 +54,6 @@ region = Rect2(256, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tl2ip")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_baisa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ciie0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_03d82")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2abgq")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_gqrm1")
 }, {
 "duration": 1.0,
@@ -128,34 +90,64 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2abgq"]
+atlas = ExtResource("5_03d82")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfnba"]
+atlas = ExtResource("5_03d82")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6mpk"]
+atlas = ExtResource("5_03d82")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch1lf"]
+atlas = ExtResource("5_03d82")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bfvw"]
+atlas = ExtResource("5_03d82")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4snw5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2abgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfnba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6mpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch1lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bfvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2abgq")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baisa"]
 size = Vector2(30, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tl2ip"]
 size = Vector2(131, 58)
 
-[sub_resource type="Animation" id="Animation_baisa"]
-resource_name = "on_damaged_effect"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../ShouldRotate/AnimatedSprite2D:material:shader_parameter/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_ciie0"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../ShouldRotate/AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/path = NodePath("../ShouldRotate/BodyAnimations:material:shader_parameter/active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -163,6 +155,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_baisa"]
+resource_name = "on_damaged_effect"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/BodyAnimations:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_03d82"]
@@ -174,6 +182,8 @@ _data = {
 [node name="AxeThrower" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_h4bk0")
+projectile = ExtResource("2_ciie0")
+proyectile_velocity = Vector2(100, 0)
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-6.5, 11)
@@ -181,11 +191,18 @@ shape = SubResource("RectangleShape2D_h4bk0")
 
 [node name="ShouldRotate" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShouldRotate"]
+[node name="BodyAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 material = SubResource("ShaderMaterial_ciie0")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_lfnba")
-animation = &"jump"
+animation = &"idle"
+
+[node name="ArmAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4snw5")
+animation = &"attack"
+frame = 5
+frame_progress = 1.0
 
 [node name="EnemyHurtbox" parent="ShouldRotate" instance=ExtResource("3_tl2ip")]
 
@@ -202,6 +219,9 @@ collision_mask = 2
 position = Vector2(69.5, -11)
 shape = SubResource("RectangleShape2D_tl2ip")
 
+[node name="AxeSpawnPosition" type="Node2D" parent="ShouldRotate"]
+position = Vector2(24, -8)
+
 [node name="VFXs" type="Node" parent="."]
 
 [node name="OnDamagedVFX" type="AnimationPlayer" parent="VFXs"]
@@ -215,6 +235,12 @@ libraries = {
 wait_time = 0.5
 one_shot = true
 
-[connection signal="frame_changed" from="ShouldRotate/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[node name="AttackCooldown" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="frame_changed" from="ShouldRotate/BodyAnimations" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="frame_changed" from="ShouldRotate/ArmAnimations" to="." method="_on_arm_animations_frame_changed"]
 [connection signal="area_entered" from="ShouldRotate/PlayerDetection" to="." method="_on_player_detection_area_entered"]
 [connection signal="timeout" from="Timers/JumpCooldown" to="." method="_on_jump_cooldown_timeout"]
+[connection signal="timeout" from="Timers/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -5,16 +5,21 @@ extends CharacterEntity
 @export var jump_force := 100
 @export var move_speed := 50
 @export var gravity := 500
+@export var projectile : PackedScene
+@export var proyectile_velocity := Vector2(100,-100)
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $ShouldRotate/AnimatedSprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $ShouldRotate/BodyAnimations
+@onready var arm_animations: AnimatedSprite2D = $ShouldRotate/ArmAnimations
 @onready var on_damaged_vfx: AnimationPlayer = $VFXs/OnDamagedVFX
 
+@onready var axe_spawn_position: Node2D = $ShouldRotate/AxeSpawnPosition
+
 @onready var jump_cooldown: Timer = $Timers/JumpCooldown
+@onready var attack_cooldown: Timer = $Timers/AttackCooldown
 
 enum States {
 	PASSIVE,
-	AGGRESIVE,
-	ATTACK
+	AGGRESIVE
 }
 
 var player = null
@@ -22,6 +27,7 @@ var jump_available := true
 var current_state := States.PASSIVE
 
 func _ready() -> void:
+	assert(projectile, "Axe thrower: NO PROJECTILE SET!!")
 	if(!Engine.is_editor_hint()):
 		animated_sprite_2d.play("idle")
 
@@ -31,7 +37,20 @@ func _physics_process(delta: float) -> void:
 		handle_state_process()
 		move_and_slide()
 
+func instantiate_projectile() -> void:
+	if(projectile):
+		var instance = projectile.instantiate()
+		instance.global_position = axe_spawn_position.global_position
+		if(facing_right):
+			proyectile_velocity.x = abs(proyectile_velocity.x)
+		else:
+			proyectile_velocity.x = -abs(proyectile_velocity.x)
+		instance.velocity = proyectile_velocity
+		get_tree().root.add_child(instance)
+		
+
 func jump() -> void:
+	attack_cooldown.start()
 	if(player):
 		var direction_to_player := global_position.direction_to(player.global_position)
 		if(direction_to_player.x > 0):
@@ -87,5 +106,13 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	if(animated_sprite_2d.animation == "jump" and animated_sprite_2d.frame == 3):
 		jump()
 
+func _on_arm_animations_frame_changed() -> void:
+	if(arm_animations.animation == "attack" and arm_animations.frame == 3):
+		instantiate_projectile()
+
 func _on_jump_cooldown_timeout() -> void:
 	jump_available = true
+	
+func _on_attack_cooldown_timeout() -> void:
+	if(!is_on_floor()):
+		arm_animations.play("attack")

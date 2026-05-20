@@ -74,12 +74,13 @@ func resolve_event_queue() ->void:
 		event_queue.clear()
 
 class CombatEvent:
+	# TODO: add types considering projectiles and enemy types
 	var type: CombatEventType
-	var emitter: Node2D
-	var receiver: Node2D
+	var emitter
+	var receiver
 	var data: Dictionary = {}
 	
-	func _init(p_type : CombatEventType, p_emitter : CharacterEntity, p_receiver : CharacterEntity, p_data := {}) -> void:
+	func _init(p_type : CombatEventType, p_emitter, p_receiver, p_data := {}) -> void:
 		type = p_type
 		emitter = p_emitter
 		receiver = p_receiver

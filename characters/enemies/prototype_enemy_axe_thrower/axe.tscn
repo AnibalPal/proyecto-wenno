@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://cv0nf6y7i6qaq"]
+
+[ext_resource type="Texture2D" uid="uid://dbhy5kllab0om" path="res://assets/prototype/trauco_fleaman_axe_32x32_spritesheet.png" id="1_1lomi"]
+[ext_resource type="Script" uid="uid://bfxhqaqju2w1g" path="res://characters/enemies/prototype_enemy_axe_thrower/axe.gd" id="1_pf1uc"]
+[ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="2_m6i7j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6i7j"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf1uc"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcjr5"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nuir"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_memfo"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkuh8"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rpjy"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn3tw"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgbjy"]
+atlas = ExtResource("1_1lomi")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wrwi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf1uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcjr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nuir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_memfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkuh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rpjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sn3tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgbjy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pf1uc"]
+size = Vector2(16, 16)
+
+[node name="Axe" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_pf1uc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m6i7j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8wrwi")
+autoplay = "default"
+frame_progress = 0.93351704
+
+[node name="EnemyHitbox" parent="." instance=ExtResource("2_m6i7j")]
+start_disabled = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+shape = SubResource("RectangleShape2D_pf1uc")
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)

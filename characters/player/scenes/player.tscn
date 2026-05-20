@@ -9,13 +9,13 @@
 [ext_resource type="Script" uid="uid://4lddnoeaxjeo" path="res://characters/player/scripts/states/dash.gd" id="7_2suro"]
 [ext_resource type="Script" uid="uid://cr64hn4qxtuok" path="res://characters/player/scripts/states/attack.gd" id="8_inse1"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
-[ext_resource type="Script" path="res://characters/player/scripts/states/air_attack.gd" id="9_ronts"]
+[ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scripts/states/air_attack.gd" id="9_ronts"]
 [ext_resource type="Script" uid="uid://c8bsm6n28c07o" path="res://characters/player/scripts/states/hit.gd" id="10_2fx0v"]
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
 [ext_resource type="Script" uid="uid://cpjguobpn02om" path="res://characters/player/scripts/states/recoil.gd" id="11_ronts"]
 [ext_resource type="Texture2D" uid="uid://ccx0vpid7qdd4" path="res://assets/prototype/player_spritesheet_60x42.png" id="12_alequ"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
-[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+[ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2wwh"]
 atlas = ExtResource("12_alequ")
@@ -220,8 +220,6 @@ collision_layer = 0
 floor_constant_speed = true
 floor_snap_length = 5.0
 script = ExtResource("1_ittr2")
-max_health = null
-current_health = null
 speed = 300
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -272,7 +270,6 @@ one_shot = true
 [node name="Recoil" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("11_ronts")
 player_hurtbox = NodePath("../../ShouldRotate/Hurtbox")
-pushback_slowdown_rate = null
 
 [node name="Duration" type="Timer" parent="StateMachine/Recoil"]
 wait_time = 0.3
@@ -403,7 +400,7 @@ text = "Vida: "
 
 [node name="Amount" type="Label" parent="UI/HealthContainer"]
 layout_mode = 2
-text = "0"
+text = "5"
 
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]
