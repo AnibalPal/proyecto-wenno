@@ -19,6 +19,8 @@ extends CharacterEntity
 @onready var jump_cooldown: Timer = $Timers/JumpCooldown
 @onready var attack_cooldown: Timer = $Timers/AttackCooldown
 
+var counter_hit_state := false
+
 enum States {
 	PASSIVE,
 	AGGRESIVE

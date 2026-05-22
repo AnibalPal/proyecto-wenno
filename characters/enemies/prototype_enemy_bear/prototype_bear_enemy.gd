@@ -21,6 +21,7 @@ extends CharacterEntity
 @export var distance_to_stop := 50
 @export var distance_to_attack3 := 100
 @export var counter_hit_state := false
+@export var show_health_and_stamina := true
 
 @onready var hitbox: EnemyHitbox = $ShouldRotate/EnemyHitbox
 @onready var hitbox2: EnemyHitbox = $ShouldRotate/EnemyHitbox2
@@ -78,6 +79,9 @@ func character_ready() -> void:
 		stamina_bar.max_value = current_stamina
 		stamina_bar.value = current_stamina
 		sprite_animations.play("walk")
+		if(!show_health_and_stamina):
+			health_bar.hide()
+			stamina_bar.hide()
 
 func _physics_process(_delta: float) -> void:
 	if(Engine.is_editor_hint()):
@@ -174,11 +178,11 @@ func handle_transition(new_state : States) -> void:
 		chase_target = null
 		sprite_animations.play("walk")
 	if(new_state == States.ATTACK1):
+		counter_hit_state = true
 		if(chase_target):
 			turn_towards(chase_target.global_position)
 		attack_detection_collision.set_deferred("disabled", true)
 		velocity = Vector2.ZERO
-		counter_hit_state = true
 		sprite_animations.play("attack1")
 	if(new_state == States.ATTACK2):
 		if(chase_target):
@@ -188,15 +192,13 @@ func handle_transition(new_state : States) -> void:
 		counter_hit_state = true
 		sprite_animations.play("attack2")
 	if(new_state == States.ATTACK3):
-		attack_3_duration.start()
 		if(chase_target):
 			turn_towards(chase_target.global_position)
 		clash_strength = attack_3_clash_strength
-		hitbox3.enable()
 		attack_detection_collision.set_deferred("disabled", true)
-		move_forward(attack3_speed)
 		counter_hit_state = true
-		sprite_animations.play("attack3")
+		velocity.x = 0
+		sprite_animations.play("attack3start")
 	if(new_state == States.ATTACK3END):
 		clash_strength = attack_3_end_clash_strength
 		hitbox3.disable()
@@ -327,11 +329,18 @@ func _on_sprite_animations_animation_finished() -> void:
 					handle_transition(States.ATTACK2)
 			else:
 				handle_transition(States.ATTACK2)
+			return
 		if(sprite_animations.animation == "attack2" and sprite_animations.frame > 0):
 			handle_transition(States.CHASE)
+		if(sprite_animations.animation == "attack3start"):
+			attack_3_duration.start()
+			move_forward(attack3_speed)
+			clash_strength = attack_3_clash_strength
+			hitbox3.enable()
+			sprite_animations.play("attack3hold")
 		if(sprite_animations.animation == "attack3finisher" and sprite_animations.frame > 0):
 			handle_transition(States.CHASE)
-
+	
 func _on_enemy_hurtbox_area_entered(_area: Area2D) -> void:
 	# NOTE: THIS IS A PATCH, the proper solution is to change the combat manager to get the entities
 	# in contact instead of just the position

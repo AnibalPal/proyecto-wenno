@@ -1,35 +1,105 @@
-[gd_scene load_steps=7 format=3 uid="uid://chpk7a5fc0pj1"]
+[gd_scene load_steps=17 format=3 uid="uid://chpk7a5fc0pj1"]
 
 [ext_resource type="Script" uid="uid://ddoui20l6iegb" path="res://VFX/base_effect.gd" id="1_g0scf"]
-[ext_resource type="Texture2D" uid="uid://no7tv5aw0xix" path="res://assets/prototype/prototype_hit_effects32x32.png" id="1_l8ayw"]
+[ext_resource type="Texture2D" uid="uid://y37fuuoh3ewx" path="res://assets/prototype/impact_effect.png" id="2_g0scf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x2j6k"]
-atlas = ExtResource("1_l8ayw")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_udq86"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(291, 0, 291, 301)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yt2bl"]
-atlas = ExtResource("1_l8ayw")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_64u2f"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(582, 0, 291, 301)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jxm1l"]
-atlas = ExtResource("1_l8ayw")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxb82"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(873, 0, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qklhw"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(1164, 0, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsc7s"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(1455, 0, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fglsk"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(0, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxrie"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(291, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpl87"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(582, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub2ph"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(873, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i2lj"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(1164, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s43i"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(1455, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw5qd"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(0, 602, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwtsp"]
+atlas = ExtResource("2_g0scf")
+region = Rect2(291, 602, 291, 301)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4wd5i"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x2j6k")
+"texture": SubResource("AtlasTexture_udq86")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yt2bl")
+"texture": SubResource("AtlasTexture_64u2f")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jxm1l")
+"texture": SubResource("AtlasTexture_pxb82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qklhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsc7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fglsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxrie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpl87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub2ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0i2lj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6s43i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw5qd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwtsp")
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 30.0
 }]
 
 [node name="PlayerHitEffect" type="Node2D"]
@@ -37,9 +107,10 @@ scale = Vector2(2, 2)
 script = ExtResource("1_g0scf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.10996564, 0.10996558)
 sprite_frames = SubResource("SpriteFrames_4wd5i")
 autoplay = "default"
-frame = 2
+frame = 12
 frame_progress = 1.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -20,6 +20,10 @@ func event_priority_sort(a : CombatEvent, b : CombatEvent) -> bool:
 		return true
 	return false
 
+# TODO BUG/REFACTOR: Hitting an enemy in the frame it becomes vulnerable causes a normal hit effect to play
+# instead of the counter effect, to fix this I think the best idea would be to call the vfx function
+# inside the on_damaged or on_clash functions or whatever depending on the case, need to think on what
+# approach to take later
 func instantiate_hit_effect(pos1: Vector2, pos2: Vector2, vfx_path: String) -> void:
 	var vfx_position := (pos1 + pos2)/2 
 	var packed_scene := load(vfx_path)
@@ -43,10 +47,21 @@ func resolve_damage(event: CombatEvent) -> void:
 	if(event.data.has("damage")):
 		event.receiver.on_damaged(event.data["damage"], event.emitter.global_position)
 	if(event.data.has("collision_info")):
+		var effect_instance_route := ""
+		if(event.data["collision_info"]["player_damaged"]):
+			effect_instance_route = "res://VFX/enemy_hit_vfx.tscn"
+		else:
+			if(event.data["collision_info"].has("counter_hit")):
+				if(event.data["collision_info"]["counter_hit"]):
+					effect_instance_route = "res://VFX/counter_hit_vfx.tscn"
+				else:
+					effect_instance_route = "res://VFX/player_hit_effect.tscn"
+			else:
+				effect_instance_route = "res://VFX/player_hit_effect.tscn"
 		instantiate_hit_effect(
 			event.data["collision_info"]["entity1"], 
 			event.data["collision_info"]["entity2"], 
-			"res://VFX/player_hit_effect.tscn"
+			effect_instance_route
 		)
 
 func resolve_clash(event: CombatEvent) -> void:

@@ -140,7 +140,7 @@ animations = [{
 size = Vector2(30, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tl2ip"]
-size = Vector2(324, 138)
+size = Vector2(324, 240)
 
 [sub_resource type="Animation" id="Animation_ciie0"]
 length = 0.001
@@ -216,7 +216,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/PlayerDetection"]
-position = Vector2(166, -51)
+position = Vector2(166, 0)
 shape = SubResource("RectangleShape2D_tl2ip")
 
 [node name="AxeSpawnPosition" type="Node2D" parent="ShouldRotate"]
@@ -236,7 +236,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="Timers"]
-wait_time = 0.5
+wait_time = 0.8
 one_shot = true
 
 [connection signal="frame_changed" from="ShouldRotate/BodyAnimations" to="." method="_on_animated_sprite_2d_frame_changed"]
