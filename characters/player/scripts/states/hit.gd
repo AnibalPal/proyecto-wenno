@@ -4,16 +4,18 @@ extends PlayerState
 @export var player_hurtbox : PlayerHurtbox
 @export var pushback_velocity := Vector2(-200,-100)
 
-@onready var duration: Timer = $Duration
+@onready var pushback_duration: Timer = $PushbackDuration
+@onready var invincible_duration: Timer = $InvincibleDuration
+@onready var damaged_invul_effect: AnimationPlayer = $DamagedInvulEffect
 
-var hit_end := false
+var pushback_end := false
 
 func enter(_data: Dictionary) -> void:
 	assert(player_hurtbox, "Hit state: No player hurtbox set!")
 	GlobalVFXs.hitstop()
 	player.disable_hitboxes()
 	reset_state()
-	duration.start()
+	pushback_duration.start()
 	if(_data.has("interaction_data")):
 		var is_area_right_of_player := player.global_position.direction_to(_data["interaction_data"]["area_position"]).x > 0
 		if(is_area_right_of_player):
@@ -36,7 +38,7 @@ func state_physics_process(_delta: float) -> void:
 		player.move_and_slide()
 
 func handle_transitions() -> void:
-	if(hit_end):
+	if(pushback_end):
 		if(player.is_on_floor()):
 			transition_to(state_data.IDLE)
 		else:
@@ -44,8 +46,19 @@ func handle_transitions() -> void:
 
 # Use if there are variables that should be reset when entering this state
 func reset_state()  -> void:
-	hit_end = false
+	pushback_end = false
 
-func _on_duration_timeout() -> void:
+func start_invincible() -> void:
+	pushback_end = true
+	damaged_invul_effect.play("damaged_invulnerable") 
+	invincible_duration.start()
+
+func end_invincible() -> void:
+	damaged_invul_effect.stop()
 	player_hurtbox.enable()
-	hit_end = true
+
+func _on_pushback_duration_timeout() -> void:
+	start_invincible()
+
+func _on_invincible_duration_timeout() -> void:
+	end_invincible()

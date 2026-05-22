@@ -7,7 +7,7 @@ extends PlayerState
 
 @onready var duration: Timer = $Duration
 
-var hit_end := false
+var pushback_end := false
 
 func enter(_data: Dictionary) -> void:
 	assert(player_hurtbox, "Hit state: No player hurtbox set!")
@@ -37,7 +37,7 @@ func state_physics_process(_delta: float) -> void:
 		player.move_and_slide()
 
 func handle_transitions() -> void:
-	if(hit_end):
+	if(pushback_end):
 		if(player.is_on_floor()):
 			transition_to(state_data.IDLE)
 		else:
@@ -45,8 +45,8 @@ func handle_transitions() -> void:
 
 # Use if there are variables that should be reset when entering this state
 func reset_state()  -> void:
-	hit_end = false
+	pushback_end = false
 
 func _on_duration_timeout() -> void:
 	player_hurtbox.enable()
-	hit_end = true
+	pushback_end = true
