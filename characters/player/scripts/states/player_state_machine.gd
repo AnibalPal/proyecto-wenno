@@ -113,7 +113,6 @@ func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_idx: int, l
 	
 	if(area is EnemyHurtbox):
 		# Hitting an enemy event
-		print(area.owner.counter_hit_state)
 		CombatManager.subscribe(CombatManager.CombatEventType.DAMAGE, owner, area.owner, {
 			"damage": local_area.get_damage(),
 			"collision_info": {

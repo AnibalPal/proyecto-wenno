@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=4 uid="uid://cmerfl3hbo3hi"]
+
+[ext_resource type="Script" uid="uid://c73pp285cnllw" path="res://stages/prototypes/combat_prototype/stage1/combat_prototype_stage_1.gd" id="1_l5gde"]
+[ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="2_qegyi"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="3_yk1a7"]
+[ext_resource type="PackedScene" uid="uid://bj2ee2effkp6v" path="res://characters/enemies/prototype_enemy_bear/prototype_bear_enemy.tscn" id="4_l5gde"]
+
+[node name="CombatPrototypeStage2" type="Node2D"]
+script = ExtResource("1_l5gde")
+next_stage_path = "res://stages/prototypes/combat_prototype/stage3/combat_prototype_stage_3.tscn"
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World"]
+tile_map_data = PackedByteArray("AAAAAAsAAAABAAAAAAAAAAoAAAABAAAAAAABAAoAAAABAAAAAAABAAsAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAATAAoAAAABAAAAAAATAAsAAAABAAAAAAASAAsAAAABAAAAAAARAAsAAAABAAAAAAAQAAsAAAABAAAAAAAPAAsAAAABAAAAAAAOAAsAAAABAAAAAAANAAsAAAABAAAAAAAMAAsAAAABAAAAAAALAAsAAAABAAAAAAAKAAsAAAABAAAAAAAJAAsAAAABAAAAAAAIAAsAAAABAAAAAAAHAAsAAAABAAAAAAAGAAsAAAABAAAAAAAFAAsAAAABAAAAAAAEAAsAAAABAAAAAAADAAsAAAABAAAAAAACAAsAAAABAAAAAAD//wsAAAABAAAAAAD//woAAAABAAAAAAD//wkAAAABAAAAAAD//wgAAAABAAAAAAD//wcAAAABAAAAAAD//wYAAAABAAAAAAD//wUAAAABAAAAAAD+/wQAAAABAAAAAAD//wQAAAABAAAAAAD+/wUAAAABAAAAAAD+/wYAAAABAAAAAAD+/wcAAAABAAAAAAD+/wgAAAABAAAAAAD+/wkAAAABAAAAAAD+/woAAAABAAAAAAD+/wsAAAABAAAAAAAAAAkAAAABAAAAAAAAAAgAAAABAAAAAAAAAAcAAAABAAAAAAAAAAYAAAABAAAAAAAAAAUAAAABAAAAAAAAAAQAAAABAAAAAAD//wMAAAABAAAAAAD+/wMAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAD//wEAAAABAAAAAAAAAAMAAAABAAAAAAD+/wIAAAABAAAAAAAAAAEAAAABAAAAAAD//wAAAAABAAAAAAD+/wAAAAABAAAAAAD+/wEAAAABAAAAAAAAAAAAAAABAAAAAAD/////AAABAAAAAAD+////AAABAAAAAAAAAP//AAABAAAAAAABAP//AAABAAAAAAACAP//AAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAAFAP//AAABAAAAAAAGAP//AAABAAAAAAAHAP//AAABAAAAAAAIAP//AAABAAAAAAAJAP//AAABAAAAAAAKAP//AAABAAAAAAALAP//AAABAAAAAAAMAP//AAABAAAAAAANAP//AAABAAAAAAAOAP//AAABAAAAAAAPAP//AAABAAAAAAAQAP//AAABAAAAAAARAP//AAABAAAAAAASAP//AAABAAAAAAATAP//AAABAAAAAAAUAP//AAABAAAAAAAUAAAAAAABAAAAAAAVAP//AAABAAAAAAAVAAAAAAABAAAAAAAVAAEAAAABAAAAAAAUAAEAAAABAAAAAAAVAAIAAAABAAAAAAAUAAIAAAABAAAAAAAVAAMAAAABAAAAAAAUAAMAAAABAAAAAAAVAAQAAAABAAAAAAAUAAQAAAABAAAAAAAVAAUAAAABAAAAAAAUAAUAAAABAAAAAAAVAAYAAAABAAAAAAAUAAYAAAABAAAAAAAUAAcAAAABAAAAAAAUAAgAAAABAAAAAAAVAAgAAAABAAAAAAAVAAcAAAABAAAAAAAVAAkAAAABAAAAAAAVAAoAAAABAAAAAAAUAAoAAAABAAAAAAAUAAkAAAABAAAAAAAVAAsAAAABAAAAAAAUAAsAAAABAAAAAAATAAkAAAABAAAAAAATAAgAAAABAAAAAAATAAcAAAABAAAAAAATAAYAAAABAAAAAAATAAUAAAABAAAAAAATAAQAAAABAAAAAAATAAMAAAABAAAAAAATAAIAAAABAAAAAAATAAEAAAABAAAAAAATAAAAAAABAAAAAAASAAAAAAABAAAAAAARAAAAAAABAAAAAAAQAAAAAAABAAAAAAAPAAAAAAABAAAAAAAOAAAAAAABAAAAAAANAAAAAAABAAAAAAAMAAAAAAABAAAAAAALAAAAAAABAAAAAAAKAAAAAAABAAAAAAAJAAAAAAABAAAAAAAIAAAAAAABAAAAAAAHAAAAAAABAAAAAAAGAAAAAAABAAAAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAADAAAAAAABAAAAAAACAAAAAAABAAAAAAABAAAAAAABAAAAAAABAAUAAAABAAAAAAACAAUAAAABAAAAAAADAAUAAAABAAAAAAAEAAUAAAABAAAAAAAFAAUAAAABAAAAAAAGAAUAAAABAAAAAAAHAAUAAAABAAAAAAAIAAUAAAABAAAAAAAJAAUAAAABAAAAAAABAAYAAAABAAAAAAACAAYAAAABAAAAAAADAAYAAAABAAAAAAAEAAYAAAABAAAAAAAFAAYAAAABAAAAAAAGAAYAAAABAAAAAAAHAAYAAAABAAAAAAAIAAYAAAABAAAAAAAJAAYAAAABAAAAAAABAAcAAAACAAEAAAAOAAcAAAADAAAAAAAPAAcAAAADAAAAAAAQAAcAAAADAAAAAAARAAcAAAADAAAAAAASAAcAAAADAAAAAAA=")
+tile_set = ExtResource("2_qegyi")
+
+[node name="Player" parent="." instance=ExtResource("3_yk1a7")]
+position = Vector2(320, 272)
+speed = 200
+gravity = 400
+jump_impulse = 300
+
+[node name="EnemySpawnPosition" type="Node2D" parent="."]
+position = Vector2(488, 104)
+
+[node name="Enemies" type="Node2D" parent="."]
+process_mode = 4
+visible = false
+
+[node name="PrototypeBear" parent="Enemies" instance=ExtResource("4_l5gde")]
+position = Vector2(520, 272)
+health = 6
+stamina = 4
+attack_3_clash_strength = 0
+show_health_and_stamina = false
+facing_right = false
+
+[node name="PrototypeBear2" parent="Enemies" instance=ExtResource("4_l5gde")]
+position = Vector2(88, 112)
+health = 6
+stamina = 4
+attack_3_clash_strength = 0
+show_health_and_stamina = false
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="StageStartupTime" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="StageCompleteTime" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="GameOverTime" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="StageLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 96.0
+offset_right = 345.0
+offset_bottom = 119.0
+text = "Nivel 2"
+
+[node name="ClearStageLabel" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 264.0
+offset_top = 96.0
+offset_right = 404.0
+offset_bottom = 119.0
+text = "Nivel completado!"
+
+[node name="GameOverLabel" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 288.0
+offset_top = 96.0
+offset_right = 380.0
+offset_bottom = 119.0
+text = "GAME OVER"
+
+[connection signal="s_game_over" from="Player" to="." method="_on_player_s_game_over"]
+[connection signal="timeout" from="Timers/StageStartupTime" to="." method="_on_stage_startup_time_timeout"]
+[connection signal="timeout" from="Timers/StageCompleteTime" to="." method="_on_stage_complete_time_timeout"]
+[connection signal="timeout" from="Timers/GameOverTime" to="." method="_on_game_over_time_timeout"]

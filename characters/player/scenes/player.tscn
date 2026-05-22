@@ -9,13 +9,28 @@
 [ext_resource type="Script" uid="uid://4lddnoeaxjeo" path="res://characters/player/scripts/states/dash.gd" id="7_2suro"]
 [ext_resource type="Script" uid="uid://cr64hn4qxtuok" path="res://characters/player/scripts/states/attack.gd" id="8_inse1"]
 [ext_resource type="Script" uid="uid://dgcq8jt1p3gmx" path="res://characters/state_machine/debug_info.gd" id="9_gy3q1"]
-[ext_resource type="Script" path="res://characters/player/scripts/states/air_attack.gd" id="9_ronts"]
+[ext_resource type="Script" uid="uid://cdxhx0732gcp8" path="res://characters/player/scripts/states/air_attack.gd" id="9_ronts"]
 [ext_resource type="Script" uid="uid://c8bsm6n28c07o" path="res://characters/player/scripts/states/hit.gd" id="10_2fx0v"]
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
 [ext_resource type="Script" uid="uid://cpjguobpn02om" path="res://characters/player/scripts/states/recoil.gd" id="11_ronts"]
 [ext_resource type="Texture2D" uid="uid://ccx0vpid7qdd4" path="res://assets/prototype/player_spritesheet_60x42.png" id="12_alequ"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
-[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+[ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+
+[sub_resource type="Animation" id="Animation_alequ"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../ShouldRotate/PlayerAnimations:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ronts"]
 resource_name = "damaged_invulnerable"
@@ -32,21 +47,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0.80784315), Color(1, 1, 1, 0.28627452), Color(1, 1, 1, 0.8392157)]
-}
-
-[sub_resource type="Animation" id="Animation_alequ"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../ShouldRotate/PlayerAnimations:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t0t3c"]
@@ -239,10 +239,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fx0v"]
-size = Vector2(48, 40)
+size = Vector2(56, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usdan"]
-size = Vector2(48, 56)
+size = Vector2(56, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ronts"]
 size = Vector2(18, 40)
@@ -333,7 +333,7 @@ animation = &"air_attack"
 [node name="AttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
-position = Vector2(32, -4)
+position = Vector2(36, -4)
 shape = SubResource("RectangleShape2D_2fx0v")
 disabled = true
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
@@ -345,7 +345,7 @@ end_frame = 2
 collision_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AirAttackHitbox"]
-position = Vector2(32, 4)
+position = Vector2(36, 4)
 shape = SubResource("RectangleShape2D_usdan")
 debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 script = ExtResource("13_inse1")

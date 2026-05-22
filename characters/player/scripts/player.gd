@@ -18,6 +18,8 @@ extends CharacterEntity
 
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
+signal s_game_over
+
 func character_ready() -> void:
 	health_amount.text = str(current_health)
 
@@ -37,6 +39,7 @@ func disable_hitboxes():
 		hitbox.disable()	
 
 func death():
+	s_game_over.emit()
 	queue_free()
 
 # Used in combat resolution

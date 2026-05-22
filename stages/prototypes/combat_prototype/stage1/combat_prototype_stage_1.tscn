@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=4 uid="uid://cs137g102kmpw"]
+
+[ext_resource type="Script" uid="uid://c73pp285cnllw" path="res://stages/prototypes/combat_prototype/stage1/combat_prototype_stage_1.gd" id="1_a1vyu"]
+[ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_xggen"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_184gn"]
+[ext_resource type="PackedScene" uid="uid://pvgqrdvw4ldb" path="res://characters/enemies/prototype_enemy_axe_thrower/axe_thrower.tscn" id="3_184gn"]
+
+[node name="CombatPrototypeStage1" type="Node2D"]
+script = ExtResource("1_a1vyu")
+next_stage_path = "res://stages/prototypes/combat_prototype/stage2/combat_prototype_stage_2.tscn"
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World"]
+tile_map_data = PackedByteArray("AAAAAAsAAAABAAAAAAAAAAoAAAABAAAAAAABAAoAAAABAAAAAAABAAsAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAATAAoAAAABAAAAAAATAAsAAAABAAAAAAASAAsAAAABAAAAAAARAAsAAAABAAAAAAAQAAsAAAABAAAAAAAPAAsAAAABAAAAAAAOAAsAAAABAAAAAAANAAsAAAABAAAAAAAMAAsAAAABAAAAAAALAAsAAAABAAAAAAAKAAsAAAABAAAAAAAJAAsAAAABAAAAAAAIAAsAAAABAAAAAAAHAAsAAAABAAAAAAAGAAsAAAABAAAAAAAFAAsAAAABAAAAAAAEAAsAAAABAAAAAAADAAsAAAABAAAAAAACAAsAAAABAAAAAAD//wsAAAABAAAAAAD//woAAAABAAAAAAD//wkAAAABAAAAAAD//wgAAAABAAAAAAD//wcAAAABAAAAAAD//wYAAAABAAAAAAD//wUAAAABAAAAAAD+/wQAAAABAAAAAAD//wQAAAABAAAAAAD+/wUAAAABAAAAAAD+/wYAAAABAAAAAAD+/wcAAAABAAAAAAD+/wgAAAABAAAAAAD+/wkAAAABAAAAAAD+/woAAAABAAAAAAD+/wsAAAABAAAAAAAAAAkAAAABAAAAAAAAAAgAAAABAAAAAAAAAAcAAAABAAAAAAAAAAYAAAABAAAAAAAAAAUAAAABAAAAAAAAAAQAAAABAAAAAAD//wMAAAABAAAAAAD+/wMAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAD//wEAAAABAAAAAAAAAAMAAAABAAAAAAD+/wIAAAABAAAAAAAAAAEAAAABAAAAAAD//wAAAAABAAAAAAD+/wAAAAABAAAAAAD+/wEAAAABAAAAAAAAAAAAAAABAAAAAAD/////AAABAAAAAAD+////AAABAAAAAAAAAP//AAABAAAAAAABAP//AAABAAAAAAACAP//AAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAAFAP//AAABAAAAAAAGAP//AAABAAAAAAAHAP//AAABAAAAAAAIAP//AAABAAAAAAAJAP//AAABAAAAAAAKAP//AAABAAAAAAALAP//AAABAAAAAAAMAP//AAABAAAAAAANAP//AAABAAAAAAAOAP//AAABAAAAAAAPAP//AAABAAAAAAAQAP//AAABAAAAAAARAP//AAABAAAAAAASAP//AAABAAAAAAATAP//AAABAAAAAAAUAP//AAABAAAAAAAUAAAAAAABAAAAAAAVAP//AAABAAAAAAAVAAAAAAABAAAAAAAVAAEAAAABAAAAAAAUAAEAAAABAAAAAAAVAAIAAAABAAAAAAAUAAIAAAABAAAAAAAVAAMAAAABAAAAAAAUAAMAAAABAAAAAAAVAAQAAAABAAAAAAAUAAQAAAABAAAAAAAVAAUAAAABAAAAAAAUAAUAAAABAAAAAAAVAAYAAAABAAAAAAAUAAYAAAABAAAAAAAUAAcAAAABAAAAAAAUAAgAAAABAAAAAAAVAAgAAAABAAAAAAAVAAcAAAABAAAAAAAVAAkAAAABAAAAAAAVAAoAAAABAAAAAAAUAAoAAAABAAAAAAAUAAkAAAABAAAAAAAVAAsAAAABAAAAAAAUAAsAAAABAAAAAAATAAkAAAABAAAAAAATAAgAAAABAAAAAAATAAcAAAABAAAAAAATAAYAAAABAAAAAAATAAUAAAABAAAAAAATAAQAAAABAAAAAAATAAMAAAABAAAAAAATAAIAAAABAAAAAAATAAEAAAABAAAAAAATAAAAAAABAAAAAAASAAAAAAABAAAAAAARAAAAAAABAAAAAAAQAAAAAAABAAAAAAAPAAAAAAABAAAAAAAOAAAAAAABAAAAAAANAAAAAAABAAAAAAAMAAAAAAABAAAAAAALAAAAAAABAAAAAAAKAAAAAAABAAAAAAAJAAAAAAABAAAAAAAIAAAAAAABAAAAAAAHAAAAAAABAAAAAAAGAAAAAAABAAAAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAADAAAAAAABAAAAAAACAAAAAAABAAAAAAABAAAAAAABAAAAAAAPAAcAAAADAAAAAAAQAAcAAAADAAAAAAARAAcAAAADAAAAAAASAAcAAAADAAAAAAAOAAcAAAADAAAAAAABAAcAAAADAAAAAAACAAcAAAADAAAAAAADAAcAAAADAAAAAAAEAAcAAAADAAAAAAAFAAcAAAADAAAAAAA=")
+tile_set = ExtResource("1_xggen")
+
+[node name="Player" parent="." instance=ExtResource("2_184gn")]
+position = Vector2(320, 272)
+speed = 200
+gravity = 400
+jump_impulse = 300
+
+[node name="EnemySpawnPosition" type="Node2D" parent="."]
+position = Vector2(488, 104)
+
+[node name="Enemies" type="Node2D" parent="."]
+process_mode = 4
+visible = false
+
+[node name="AxeThrower" parent="Enemies" instance=ExtResource("3_184gn")]
+position = Vector2(472, 288)
+jump_force = 400
+move_speed = 100
+proyectile_velocity = Vector2(200, -50)
+facing_right = false
+
+[node name="AxeThrower2" parent="Enemies" instance=ExtResource("3_184gn")]
+position = Vector2(552, 176)
+jump_force = 400
+move_speed = 100
+proyectile_velocity = Vector2(200, -50)
+facing_right = false
+
+[node name="AxeThrower3" parent="Enemies" instance=ExtResource("3_184gn")]
+position = Vector2(104, 184)
+jump_force = 400
+move_speed = 100
+proyectile_velocity = Vector2(200, -50)
+
+[node name="AxeThrower4" parent="Enemies" instance=ExtResource("3_184gn")]
+position = Vector2(152, 288)
+jump_force = 400
+move_speed = 100
+proyectile_velocity = Vector2(200, -50)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="StageStartupTime" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="StageCompleteTime" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="GameOverTime" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="StageLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 96.0
+offset_right = 345.0
+offset_bottom = 119.0
+text = "Nivel 1"
+
+[node name="ClearStageLabel" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 264.0
+offset_top = 96.0
+offset_right = 404.0
+offset_bottom = 119.0
+text = "Nivel completado!"
+
+[node name="GameOverLabel" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 288.0
+offset_top = 96.0
+offset_right = 380.0
+offset_bottom = 119.0
+text = "GAME OVER"
+
+[connection signal="s_game_over" from="Player" to="." method="_on_player_s_game_over"]
+[connection signal="timeout" from="Timers/StageStartupTime" to="." method="_on_stage_startup_time_timeout"]
+[connection signal="timeout" from="Timers/StageCompleteTime" to="." method="_on_stage_complete_time_timeout"]
+[connection signal="timeout" from="Timers/GameOverTime" to="." method="_on_game_over_time_timeout"]

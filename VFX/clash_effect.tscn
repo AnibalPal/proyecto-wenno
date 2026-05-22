@@ -95,7 +95,6 @@ script = ExtResource("1_gbqch")
 scale = Vector2(0.15151517, 0.15151514)
 sprite_frames = SubResource("SpriteFrames_8j172")
 autoplay = "default"
-frame = 10
 frame_progress = 1.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
