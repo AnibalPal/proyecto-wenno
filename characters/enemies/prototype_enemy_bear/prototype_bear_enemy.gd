@@ -91,6 +91,11 @@ func _physics_process(_delta: float) -> void:
 		handle_state_process()
 		move_and_slide()
 
+func set_counter_state(value: bool) -> void:
+	if(Settings.counter_state_aura):
+		sprite_animations.material.set_shader_parameter("counter_state", value)
+	counter_hit_state = value
+
 func disable_hitboxes() -> void:
 	hitbox.disable()
 	hitbox2.disable()
@@ -171,14 +176,14 @@ func handle_transition(new_state : States) -> void:
 		current_state = States.DEATH
 		return
 	if(new_state == States.PASSIVE):
-		counter_hit_state = false
+		set_counter_state(false)
 		attack_detection_collision.set_deferred("disabled", true)
 		player_awareness_collision.set_deferred("disabled", true)
 		player_detection_collision.set_deferred("disabled", false)
 		chase_target = null
 		sprite_animations.play("walk")
 	if(new_state == States.ATTACK1):
-		counter_hit_state = true
+		set_counter_state(true)
 		if(chase_target):
 			turn_towards(chase_target.global_position)
 		attack_detection_collision.set_deferred("disabled", true)
@@ -189,14 +194,14 @@ func handle_transition(new_state : States) -> void:
 			turn_towards(chase_target.global_position)
 		attack_detection_collision.set_deferred("disabled", true)
 		velocity = Vector2.ZERO
-		counter_hit_state = true
+		set_counter_state(true)
 		sprite_animations.play("attack2")
 	if(new_state == States.ATTACK3):
 		if(chase_target):
 			turn_towards(chase_target.global_position)
 		clash_strength = attack_3_clash_strength
 		attack_detection_collision.set_deferred("disabled", true)
-		counter_hit_state = true
+		set_counter_state(true)
 		velocity.x = 0
 		sprite_animations.play("attack3start")
 	if(new_state == States.ATTACK3END):
@@ -205,14 +210,14 @@ func handle_transition(new_state : States) -> void:
 		hitbox3end.enable()
 		attack_detection_collision.set_deferred("disabled", true)
 		velocity = Vector2.ZERO
-		counter_hit_state = true
+		set_counter_state(true)
 		sprite_animations.play("attack3finisher")
 	if(new_state == States.CHASE):
 		player_detection_collision.set_deferred("disabled", true)
 		player_awareness_collision.set_deferred("disabled", false)
 		disable_hitboxes()
 		attack_cooldown.start()
-		counter_hit_state = false
+		set_counter_state(false)
 		sprite_animations.play("run")
 	if(new_state == States.STUNNED):
 		GlobalVFXs.hitstop()
@@ -222,13 +227,13 @@ func handle_transition(new_state : States) -> void:
 		disable_hitboxes()
 		attack_detection_collision.set_deferred("disabled", true)
 		player_detection_collision.set_deferred("disabled", true)
-		counter_hit_state = false
+		set_counter_state(false)
 		sprite_animations.play("stunned")
 	if(new_state == States.RECOIL):
 		recoil_duration.start()
 		disable_hitboxes()
 		attack_detection_collision.set_deferred("disabled", true)
-		counter_hit_state = false
+		set_counter_state(false)
 		sprite_animations.play("recoil")
 	current_state = new_state
 

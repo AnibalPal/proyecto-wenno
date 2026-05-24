@@ -31,7 +31,6 @@ visible = false
 [node name="PrototypeBear" parent="Enemies" instance=ExtResource("4_l5gde")]
 position = Vector2(520, 272)
 health = 6
-stamina = 4
 attack_3_clash_strength = 0
 show_health_and_stamina = false
 facing_right = false
@@ -39,7 +38,6 @@ facing_right = false
 [node name="PrototypeBear2" parent="Enemies" instance=ExtResource("4_l5gde")]
 position = Vector2(88, 112)
 health = 6
-stamina = 4
 attack_3_clash_strength = 0
 show_health_and_stamina = false
 

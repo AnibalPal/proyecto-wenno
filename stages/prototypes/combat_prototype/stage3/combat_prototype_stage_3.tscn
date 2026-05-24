@@ -32,7 +32,6 @@ visible = false
 [node name="BigEnemy" parent="Enemies" instance=ExtResource("4_3tyw3")]
 position = Vector2(488, 240)
 health = 6
-stamina = 4
 attack_3_clash_strength = 0
 show_health_and_stamina = false
 facing_right = false
@@ -40,7 +39,6 @@ facing_right = false
 [node name="PrototypeBear" parent="Enemies" instance=ExtResource("4_3tyw3")]
 position = Vector2(88, 280)
 health = 6
-stamina = 4
 attack_3_clash_strength = 0
 show_health_and_stamina = false
 

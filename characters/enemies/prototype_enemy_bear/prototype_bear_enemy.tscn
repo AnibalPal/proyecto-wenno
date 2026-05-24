@@ -11,7 +11,10 @@ size = Vector2(20, 68)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bi512"]
 shader = ExtResource("2_3vt6o")
-shader_parameter/active = false
+shader_parameter/counter_state = false
+shader_parameter/hit_effect = false
+shader_parameter/offset = 0.006000047784999962
+shader_parameter/aura_color = Color(0.84313726, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5m4w0"]
 atlas = ExtResource("3_3vt6o")
@@ -328,7 +331,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ShouldRotate/SpriteAnimations:material:shader_parameter/active")
+tracks/0/path = NodePath("ShouldRotate/SpriteAnimations:material:shader_parameter/hit_effect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -344,7 +347,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ShouldRotate/SpriteAnimations:material:shader_parameter/active")
+tracks/0/path = NodePath("ShouldRotate/SpriteAnimations:material:shader_parameter/hit_effect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -376,7 +379,7 @@ shape = SubResource("RectangleShape2D_3vt6o")
 material = SubResource("ShaderMaterial_bi512")
 scale = Vector2(2.5000002, 2.625)
 sprite_frames = SubResource("SpriteFrames_008bi")
-animation = &"attack3hold"
+animation = &"attack1"
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate"]
 target_position = Vector2(24, 0)

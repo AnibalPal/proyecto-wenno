@@ -30,7 +30,7 @@ position = Vector2(488, 104)
 [node name="BigEnemy" parent="Enemies" instance=ExtResource("3_ph2t8")]
 position = Vector2(488, 240)
 health = 6
-stamina = 4
+stamina = 6
 attack_3_clash_strength = 0
 show_health_and_stamina = false
 facing_right = false
@@ -38,7 +38,7 @@ facing_right = false
 [node name="PrototypeBear" parent="Enemies" instance=ExtResource("3_ph2t8")]
 position = Vector2(88, 280)
 health = 6
-stamina = 4
+stamina = 6
 attack_3_clash_strength = 0
 show_health_and_stamina = false
 
