@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bacta4ae0q2d4"
-path="res://.godot/imported/Effect_BloodImpact_1_69x60.png-3108adc84b709fe04aa824c4f6e7e447.ctex"
+path="res://.godot/imported/Effect_BloodImpact_1_69x60.png-758a3ee368ba40919b08cc18cd12768d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/prototype/tile_sets/Effect_BloodImpact_1_69x60.png"
-dest_files=["res://.godot/imported/Effect_BloodImpact_1_69x60.png-3108adc84b709fe04aa824c4f6e7e447.ctex"]
+source_file="res://assets/prototype/Effect_BloodImpact_1_69x60.png"
+dest_files=["res://.godot/imported/Effect_BloodImpact_1_69x60.png-758a3ee368ba40919b08cc18cd12768d.ctex"]
 
 [params]
 

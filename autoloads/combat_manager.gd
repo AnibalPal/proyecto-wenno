@@ -20,10 +20,6 @@ func event_priority_sort(a : CombatEvent, b : CombatEvent) -> bool:
 		return true
 	return false
 
-# TODO BUG/REFACTOR: Hitting an enemy in the frame it becomes vulnerable causes a normal hit effect to play
-# instead of the counter effect, to fix this I think the best idea would be to call the vfx function
-# inside the on_damaged or on_clash functions or whatever depending on the case, need to think on what
-# approach to take later
 func instantiate_hit_effect(pos1: Vector2, pos2: Vector2, vfx_path: String) -> void:
 	var vfx_position := (pos1 + pos2)/2 
 	var packed_scene := load(vfx_path)

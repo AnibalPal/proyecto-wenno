@@ -13,7 +13,7 @@ size = Vector2(20, 68)
 shader = ExtResource("2_3vt6o")
 shader_parameter/counter_state = false
 shader_parameter/hit_effect = false
-shader_parameter/offset = 0.006000047784999962
+shader_parameter/offset = 0.00600004778499996
 shader_parameter/aura_color = Color(0.84313726, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5m4w0"]
@@ -365,6 +365,7 @@ _data = {
 
 [node name="PrototypeBear" type="CharacterBody2D"]
 collision_layer = 0
+collision_mask = 3
 floor_constant_speed = true
 floor_snap_length = 20.0
 script = ExtResource("1_uy33a")

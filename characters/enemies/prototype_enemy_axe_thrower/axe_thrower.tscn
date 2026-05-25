@@ -12,7 +12,10 @@ size = Vector2(17, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ciie0"]
 shader = ExtResource("2_baisa")
-shader_parameter/active = false
+shader_parameter/counter_state = false
+shader_parameter/hit_effect = false
+shader_parameter/offset = 0.0
+shader_parameter/aura_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gqrm1"]
 atlas = ExtResource("1_stnio")
@@ -181,6 +184,7 @@ _data = {
 
 [node name="AxeThrower" type="CharacterBody2D"]
 collision_layer = 0
+collision_mask = 3
 script = ExtResource("1_h4bk0")
 projectile = ExtResource("2_ciie0")
 proyectile_velocity = Vector2(100, 0)
