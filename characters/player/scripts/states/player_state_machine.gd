@@ -52,10 +52,6 @@ func check_state_machine() -> void:
 		if(!child.active):
 			disable_state(child.name)
 
-# TODO: Complete then add it to instance_hit_effect function to place the effect in the proper position
-func get_collision_points_between_areas(_area1: Area2D, _area2: Area2D) -> Array:
-	return []
-
 func get_collision_shape_from_idx(area: Area2D, index: int) -> CollisionShape2D:
 	return area.get_children()[index]	
 
