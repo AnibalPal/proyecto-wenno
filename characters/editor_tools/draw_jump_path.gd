@@ -13,17 +13,13 @@ var points := []
 
 func draw_jump_arc() -> void:
 	time_delta = get_physics_process_delta_time()
-	print(time_delta)
 	if(Engine.is_editor_hint()):
 		points.clear()
 		var old_point := Vector2.ZERO
 		var next_point := Vector2.ZERO
 		var speed : int = owner.speed
-		print(speed)
 		var gravity : int = owner.gravity
-		print(gravity)
 		var jump_impulse : int = owner.jump_impulse
-		print(jump_impulse)
 		var velocity := Vector2(speed, -jump_impulse)
 		for i in range(ticks):
 			old_point = next_point

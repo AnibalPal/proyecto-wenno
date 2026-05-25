@@ -293,10 +293,18 @@ script = ExtResource("8_inse1")
 animation_name = "attack"
 hitbox_collision_shapes = [NodePath("../../ShouldRotate/Hitboxes/AttackHitbox/FrontShape")]
 
+[node name="InputBuffer" type="Timer" parent="StateMachine/Attack"]
+wait_time = 0.15
+one_shot = true
+
 [node name="AirAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hitbox_collision_shapes")]
 script = ExtResource("9_ronts")
 animation_name = "air_attack"
 hitbox_collision_shapes = [NodePath("../../ShouldRotate/Hitboxes/AirAttackHitbox/FrontShape")]
+
+[node name="InputBuffer" type="Timer" parent="StateMachine/AirAttack"]
+wait_time = 0.15
+one_shot = true
 
 [node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("10_2fx0v")
@@ -447,9 +455,9 @@ text = "Vida: "
 layout_mode = 2
 text = "5"
 
-[node name="Tools" type="Node2D" parent="."]
+[node name="EditorTools" type="Node2D" parent="."]
 
-[node name="DrawJumpPath" parent="Tools" instance=ExtResource("17_alequ")]
+[node name="DrawJumpPath" parent="EditorTools" instance=ExtResource("17_alequ")]
 
 [connection signal="timeout" from="StateMachine/Fall/CoyoteTime" to="StateMachine/Fall" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="StateMachine/Fall/InputBuffer" to="StateMachine/Fall" method="_on_input_buffer_timeout"]

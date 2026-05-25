@@ -2,10 +2,12 @@
 class_name Player
 extends CharacterEntity
 
+@export_group("Stats")
 @export var max_health := 5
 @export var current_health := 5
 @export var clash_strength := 1
 
+@export_group("Movement variables")
 @export var speed := 100:
 	set(value):
 		speed = value

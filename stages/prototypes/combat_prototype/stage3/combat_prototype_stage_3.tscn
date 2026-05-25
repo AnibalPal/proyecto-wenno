@@ -18,9 +18,9 @@ tile_set = ExtResource("2_3g8jr")
 
 [node name="Player" parent="." instance=ExtResource("3_8th7t")]
 position = Vector2(320, 272)
-speed = 200
-gravity = 400
-jump_impulse = 300
+speed = 150
+gravity = 850
+jump_impulse = 400
 
 [node name="EnemySpawnPosition" type="Node2D" parent="."]
 position = Vector2(488, 104)

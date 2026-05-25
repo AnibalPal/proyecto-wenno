@@ -44,7 +44,9 @@ static var transitions = {
 			IDLE: true,
 			RUN: true,
 			JUMP: true,
-			FALL: true
+			FALL: true,
+			ATTACK: true,
+			AIRATTACK: true
 		},
 		ALL: {
 			HIT: true,

@@ -68,7 +68,7 @@ func move_backwards(speed: float) -> void:
 # Editor tool functions
 func tool_update_jump_trayectory() -> void:
 	if(Engine.is_editor_hint()):
-		var draw_jump_node := get_node("Tools/DrawJumpPath")
+		var draw_jump_node := get_node("EditorTools/DrawJumpPath")
 		if(draw_jump_node):
 			draw_jump_node.draw_jump_arc()
 	
