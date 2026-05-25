@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://4q871lw6yrib"]
+
+[ext_resource type="Script" uid="uid://doh1d0a7oqlpk" path="res://characters/editor_tools/draw_jump_path.gd" id="1_elcvg"]
+
+[node name="DrawJumpPath" type="Node2D"]
+script = ExtResource("1_elcvg")
+ticks = 100

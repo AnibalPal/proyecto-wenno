@@ -6,9 +6,20 @@ extends CharacterEntity
 @export var current_health := 5
 @export var clash_strength := 1
 
-@export var speed := 100
-@export var gravity := 300
-@export var jump_impulse := 200
+@export var speed := 100:
+	set(value):
+		speed = value
+		tool_update_jump_trayectory()
+		
+@export var gravity := 300:
+	set(value):
+		gravity = value
+		tool_update_jump_trayectory()
+
+@export var jump_impulse := 200:
+	set(value):
+		jump_impulse = value
+		tool_update_jump_trayectory()
 
 @onready var floor_detection: RayCast2D = $ShouldNotRotate/FloorDetection
 @onready var player_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations

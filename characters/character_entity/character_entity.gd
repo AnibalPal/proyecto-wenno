@@ -36,7 +36,6 @@ func character_ready() -> void:
 
 
 # Utility functions to be used inside PlayerState or Enemy scripts
-
 func turn_around() -> void:
 	if(facing_right):
 		turn_left()
@@ -66,6 +65,13 @@ func move_backwards(speed: float) -> void:
 	else:
 		velocity.x = speed
 
+# Editor tool functions
+func tool_update_jump_trayectory() -> void:
+	if(Engine.is_editor_hint()):
+		var draw_jump_node := get_node("Tools/DrawJumpPath")
+		if(draw_jump_node):
+			draw_jump_node.draw_jump_arc()
+	
 # Virtual functions used in the CombatManager class
 func on_damaged(_damage: int, _other_entity_position: Vector2) -> void:
 	pass
