@@ -303,10 +303,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fx0v"]
-size = Vector2(56, 40)
+size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usdan"]
-size = Vector2(56, 56)
+size = Vector2(72, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ronts"]
 size = Vector2(18, 40)
@@ -398,14 +398,16 @@ one_shot = true
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_41mm0")
-animation = &"attack"
+animation = &"air_attack"
+frame = 2
+frame_progress = 1.0
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
 [node name="AttackHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_eigjl")]
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AttackHitbox"]
-position = Vector2(36, -4)
+position = Vector2(32, 8)
 shape = SubResource("RectangleShape2D_2fx0v")
 disabled = true
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
@@ -417,8 +419,9 @@ end_frame = 2
 collision_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 
 [node name="FrontShape" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/AirAttackHitbox"]
-position = Vector2(36, 4)
+position = Vector2(24, -4)
 shape = SubResource("RectangleShape2D_usdan")
+disabled = true
 debug_color = Color(0.80053717, 0.4167917, 0.19593138, 0.41960785)
 script = ExtResource("13_inse1")
 start_frame = 1
@@ -498,7 +501,7 @@ text = "Idle"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="UI"]
+[node name="Background" type="ColorRect" parent="UI"]
 offset_left = 8.0
 offset_top = 16.0
 offset_right = 88.0

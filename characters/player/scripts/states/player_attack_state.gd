@@ -40,18 +40,20 @@ func on_animation_finished() -> void:
 
 # Mostly used to start collision changes in frame 0
 func on_animation_animation_changed() -> void:
-	if(player.player_animations.animation == animation_name):
-		for hitbox_collision: HitboxCollision in hitbox_collision_shapes:
-			if(player.player_animations.frame == hitbox_collision.start_frame):
-				hitbox_collision.set_deferred("disabled", false)
+	if(!Engine.is_editor_hint()):
+		if(player.player_animations.animation == animation_name):
+			for hitbox_collision: HitboxCollision in hitbox_collision_shapes:
+				if(player.player_animations.frame == hitbox_collision.start_frame):
+					hitbox_collision.set_deferred("disabled", false)
 
 func on_animation_frame_changed() -> void:
-	if(player.player_animations.animation == animation_name):
-		for hitbox_collision: HitboxCollision in hitbox_collision_shapes:
-			if(player.player_animations.frame == hitbox_collision.start_frame):
-				hitbox_collision.set_deferred("disabled", false)
-			if(player.player_animations.frame == hitbox_collision.end_frame):
-				hitbox_collision.set_deferred("disabled", true)
+	if(!Engine.is_editor_hint()):
+		if(player.player_animations.animation == animation_name):
+			for hitbox_collision: HitboxCollision in hitbox_collision_shapes:
+				if(player.player_animations.frame == hitbox_collision.start_frame):
+					hitbox_collision.set_deferred("disabled", false)
+				if(player.player_animations.frame == hitbox_collision.end_frame):
+					hitbox_collision.set_deferred("disabled", true)
 
 # Override in children
 func handle_attack_finished_transitions() -> void:
