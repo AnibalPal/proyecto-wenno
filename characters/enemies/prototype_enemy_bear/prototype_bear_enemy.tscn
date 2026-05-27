@@ -1,7 +1,7 @@
 [gd_scene load_steps=52 format=3 uid="uid://bj2ee2effkp6v"]
 
 [ext_resource type="Script" uid="uid://c8p7n6mdabh4v" path="res://characters/enemies/prototype_enemy_bear/prototype_bear_enemy.gd" id="1_uy33a"]
-[ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/hit_effect.gdshader" id="2_3vt6o"]
+[ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="2_3vt6o"]
 [ext_resource type="Texture2D" uid="uid://h6vvwfe54spl" path="res://assets/prototype/prototype_enemy_1_64x128_spritesheet.png" id="3_3vt6o"]
 [ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="3_008bi"]
 [ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="4_3vt6o"]

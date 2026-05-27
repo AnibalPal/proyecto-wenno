@@ -92,7 +92,6 @@ func _on_hurtbox_area_entered(_area: EnemyHitbox) -> void:
 		}
 	})
 
-# Handle weapon VFX when attacking an enemy mostly
 func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_idx: int, local_shape_idx: int, local_area: Area2D):
 	var local_shape = get_collision_shape_from_idx(local_area, local_shape_idx)
 	var other_shape = get_collision_shape_from_idx(area, area_shape_idx)
