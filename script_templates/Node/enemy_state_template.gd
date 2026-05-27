@@ -9,8 +9,7 @@ func state_process(_delta: float) -> void:
 
 func state_physics_process(_delta: float) -> void:
 	if(active):
-		# player.enable_gravity(_delta)
-		# player.enable_x_movement()
+		# enemy.enable_gravity(_delta)
 		handle_transitions()
 		enemy.move_and_slide()
 

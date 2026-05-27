@@ -6,6 +6,8 @@ extends CharacterEntity
 @export var health := 1
 @export var stamina := 10
 
+@export var gravity := 300
+
 @onready var sprite_animations := $ShouldRotate/SpriteAnimations
 @onready var hitboxes := $ShouldRotate/Hitboxes
 
@@ -62,3 +64,6 @@ func turn_towards(objective_position: Vector2) -> void:
 		turn_left()
 	else:
 		turn_right()
+		
+func enable_gravity(_delta: float):
+	velocity.y += gravity * _delta
