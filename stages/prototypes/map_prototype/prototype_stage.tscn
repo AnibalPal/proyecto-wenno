@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://jtxhssckm7o6"]
+
+[ext_resource type="Script" uid="uid://bi0fmvnyujiwx" path="res://stages/level_design/stage/stage_manager.gd" id="1_5c64k"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_x31yq"]
+
+[node name="PrototypeStage" type="Node2D"]
+script = ExtResource("1_5c64k")
+stage_id = "Prototype"
+initial_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_1.tscn"
+
+[node name="CurrentChamber" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_x31yq")]
+position = Vector2(320, 272)
+speed = 150
+gravity = 850
+jump_impulse = 400
+
+[node name="FadeEffect" type="CanvasLayer" parent="."]

@@ -1,6 +1,13 @@
 @tool
 extends Node2D
 
+# NOTE: Draws jump arcs when added to a node that has the following parameters:
+# speed
+# gravity
+# jump_impulse
+# Mostly used when I need to see a jump arc from the editor to properly level design
+# Do not add the draw_jump_path node if the owner does not have the previosly stated properties
+
 @export var trigger_redraw := false:
 	set(value):
 		draw_jump_arc()

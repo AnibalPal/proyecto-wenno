@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3qgmya5ej67y"]
 
-[ext_resource type="Script" uid="uid://cia73211sbs5j" path="res://stages/level_design/scripts/camera_params.gd" id="1_ug6ff"]
+[ext_resource type="Script" uid="uid://cia73211sbs5j" path="res://stages/level_design/camera/camera_params.gd" id="1_hntaa"]
 
 [node name="CameraParams" type="Node2D"]
-script = ExtResource("1_ug6ff")
+script = ExtResource("1_hntaa")
 draw_guideline = false
 guideline_width = 10
 line_width = 6

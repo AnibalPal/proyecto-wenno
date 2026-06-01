@@ -1,4 +1,3 @@
-class_name GameProgression
 extends Node
 
 # This script should contain all things related to the player, like which map has he seen, what

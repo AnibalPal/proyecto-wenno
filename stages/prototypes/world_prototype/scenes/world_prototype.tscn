@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c55ygpi0stsms" path="res://stages/prototypes/world_prototype/scripts/world_prototype.gd" id="1_b6msb"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_b6msb"]
-[ext_resource type="PackedScene" uid="uid://bvat8fbkoepjn" path="res://stages/level_design/scenes/camera_manager.tscn" id="2_cgpbq"]
-[ext_resource type="PackedScene" uid="uid://c3qgmya5ej67y" path="res://stages/level_design/scenes/camera_params.tscn" id="3_76g1l"]
+[ext_resource type="PackedScene" uid="uid://bvat8fbkoepjn" path="res://stages/level_design/camera/camera_manager.tscn" id="2_cgpbq"]
+[ext_resource type="PackedScene" uid="uid://c3qgmya5ej67y" path="res://stages/level_design/camera/camera_params.tscn" id="3_76g1l"]
 [ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="3_imxai"]
-[ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/scenes/camera_change_trigger.tscn" id="4_76g1l"]
+[ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/camera/camera_change_trigger.tscn" id="4_76g1l"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="5_76g1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76g1l"]

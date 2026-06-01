@@ -12,7 +12,7 @@ extends CharacterBody2D
 @export var facing_right := true:
 	set(value):
 		facing_right = value
-		if(Engine.is_editor_hint()):
+		if(Engine.is_editor_hint() and should_rotate != null):
 			if(value):
 				should_rotate.transform.x = Vector2(1.0, 0.0)
 			else:
