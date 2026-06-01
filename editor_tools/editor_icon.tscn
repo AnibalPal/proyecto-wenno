@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlpokfxijt167"]
+
+[ext_resource type="Script" uid="uid://bsrqa7hosevw2" path="res://editor_tools/editor_icon.gd" id="1_il5g2"]
+
+[node name="EditorIcon" type="Sprite2D"]
+script = ExtResource("1_il5g2")

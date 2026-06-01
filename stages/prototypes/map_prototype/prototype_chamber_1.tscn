@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=4 uid="uid://dfo7oohfy42y8"]
+[gd_scene load_steps=9 format=4 uid="uid://ck0xpx1dhvjc2"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_buxlp"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_vlr1m"]
 [ext_resource type="Texture2D" uid="uid://b7gynjk0rpabn" path="res://assets/icons/human_icon_16x16.png" id="2_7tcn1"]
 [ext_resource type="Script" uid="uid://bsrqa7hosevw2" path="res://editor_tools/editor_icon.gd" id="3_buxlp"]
+[ext_resource type="PackedScene" uid="uid://dlpokfxijt167" path="res://editor_tools/editor_icon.tscn" id="5_6h84v"]
+[ext_resource type="Texture2D" uid="uid://b70eyfbg51noy" path="res://assets/icons/camera_icon32.png" id="6_nyaid"]
+[ext_resource type="Script" uid="uid://df1b167dho3sh" path="res://stages/level_design/chamber/exit_area_params.gd" id="7_nyaid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wos68"]
+size = Vector2(48, 80)
 
 [node name="PrototypeChamber1" type="Node2D"]
 script = ExtResource("1_buxlp")
@@ -14,8 +20,25 @@ tile_set = ExtResource("1_vlr1m")
 
 [node name="StartPosition" type="Sprite2D" parent="."]
 modulate = Color(0, 0.5921569, 1, 1)
-position = Vector2(128, 264)
+position = Vector2(112, 272)
 scale = Vector2(3, 3)
 texture = ExtResource("2_7tcn1")
 script = ExtResource("3_buxlp")
 color = Color(0, 0.5921569, 1, 1)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="0" type="Area2D" parent="Exits"]
+position = Vector2(632, 272)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("7_nyaid")
+next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_2.tscn"
+
+[node name="ExitAreaCollision" type="CollisionShape2D" parent="Exits/0"]
+shape = SubResource("RectangleShape2D_wos68")
+
+[node name="EditorIcon" parent="Exits/0" instance=ExtResource("5_6h84v")]
+modulate = Color(0.26180834, 0.3734509, 0.20341444, 1)
+texture = ExtResource("6_nyaid")
+color = Color(0.26180834, 0.3734509, 0.20341444, 1)
