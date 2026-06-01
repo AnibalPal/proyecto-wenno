@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3qe6e0va78bl"]
+
+[ext_resource type="Script" uid="uid://bd60ww3411ei5" path="res://stages/level_design/chamber/entry_params.gd" id="1_b1tg7"]
+[ext_resource type="Texture2D" uid="uid://b7gynjk0rpabn" path="res://assets/icons/human_icon_16x16.png" id="2_oh3hb"]
+[ext_resource type="Script" uid="uid://bsrqa7hosevw2" path="res://editor_tools/editor_icon.gd" id="3_glpdy"]
+
+[node name="Entry" type="Node2D"]
+script = ExtResource("1_b1tg7")
+
+[node name="PositionMarker" type="Sprite2D" parent="."]
+modulate = Color(0, 0.5921569, 1, 1)
+scale = Vector2(3, 3)
+texture = ExtResource("2_oh3hb")
+script = ExtResource("3_glpdy")
+color = Color(0, 0.5921569, 1, 1)
+metadata/_edit_lock_ = true

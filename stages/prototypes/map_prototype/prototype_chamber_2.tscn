@@ -1,15 +1,14 @@
-[gd_scene load_steps=10 format=4 uid="uid://dfo7oohfy42y8"]
+[gd_scene load_steps=11 format=4 uid="uid://dfo7oohfy42y8"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_pc242"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="2_8n16g"]
+[ext_resource type="Script" uid="uid://bd60ww3411ei5" path="res://stages/level_design/chamber/entry_params.gd" id="3_p2f2n"]
 [ext_resource type="Texture2D" uid="uid://b7gynjk0rpabn" path="res://assets/icons/human_icon_16x16.png" id="3_sx043"]
 [ext_resource type="Script" uid="uid://bsrqa7hosevw2" path="res://editor_tools/editor_icon.gd" id="4_n8wv1"]
+[ext_resource type="PackedScene" uid="uid://hlkos3om81d6" path="res://stages/level_design/chamber/exit_area.tscn" id="5_ij6yv"]
 [ext_resource type="Script" uid="uid://df1b167dho3sh" path="res://stages/level_design/chamber/exit_area_params.gd" id="5_n8wv1"]
 [ext_resource type="PackedScene" uid="uid://dlpokfxijt167" path="res://editor_tools/editor_icon.tscn" id="6_ij6yv"]
-[ext_resource type="Texture2D" uid="uid://b70eyfbg51noy" path="res://assets/icons/camera_icon32.png" id="7_p2f2n"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8wv1"]
-size = Vector2(48, 80)
+[ext_resource type="Texture2D" uid="uid://bq8eqb3u2hukk" path="res://assets/icons/exit_sign32x32.png" id="7_n8wv1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0jk"]
 size = Vector2(48, 80)
@@ -21,30 +20,26 @@ script = ExtResource("1_pc242")
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAoAAAABAAAAAAAAAAsAAAABAAAAAAABAAsAAAABAAAAAAACAAsAAAABAAAAAAADAAsAAAABAAAAAAAEAAsAAAABAAAAAAAFAAsAAAABAAAAAAAGAAsAAAABAAAAAAAHAAsAAAABAAAAAAAIAAsAAAABAAAAAAAJAAsAAAABAAAAAAAKAAsAAAABAAAAAAALAAsAAAABAAAAAAAMAAsAAAABAAAAAAANAAsAAAABAAAAAAAOAAsAAAABAAAAAAAPAAsAAAABAAAAAAAQAAsAAAABAAAAAAARAAsAAAABAAAAAAASAAsAAAABAAAAAAATAAsAAAABAAAAAAATAAAAAAABAAAAAAATAAEAAAABAAAAAAABAAoAAAABAAAAAAABAAEAAAABAAAAAAABAAAAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAMAAAAAAABAAAAAAANAAAAAAABAAAAAAAOAAAAAAABAAAAAAAPAAAAAAABAAAAAAAQAAAAAAABAAAAAAARAAAAAAABAAAAAAASAAAAAAABAAAAAAASAAEAAAABAAAAAAARAAEAAAABAAAAAAAQAAEAAAABAAAAAAAPAAEAAAABAAAAAAAOAAEAAAABAAAAAAANAAEAAAABAAAAAAAMAAEAAAABAAAAAAALAAEAAAABAAAAAAAKAAEAAAABAAAAAAAJAAEAAAABAAAAAAAIAAEAAAABAAAAAAAHAAEAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAEAAEAAAABAAAAAAADAAEAAAABAAAAAAACAAEAAAABAAAAAAATAAoAAAABAAAAAAATAAkAAAABAAAAAAATAAgAAAABAAAAAAATAAcAAAABAAAAAAATAAYAAAABAAAAAAATAAUAAAABAAAAAAATAAQAAAABAAAAAAATAAMAAAABAAAAAAATAAIAAAABAAAAAAASAAIAAAABAAAAAAASAAMAAAABAAAAAAASAAQAAAABAAAAAAASAAUAAAABAAAAAAASAAYAAAABAAAAAAASAAcAAAABAAAAAAASAAgAAAABAAAAAAASAAkAAAABAAAAAAA=")
 tile_set = ExtResource("2_8n16g")
 
-[node name="StartPosition" type="Sprite2D" parent="."]
+[node name="Entries" type="Node2D" parent="."]
+
+[node name="0" type="Node2D" parent="Entries"]
+position = Vector2(96, 272)
+script = ExtResource("3_p2f2n")
+
+[node name="PositionMarker" type="Sprite2D" parent="Entries/0"]
 modulate = Color(0, 0.5921569, 1, 1)
-position = Vector2(120.000015, 272)
 scale = Vector2(3, 3)
 texture = ExtResource("3_sx043")
 script = ExtResource("4_n8wv1")
 color = Color(0, 0.5921569, 1, 1)
+metadata/_edit_lock_ = true
 
 [node name="Exits" type="Node2D" parent="."]
 
-[node name="0" type="Area2D" parent="Exits"]
+[node name="0" parent="Exits" instance=ExtResource("5_ij6yv")]
 position = Vector2(24, 272)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("5_n8wv1")
 next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_1.tscn"
-
-[node name="ExitAreaCollision" type="CollisionShape2D" parent="Exits/0"]
-shape = SubResource("RectangleShape2D_n8wv1")
-
-[node name="EditorIcon" parent="Exits/0" instance=ExtResource("6_ij6yv")]
-modulate = Color(0.26180834, 0.3734509, 0.20341444, 1)
-texture = ExtResource("7_p2f2n")
-color = Color(0.26180834, 0.3734509, 0.20341444, 1)
+next_entry_name = "1"
 
 [node name="1" type="Area2D" parent="Exits"]
 position = Vector2(536, 272)
@@ -52,11 +47,12 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("5_n8wv1")
 next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_1.tscn"
+next_entry_name = "0"
 
 [node name="ExitAreaCollision" type="CollisionShape2D" parent="Exits/1"]
 shape = SubResource("RectangleShape2D_4g0jk")
 
 [node name="EditorIcon" parent="Exits/1" instance=ExtResource("6_ij6yv")]
-modulate = Color(0.26180834, 0.3734509, 0.20341444, 1)
-texture = ExtResource("7_p2f2n")
-color = Color(0.26180834, 0.3734509, 0.20341444, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("7_n8wv1")
+color = Color(1, 1, 1, 1)

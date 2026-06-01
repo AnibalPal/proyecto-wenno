@@ -7,6 +7,7 @@
 script = ExtResource("1_5c64k")
 stage_id = "Prototype"
 initial_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_1.tscn"
+initial_entry_name = "0"
 
 [node name="CurrentChamber" type="Node2D" parent="."]
 
