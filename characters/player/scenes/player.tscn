@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=60 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -14,8 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://cvg2rmersr1c4" path="res://characters/collisions/scenes/player_hitbox.tscn" id="11_eigjl"]
 [ext_resource type="Script" uid="uid://cpjguobpn02om" path="res://characters/player/scripts/states/recoil.gd" id="11_ronts"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
+[ext_resource type="Script" uid="uid://br2dnkhwsutnn" path="res://characters/player/scripts/states/cutscene.gd" id="12_j2wwh"]
 [ext_resource type="Texture2D" uid="uid://cl3cg0hs6q0tk" path="res://assets/spritesheets/red_spritesheet_60x42.png" id="12_t0t3c"]
-[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+[ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 [ext_resource type="PackedScene" uid="uid://4q871lw6yrib" path="res://characters/editor_tools/draw_jump_path.tscn" id="17_alequ"]
 
 [sub_resource type="Animation" id="Animation_alequ"]
@@ -325,6 +326,9 @@ size = Vector2(72, 72)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ronts"]
 size = Vector2(18, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0t3c"]
+size = Vector2(32, 48)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy3q1"]
 size = Vector2(24, 40)
 
@@ -407,6 +411,13 @@ player_hurtbox = NodePath("../../ShouldRotate/Hurtbox")
 wait_time = 0.3
 one_shot = true
 
+[node name="Cutscene" type="Node" parent="StateMachine"]
+script = ExtResource("12_j2wwh")
+
+[node name="MoveDuration" type="Timer" parent="StateMachine/Cutscene"]
+wait_time = 0.8
+one_shot = true
+
 [node name="ShouldRotate" type="Node2D" parent="."]
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
@@ -445,6 +456,13 @@ end_frame = 2
 position = Vector2(-1, 4)
 shape = SubResource("RectangleShape2D_ronts")
 debug_color = Color(0.6105231, 0.36463746, 1, 0.41960785)
+
+[node name="PlayerTrigger" type="Area2D" parent="ShouldRotate"]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/PlayerTrigger"]
+shape = SubResource("RectangleShape2D_t0t3c")
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
 
@@ -543,4 +561,5 @@ text = "5"
 [connection signal="timeout" from="StateMachine/Hit/PushbackDuration" to="StateMachine/Hit" method="_on_pushback_duration_timeout"]
 [connection signal="timeout" from="StateMachine/Hit/InvincibleDuration" to="StateMachine/Hit" method="_on_invincible_duration_timeout"]
 [connection signal="timeout" from="StateMachine/Recoil/Duration" to="StateMachine/Recoil" method="_on_duration_timeout"]
+[connection signal="timeout" from="StateMachine/Cutscene/MoveDuration" to="StateMachine/Cutscene" method="_on_move_duration_timeout"]
 [connection signal="area_entered" from="ShouldRotate/Hurtbox" to="StateMachine" method="_on_hurtbox_area_entered"]

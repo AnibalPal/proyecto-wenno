@@ -4,16 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://dlpokfxijt167" path="res://editor_tools/editor_icon.tscn" id="2_6enhk"]
 [ext_resource type="Texture2D" uid="uid://bq8eqb3u2hukk" path="res://assets/icons/exit_sign32x32.png" id="3_hjsdn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8wv1"]
-size = Vector2(48, 80)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2wt8"]
+size = Vector2(48, 128)
 
 [node name="ExitArea" type="Area2D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 64
+collision_mask = 64
 script = ExtResource("1_c2wt8")
+direction = null
 
 [node name="ExitAreaCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_n8wv1")
+shape = SubResource("RectangleShape2D_c2wt8")
 
 [node name="EditorIcon" parent="." instance=ExtResource("2_6enhk")]
 scale = Vector2(2, 2)
