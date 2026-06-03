@@ -60,7 +60,10 @@ func end() -> void:
 	trigger_end = false
 	player_trigger_collision.set_deferred("disabled", false)
 	player_hurtbox.enable()
-	transition_to(state_data.IDLE)
+	if(Input.is_action_pressed("left") or Input.is_action_pressed("right")):
+		transition_to(state_data.RUN)
+	else:
+		transition_to(state_data.IDLE)
 
 func _on_move_duration_timeout() -> void:
 	player.velocity.x = 0

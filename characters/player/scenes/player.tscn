@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
 [ext_resource type="Script" uid="uid://br2dnkhwsutnn" path="res://characters/player/scripts/states/cutscene.gd" id="12_j2wwh"]
 [ext_resource type="Texture2D" uid="uid://cl3cg0hs6q0tk" path="res://assets/spritesheets/red_spritesheet_60x42.png" id="12_t0t3c"]
-[ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 [ext_resource type="PackedScene" uid="uid://4q871lw6yrib" path="res://characters/editor_tools/draw_jump_path.tscn" id="17_alequ"]
 
 [sub_resource type="Animation" id="Animation_alequ"]
