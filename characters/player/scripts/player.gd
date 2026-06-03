@@ -33,6 +33,10 @@ extends CharacterEntity
 
 signal s_game_over
 
+func _process(_delta: float) -> void:
+	if(Input.is_action_pressed("pause")):
+		pause_game()
+
 func character_ready() -> void:
 	health_amount.text = str(current_health)
 
@@ -56,7 +60,7 @@ func death():
 	queue_free()
 
 func pause_game():
-	pass
+	print("PAUSE")
 
 # Used in combat resolution
 func on_damaged(damage: int, enemy_position: Vector2) -> void:
