@@ -18,7 +18,7 @@ tile_set = ExtResource("2_si5nq")
 [node name="Entries" type="Node2D" parent="."]
 
 [node name="0" parent="Entries" instance=ExtResource("3_t7ios")]
-position = Vector2(360, 26)
+position = Vector2(360, 18)
 direction = "DOWN"
 
 [node name="Exits" type="Node2D" parent="."]
