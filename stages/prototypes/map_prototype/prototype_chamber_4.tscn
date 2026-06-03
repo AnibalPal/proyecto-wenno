@@ -38,6 +38,7 @@ position = Vector2(0, 24)
 
 [node name="ArrowPivot" parent="Exits/0" index="2"]
 visible = true
+position = Vector2(0, 16)
 rotation = 0.0
 
 [editable path="Exits/0"]

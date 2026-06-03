@@ -62,7 +62,8 @@ func fall(end_cutscene:= false) -> void:
 	current_state = CutsceneStates.MOVEY
 	move_action(end_cutscene)
 	player.velocity.x = 0
-	player.velocity.y = 0
+	if(player.velocity.y < 0):
+		player.velocity.y = 0
 	player.player_animations.play("fall")
 	has_gravity = true
 
