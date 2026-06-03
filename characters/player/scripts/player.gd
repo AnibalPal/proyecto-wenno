@@ -27,7 +27,7 @@ extends CharacterEntity
 @onready var player_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations
 @onready var hitboxes: Node2D = $ShouldRotate/Hitboxes
 
-@onready var health_amount: Label = $UI/HealthContainer/Amount
+@onready var health_amount: Label = $UI/Game/HealthContainer/Amount
 
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
@@ -54,6 +54,9 @@ func disable_hitboxes():
 func death():
 	s_game_over.emit()
 	queue_free()
+
+func pause_game():
+	pass
 
 # Used in combat resolution
 func on_damaged(damage: int, enemy_position: Vector2) -> void:

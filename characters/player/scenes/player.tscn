@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=61 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -16,8 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
 [ext_resource type="Script" uid="uid://br2dnkhwsutnn" path="res://characters/player/scripts/states/cutscene.gd" id="12_j2wwh"]
 [ext_resource type="Texture2D" uid="uid://cl3cg0hs6q0tk" path="res://assets/spritesheets/red_spritesheet_60x42.png" id="12_t0t3c"]
-[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+[ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 [ext_resource type="PackedScene" uid="uid://4q871lw6yrib" path="res://characters/editor_tools/draw_jump_path.tscn" id="17_alequ"]
+[ext_resource type="PackedScene" uid="uid://bwuaylvvur5ge" path="res://characters/player/scenes/pause_menu.tscn" id="18_j2wwh"]
 
 [sub_resource type="Animation" id="Animation_alequ"]
 length = 0.001
@@ -531,26 +532,37 @@ text = "Idle"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Background" type="ColorRect" parent="UI"]
+[node name="Game" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="UI/Game"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
 offset_right = 88.0
 offset_bottom = 56.0
 color = Color(0, 0, 0, 0.34509805)
 
-[node name="HealthContainer" type="HBoxContainer" parent="UI"]
+[node name="HealthContainer" type="HBoxContainer" parent="UI/Game"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 73.0
 offset_bottom = 56.0
 
-[node name="Health" type="Label" parent="UI/HealthContainer"]
+[node name="Health" type="Label" parent="UI/Game/HealthContainer"]
 layout_mode = 2
 text = "Vida: "
 
-[node name="Amount" type="Label" parent="UI/HealthContainer"]
+[node name="Amount" type="Label" parent="UI/Game/HealthContainer"]
 layout_mode = 2
 text = "5"
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("18_j2wwh")]
+visible = false
 
 [node name="EditorTools" type="Node2D" parent="."]
 

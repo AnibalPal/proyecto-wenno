@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=3 uid="uid://moaeu8xcurnk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cktg2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wspbi"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MapTab" type="MarginContainer"]
+offset_right = 640.0
+offset_bottom = 285.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Map" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Map"]
+layout_mode = 2
+text = "Map Menu"
+
+[node name="Content" type="HBoxContainer" parent="Map"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MapArea" type="MarginContainer" parent="Map/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MapAreaBorder" type="PanelContainer" parent="Map/Content/MapArea"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cktg2")
+
+[node name="ContentMargin" type="MarginContainer" parent="Map/Content/MapArea/MapAreaBorder"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MapContent" type="VBoxContainer" parent="Map/Content/MapArea/MapAreaBorder/ContentMargin"]
+layout_mode = 2
+
+[node name="CurrentMapTitle" type="Label" parent="Map/Content/MapArea/MapAreaBorder/ContentMargin/MapContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Forest"
+
+[node name="CurrentMap" type="Control" parent="Map/Content/MapArea/MapAreaBorder/ContentMargin/MapContent"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Markers" type="MarginContainer" parent="Map/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MarkersBorder" type="PanelContainer" parent="Map/Content/Markers"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wspbi")
+
+[node name="MarkersMargin" type="MarginContainer" parent="Map/Content/Markers/MarkersBorder"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MarkersContent" type="VBoxContainer" parent="Map/Content/Markers/MarkersBorder/MarkersMargin"]
+layout_mode = 2
+
+[node name="MarkersTitle" type="Label" parent="Map/Content/Markers/MarkersBorder/MarkersMargin/MarkersContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Markers"

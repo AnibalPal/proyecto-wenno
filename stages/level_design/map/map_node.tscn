@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl3cgk23xeysc"]
+
+[ext_resource type="Script" uid="uid://dmxpqdxs0dqvd" path="res://stages/level_design/map/map_node.gd" id="1_lur7o"]
+[ext_resource type="Texture2D" uid="uid://34hrw4muv4hf" path="res://assets/icons/white_circle_16.png" id="2_qum40"]
+
+[node name="MapNode" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+script = ExtResource("1_lur7o")
+
+[node name="Base" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 16.0
+color = Color(0.20700002, 0.20700002, 0.9, 1)
+
+[node name="Up" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 2.0
+
+[node name="Open" type="ColorRect" parent="Up"]
+visible = false
+layout_mode = 0
+offset_left = 7.0
+offset_right = 17.0
+offset_bottom = 2.0
+color = Color(0.20784314, 0.20784314, 0.9019608, 1)
+
+[node name="Right" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_right = 24.0
+offset_bottom = 16.0
+
+[node name="Open" type="ColorRect" parent="Right"]
+visible = false
+layout_mode = 0
+offset_top = 5.0
+offset_right = 2.0
+offset_bottom = 11.0
+color = Color(0.20784314, 0.20784314, 0.9019608, 1)
+
+[node name="Down" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 14.0
+offset_right = 24.0
+offset_bottom = 16.0
+
+[node name="Open" type="ColorRect" parent="Down"]
+visible = false
+layout_mode = 0
+offset_left = 7.0
+offset_right = 17.0
+offset_bottom = 2.0
+color = Color(0.20784314, 0.20784314, 0.9019608, 1)
+
+[node name="Left" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 2.0
+offset_bottom = 16.0
+
+[node name="Open" type="ColorRect" parent="Left"]
+visible = false
+layout_mode = 0
+offset_top = 5.0
+offset_right = 2.0
+offset_bottom = 11.0
+color = Color(0.20784314, 0.20784314, 0.9019608, 1)
+
+[node name="PlayerIcon" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.97050005, 1, 0.41000003, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 16.0
+offset_bottom = 12.0
+texture = ExtResource("2_qum40")
+expand_mode = 1

@@ -77,6 +77,8 @@ func load_chamber() -> void:
 	var chamber_instance: Chamber = chamber_packed_scene.instantiate()
 	# Need to call deferred because godot things
 	call_deferred("add_chamber_node", chamber_instance, current_entry_name)
+	# Update current map UI
+	
 
 func _on_screen_vf_xanimation_player_animation_finished(anim_name: StringName) -> void:
 	if(anim_name == "fade_in"):
