@@ -24,7 +24,7 @@ direction = "DOWN"
 [node name="Exits" type="Node2D" parent="."]
 
 [node name="0" parent="Exits" instance=ExtResource("4_v3uyu")]
-position = Vector2(336, -64)
+position = Vector2(336, -96)
 next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_2.tscn"
 next_entry_name = "2"
 direction = "UP"
@@ -35,5 +35,9 @@ shape = SubResource("RectangleShape2D_uc1bm")
 
 [node name="EditorIcon" parent="Exits/0" index="1"]
 position = Vector2(0, 24)
+
+[node name="ArrowPivot" parent="Exits/0" index="2"]
+visible = true
+rotation = 0.0
 
 [editable path="Exits/0"]

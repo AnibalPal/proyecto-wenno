@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://ck0xpx1dhvjc2"]
+[gd_scene load_steps=12 format=4 uid="uid://ck0xpx1dhvjc2"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_buxlp"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_vlr1m"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dlpokfxijt167" path="res://editor_tools/editor_icon.tscn" id="5_6h84v"]
 [ext_resource type="Script" uid="uid://df1b167dho3sh" path="res://stages/level_design/chamber/exit_area_params.gd" id="7_nyaid"]
 [ext_resource type="Texture2D" uid="uid://bq8eqb3u2hukk" path="res://assets/icons/exit_sign32x32.png" id="7_wos68"]
+[ext_resource type="Texture2D" uid="uid://d2gqqqixyioxa" path="res://assets/icons/up_arrow32x32.png" id="8_dfm2w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wos68"]
 size = Vector2(48, 80)
@@ -39,6 +40,16 @@ script = ExtResource("3_buxlp")
 color = Color(0, 0.5921569, 1, 1)
 metadata/_edit_lock_ = true
 
+[node name="ArrowPivot" type="Node2D" parent="Entries/1"]
+rotation = 4.712389
+
+[node name="DirectionalArrow" parent="Entries/1/ArrowPivot" instance=ExtResource("5_6h84v")]
+modulate = Color(0.32941177, 0.5882353, 0.8901961, 1)
+position = Vector2(0, -16)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_dfm2w")
+color = Color(0.32941177, 0.5882353, 0.8901961, 1)
+
 [node name="Exits" type="Node2D" parent="."]
 
 [node name="0" type="Area2D" parent="Exits"]
@@ -58,3 +69,13 @@ shape = SubResource("RectangleShape2D_wos68")
 scale = Vector2(2, 2)
 texture = ExtResource("7_wos68")
 color = Color(1, 1, 1, 1)
+
+[node name="ArrowPivot" type="Node2D" parent="Exits/0"]
+rotation = 1.5707964
+
+[node name="DirectionalArrow" parent="Exits/0/ArrowPivot" instance=ExtResource("5_6h84v")]
+modulate = Color(0.3863936, 0.65864027, 0.3070067, 1)
+position = Vector2(0, -16)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_dfm2w")
+color = Color(0.3863936, 0.65864027, 0.3070067, 1)

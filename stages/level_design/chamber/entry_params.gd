@@ -1,7 +1,7 @@
+@tool
 class_name ChamberEntry
-extends Node2D
-
-@export_enum("UP", "RIGHT", "DOWN", "LEFT") var direction := ""
+extends ChamberTransition
 
 func _ready() -> void:
-	assert(direction, "Entrypoint %s: No direction set" % name)
+	if(!Engine.is_editor_hint()):
+		assert(direction, "Entrypoint %s: No direction set" % name)

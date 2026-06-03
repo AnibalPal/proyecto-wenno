@@ -36,4 +36,9 @@ shape = SubResource("RectangleShape2D_2scmw")
 [node name="EditorIcon" parent="Exits/0" index="1"]
 position = Vector2(0, -80)
 
+[node name="ArrowPivot" parent="Exits/0" index="2"]
+visible = true
+position = Vector2(0, -80)
+rotation = 4.712389
+
 [editable path="Exits/0"]

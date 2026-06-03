@@ -1,12 +1,11 @@
 @tool
 class_name ChamberExit
-extends Area2D
+extends ChamberTransition
 
 @export var next_chamber_path := ""
 @export_tool_button("Open Scene")
 var open_scene_button = editor_open_scene
 @export var next_entry_name := ""
-@export_enum("UP", "RIGHT", "DOWN", "LEFT") var direction := ""
 
 func _ready() -> void:
 	if(!Engine.is_editor_hint()):
