@@ -30,12 +30,16 @@ extends CharacterEntity
 @onready var health_amount: Label = $UI/Game/HealthContainer/Amount
 
 @onready var state_machine: PlayerStateMachine = $StateMachine
+@onready var pause_menu: Control = $UI/PauseMenu
+
+var pause_trigger := false
 
 signal s_game_over
 
 func _process(_delta: float) -> void:
-	if(Input.is_action_pressed("pause")):
-		pause_game()
+	if(!Engine.is_editor_hint()):
+		if(Input.is_action_just_pressed("pause")):
+			pause_game()
 
 func character_ready() -> void:
 	health_amount.text = str(current_health)
@@ -60,7 +64,10 @@ func death():
 	queue_free()
 
 func pause_game():
-	print("PAUSE")
+	pause_trigger = true
+	get_tree().paused = true
+	pause_menu.set_menu_position(0)
+	pause_menu.show()
 
 # Used in combat resolution
 func on_damaged(damage: int, enemy_position: Vector2) -> void:

@@ -562,6 +562,7 @@ layout_mode = 2
 text = "5"
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("18_j2wwh")]
+process_mode = 2
 visible = false
 
 [node name="EditorTools" type="Node2D" parent="."]

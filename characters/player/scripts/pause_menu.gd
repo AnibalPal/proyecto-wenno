@@ -32,6 +32,16 @@ func _process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("menu_return_tab")):
 		if(current_menu != Menu.STATUS):
 			menu_transition(current_menu - 1)
+	if(Input.is_action_just_pressed("pause")):
+		unpause()
+
+func unpause() -> void:
+	if(current_tween and current_tween.is_running()): return
+	if(!owner.pause_trigger):
+		get_tree().paused = false
+		hide()
+	else:
+		owner.pause_trigger = false
 
 func set_active_label(new_menu: Menu) -> void:
 	match new_menu:
@@ -60,5 +70,6 @@ func menu_transition(new_menu: Menu) -> void:
 	current_menu = new_menu
 	var new_x_pos = menu_positions[new_menu]
 	var tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(sliding_container, "position", Vector2(new_x_pos, 0), 0.3)
 	current_tween = tween
