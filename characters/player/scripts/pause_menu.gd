@@ -7,7 +7,6 @@ extends Control
 @onready var settings_label: RichTextLabel = $Content/Options/Settings
 
 @onready var status: VBoxContainer = $Content/Display/SlidingContainer/Status
-@onready var map: MarginContainer = $Content/Display/SlidingContainer/Map
 @onready var settings: VBoxContainer = $Content/Display/SlidingContainer/Settings
 
 enum Menu {

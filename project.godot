@@ -21,6 +21,7 @@ GlobalVFXs="*res://autoloads/global_vfxs.tscn"
 CombatManager="*res://autoloads/combat_manager.gd"
 Helpers="*res://autoloads/helpers.gd"
 Settings="*res://autoloads/settings.gd"
+PlayerData="*res://autoloads/player_data.gd"
 
 [display]
 

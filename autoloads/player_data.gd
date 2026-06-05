@@ -6,7 +6,8 @@ extends Node
 var player_progression := {
 	# Main status and power ups
 	"status": {
-		"current_position": "",
+		"current_stage_id": "",
+		"current_chamber_id": "",
 		"max_health": 5,
 		"max_stamina": 5,
 		"money": 0,

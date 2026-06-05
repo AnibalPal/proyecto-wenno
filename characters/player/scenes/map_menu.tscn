@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://moaeu8xcurnk"]
+[gd_scene load_steps=4 format=3 uid="uid://moaeu8xcurnk"]
+
+[ext_resource type="Script" uid="uid://btwj5g5pdmqeg" path="res://stages/level_design/map/map_manager.gd" id="1_wspbi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cktg2"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -29,6 +31,7 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
+script = ExtResource("1_wspbi")
 
 [node name="Map" type="VBoxContainer" parent="."]
 layout_mode = 2

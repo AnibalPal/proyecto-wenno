@@ -1,12 +1,15 @@
 class_name Chamber
 extends Node2D
 
+@export var id := ""
+
 @onready var entries: Node2D = $Entries
 @onready var exits: Node2D = $Exits
 
 signal s_change_chamber(next_chamber_path: String, next_entry: String, direction: String)
 
 func _ready() -> void:
+	assert(id, "%s: No id set!" % name)
 	prepare_exit_areas()
 
 # Can return Vector2 or null
