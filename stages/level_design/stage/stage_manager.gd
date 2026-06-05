@@ -19,6 +19,9 @@ func _ready() -> void:
 	assert(stage_id, "No stage id set!")
 	assert(initial_chamber_path, stage_id + ": No inital chamber path set!")
 	PlayerData.s_update_player_status.emit("current_stage_id", stage_id)
+	# TODO REFACTOR: this is a patch, i am not sure how to handle all the logic 
+	# for map loading but for now use this
+	PlayerData.s_update_player_status.emit("current_chamber_id", "1")
 	fade_effect.show()
 	current_chamber_path = initial_chamber_path
 	current_entry_name = initial_entry_name

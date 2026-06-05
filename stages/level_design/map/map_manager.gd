@@ -15,5 +15,7 @@ func load_stage_map():
 	var map_instance = packed_scene_map.instantiate()
 	current_map.add_child(map_instance)
 
-func update_map_ui(stage_id: String, chamber_id: String, key: String, value: Variant):
-	pass
+func update_map_ui(_stage_id: String, _chamber_id: String, _key: String, _value: Variant):
+	if(current_map.get_child_count() >= 1):
+		var current_map_node: MapUI = current_map.get_child(0)
+		current_map_node.call_deferred("update_map_ui")

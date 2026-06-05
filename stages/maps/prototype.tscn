@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://duewpdgoaiarq"]
+[gd_scene load_steps=3 format=3 uid="uid://duewpdgoaiarq"]
 
+[ext_resource type="Script" uid="uid://cm8neufswafpt" path="res://stages/level_design/map/stage_map.gd" id="1_0dtix"]
 [ext_resource type="PackedScene" uid="uid://dl3cgk23xeysc" path="res://stages/level_design/map/map_node.tscn" id="1_perdn"]
 
 [node name="PrototypeMap" type="Control"]
@@ -11,46 +12,62 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0dtix")
 
 [node name="1" parent="." instance=ExtResource("1_perdn")]
+visible = false
 layout_mode = 0
 offset_left = -43.0
 offset_top = -8.0
 offset_right = -43.0
 offset_bottom = -8.0
+id = "1"
+visited = true
 right_open = true
 
 [node name="2" parent="." instance=ExtResource("1_perdn")]
+visible = false
 layout_mode = 0
 offset_left = -11.0
 offset_top = -8.0
 offset_right = -11.0
 offset_bottom = -8.0
+id = "2"
 up_open = true
 right_open = true
 down_open = true
 left_open = true
+player = null
 
 [node name="3" parent="." instance=ExtResource("1_perdn")]
+visible = false
 layout_mode = 0
 offset_left = 21.0
 offset_top = -8.0
 offset_right = 21.0
 offset_bottom = -8.0
+id = "3"
 left_open = true
+player = null
 
 [node name="4" parent="." instance=ExtResource("1_perdn")]
+visible = false
 layout_mode = 0
 offset_left = -11.0
 offset_top = 16.0
 offset_right = -11.0
 offset_bottom = 16.0
+id = "4"
 up_open = true
+player = null
 
 [node name="5" parent="." instance=ExtResource("1_perdn")]
+visible = false
 layout_mode = 0
 offset_left = -11.0
 offset_top = -32.0
 offset_right = -11.0
 offset_bottom = -32.0
+id = "5"
 down_open = true
+player = null

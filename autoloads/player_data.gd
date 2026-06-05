@@ -39,19 +39,49 @@ var map_progression := {
 		"selectable": false,
 		"clear": false,
 		"1": {
-			"visited": true
+			"visited": true,
+			"walls": {
+				"up": false,
+				"right": true,
+				"down": false,
+				"left": false 
+			}
 		},
 		"2": {
-			"visited": false
+			"visited": false,
+			"walls": {
+				"up": true,
+				"right": true,
+				"down": true,
+				"left": true 
+			}
 		},
 		"3": {
-			"visited": false
+			"visited": false,
+			"walls": {
+				"up": false,
+				"right": false,
+				"down": false,
+				"left": true 
+			}
 		},
 		"4": {
-			"visited": false
+			"visited": false,
+			"walls": {
+				"up": true,
+				"right": false,
+				"down": false,
+				"left": false 
+			}
 		},
 		"5": {
-			"visited": false
+			"visited": false,
+			"walls": {
+				"up": false,
+				"right": false,
+				"down": true,
+				"left": false 
+			}
 		},		
 	},
 	"yastay": {

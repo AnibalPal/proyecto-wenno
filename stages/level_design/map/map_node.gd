@@ -2,6 +2,21 @@
 class_name MapNode
 extends Control
 
+# NOTE to self: can't use dictionary because the inspector does not support fixed keys,
+# the option is to make a resource but I don't really like that option
+
+@export var id := ""
+
+@export_group("Status")
+@export var visited := false:
+	set(value):
+		visited = value
+		if(value):
+			show()
+		else:
+			hide()
+
+@export_group("Walls")
 @export var up_open := false:
 	set(value):
 		if(up_open_wall):
@@ -38,10 +53,11 @@ extends Control
 			else:
 				left_open_wall.hide()
 
-@export var is_player := false:
+@export_group("Icons")
+@export var player := false:
 	set(value):
 		if(player_icon):
-			is_player = value
+			player = value
 			if(value):
 				player_icon.show()
 			else:
