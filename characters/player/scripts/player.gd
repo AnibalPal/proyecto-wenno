@@ -40,6 +40,8 @@ func _process(_delta: float) -> void:
 	if(!Engine.is_editor_hint()):
 		if(Input.is_action_just_pressed("pause")):
 			pause_game()
+		if(Input.is_action_just_pressed("map")):
+			pause_game(1)
 
 func character_ready() -> void:
 	health_amount.text = str(current_health)
@@ -63,10 +65,10 @@ func death():
 	s_game_over.emit()
 	queue_free()
 
-func pause_game():
+func pause_game(tab_position := 0):
 	pause_trigger = true
 	get_tree().paused = true
-	pause_menu.set_menu_position(0)
+	pause_menu.set_menu_position(tab_position)
 	pause_menu.show()
 
 # Used in combat resolution

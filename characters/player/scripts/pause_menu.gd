@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("menu_return_tab")):
 		if(current_menu != Menu.STATUS):
 			menu_transition(current_menu - 1)
-	if(Input.is_action_just_pressed("pause")):
+	if(Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("map")):
 		unpause()
 
 func unpause() -> void:
