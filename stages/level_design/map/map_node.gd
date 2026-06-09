@@ -7,6 +7,13 @@ extends Control
 
 @export var id := ""
 
+@export_group("Style")
+@export var base_color := Color("#3535e6"):
+	set(value):
+		base_color = value
+		if(base_color_rect):
+			base_color_rect.color = base_color
+
 @export_group("Status")
 @export var visited: bool:
 	set(value):
@@ -62,7 +69,8 @@ extends Control
 				player_icon.show()
 			else:
 				player_icon.hide()
-
+				
+@onready var base_color_rect: ColorRect = $Base
 @onready var up_open_wall: ColorRect = $Up/Open
 @onready var right_open_wall: ColorRect = $Right/Open
 @onready var down_open_wall: ColorRect = $Down/Open
@@ -70,6 +78,7 @@ extends Control
 @onready var player_icon : TextureRect = $"PlayerIcon"
 
 func _ready() -> void:
+	base_color_rect.color = base_color
 	up_open_wall.visible = up_open
 	right_open_wall.visible = right_open
 	down_open_wall.visible = down_open

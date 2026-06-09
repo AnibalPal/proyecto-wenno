@@ -8,12 +8,13 @@ layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 script = ExtResource("1_lur7o")
+visited = true
 
 [node name="Base" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 24.0
 offset_bottom = 16.0
-color = Color(0.20700002, 0.20700002, 0.9, 1)
+color = Color(0.20784314, 0.20784314, 0.9019608, 1)
 
 [node name="Up" type="ColorRect" parent="."]
 layout_mode = 0
