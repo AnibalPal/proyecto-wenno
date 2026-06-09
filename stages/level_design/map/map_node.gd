@@ -8,7 +8,7 @@ extends Control
 @export var id := ""
 
 @export_group("Status")
-@export var visited := false:
+@export var visited: bool:
 	set(value):
 		visited = value
 		if(value):
@@ -17,47 +17,47 @@ extends Control
 			hide()
 
 @export_group("Walls")
-@export var up_open := false:
+@export var up_open: bool:
 	set(value):
+		up_open = value
 		if(up_open_wall):
-			up_open = value
 			if(value): 
 				up_open_wall.show()
 			else:
 				up_open_wall.hide()
 
-@export var right_open := false:
+@export var right_open: bool:
 	set(value):
+		right_open = value
 		if(right_open_wall):
-			right_open = value
 			if(value): 
 				right_open_wall.show()
 			else:
 				right_open_wall.hide()
 				
-@export var down_open := false:
+@export var down_open: bool:
 	set(value):
+		down_open = value
 		if(down_open_wall):
-			down_open = value
 			if(value): 
 				down_open_wall.show()
 			else:
 				down_open_wall.hide()
 
-@export var left_open := false:
+@export var left_open: bool:
 	set(value):
+		left_open = value
 		if(left_open_wall):
-			left_open = value
 			if(value): 
 				left_open_wall.show()
 			else:
 				left_open_wall.hide()
 
 @export_group("Icons")
-@export var player := false:
+@export var player: bool:
 	set(value):
+		player = value
 		if(player_icon):
-			player = value
 			if(value):
 				player_icon.show()
 			else:
@@ -68,3 +68,11 @@ extends Control
 @onready var down_open_wall: ColorRect = $Down/Open
 @onready var left_open_wall: ColorRect = $Left/Open
 @onready var player_icon : TextureRect = $"PlayerIcon"
+
+func _ready() -> void:
+	up_open_wall.visible = up_open
+	right_open_wall.visible = right_open
+	down_open_wall.visible = down_open
+	left_open_wall.visible = left_open
+	player_icon.visible = player
+	visited = visited

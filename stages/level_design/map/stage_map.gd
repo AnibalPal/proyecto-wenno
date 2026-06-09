@@ -1,5 +1,9 @@
+@tool
 class_name MapUI
 extends Control
+
+@export var stage_map_id := ""
+@export_tool_button("Generate json map") var action = make_map_json
 
 #@onready var up_open_wall: ColorRect = $Up/Open
 #@onready var right_open_wall: ColorRect = $Right/Open
@@ -20,9 +24,28 @@ extends Control
 #}
 
 func make_map_json() -> void:
-	# Create a json with the proper map information that must be later added to the
-	# player progression object
-	pass
+	if(Engine.is_editor_hint()):
+		assert(stage_map_id, "No stage map id set")
+		var json_dict := {}
+		for map_node: MapNode in get_children():
+			json_dict[map_node.id] = {
+				"visited": map_node.visited,
+				"walls": {
+					"up": map_node.up_open,
+					"right": map_node.right_open,
+					"down": map_node.down_open,
+					"left": map_node.left_open
+				}
+			}
+		var json_string = JSON.stringify(json_dict)
+		var json_file_path := "res://map_jsons/%s.json"%stage_map_id
+		var map_json_file := FileAccess.open(json_file_path, FileAccess.WRITE)
+		map_json_file.store_line(json_string)
+		map_json_file.close()
+		var fs = EditorInterface.get_resource_filesystem()
+		fs.scan()
+		await fs.filesystem_changed
+		print("json file saved to %s"%json_file_path)
 
 func update_map_ui() -> void:
 	var player_current_stage = PlayerData.player_progression["status"]["current_stage_id"]

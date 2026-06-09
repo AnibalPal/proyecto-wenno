@@ -38,51 +38,7 @@ var map_progression := {
 	"prototype": {
 		"selectable": false,
 		"clear": false,
-		"1": {
-			"visited": true,
-			"walls": {
-				"up": false,
-				"right": true,
-				"down": false,
-				"left": false 
-			}
-		},
-		"2": {
-			"visited": false,
-			"walls": {
-				"up": true,
-				"right": true,
-				"down": true,
-				"left": true 
-			}
-		},
-		"3": {
-			"visited": false,
-			"walls": {
-				"up": false,
-				"right": false,
-				"down": false,
-				"left": true 
-			}
-		},
-		"4": {
-			"visited": false,
-			"walls": {
-				"up": true,
-				"right": false,
-				"down": false,
-				"left": false 
-			}
-		},
-		"5": {
-			"visited": false,
-			"walls": {
-				"up": false,
-				"right": false,
-				"down": true,
-				"left": false 
-			}
-		},		
+		"1":{"visited":true,"walls":{"down":false,"left":false,"right":true,"up":false}},"2":{"visited":false,"walls":{"down":true,"left":true,"right":true,"up":true}},"3":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"4":{"visited":false,"walls":{"down":false,"left":false,"right":false,"up":true}},"5":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":false}}
 	},
 	"yastay": {
 		"chamber_id_1": false
