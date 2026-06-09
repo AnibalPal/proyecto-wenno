@@ -5,24 +5,6 @@ extends Control
 @export var stage_map_id := ""
 @export_tool_button("Generate json map") var action = make_map_json
 
-#@onready var up_open_wall: ColorRect = $Up/Open
-#@onready var right_open_wall: ColorRect = $Right/Open
-#@onready var down_open_wall: ColorRect = $Down/Open
-#@onready var left_open_wall: ColorRect = $Left/Open
-#@onready var player_icon : TextureRect = $"PlayerIcon"
-
-#var update_dict = {
-	#"walls": {
-		#"up": true,
-		#"right": true,
-		#"down": true,
-		#"left": true,
-	#},
-	#"icons": {
-		#"player": true
-	#}
-#}
-
 func make_map_json() -> void:
 	if(Engine.is_editor_hint()):
 		assert(stage_map_id, "No stage map id set")
@@ -38,7 +20,7 @@ func make_map_json() -> void:
 				}
 			}
 		var json_string = JSON.stringify(json_dict)
-		var json_file_path := "res://map_jsons/%s.json"%stage_map_id
+		var json_file_path := "res://stages/map_data/map_jsons/%s.json"%stage_map_id
 		var map_json_file := FileAccess.open(json_file_path, FileAccess.WRITE)
 		map_json_file.store_line(json_string)
 		map_json_file.close()

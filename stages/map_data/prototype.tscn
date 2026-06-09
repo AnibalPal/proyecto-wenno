@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://duewpdgoaiarq"]
 
-[ext_resource type="Script" uid="uid://cm8neufswafpt" path="res://stages/level_design/map/stage_map.gd" id="1_0dtix"]
-[ext_resource type="PackedScene" uid="uid://dl3cgk23xeysc" path="res://stages/level_design/map/map_node.tscn" id="1_perdn"]
+[ext_resource type="Script" uid="uid://cm8neufswafpt" path="res://stages/level_design/map/stage_map.gd" id="1_lb3ys"]
+[ext_resource type="PackedScene" uid="uid://dl3cgk23xeysc" path="res://stages/level_design/map/map_node.tscn" id="2_djjcm"]
 
 [node name="PrototypeMap" type="Control"]
 layout_mode = 3
@@ -12,10 +12,10 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0dtix")
+script = ExtResource("1_lb3ys")
 stage_map_id = "prototype"
 
-[node name="1" parent="." instance=ExtResource("1_perdn")]
+[node name="1" parent="." instance=ExtResource("2_djjcm")]
 layout_mode = 0
 offset_left = -43.0
 offset_top = -8.0
@@ -25,7 +25,7 @@ id = "1"
 visited = true
 right_open = true
 
-[node name="2" parent="." instance=ExtResource("1_perdn")]
+[node name="2" parent="." instance=ExtResource("2_djjcm")]
 visible = false
 layout_mode = 0
 offset_left = -11.0
@@ -38,7 +38,7 @@ right_open = true
 down_open = true
 left_open = true
 
-[node name="3" parent="." instance=ExtResource("1_perdn")]
+[node name="3" parent="." instance=ExtResource("2_djjcm")]
 visible = false
 layout_mode = 0
 offset_left = 21.0
@@ -48,7 +48,7 @@ offset_bottom = -8.0
 id = "3"
 left_open = true
 
-[node name="4" parent="." instance=ExtResource("1_perdn")]
+[node name="4" parent="." instance=ExtResource("2_djjcm")]
 visible = false
 layout_mode = 0
 offset_left = -11.0
@@ -58,7 +58,7 @@ offset_bottom = 16.0
 id = "4"
 up_open = true
 
-[node name="5" parent="." instance=ExtResource("1_perdn")]
+[node name="5" parent="." instance=ExtResource("2_djjcm")]
 visible = false
 layout_mode = 0
 offset_left = -11.0
