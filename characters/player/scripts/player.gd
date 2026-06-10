@@ -2,6 +2,8 @@
 class_name Player
 extends CharacterEntity
 
+signal s_game_over
+
 @export_group("Stats")
 @export var max_health := 5
 @export var current_health := 5
@@ -33,8 +35,6 @@ extends CharacterEntity
 @onready var pause_menu: Control = $UI/PauseMenu
 
 var pause_trigger := false
-
-signal s_game_over
 
 func _process(_delta: float) -> void:
 	if(!Engine.is_editor_hint()):

@@ -19,6 +19,8 @@ func _ready() -> void:
 	assert(stage_id, "No stage id set!")
 	assert(initial_chamber_path, stage_id + ": No inital chamber path set!")
 	PlayerData.s_update_player_status.emit("current_stage_id", stage_id)
+	var map_tab_node = player.find_child("MapTab")
+	map_tab_node.load_stage_map()
 	fade_effect.show()
 	current_chamber_path = initial_chamber_path
 	current_entry_name = initial_entry_name
@@ -76,14 +78,11 @@ func load_chamber() -> void:
 	# Add new chamber
 	var chamber_packed_scene = load(current_chamber_path)
 	var chamber_instance: Chamber = chamber_packed_scene.instantiate()
+	chamber_instance.remove_debug_player()
 	PlayerData.s_update_map_progression.emit(stage_id, chamber_instance.id, "visited", true)
 	PlayerData.s_update_player_status.emit("current_chamber_id", chamber_instance.id)
 	# Need to call deferred because godot things
 	call_deferred("add_chamber_node", chamber_instance, current_entry_name)
-	# Update current map UI
-
-func update_map_ui() -> void:
-	pass
 
 func _on_screen_vf_xanimation_player_animation_finished(anim_name: StringName) -> void:
 	if(anim_name == "fade_in"):

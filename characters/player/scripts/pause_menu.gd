@@ -1,5 +1,6 @@
 extends Control
 
+@onready var player: Player = $"../.."
 @onready var sliding_container: Control = $Content/Display/SlidingContainer
 
 @onready var status_label: RichTextLabel = $Content/Options/Status
@@ -8,6 +9,8 @@ extends Control
 
 @onready var status: VBoxContainer = $Content/Display/SlidingContainer/Status
 @onready var settings: VBoxContainer = $Content/Display/SlidingContainer/Settings
+
+@onready var map_tab: MapManager = $Content/Display/SlidingContainer/MapTab
 
 enum Menu {
 	STATUS,

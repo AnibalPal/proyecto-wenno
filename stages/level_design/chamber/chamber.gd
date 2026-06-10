@@ -12,6 +12,11 @@ func _ready() -> void:
 	assert(id, "%s: No id set!" % name)
 	prepare_exit_areas()
 
+func remove_debug_player():
+	var debug_player_node = get_node_or_null("DebugPlayer")
+	if(debug_player_node):
+		debug_player_node.queue_free()
+
 # Can return Vector2 or null
 func get_entry_node(entry_name : String) -> Variant:
 	for child: ChamberEntry in entries.get_children():

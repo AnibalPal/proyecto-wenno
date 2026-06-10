@@ -22,7 +22,6 @@ offset_top = -8.0
 offset_right = -43.0
 offset_bottom = -8.0
 id = "1"
-visited = true
 right_open = true
 
 [node name="2" parent="." instance=ExtResource("2_djjcm")]
@@ -33,6 +32,7 @@ offset_top = -8.0
 offset_right = -11.0
 offset_bottom = -8.0
 id = "2"
+visited = false
 up_open = true
 right_open = true
 down_open = true
@@ -46,6 +46,7 @@ offset_top = -8.0
 offset_right = 21.0
 offset_bottom = -8.0
 id = "3"
+visited = false
 left_open = true
 
 [node name="4" parent="." instance=ExtResource("2_djjcm")]
@@ -56,6 +57,7 @@ offset_top = 16.0
 offset_right = -11.0
 offset_bottom = 16.0
 id = "4"
+visited = false
 up_open = true
 
 [node name="5" parent="." instance=ExtResource("2_djjcm")]
@@ -66,4 +68,5 @@ offset_top = -32.0
 offset_right = -11.0
 offset_bottom = -32.0
 id = "5"
+visited = false
 down_open = true

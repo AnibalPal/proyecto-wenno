@@ -7,7 +7,7 @@ var state_data = PlayerStateData
 func _ready() -> void:
 	await owner.ready
 	player = owner as Player
-	assert(owner.name == "Player", "The PlayerState class must only be used by the Player node")
+	assert(owner.name == "Player" or owner.name == "DebugPlayer", "The PlayerState class must only be used by the Player node")
 	player_state_ready()
 
 # Override this in children if needed
