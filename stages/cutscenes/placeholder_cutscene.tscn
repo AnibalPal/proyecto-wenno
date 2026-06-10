@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://fdcr12dtjkoq"]
+
+[ext_resource type="Script" uid="uid://bmo8delvkt18r" path="res://stages/cutscenes/placeholder_cutscene.gd" id="1_ixe7g"]
+
+[node name="PlaceholderCutscene" type="Node2D"]
+script = ExtResource("1_ixe7g")
+
+[node name="CutsceneArea" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="CutsceneArea"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="Label" parent="CutsceneArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -11.5
+offset_right = 60.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Insert text here"
