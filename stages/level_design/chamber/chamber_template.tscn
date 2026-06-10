@@ -1,17 +1,51 @@
-[gd_scene load_steps=6 format=4 uid="uid://x36rp2tbxt37"]
+[gd_scene load_steps=10 format=4 uid="uid://x36rp2tbxt37"]
 
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_dvjcd"]
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_gnrrh"]
+[ext_resource type="PackedScene" uid="uid://bvat8fbkoepjn" path="res://stages/level_design/camera/camera_manager.tscn" id="3_65qok"]
 [ext_resource type="PackedScene" uid="uid://c3qe6e0va78bl" path="res://stages/level_design/chamber/entry.tscn" id="3_bsroh"]
 [ext_resource type="PackedScene" uid="uid://hlkos3om81d6" path="res://stages/level_design/chamber/exit_area.tscn" id="4_4yjwl"]
+[ext_resource type="PackedScene" uid="uid://c3qgmya5ej67y" path="res://stages/level_design/camera/camera_params.tscn" id="4_f1wtg"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="5_4yjwl"]
+[ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/camera/camera_change_trigger.tscn" id="5_5q6eb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7iq6d"]
+size = Vector2(48, 264)
 
 [node name="ChamberTemplate" type="Node2D"]
 script = ExtResource("1_gnrrh")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="World" type="Node2D" parent="."]
+
+[node name="ForegroundMapLayer" type="TileMapLayer" parent="World"]
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAABAAAAAAAAAAYAAAABAAAAAAAAAAcAAAABAAAAAAAAAAgAAAABAAAAAAAAAAkAAAABAAAAAAAAAAoAAAABAAAAAAAAAAsAAAABAAAAAAABAAsAAAABAAAAAAACAAsAAAABAAAAAAADAAsAAAABAAAAAAAEAAsAAAABAAAAAAAFAAsAAAABAAAAAAAGAAsAAAABAAAAAAAHAAsAAAABAAAAAAAIAAsAAAABAAAAAAAJAAsAAAABAAAAAAAKAAsAAAABAAAAAAALAAsAAAABAAAAAAAMAAsAAAABAAAAAAANAAsAAAABAAAAAAAOAAsAAAABAAAAAAAPAAsAAAABAAAAAAAQAAsAAAABAAAAAAARAAsAAAABAAAAAAASAAsAAAABAAAAAAATAAsAAAABAAAAAAAUAAsAAAABAAAAAAAUAAEAAAABAAAAAAAUAAAAAAABAAAAAAATAAAAAAABAAAAAAATAAEAAAABAAAAAAABAAoAAAABAAAAAAABAAkAAAABAAAAAAABAAgAAAABAAAAAAABAAcAAAABAAAAAAABAAYAAAABAAAAAAABAAUAAAABAAAAAAABAAQAAAABAAAAAAABAAMAAAABAAAAAAABAAIAAAABAAAAAAABAAEAAAABAAAAAAABAAAAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAMAAAAAAABAAAAAAANAAAAAAABAAAAAAAOAAAAAAABAAAAAAAPAAAAAAABAAAAAAAQAAAAAAABAAAAAAARAAAAAAABAAAAAAASAAAAAAABAAAAAAASAAEAAAABAAAAAAARAAEAAAABAAAAAAAQAAEAAAABAAAAAAAPAAEAAAABAAAAAAAOAAEAAAABAAAAAAANAAEAAAABAAAAAAAMAAEAAAABAAAAAAALAAEAAAABAAAAAAAKAAEAAAABAAAAAAAJAAEAAAABAAAAAAAIAAEAAAABAAAAAAAHAAEAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAEAAEAAAABAAAAAAADAAEAAAABAAAAAAACAAEAAAABAAAAAAATAAoAAAABAAAAAAAUAAoAAAABAAAAAAA=")
 tile_set = ExtResource("1_dvjcd")
+
+[node name="CameraManager" parent="World" node_paths=PackedStringArray("player_camera", "initial_params") instance=ExtResource("3_65qok")]
+tween_duration = 3.0
+player_camera = NodePath("../../DebugPlayer/PlayerCamera")
+initial_params = NodePath("CameraParams1")
+
+[node name="CameraParams1" parent="World/CameraManager" instance=ExtResource("4_f1wtg")]
+position = Vector2(640, 0)
+line_color = Color(0.5756378, 0.94419235, 0.23654485, 1)
+
+[node name="TopLeft" parent="World/CameraManager/CameraParams1" index="0"]
+position = Vector2(-640, 0)
+
+[node name="BottomRight" parent="World/CameraManager/CameraParams1" index="1"]
+position = Vector2(0, 360)
+
+[node name="CameraChangeTrigger" parent="World/CameraManager/CameraParams1/CameraTriggers" index="0" instance=ExtResource("5_5q6eb")]
+position = Vector2(-64, 192)
+
+[node name="CameraCollision" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_7iq6d")
+debug_color = Color(0.5756378, 0.94419235, 0.23654485, 0.2)
+
+[node name="CameraIcon" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="1"]
+modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
 
 [node name="Entries" type="Node2D" parent="."]
 
@@ -29,3 +63,8 @@ speed = 150
 gravity = 850
 jump_impulse = 400
 debug_mode = true
+
+[node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]
+
+[editable path="World/CameraManager/CameraParams1"]
+[editable path="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger"]
