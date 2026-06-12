@@ -40,16 +40,6 @@ func set_player_move_direction(direction: String, end_cutscene:= false):
 		_:
 			print("Unrecognized direction: " + direction)
 
-func add_chamber_node(chamber_instance: Chamber, entry_name: String) -> void:
-	current_chamber.add_child(chamber_instance)
-	chamber_instance.s_change_chamber.connect(start_next_chamber_change)
-	# Place player in the stage's player position node
-	var new_entry_node = chamber_instance.get_entry_node(entry_name)
-	assert(new_entry_node, "Error getting the player pos in the next chamber, make sure the name of the entrypoint exists, expected name: " + entry_name)
-	player.global_position = new_entry_node.global_position
-	if(player.state_machine.current_state.name == "Cutscene"):
-		set_player_move_direction(new_entry_node.direction, true)
-
 func start_fade_out() -> void:
 	screen_vfx_animation_player.play("fade_out")
 
@@ -83,6 +73,16 @@ func load_chamber() -> void:
 	PlayerData.s_update_player_status.emit("current_chamber_id", chamber_instance.id)
 	# Need to call deferred because godot things
 	call_deferred("add_chamber_node", chamber_instance, current_entry_name)
+
+func add_chamber_node(chamber_instance: Chamber, entry_name: String) -> void:
+	current_chamber.add_child(chamber_instance)
+	chamber_instance.s_change_chamber.connect(start_next_chamber_change)
+	# Place player in the stage's player position node
+	var new_entry_node = chamber_instance.get_entry_node(entry_name)
+	assert(new_entry_node, "Error getting the player pos in the next chamber, make sure the name of the entrypoint exists, expected name: " + entry_name)
+	player.global_position = new_entry_node.global_position
+	if(player.state_machine.current_state.name == "Cutscene"):
+		set_player_move_direction(new_entry_node.direction, true)
 
 func _on_screen_vf_xanimation_player_animation_finished(anim_name: StringName) -> void:
 	if(anim_name == "fade_in"):

@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://bncs7vs6x0x01"]
+[gd_scene load_steps=3 format=3 uid="uid://bncs7vs6x0x01"]
+
+[ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="1_5nt0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qff8p"]
 
 [node name="CutsceneTemplate" type="Node2D"]
+script = ExtResource("1_5nt0i")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Trigger" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+shape = SubResource("RectangleShape2D_qff8p")
+
+[connection signal="area_entered" from="Trigger" to="." method="_on_trigger_area_entered"]

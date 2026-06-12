@@ -38,6 +38,14 @@ var map_progression := {
 	"prototype": {
 		"selectable": false,
 		"clear": false,
+		"cutscenes": {
+			"cutscene_1": false,
+			"cutscene_2": false,
+			"cutscene_3": false,
+			"cutscene_4": false,
+			"cutscene_5": false,
+			"cutscene_6": false
+		},
 		"1":{"visited":true,"walls":{"down":false,"left":false,"right":true,"up":false}},"2":{"visited":false,"walls":{"down":true,"left":true,"right":true,"up":true}},"3":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"4":{"visited":false,"walls":{"down":false,"left":false,"right":false,"up":true}},"5":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":false}}
 	},
 	"yastay": {
