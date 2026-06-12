@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://jtxhssckm7o6"]
+[gd_scene load_steps=8 format=3 uid="uid://jtxhssckm7o6"]
 
 [ext_resource type="Script" uid="uid://bi0fmvnyujiwx" path="res://stages/level_design/stage/stage_manager.gd" id="1_5c64k"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_x31yq"]
+[ext_resource type="Script" uid="uid://bwjdpwc4m7osb" path="res://stages/cutscenes/cutscene_manager.gd" id="3_x31yq"]
 
 [sub_resource type="Animation" id="Animation_42shc"]
 length = 0.001
@@ -62,6 +63,9 @@ script = ExtResource("1_5c64k")
 stage_id = "prototype"
 initial_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_1.tscn"
 initial_entry_name = "0"
+
+[node name="CutsceneManager" type="Node2D" parent="."]
+script = ExtResource("3_x31yq")
 
 [node name="CurrentChamber" type="Node2D" parent="."]
 

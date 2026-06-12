@@ -8,6 +8,7 @@ extends Node2D
 @export var initial_entry_name := ""
 
 @onready var player: Player = $Player
+@onready var cutscene_manager: CutsceneManager = $CutsceneManager
 @onready var current_chamber: Node2D = $CurrentChamber
 @onready var fade_effect: CanvasLayer = $FadeEffect
 @onready var screen_vfx_animation_player: AnimationPlayer = $FadeEffect/ScreenVFXanimationPlayer
@@ -77,6 +78,7 @@ func load_chamber() -> void:
 func add_chamber_node(chamber_instance: Chamber, entry_name: String) -> void:
 	current_chamber.add_child(chamber_instance)
 	chamber_instance.s_change_chamber.connect(start_next_chamber_change)
+	cutscene_manager.prepare_cutscene_areas()
 	# Place player in the stage's player position node
 	var new_entry_node = chamber_instance.get_entry_node(entry_name)
 	assert(new_entry_node, "Error getting the player pos in the next chamber, make sure the name of the entrypoint exists, expected name: " + entry_name)
