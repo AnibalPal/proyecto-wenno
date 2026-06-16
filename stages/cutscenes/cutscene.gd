@@ -1,10 +1,10 @@
 class_name Cutscene
 extends Node2D
 
-signal s_start_cutscene(cutscene_id: String)
+signal s_start_cutscene(cutscene_id: String, cutscene_node: Cutscene)
 
 @export var id := ""
 @export var cutscene_data := []
 
 func _on_trigger_area_entered(_area: Area2D) -> void:
-	s_start_cutscene.emit(id)
+	s_start_cutscene.emit(id, self)

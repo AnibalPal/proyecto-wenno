@@ -93,6 +93,8 @@ id = "cutscene_1"
 
 [node name="Entities" type="Node2D" parent="Cutscenes/Cutscene1"]
 
+[node name="Sprite2D" type="Sprite2D" parent="Cutscenes/Cutscene1/Entities"]
+
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
 position = Vector2(264, 272)
 collision_layer = 0

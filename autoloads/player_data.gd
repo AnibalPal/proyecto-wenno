@@ -3,8 +3,6 @@ extends Node
 # This script should contain all things related to the player, like which map has he seen, what
 # powerups does he have, max health, money, etc. I am also adding related global signals
 
-var cutscene_playing := false
-
 var player_progression := {
 	# Main status and power ups
 	"status": {
