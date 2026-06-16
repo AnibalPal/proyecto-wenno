@@ -2,14 +2,13 @@ class_name CutsceneManager
 extends Node2D
 
 @onready var player: Player = $"../Player"
-@onready var current_chamber: Node2D = $"../CurrentChamber"
 
 # The type is cutscene or null
 var playing_cutscene : Variant = null
 
-func prepare_cutscene_areas() -> void:
+func prepare_cutscene_areas(chamber_node: Chamber) -> void:
 	# Connect the cutscene signals with start cutscene
-	var chamber_cutscene_node = current_chamber.get_child(0).get_node_or_null("Cutscenes")
+	var chamber_cutscene_node = chamber_node.get_node_or_null("Cutscenes")
 	if(chamber_cutscene_node):
 		if(chamber_cutscene_node.get_child_count() > 0):
 			for child: Cutscene in chamber_cutscene_node.get_children():

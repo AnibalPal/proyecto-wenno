@@ -78,7 +78,7 @@ func load_chamber() -> void:
 func add_chamber_node(chamber_instance: Chamber, entry_name: String) -> void:
 	current_chamber.add_child(chamber_instance)
 	chamber_instance.s_change_chamber.connect(start_next_chamber_change)
-	cutscene_manager.prepare_cutscene_areas()
+	cutscene_manager.prepare_cutscene_areas(chamber_instance)
 	# Place player in the stage's player position node
 	var new_entry_node = chamber_instance.get_entry_node(entry_name)
 	assert(new_entry_node, "Error getting the player pos in the next chamber, make sure the name of the entrypoint exists, expected name: " + entry_name)
