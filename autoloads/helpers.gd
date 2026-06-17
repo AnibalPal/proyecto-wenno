@@ -1,5 +1,8 @@
 extends Node2D
 
+func is_equal_custom(a: float, b: float, threshold: float) -> bool:
+	return abs(a-b) < threshold
+
 func is_wall_between(pos1: Vector2, pos2: Vector2) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(pos1, pos2, 1)

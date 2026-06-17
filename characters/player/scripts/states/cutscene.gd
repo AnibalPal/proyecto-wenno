@@ -21,6 +21,9 @@ var current_state := CutsceneStates.NONE
 func enter(_data: Dictionary) -> void:
 	player_trigger_collision.set_deferred("disabled", true)
 	player_hurtbox.disable()
+	if(_data.has("stop")):
+		player.velocity.x = 0
+		player.player_animations.play("idle")
 
 func state_process(_delta: float) -> void:
 	return
