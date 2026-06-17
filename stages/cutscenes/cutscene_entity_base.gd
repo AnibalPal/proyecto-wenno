@@ -2,7 +2,9 @@
 class_name CutsceneEntityBase
 extends CharacterEntity
 
-@export var speed := 100
+signal s_action_complete
+
+@export var speed := 200
 
 # Vector2 or null
 var target_x_position : Variant = null
@@ -13,7 +15,7 @@ func _physics_process(_delta: float) -> void:
 			if(Helpers.is_equal_custom(global_position.x, target_x_position, 5)):
 				velocity.x = 0
 				target_x_position = null
-				# Maybe use a signal to tell the cutscene manager that it is done
+				s_action_complete.emit()
 		move_and_slide()
 
 func handle_action(action: Enums.CutsceneActions, data := {}):
@@ -21,9 +23,11 @@ func handle_action(action: Enums.CutsceneActions, data := {}):
 		Enums.CutsceneActions.HIDE:
 			process_mode = Node.PROCESS_MODE_DISABLED
 			hide()
+			s_action_complete.emit()
 		Enums.CutsceneActions.SHOW:
 			process_mode = Node.PROCESS_MODE_INHERIT
 			show()
+			s_action_complete.emit()
 		Enums.CutsceneActions.MOVE:
 			if(data.has("x")):
 				target_x_position = data["x"]
@@ -35,9 +39,11 @@ func handle_action(action: Enums.CutsceneActions, data := {}):
 				move_forward(speed)
 		Enums.CutsceneActions.TALK:
 			print("TALK PENDING IMPLEMENTATION")
-			pass
+			s_action_complete.emit()
 		Enums.CutsceneActions.ANIMATION:
 			print("ANIMATION PENDING IMPLEMENTATION")
-			pass
-		
+			s_action_complete.emit()		
+		Enums.CutsceneActions.WAIT:
+			print("WAIT PENDING IMPLEMENTATION")
+			s_action_complete.emit()					
 	pass

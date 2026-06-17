@@ -2,12 +2,15 @@ class_name Cutscene
 extends Node2D
 
 signal s_start_cutscene(cutscene_id: String, cutscene_node: Cutscene)
+signal s_step_complete
 
 @export var id := ""
 
 @onready var entities: Node2D = $Entities
 
 var current_idx := 0
+var action_stack := []
+var expected_actions := 0
 
 # TODO: Change this to an export variable with resources
 var cutscene_data := [
@@ -54,6 +57,10 @@ var cutscene_data := [
 	]
 ]
 
+func _ready() -> void:
+	for cutscene_entity: CutsceneEntityBase in entities.get_children():
+		cutscene_entity.s_action_complete.connect(on_action_complete)
+
 func _on_trigger_area_entered(_area: Area2D) -> void:
 	s_start_cutscene.emit(id, self)
 
@@ -68,7 +75,20 @@ func get_next() -> Variant:
 		current_idx = 0
 	return step_data
 
-func execute(entity_name, action, data) -> void:
-	var entity = entities.get_node_or_null(entity_name)
-	assert(entity, "ENTITY NOT FOUND")
-	entity.handle_action(action, data)
+func add_step_action(action_data := {}) -> void:
+	action_stack.append(action_data)
+
+func execute() -> void:
+	expected_actions = len(action_stack)
+	for action_data in action_stack:
+		var entity = entities.get_node_or_null(action_data["entity"])
+		assert(entity, "ENTITY NOT FOUND")
+		var action_extra_data = action_data["data"] if action_data.has("data") else {}
+		entity.handle_action(action_data["action"], action_extra_data)
+	action_stack = []
+
+func on_action_complete() -> void:
+	expected_actions -= 1
+	if(expected_actions <= 0):
+		expected_actions = 0
+		s_step_complete.emit()

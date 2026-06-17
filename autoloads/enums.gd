@@ -6,5 +6,6 @@ enum CutsceneActions {
 	MOVE,
 	WALK,
 	TALK,
-	ANIMATION
+	ANIMATION,
+	WAIT
 }

@@ -104,6 +104,9 @@ visible = false
 position = Vector2(688, 288)
 collision_layer = 0
 script = ExtResource("12_41nde")
+speed = null
+debug_mode = null
+facing_right = null
 
 [node name="ShouldRotate" type="Node2D" parent="Cutscenes/Cutscene1/Entities/TestNPC"]
 
