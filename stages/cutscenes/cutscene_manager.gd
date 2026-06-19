@@ -7,6 +7,7 @@ var step_running := false
 
 # The type is cutscene or null
 var currently_playing_cutscene_node : Variant = null
+var dialogue_playing := false
 
 func _process(_delta: float) -> void:
 	if(currently_playing_cutscene_node):
