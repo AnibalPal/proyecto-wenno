@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://ck0xpx1dhvjc2"]
+[gd_scene load_steps=18 format=4 uid="uid://ck0xpx1dhvjc2"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_buxlp"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_vlr1m"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d2gqqqixyioxa" path="res://assets/icons/up_arrow32x32.png" id="8_dfm2w"]
 [ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="11_8v8c7"]
 [ext_resource type="Script" uid="uid://bithqqv7d4idm" path="res://stages/cutscenes/cutscene_entity_base.gd" id="12_41nde"]
+[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://stages/cutscenes/dialogue_bubble.tscn" id="13_epbk7"]
 [ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="13_vef0q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wos68"]
@@ -104,13 +105,11 @@ visible = false
 position = Vector2(688, 288)
 collision_layer = 0
 script = ExtResource("12_41nde")
-speed = null
-debug_mode = null
-facing_right = null
+dialogue_bubble = ExtResource("13_epbk7")
 
 [node name="ShouldRotate" type="Node2D" parent="Cutscenes/Cutscene1/Entities/TestNPC"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Cutscenes/Cutscene1/Entities/TestNPC/ShouldRotate"]
+[node name="CutsceneEntitySprite" type="Sprite2D" parent="Cutscenes/Cutscene1/Entities/TestNPC/ShouldRotate"]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("13_vef0q")
 

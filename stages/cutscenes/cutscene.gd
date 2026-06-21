@@ -41,7 +41,38 @@ var cutscene_data := [
 			"entity": "TestNPC",
 			"action": Enums.CutsceneActions.TALK,
 			"data": {
-				"text": "Hola",
+				"text": "Hola, Estoy probando el sistema de cutscenes",
+				"width": 240
+			}
+		}
+	],
+	[
+		{
+			"entity": "TestNPC",
+			"action": Enums.CutsceneActions.TALK,
+			"data": {
+				"text": "Texto pequeño",
+				"width": 120
+			}
+		}
+	],
+	[
+		{
+			"entity": "TestNPC",
+			"action": Enums.CutsceneActions.TALK,
+			"data": {
+				"text": "Ahora un texto mas largo a ver si se ve mas o menos decente, bla bla la la la",
+				"width": 300
+			}
+		}
+	],
+	[
+		{
+			"entity": "TestNPC",
+			"action": Enums.CutsceneActions.TALK,
+			"data": {
+				"text": "Bueno chao",
+				"width": 100
 			}
 		}
 	],

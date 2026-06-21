@@ -18,15 +18,14 @@ corner_radius_bottom_left = 8
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5xuko")
-dialogue_text = "Probando burbuja de dialogo von un texto mas grande a ver que pasa"
+dialogue_text = "Probando"
 play_speed = 20
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedDialogueBubble" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 31.0
-offset_bottom = 30.0
+offset_right = 23.0
+offset_bottom = 22.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_impe3")
 
 [node name="MarginContainer" type="MarginContainer" parent="AnimatedDialogueBubble"]
@@ -43,10 +42,10 @@ fit_content = true
 
 [node name="DialogueBubbleMeasurer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = -272.0
-offset_top = -104.0
-offset_right = -32.0
-offset_bottom = -82.0
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = -9760.0
+offset_bottom = -9978.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_impe3")
 
 [node name="MarginContainer" type="MarginContainer" parent="DialogueBubbleMeasurer"]

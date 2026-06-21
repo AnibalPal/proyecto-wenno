@@ -1,3 +1,4 @@
+class_name DialogueBubble
 extends Control
 
 signal s_dialogue_complete
@@ -17,6 +18,10 @@ var dialogue_playing := false
 func _ready() -> void:
 	var expected_dialogue_bubble_size = await get_expected_dialogue_bubble_size()
 	var expand_dialogue_bubble_tween := create_tween()
+	# Vector to center the dialogue bubble on the x axis but move it fully up depending on its size
+	# This makes it easier to add the dialogue to the cutscene entities
+	var dialogue_bubble_offset = -Vector2(expected_dialogue_bubble_size.x/2.0, expected_dialogue_bubble_size.y)
+	animated_dialogue_bubble.position = dialogue_bubble_offset
 	expand_dialogue_bubble_tween.tween_property(animated_dialogue_bubble, "size", expected_dialogue_bubble_size, 0.1)
 	expand_dialogue_bubble_tween.finished.connect(ready_text)
 
@@ -46,5 +51,14 @@ func next() -> void:
 		text_content.visible_characters = -1
 		dialogue_playing = false
 	else:
-		print("DIALOGUE COMPLETE")
-		s_dialogue_complete.emit()
+		complete_dialogue()
+
+func complete_dialogue() -> void:
+	text_content.text = ""
+	var shrink_tween = create_tween()
+	shrink_tween.tween_property(animated_dialogue_bubble, "size", Vector2.ZERO, 0.1)
+	shrink_tween.finished.connect(free_bubble)
+
+func free_bubble() -> void:
+	s_dialogue_complete.emit()
+	queue_free()
