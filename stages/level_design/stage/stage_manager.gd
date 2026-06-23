@@ -31,13 +31,25 @@ func _ready() -> void:
 func set_player_move_direction(direction: String, end_cutscene:= false):
 	match direction:
 		"UP":
-			player.state_machine.current_state.move_up(end_cutscene)
+			player.state_machine.current_state.cutscene_transition_to("MoveUp", {
+				"y": player.global_position.x - 50,
+				"end": end_cutscene
+			})
 		"RIGHT":
-			player.state_machine.current_state.move_right(end_cutscene)
+			player.state_machine.current_state.cutscene_transition_to("MoveRight", {
+				"x": player.global_position.x + 120,
+				"end": end_cutscene
+			})
+			#player.state_machine.current_state.move_right(end_cutscene)
 		"DOWN":
-			player.state_machine.current_state.fall(end_cutscene)
+			player.state_machine.current_state.cutscene_transition_to("Fall", {
+				"end": end_cutscene
+			})
 		"LEFT":
-			player.state_machine.current_state.move_left(end_cutscene)
+			player.state_machine.current_state.cutscene_transition_to("MoveLeft", {
+				"x": player.global_position.x - 120,
+				"end": end_cutscene
+			})
 		_:
 			print("Unrecognized direction: " + direction)
 

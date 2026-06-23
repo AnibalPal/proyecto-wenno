@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=66 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://dlbig83msgaj7" path="res://characters/player/scripts/cutscene_states/move_left.gd" id="15_1queg"]
 [ext_resource type="Script" uid="uid://btrgxgm0gmd3l" path="res://characters/player/scripts/cutscene_states/move_up.gd" id="16_is67l"]
 [ext_resource type="PackedScene" uid="uid://4q871lw6yrib" path="res://characters/editor_tools/draw_jump_path.tscn" id="17_alequ"]
+[ext_resource type="Script" uid="uid://b2uq2rh3yudf0" path="res://characters/player/scenes/fall.gd" id="17_rnoiw"]
 [ext_resource type="PackedScene" uid="uid://bwuaylvvur5ge" path="res://characters/player/scenes/pause_menu.tscn" id="18_j2wwh"]
 
 [sub_resource type="Animation" id="Animation_alequ"]
@@ -434,6 +435,7 @@ script = ExtResource("16_is67l")
 [node name="Jump" type="Node" parent="StateMachine/Cutscene"]
 
 [node name="Fall" type="Node" parent="StateMachine/Cutscene"]
+script = ExtResource("17_rnoiw")
 
 [node name="MoveDuration" type="Timer" parent="StateMachine/Cutscene"]
 wait_time = 0.8

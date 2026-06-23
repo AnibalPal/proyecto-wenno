@@ -7,8 +7,6 @@ const MOVEY := "MoveY"
 const JUMP := "Jump"
 const FALL := "Fall"
 
-signal s_step_finished
-
 # In this state, the player is controlled externally by the engine
 
 @onready var player_hurtbox: PlayerHurtbox = $"../../ShouldRotate/Hurtbox"
@@ -38,8 +36,8 @@ func state_process(_delta: float) -> void:
 func state_physics_process(_delta: float) -> void:
 	if(active):
 		if(current_state_node):
-			current_state_node.cutscene_state_physics_process()
-		player.move_and_slide()	
+			current_state_node.cutscene_state_physics_process(_delta)
+			player.move_and_slide()	
 
 # Used in other nodes to change behavior
 func cutscene_transition_to(state_name: String, data := {}) -> void:
@@ -85,6 +83,7 @@ func cutscene_transition_to(state_name: String, data := {}) -> void:
 func end() -> void:
 	player_trigger_collision.set_deferred("disabled", false)
 	player_hurtbox.enable()
+	current_state_node = null
 	if(Input.is_action_pressed("left") or Input.is_action_pressed("right")):
 		transition_to(state_data.RUN)
 	else:

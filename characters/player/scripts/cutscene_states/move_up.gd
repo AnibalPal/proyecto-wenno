@@ -1,13 +1,16 @@
 extends CutsceneState
 
-# Move directly up until a target direction is reached
+var target_position_y = null
 
-func cutscene_state_enter(_data := {}) -> void:
-	#cutscene_entity.cutscene_animations
-	pass
+func enter(_data := {}) -> void:
+	if(_data.has("y")):
+		target_position_y = _data["y"]
+	cutscene_entity.cutscene_animations.play("jump")
+	cutscene_entity.velocity = Vector2(0, -cutscene_entity.jump_impulse)
 
-func cutscene_state_process() -> void:
-	pass
+func cutscene_state_physics_process(_delta: float) -> void:
+	if(Helpers.is_equal_custom(cutscene_entity.global_position.y, target_position_y, 5)):
+		end_move()
 
-func cutscene_state_physics_process() -> void:
-	pass
+func reset_vars() -> void:
+	target_position_y = null

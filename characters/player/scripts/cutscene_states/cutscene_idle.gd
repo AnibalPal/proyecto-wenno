@@ -1,12 +1,13 @@
 extends CutsceneState
 
-func cutscene_state_enter(_data := {}) -> void:
+func enter(_data := {}) -> void:
 	cutscene_entity.velocity = Vector2.ZERO
 	if(cutscene_entity.is_on_floor()):
 		cutscene_entity.cutscene_animations.play("idle")
 	else:
 		cutscene_entity.cutscene_animations.play("fall")	
 
-func cutscene_state_physics_process() -> void:
+func cutscene_state_physics_process(_delta: float) -> void:
+	cutscene_entity.enable_gravity(_delta)
 	if(cutscene_entity.is_on_floor()):
 		cutscene_entity.cutscene_animations.play("idle")
