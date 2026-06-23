@@ -12,13 +12,7 @@ var dialogue_playing := false
 func _process(_delta: float) -> void:
 	if(currently_playing_cutscene_node):
 		pass
-		# Handle cutscene inputs to advance dialogue or animations
-		#if(Input.is_action_just_pressed("cutscene_next") and !step_running):
-			#var cutscene_step_data = currently_playing_cutscene_node.get_next()
-			#if(cutscene_step_data):
-				#execute_step(cutscene_step_data)
-			#else:
-				#end_cutscene()
+		# Handle cutscene skip inputs and logic
 	
 
 func prepare_cutscene_areas(chamber_node: Chamber) -> void:

@@ -13,6 +13,7 @@ signal s_dialogue_complete
 @export var play_speed := 1
 
 var text_count := 0.0
+var bubble_ready := false
 var dialogue_playing := false
 
 func _ready() -> void:
@@ -27,6 +28,7 @@ func _ready() -> void:
 
 func ready_text() -> void:
 	text_content.text = dialogue_text
+	bubble_ready = true
 	dialogue_playing = true
 	text_content.visible_characters = 0
 
@@ -36,8 +38,9 @@ func _process(_delta: float) -> void:
 		text_content.visible_characters = int(text_count)
 		if(text_content.visible_characters >= text_content.text.length()):
 			dialogue_playing = false
-	if(Input.is_action_just_pressed("cutscene_next")):
-		next()
+	if(bubble_ready):
+		if(Input.is_action_just_pressed("cutscene_next")):
+			next()
 
 func get_expected_dialogue_bubble_size() -> Vector2:
 	dialogue_bubble_measurer.size = Vector2(minimum_bubble_width, 0)

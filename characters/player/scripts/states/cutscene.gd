@@ -23,7 +23,10 @@ func enter(_data: Dictionary) -> void:
 	player_hurtbox.disable()
 	if(_data.has("stop")):
 		player.velocity.x = 0
-		player.player_animations.play("idle")
+		if(player.is_on_floor()):
+			player.player_animations.play("idle")
+		else:
+			player.player_animations.play("fall")
 
 func state_process(_delta: float) -> void:
 	return
@@ -34,7 +37,8 @@ func state_physics_process(_delta: float) -> void:
 			player.enable_gravity(_delta)
 		match current_state:
 			CutsceneStates.NONE:
-				pass
+				if(player.is_on_floor()):
+					player.player_animations.play("idle")
 			CutsceneStates.MOVEX:
 				if(player.is_on_floor() and abs(player.velocity.x) > 0):
 					player.player_animations.play("run")
