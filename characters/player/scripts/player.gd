@@ -27,6 +27,7 @@ signal s_game_over
 
 @onready var floor_detection: RayCast2D = $ShouldNotRotate/FloorDetection
 @onready var player_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations
+@onready var cutscene_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations
 @onready var hitboxes: Node2D = $ShouldRotate/Hitboxes
 
 @onready var health_amount: Label = $UI/Game/HealthContainer/Amount
