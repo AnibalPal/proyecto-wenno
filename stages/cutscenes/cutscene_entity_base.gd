@@ -27,17 +27,17 @@ func _physics_process(_delta: float) -> void:
 				s_action_complete.emit()
 		move_and_slide()
 
-func handle_action(action: Enums.CutsceneActions, data := {}):
+func handle_action(action: Enums.CutsceneCommonActions, data := {}):
 	match action:
-		Enums.CutsceneActions.HIDE:
+		Enums.CutsceneCommonActions.HIDE:
 			process_mode = Node.PROCESS_MODE_DISABLED
 			hide()
 			s_action_complete.emit()
-		Enums.CutsceneActions.SHOW:
+		Enums.CutsceneCommonActions.SHOW:
 			process_mode = Node.PROCESS_MODE_INHERIT
 			show()
 			s_action_complete.emit()
-		Enums.CutsceneActions.MOVE:
+		Enums.CutsceneCommonActions.MOVE:
 			if(data.has("x")):
 				target_x_position = data["x"]
 				var dir = global_position.direction_to(Vector2(data["x"], global_position.y))
@@ -46,15 +46,15 @@ func handle_action(action: Enums.CutsceneActions, data := {}):
 				else:
 					turn_left()
 				move_forward(speed)
-		Enums.CutsceneActions.TALK:
+		Enums.CutsceneCommonActions.TALK:
 			if(data.has("width")):
 				instantiate_dialogue_bubble(data["text"], data["width"])			
 			else:
 				instantiate_dialogue_bubble(data["text"])
-		Enums.CutsceneActions.ANIMATION:
+		Enums.CutsceneCommonActions.ANIMATION:
 			print("ANIMATION PENDING IMPLEMENTATION")
 			s_action_complete.emit()		
-		Enums.CutsceneActions.WAIT:
+		Enums.CutsceneCommonActions.WAIT:
 			print("WAIT PENDING IMPLEMENTATION")
 			s_action_complete.emit()					
 

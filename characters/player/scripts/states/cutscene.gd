@@ -55,17 +55,16 @@ func end() -> void:
 	else:
 		transition_to(state_data.IDLE)
 
-func execute_cutscene_step(action: Enums.CutsceneActions, step_data := {}) -> void:
-	var action_extra_data = step_data["data"] if step_data.has("data") else {}
+func execute_cutscene_step(action: Enums.CutsceneCommonActions, step_data = {}) -> void:
 	# Transform available cutscene actions for the player
 	match action:
-		Enums.CutsceneActions.MOVE:
-			cutscene_transition_to(MOVERIGHT, action_extra_data)
-		Enums.CutsceneActions.TALK:
-			instantiate_dialogue_bubble(action_extra_data["text"])
-		Enums.CutsceneActions.ANIMATION:
+		Enums.CutsceneCommonActions.MOVE:
+			cutscene_transition_to(MOVERIGHT, step_data)
+		Enums.CutsceneCommonActions.TALK:
+			instantiate_dialogue_bubble(step_data["text"])
+		Enums.CutsceneCommonActions.ANIMATION:
 			print("PLAYER CUTSCENE PENDING IMPLEMENTATION ANIMATION")		
-		Enums.CutsceneActions.WAIT:
+		Enums.CutsceneCommonActions.WAIT:
 			print("PLAYER CUTSCENE PENDING IMPLEMENTATION WAIT")		
 		_:
 			print("PLAYER CUTSCENE ACTION NOT FOUND: %s"% action)

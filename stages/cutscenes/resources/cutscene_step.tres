@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cqrw7hsnvjveg"]
+
+[ext_resource type="Script" uid="uid://cdpg2b6dbbx0r" path="res://stages/cutscenes/resources/cutscene_step.gd" id="1_62wfx"]
+
+[resource]
+script = ExtResource("1_62wfx")

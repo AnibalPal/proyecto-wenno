@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://ck0xpx1dhvjc2"]
+[gd_scene load_steps=34 format=4 uid="uid://ck0xpx1dhvjc2"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_buxlp"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_vlr1m"]
@@ -12,11 +12,115 @@
 [ext_resource type="Texture2D" uid="uid://d2gqqqixyioxa" path="res://assets/icons/up_arrow32x32.png" id="8_dfm2w"]
 [ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="11_8v8c7"]
 [ext_resource type="Script" uid="uid://bithqqv7d4idm" path="res://stages/cutscenes/cutscene_entity_base.gd" id="12_41nde"]
+[ext_resource type="Script" uid="uid://cdpg2b6dbbx0r" path="res://stages/cutscenes/resources/cutscene_step.gd" id="12_wp1qa"]
 [ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://stages/cutscenes/dialogue_bubble.tscn" id="13_epbk7"]
+[ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="13_smmjg"]
 [ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="13_vef0q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wos68"]
 size = Vector2(48, 80)
+
+[sub_resource type="Resource" id="Resource_af7qt"]
+script = ExtResource("13_smmjg")
+entity = "TestNPC"
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_sd3vl"]
+script = ExtResource("13_smmjg")
+entity = "player"
+action = 2
+data = {
+"x": 280
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_pm46m"]
+script = ExtResource("13_smmjg")
+entity = "TestNPC"
+action = 2
+data = {
+"x": 450
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_smmjg"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_af7qt"), SubResource("Resource_sd3vl"), SubResource("Resource_pm46m")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_qfomy"]
+script = ExtResource("13_smmjg")
+entity = "TestNPC"
+action = 4
+data = {
+"text": "Hola, estoy probando el sistema de cutscenes",
+"width": 240
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_a55il"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_qfomy")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_vnxm1"]
+script = ExtResource("13_smmjg")
+entity = "player"
+action = 4
+data = {
+"text": "A que bonito",
+"width": 240
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_p2ees"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_vnxm1")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_htpxw"]
+script = ExtResource("13_smmjg")
+entity = "TestNPC"
+action = 4
+data = {
+"text": "Bueno chao",
+"width": 100
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_6ahtd"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_htpxw")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_rwk2m"]
+script = ExtResource("13_smmjg")
+entity = "TestNPC"
+action = 2
+data = {
+"x": 800
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_se88u"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_rwk2m")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_3rqkl"]
+script = ExtResource("13_smmjg")
+entity = "player"
+action = 4
+data = {
+"text": "Que agradable sujeto",
+"width": 240
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_bb3b7"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_3rqkl")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epbk7"]
 size = Vector2(48, 48)
@@ -96,6 +200,7 @@ color = Color(0.3863936, 0.65864027, 0.3070067, 1)
 [node name="Cutscene1" type="Node2D" parent="Cutscenes"]
 script = ExtResource("11_8v8c7")
 id = "cutscene_1"
+cutscene_data = Array[ExtResource("12_wp1qa")]([SubResource("Resource_smmjg"), SubResource("Resource_a55il"), SubResource("Resource_p2ees"), SubResource("Resource_6ahtd"), SubResource("Resource_se88u"), SubResource("Resource_bb3b7")])
 
 [node name="Entities" type="Node2D" parent="Cutscenes/Cutscene1"]
 

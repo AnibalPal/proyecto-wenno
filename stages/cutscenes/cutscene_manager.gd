@@ -25,13 +25,13 @@ func prepare_cutscene_areas(chamber_node: Chamber) -> void:
 				child.s_step_complete.connect(on_cutscene_step_complete)
 
 func execute_step(steps := []) -> void:
-	for step_data in steps:
-		if(step_data["entity"] == "player"):
+	for action in steps:
+		if(action.entity == "player"):
 			player_step_completed = false
-			player.state_machine.current_state.execute_cutscene_step(step_data["action"], step_data)
+			player.state_machine.current_state.execute_cutscene_step(action.action, action.data)
 		else:
 			cutscene_entitites_step_completed = false
-			currently_playing_cutscene_node.add_step_action(step_data)
+			currently_playing_cutscene_node.add_step_action(action)
 	currently_playing_cutscene_node.execute()
 
 func end_cutscene() -> void:
@@ -54,7 +54,7 @@ func start_cutscene(cutscene_id: String, cutscene_node: Cutscene) -> void:
 	player.state_machine.transition_to_next_state(player.state_machine.state_data.CUTSCENE)
 	player.state_machine.current_state.s_action_complete.connect(on_player_step_complete)
 	if(cutscene_step_data):
-		execute_step(cutscene_step_data)
+		execute_step(cutscene_step_data.actions)
 	# Should also hide UI
 	print("START CUTSCENE: %s"%cutscene_id)
 
@@ -71,6 +71,6 @@ func on_step_complete() -> void:
 		if(player_step_completed and cutscene_entitites_step_completed):
 			var cutscene_step_data = currently_playing_cutscene_node.get_next()
 			if(cutscene_step_data):
-				execute_step(cutscene_step_data)
+				execute_step(cutscene_step_data.actions)
 			else:
 				end_cutscene()

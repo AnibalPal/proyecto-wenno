@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="CutsceneAction" load_steps=2 format=3 uid="uid://c3pmin8u1225l"]
+
+[ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="1_bm7k3"]
+
+[resource]
+script = ExtResource("1_bm7k3")
