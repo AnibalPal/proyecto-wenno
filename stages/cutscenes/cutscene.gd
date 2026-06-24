@@ -48,6 +48,26 @@ var cutscene_data := [
 	],
 	[
 		{
+			"entity": "player",
+			"action": Enums.CutsceneActions.TALK,
+			"data": {
+				"text": "A que bonito",
+				"width": 240
+			}
+		}
+	],
+	[
+		{
+			"entity": "player",
+			"action": Enums.CutsceneActions.TALK,
+			"data": {
+				"text": "Tambien quiero probar con un texto largo, ñam ñam ñam ñam ñam ñam ñam ñam",
+				"width": 240
+			}
+		}
+	],
+	[
+		{
 			"entity": "TestNPC",
 			"action": Enums.CutsceneActions.TALK,
 			"data": {

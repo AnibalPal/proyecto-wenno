@@ -33,6 +33,7 @@ func start_cutscene(cutscene_id: String, cutscene_node: Cutscene) -> void:
 	var cutscene_step_data = currently_playing_cutscene_node.get_next()
 	# Set the player state to cutscene, then move as requested by the current cutscene
 	player.state_machine.transition_to_next_state(player.state_machine.state_data.CUTSCENE)
+	player.state_machine.current_state.s_action_complete.connect(on_step_complete)
 	if(cutscene_step_data):
 		execute_step(cutscene_step_data)
 	# Should also hide UI
@@ -51,6 +52,7 @@ func end_cutscene() -> void:
 	currently_playing_cutscene_node.queue_free()
 	currently_playing_cutscene_node = null
 	if(player.state_machine.current_state.name == "Cutscene"):
+		player.state_machine.current_state.s_action_complete.disconnect(on_step_complete)
 		player.state_machine.current_state.end()
 	else:
 		print("PLAYER WAS NOT IN CUTSCENE STATE WHEN TRYING TO END CUTSCENE")

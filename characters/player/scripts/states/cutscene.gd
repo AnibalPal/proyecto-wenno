@@ -1,6 +1,10 @@
 @tool
 extends PlayerState
 
+# In this state, the player is controlled externally by the engine
+
+const DIALOGUE_BUBBLE_Y_OFFSET := 10
+
 const IDLE := "Idle"
 const MOVERIGHT := "MoveRight"
 const MOVELEFT := "MoveLeft"
@@ -8,11 +12,14 @@ const MOVEY := "MoveY"
 const JUMP := "Jump"
 const FALL := "Fall"
 
-# In this state, the player is controlled externally by the engine
+@export var dialogue_bubble : PackedScene
 
+@onready var cutscene_bubble_anchor: Node2D = $"../../ShouldNotRotate/CutsceneBubbleAnchor"
 @onready var player_hurtbox: PlayerHurtbox = $"../../ShouldRotate/Hurtbox"
 @onready var player_trigger_collision: CollisionShape2D = $"../../ShouldRotate/PlayerTrigger/CollisionShape2D"
 @onready var move_duration: Timer = $MoveDuration
+
+signal s_action_complete
 
 var has_gravity := true
 var trigger_end := false
@@ -55,13 +62,25 @@ func execute_cutscene_step(action: Enums.CutsceneActions, step_data := {}) -> vo
 		Enums.CutsceneActions.MOVE:
 			cutscene_transition_to(MOVERIGHT, action_extra_data)
 		Enums.CutsceneActions.TALK:
-			print("PLAYER CUTSCENE PENDING IMPLEMENTATION TALK")
+			instantiate_dialogue_bubble(action_extra_data["text"])
 		Enums.CutsceneActions.ANIMATION:
 			print("PLAYER CUTSCENE PENDING IMPLEMENTATION ANIMATION")		
 		Enums.CutsceneActions.WAIT:
 			print("PLAYER CUTSCENE PENDING IMPLEMENTATION WAIT")		
 		_:
 			print("PLAYER CUTSCENE ACTION NOT FOUND: %s"% action)
+
+# NOTE: Duplicate function in CutsceneEntityBase class
+func instantiate_dialogue_bubble(text:= "", width := 240) -> void:
+	var dialogue_bubble_instance : DialogueBubble = dialogue_bubble.instantiate()
+	dialogue_bubble_instance.dialogue_text = text
+	dialogue_bubble_instance.minimum_bubble_width = width
+	dialogue_bubble_instance.global_position = Vector2(cutscene_bubble_anchor.global_position.x, cutscene_bubble_anchor.global_position.y - DIALOGUE_BUBBLE_Y_OFFSET)
+	dialogue_bubble_instance.s_dialogue_complete.connect(on_dialogue_complete)
+	get_tree().root.add_child(dialogue_bubble_instance)
+
+func on_dialogue_complete() -> void:
+	s_action_complete.emit()
 
 func _on_move_duration_timeout() -> void:
 	player.velocity.x = 0
