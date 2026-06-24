@@ -31,17 +31,17 @@ func start_cutscene(cutscene_id: String, cutscene_node: Cutscene) -> void:
 	currently_playing_cutscene_node = cutscene_node
 	step_running = true
 	var cutscene_step_data = currently_playing_cutscene_node.get_next()
+	# Set the player state to cutscene, then move as requested by the current cutscene
+	player.state_machine.transition_to_next_state(player.state_machine.state_data.CUTSCENE)
 	if(cutscene_step_data):
 		execute_step(cutscene_step_data)
-	# Set the player state to cutscene, then move as requested by the current cutscene
-	player.state_machine.transition_to_next_state(player.state_machine.state_data.CUTSCENE, {"stop": true})
 	# Should also hide UI
 	print("START CUTSCENE: %s"%cutscene_id)
 
 func execute_step(steps := []) -> void:
 	for step_data in steps:
 		if(step_data["entity"] == "player"):
-			pass
+			player.state_machine.current_state.execute_cutscene_step(step_data["action"], step_data)
 		else:
 			currently_playing_cutscene_node.add_step_action(step_data)
 	currently_playing_cutscene_node.execute()

@@ -23,7 +23,7 @@ var cutscene_data := [
 		"entity": "player",
 		"action": Enums.CutsceneActions.MOVE,
 		"data": {
-			"x": 100,
+			"x": 280,
 			"y": 100,
 			}
 		},

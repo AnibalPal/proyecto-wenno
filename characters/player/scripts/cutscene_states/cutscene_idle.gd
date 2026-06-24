@@ -1,7 +1,7 @@
 extends CutsceneState
 
 func enter(_data := {}) -> void:
-	cutscene_entity.velocity = Vector2.ZERO
+	cutscene_entity.velocity.x = 0
 	if(cutscene_entity.is_on_floor()):
 		cutscene_entity.cutscene_animations.play("idle")
 	else:
