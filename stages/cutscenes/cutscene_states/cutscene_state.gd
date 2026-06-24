@@ -34,6 +34,7 @@ func end_move() -> void:
 	if(should_end):
 		cutscene_state_manager.end()
 	else:
+		cutscene_state_manager.s_action_complete.emit()
 		cutscene_state_manager.cutscene_transition_to(cutscene_state_manager.IDLE)
 
 # Override
