@@ -14,6 +14,8 @@ var expected_actions := 0
 @export var cutscene_data : Array[CutsceneStep]
 
 func _ready() -> void:
+	if(PlayerData.player_progression["cutscenes"].has(id) and PlayerData.player_progression["cutscenes"][id]):
+		queue_free()
 	for cutscene_entity: CutsceneEntityBase in entities.get_children():
 		cutscene_entity.s_action_complete.connect(on_action_complete)
 
@@ -29,6 +31,8 @@ func get_next() -> Variant:
 	else:
 		step_data = null
 		current_idx = 0
+		action_stack = []
+		expected_actions = 0
 	return step_data
 
 func add_step_action(action_data : CutsceneAction) -> void:

@@ -30,9 +30,11 @@ func _physics_process(_delta: float) -> void:
 func handle_action(action: Enums.CutsceneCommonActions, data := {}):
 	match action:
 		Enums.CutsceneCommonActions.HIDE:
-			process_mode = Node.PROCESS_MODE_DISABLED
+			# NOTE: this has a bug with the physics_process on the entity that calls it
+			# I am not using it currently because I queue_free the cutscene when completed
 			hide()
 			s_action_complete.emit()
+			process_mode = Node.PROCESS_MODE_DISABLED
 		Enums.CutsceneCommonActions.SHOW:
 			process_mode = Node.PROCESS_MODE_INHERIT
 			show()

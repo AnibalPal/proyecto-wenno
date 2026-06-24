@@ -1,6 +1,7 @@
 class_name CutsceneManager
 extends Node2D
 
+@onready var current_stage: Stage = $".."
 @onready var player: Player = $"../Player"
 
 # The type is cutscene or null
@@ -13,7 +14,6 @@ func _process(_delta: float) -> void:
 	if(currently_playing_cutscene_node):
 		pass
 		# Handle cutscene skip inputs and logic
-	
 
 func prepare_cutscene_areas(chamber_node: Chamber) -> void:
 	# Connect the cutscene signals with start cutscene
@@ -36,8 +36,12 @@ func execute_step(steps := []) -> void:
 
 func end_cutscene() -> void:
 	#TODO: Maybe clean this in some other way
+	# Update cutscene state to be seen
+	PlayerData.s_update_cutscene_state.emit(currently_playing_cutscene_node.id)
 	currently_playing_cutscene_node.queue_free()
 	currently_playing_cutscene_node = null
+	player_step_completed = true
+	cutscene_entitites_step_completed = true
 	if(player.state_machine.current_state.name == "Cutscene"):
 		player.state_machine.current_state.s_action_complete.disconnect(on_player_step_complete)
 		player.state_machine.current_state.end()

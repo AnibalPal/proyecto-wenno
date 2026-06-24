@@ -16,7 +16,15 @@ var player_progression := {
 	},
 	"settings": {
 		# ...
-	}
+	},
+	"cutscenes": { # Stores if cutscenes are already seen
+		"cutscene_1": false,
+		"cutscene_2": false,
+		"cutscene_3": false,
+		"cutscene_4": false,
+		"cutscene_5": false,
+		"cutscene_6": false
+	},
 }
 
 var map_progression := {
@@ -38,14 +46,6 @@ var map_progression := {
 	"prototype": {
 		"selectable": false,
 		"clear": false,
-		"cutscenes": {
-			"cutscene_1": false,
-			"cutscene_2": false,
-			"cutscene_3": false,
-			"cutscene_4": false,
-			"cutscene_5": false,
-			"cutscene_6": false
-		},
 		"1":{"visited":true,"walls":{"down":false,"left":false,"right":true,"up":false}},"2":{"visited":false,"walls":{"down":true,"left":true,"right":true,"up":true}},"3":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"4":{"visited":false,"walls":{"down":false,"left":false,"right":false,"up":true}},"5":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":false}}
 	},
 	"yastay": {
@@ -55,14 +55,16 @@ var map_progression := {
 
 signal s_update_player_status(key: String, value: Variant)
 signal s_update_map_progression(stage_id: String, chamber_id: String, key: String, value: Variant)
+signal s_update_cutscene_state(cutscene_id: String)
 
 func _ready() -> void:
 	# These will update the data dictionaries in order to then save/load, should have to connect
 	# these signals for other functions to update UI for example
 	s_update_map_progression.connect(on_update_map_progression)
-	s_update_player_status.connect(on_update_player_satus)
+	s_update_player_status.connect(on_update_player_status)
+	s_update_cutscene_state.connect(on_update_cutscene_state)
 
-func on_update_player_satus(key: String, value: Variant):
+func on_update_player_status(key: String, value: Variant):
 	if(player_progression["status"].has(key)):
 		player_progression["status"][key] = value
 
@@ -73,6 +75,10 @@ func on_update_map_progression(stage_id: String, chamber_id: String, key: String
 			var chamber_data = map_data[chamber_id]
 			if(chamber_data.has(key)):
 				chamber_data[key] = value
+
+func on_update_cutscene_state(cutscene_id: String) -> void:
+	if(player_progression["cutscenes"].has(cutscene_id)):
+		player_progression["cutscenes"][cutscene_id] = true
 
 func save_game() -> void:
 	pass

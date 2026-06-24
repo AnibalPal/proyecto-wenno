@@ -59,7 +59,10 @@ func execute_cutscene_step(action: Enums.CutsceneCommonActions, step_data = {}) 
 	# Transform available cutscene actions for the player
 	match action:
 		Enums.CutsceneCommonActions.MOVE:
-			cutscene_transition_to(MOVERIGHT, step_data)
+			if(player.global_position.x < step_data["x"]):
+				cutscene_transition_to(MOVERIGHT, step_data)
+			else:
+				cutscene_transition_to(MOVELEFT, step_data)
 		Enums.CutsceneCommonActions.TALK:
 			instantiate_dialogue_bubble(step_data["text"])
 		Enums.CutsceneCommonActions.ANIMATION:

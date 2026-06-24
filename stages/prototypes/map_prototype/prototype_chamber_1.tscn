@@ -139,7 +139,7 @@ tile_set = ExtResource("1_vlr1m")
 [node name="Entries" type="Node2D" parent="."]
 
 [node name="0" parent="Entries" instance=ExtResource("3_grbin")]
-position = Vector2(104, 296)
+position = Vector2(104, 288)
 direction = "RIGHT"
 
 [node name="1" type="Node2D" parent="Entries"]
@@ -222,7 +222,7 @@ texture = ExtResource("13_vef0q")
 shape = SubResource("RectangleShape2D_epbk7")
 
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
-position = Vector2(264, 272)
+position = Vector2(232, 272)
 collision_layer = 0
 collision_mask = 64
 
