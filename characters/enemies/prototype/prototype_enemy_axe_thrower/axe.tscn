@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cv0nf6y7i6qaq"]
 
 [ext_resource type="Texture2D" uid="uid://dbhy5kllab0om" path="res://assets/prototype/trauco_fleaman_axe_32x32_spritesheet.png" id="1_1lomi"]
-[ext_resource type="Script" uid="uid://bfxhqaqju2w1g" path="res://characters/enemies/prototype_enemy_axe_thrower/axe.gd" id="1_pf1uc"]
+[ext_resource type="Script" uid="uid://bfxhqaqju2w1g" path="res://characters/enemies/prototype/prototype_enemy_axe_thrower/axe.gd" id="1_pf1uc"]
 [ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="2_m6i7j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m6i7j"]

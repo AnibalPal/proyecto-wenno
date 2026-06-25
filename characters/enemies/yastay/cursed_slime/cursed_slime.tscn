@@ -1,0 +1,327 @@
+[gd_scene load_steps=37 format=3 uid="uid://crnw38l7vhmb2"]
+
+[ext_resource type="Script" uid="uid://cn21ycnxo1ku7" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.gd" id="1_1iamu"]
+[ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="2_3qsoo"]
+[ext_resource type="Script" uid="uid://bipe73bixjws3" path="res://characters/enemies/yastay/cursed_slime/state_machine.gd" id="2_11bk6"]
+[ext_resource type="Script" uid="uid://dyxgr7gkqkarw" path="res://characters/enemies/yastay/cursed_slime/spawn.gd" id="3_11bk6"]
+[ext_resource type="Script" uid="uid://dmk4cmb2ssg51" path="res://characters/enemies/yastay/cursed_slime/inactive.gd" id="3_lqaof"]
+[ext_resource type="Script" uid="uid://r1gd3qp5kcrk" path="res://characters/enemies/yastay/cursed_slime/run.gd" id="5_hxl8y"]
+[ext_resource type="PackedScene" uid="uid://bs1c2ojq0mv8s" path="res://characters/enemies/common/enemy_detection.tscn" id="6_ekd0c"]
+[ext_resource type="Script" uid="uid://cy82bekr7mp5j" path="res://characters/enemies/yastay/cursed_slime/attack.gd" id="6_h8ln0"]
+[ext_resource type="Script" uid="uid://cwfia1da70qfw" path="res://characters/enemies/common/enemy_detection.gd" id="7_7mw0q"]
+[ext_resource type="Texture2D" uid="uid://bdysi7f1efd0g" path="res://assets/spritesheets/jalea_maldita_spritesheet.png" id="8_7y3rg"]
+[ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="11_vh0o5"]
+[ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="12_g8awh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxl8y"]
+shader = ExtResource("2_3qsoo")
+shader_parameter/counter_state = false
+shader_parameter/hit_effect = false
+shader_parameter/offset = 0.0
+shader_parameter/aura_color = Color(1, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvn64"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh0o5"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y3rg"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8awh"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvqkj"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwr5o"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sie0e"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16xxg"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7kxu"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1snvp"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8nlo"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_toi0j"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao51n"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wra3n"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r8kw"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1iamu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvn64")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_vh0o5")
+}],
+"loop": false,
+"name": &"death",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_7y3rg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8awh")
+}],
+"loop": false,
+"name": &"on_clash",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvqkj")
+}],
+"loop": false,
+"name": &"on_damaged",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwr5o")
+}],
+"loop": true,
+"name": &"passive",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_sie0e")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_16xxg")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_t7kxu")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_1snvp")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_v8nlo")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_toi0j")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_ao51n")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_wra3n")
+}],
+"loop": true,
+"name": &"run",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r8kw")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 60.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekd0c"]
+size = Vector2(28, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8awh"]
+size = Vector2(56, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vh0o5"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mw0q"]
+size = Vector2(16, 8)
+
+[sub_resource type="Animation" id="Animation_y7tp8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/SpriteAnimations:material:shader_parameter/hit_effect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hfvpq"]
+resource_name = "hit_effect"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/SpriteAnimations:material:shader_parameter/hit_effect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7aexb"]
+_data = {
+&"RESET": SubResource("Animation_y7tp8"),
+&"hit_effect": SubResource("Animation_hfvpq")
+}
+
+[node name="CursedSlime" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_1iamu")
+speed = null
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_11bk6")
+initial_state = NodePath("Passive")
+
+[node name="Passive" type="Node" parent="StateMachine"]
+script = ExtResource("3_lqaof")
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource("3_11bk6")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+
+[node name="Walk" type="Node" parent="StateMachine"]
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("5_hxl8y")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_h8ln0")
+
+[node name="Death" type="Node" parent="StateMachine"]
+
+[node name="Damaged" type="Node" parent="StateMachine"]
+
+[node name="Cutscene" type="Node" parent="StateMachine"]
+
+[node name="ShouldRotate" type="Node2D" parent="."]
+
+[node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
+material = SubResource("ShaderMaterial_hxl8y")
+sprite_frames = SubResource("SpriteFrames_1iamu")
+animation = &"idle"
+
+[node name="Detections" type="Node2D" parent="ShouldRotate"]
+
+[node name="ActivateDetection" parent="ShouldRotate/Detections" instance=ExtResource("6_ekd0c")]
+
+[node name="CollisionShape2D" parent="ShouldRotate/Detections/ActivateDetection" index="0"]
+position = Vector2(0, -44)
+
+[node name="AttackInRangeDetection" type="Area2D" parent="ShouldRotate/Detections"]
+script = ExtResource("7_7mw0q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Detections/AttackInRangeDetection"]
+position = Vector2(26, -4)
+shape = SubResource("RectangleShape2D_ekd0c")
+
+[node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
+
+[node name="Attack" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_vh0o5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/Attack"]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_g8awh")
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
+[node name="Hurtboxes" type="Node2D" parent="ShouldRotate"]
+
+[node name="EnemyHurtbox" parent="ShouldRotate/Hurtboxes" instance=ExtResource("12_g8awh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hurtboxes/EnemyHurtbox"]
+shape = SubResource("RectangleShape2D_vh0o5")
+debug_color = Color(0.6117647, 0.3647059, 1, 0.41960785)
+
+[node name="Other" type="Node2D" parent="ShouldRotate"]
+
+[node name="ShouldNotRotate" type="Node2D" parent="."]
+
+[node name="FloorDetection" type="RayCast2D" parent="ShouldNotRotate"]
+position = Vector2(15, 11)
+target_position = Vector2(0, 16)
+
+[node name="WallDetection" type="RayCast2D" parent="ShouldNotRotate"]
+position = Vector2(16, 0)
+target_position = Vector2(16, 0)
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_7mw0q")
+
+[node name="VFXs" type="Node" parent="."]
+
+[node name="OnDamagedVFX" type="AnimationPlayer" parent="VFXs"]
+libraries = {
+&"": SubResource("AnimationLibrary_7aexb")
+}
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EditorTools" type="Node2D" parent="."]
+
+[connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Spawn" method="_on_sprite_animations_animation_finished"]
+[connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Attack" method="_on_sprite_animations_animation_finished"]
+[connection signal="area_entered" from="ShouldRotate/Detections/ActivateDetection" to="StateMachine/Passive" method="_on_activate_detection_area_entered"]
+[connection signal="area_entered" from="ShouldRotate/Detections/AttackInRangeDetection" to="StateMachine/Run" method="_on_attack_in_range_detection_area_entered"]
+
+[editable path="ShouldRotate/Detections/ActivateDetection"]
+[editable path="ShouldRotate/Hurtboxes/EnemyHurtbox"]

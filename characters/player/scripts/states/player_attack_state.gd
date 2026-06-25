@@ -38,7 +38,7 @@ func on_animation_finished() -> void:
 	if(player.player_animations.animation == animation_name):
 		attack_finished = true
 
-# Mostly used to start collision changes in frame 0
+# Mostly used to start collision changes in the start frame
 func on_animation_animation_changed() -> void:
 	if(!Engine.is_editor_hint()):
 		if(player.player_animations.animation == animation_name):

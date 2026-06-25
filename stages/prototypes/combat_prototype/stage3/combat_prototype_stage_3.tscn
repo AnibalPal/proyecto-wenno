@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://c73pp285cnllw" path="res://stages/prototypes/combat_prototype/stage1/combat_prototype_stage_1.gd" id="1_h1ymy"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="2_3g8jr"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="3_8th7t"]
-[ext_resource type="PackedScene" uid="uid://bj2ee2effkp6v" path="res://characters/enemies/prototype_enemy_bear/prototype_bear_enemy.tscn" id="4_3tyw3"]
-[ext_resource type="PackedScene" uid="uid://pvgqrdvw4ldb" path="res://characters/enemies/prototype_enemy_axe_thrower/axe_thrower.tscn" id="5_3g8jr"]
+[ext_resource type="PackedScene" uid="uid://bj2ee2effkp6v" path="res://characters/enemies/prototype/prototype_enemy_bear/prototype_bear_enemy.tscn" id="4_3tyw3"]
+[ext_resource type="PackedScene" uid="uid://pvgqrdvw4ldb" path="res://characters/enemies/prototype/prototype_enemy_axe_thrower/axe_thrower.tscn" id="5_3g8jr"]
 
 [node name="CombatPrototypeStage3" type="Node2D"]
 script = ExtResource("1_h1ymy")

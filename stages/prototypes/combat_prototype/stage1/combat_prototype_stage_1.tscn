@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c73pp285cnllw" path="res://stages/prototypes/combat_prototype/stage1/combat_prototype_stage_1.gd" id="1_a1vyu"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_xggen"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_184gn"]
-[ext_resource type="PackedScene" uid="uid://pvgqrdvw4ldb" path="res://characters/enemies/prototype_enemy_axe_thrower/axe_thrower.tscn" id="3_184gn"]
+[ext_resource type="PackedScene" uid="uid://pvgqrdvw4ldb" path="res://characters/enemies/prototype/prototype_enemy_axe_thrower/axe_thrower.tscn" id="3_184gn"]
 
 [node name="CombatPrototypeStage1" type="Node2D"]
 script = ExtResource("1_a1vyu")

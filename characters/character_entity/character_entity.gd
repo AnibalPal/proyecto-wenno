@@ -34,7 +34,6 @@ func _ready() -> void:
 func character_ready() -> void:
 	pass
 
-
 # Utility functions to be used inside PlayerState or Enemy scripts
 func turn_around() -> void:
 	if(facing_right):
@@ -71,7 +70,7 @@ func tool_update_jump_trayectory() -> void:
 		var draw_jump_node := get_node_or_null("EditorTools/DrawJumpPath")
 		if(draw_jump_node):
 			draw_jump_node.draw_jump_arc()
-	
+
 # Virtual functions used in the CombatManager class
 func on_damaged(_damage: int, _other_entity_position: Vector2) -> void:
 	pass

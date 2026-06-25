@@ -1,9 +1,9 @@
 [gd_scene load_steps=30 format=3 uid="uid://pvgqrdvw4ldb"]
 
-[ext_resource type="Script" uid="uid://dc30rstv8kg3e" path="res://characters/enemies/prototype_enemy_axe_thrower/axe_thrower.gd" id="1_h4bk0"]
+[ext_resource type="Script" uid="uid://dc30rstv8kg3e" path="res://characters/enemies/prototype/prototype_enemy_axe_thrower/axe_thrower.gd" id="1_h4bk0"]
 [ext_resource type="Texture2D" uid="uid://3g7uney1pp8k" path="res://assets/prototype/trauco_fleaman_32x32_spritesheet.png" id="1_stnio"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="2_baisa"]
-[ext_resource type="PackedScene" uid="uid://cv0nf6y7i6qaq" path="res://characters/enemies/prototype_enemy_axe_thrower/axe.tscn" id="2_ciie0"]
+[ext_resource type="PackedScene" uid="uid://cv0nf6y7i6qaq" path="res://characters/enemies/prototype/prototype_enemy_axe_thrower/axe.tscn" id="2_ciie0"]
 [ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="3_tl2ip"]
 [ext_resource type="Texture2D" uid="uid://dc3kafg03g2y8" path="res://assets/prototype/trauco_axe_arm_32x32_spritesheet.png" id="5_03d82"]
 

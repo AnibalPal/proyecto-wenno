@@ -1,24 +1,21 @@
 @tool
-class_name Enemy
-extends CharacterEntity
+class_name CursedSlime
+extends Enemy
 
-@export_group("stats")
-@export var health := 1
-@export var stamina := 10
-@export var attack_damage := 1
-@export var energy := 3
+@onready var attack_in_range_detection: EnemyDetection = $ShouldRotate/Detections/AttackInRangeDetection
+@onready var floor_detection: RayCast2D = $ShouldNotRotate/FloorDetection
+@onready var wall_detection: RayCast2D = $ShouldNotRotate/WallDetection
 
-@export var gravity := 300
+@export_group("Movement vars")
+@export var speed := 100
 
-@onready var sprite_animations := $ShouldRotate/SpriteAnimations
-@onready var hitboxes := $ShouldRotate/Hitboxes
-@onready var hurtboxes := $ShouldRotate/Hitboxes
+@export_group("Attack stats")
+# TODO: add a variable that is a list of fight data, maybe create a resource. 
+# for example:
+# @export var attack_hitbox: Hitbox
+# @export var attack_start_active_frames : int
+# @export var attack_end_active_frames : int
 
-# Detection areas
-@onready var detections: Node2D = $ShouldRotate/Detections
-@onready var activate_detection: EnemyDetection = $ShouldRotate/Detections/ActivateDetection
-
-var counter_hit_state := false
 
 # Functions to override
 func character_ready() -> void:
@@ -49,34 +46,17 @@ func death():
 	# Call a death animation and do whatever else is needed
 	queue_free()
 
+func enable_attack_detection() -> void:
+	attack_in_range_detection.enable()
+
+func disable_attack_detection() -> void:
+	attack_in_range_detection.disable()
+
 func on_clash(_other_collision_position: Vector2) -> void:
 	pass
 
 func on_hit() -> void:
 	pass
-
-# Helper Functions
-func disable_hitboxes() -> void:
-	for hitbox : EnemyHitbox in hitboxes.get_children():
-		hitbox.disable()
-
-func disable_hurtboxes() -> void:
-	for hurtbox : EnemyHurtbox in hurtboxes.get_children():
-		hurtbox.disable()
-
-func enable_hurtboxes() -> void:
-	for hurtbox : EnemyHurtbox in hurtboxes.get_children():
-		hurtbox.enable()
-
-func disable_detections() -> void:
-	for detection : EnemyDetection in detections:
-		detection.disable()
-
-func enable_activation_detection() -> void:
-	activate_detection.enable()
-
-func disable_activation_detection() -> void:
-	activate_detection.disable()
 
 func set_counter_state(value: bool) -> void:
 	if(Settings.counter_state_aura):
