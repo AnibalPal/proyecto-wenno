@@ -2,7 +2,7 @@ class_name EnemyState
 extends State
 
 var enemy: Enemy
-var state_machine : EnemyStateMachine
+var state_machine: EnemyStateMachine
 
 func _ready() -> void:
 	await owner.ready

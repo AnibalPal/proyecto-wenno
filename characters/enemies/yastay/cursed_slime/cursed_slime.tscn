@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://crnw38l7vhmb2"]
+[gd_scene load_steps=39 format=3 uid="uid://crnw38l7vhmb2"]
 
 [ext_resource type="Script" uid="uid://cn21ycnxo1ku7" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.gd" id="1_1iamu"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="2_3qsoo"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bs1c2ojq0mv8s" path="res://characters/enemies/common/enemy_detection.tscn" id="6_ekd0c"]
 [ext_resource type="Script" uid="uid://cy82bekr7mp5j" path="res://characters/enemies/yastay/cursed_slime/attack.gd" id="6_h8ln0"]
 [ext_resource type="Script" uid="uid://cwfia1da70qfw" path="res://characters/enemies/common/enemy_detection.gd" id="7_7mw0q"]
+[ext_resource type="Script" uid="uid://wmbi3x2kfr6r" path="res://characters/enemies/yastay/cursed_slime/attack_params.gd" id="7_g8awh"]
 [ext_resource type="Texture2D" uid="uid://bdysi7f1efd0g" path="res://assets/spritesheets/jalea_maldita_spritesheet.png" id="8_7y3rg"]
 [ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="11_vh0o5"]
 [ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="12_g8awh"]
@@ -21,6 +22,10 @@ shader_parameter/offset = 0.0
 shader_parameter/aura_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dvn64"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1yr4"]
 atlas = ExtResource("8_7y3rg")
 region = Rect2(320, 0, 32, 32)
 
@@ -83,8 +88,14 @@ region = Rect2(288, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_1iamu"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 30.0,
 "texture": SubResource("AtlasTexture_dvn64")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_f1yr4")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_f1yr4")
 }],
 "loop": false,
 "name": &"attack",
@@ -160,7 +171,7 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 60.0,
 "texture": SubResource("AtlasTexture_8r8kw")
 }],
 "loop": false,
@@ -169,16 +180,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekd0c"]
-size = Vector2(28, 24)
+size = Vector2(44, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8awh"]
-size = Vector2(56, 16)
+size = Vector2(88, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vh0o5"]
-size = Vector2(32, 32)
+size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mw0q"]
-size = Vector2(16, 8)
+size = Vector2(32, 8)
 
 [sub_resource type="Animation" id="Animation_y7tp8"]
 length = 0.001
@@ -221,7 +232,11 @@ _data = {
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_1iamu")
-speed = null
+health = 2
+stamina = 3
+attack_damage = null
+energy = null
+gravity = null
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_11bk6")
@@ -233,49 +248,56 @@ script = ExtResource("3_lqaof")
 [node name="Spawn" type="Node" parent="StateMachine"]
 script = ExtResource("3_11bk6")
 
-[node name="Idle" type="Node" parent="StateMachine"]
-
-[node name="Walk" type="Node" parent="StateMachine"]
-
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("5_hxl8y")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_h8ln0")
 
-[node name="Death" type="Node" parent="StateMachine"]
-
-[node name="Damaged" type="Node" parent="StateMachine"]
-
-[node name="Cutscene" type="Node" parent="StateMachine"]
-
 [node name="ShouldRotate" type="Node2D" parent="."]
 
-[node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
+[node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate" node_paths=PackedStringArray("attack_hitbox")]
 material = SubResource("ShaderMaterial_hxl8y")
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_1iamu")
-animation = &"idle"
+animation = &"passive"
+script = ExtResource("7_g8awh")
+attack_hitbox = NodePath("../Hitboxes/Attack")
+active_frames_start = 1
+active_frames_end = 2
 
-[node name="Detections" type="Node2D" parent="ShouldRotate"]
+[node name="AreaDetections" type="Node2D" parent="ShouldRotate"]
 
-[node name="ActivateDetection" parent="ShouldRotate/Detections" instance=ExtResource("6_ekd0c")]
+[node name="ActivateDetection" parent="ShouldRotate/AreaDetections" instance=ExtResource("6_ekd0c")]
 
-[node name="CollisionShape2D" parent="ShouldRotate/Detections/ActivateDetection" index="0"]
+[node name="CollisionShape2D" parent="ShouldRotate/AreaDetections/ActivateDetection" index="0"]
 position = Vector2(0, -44)
 
-[node name="AttackInRangeDetection" type="Area2D" parent="ShouldRotate/Detections"]
+[node name="AttackInRangeDetection" type="Area2D" parent="ShouldRotate/AreaDetections"]
+collision_layer = 0
+collision_mask = 64
 script = ExtResource("7_7mw0q")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Detections/AttackInRangeDetection"]
-position = Vector2(26, -4)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/AreaDetections/AttackInRangeDetection"]
+position = Vector2(34, -4)
 shape = SubResource("RectangleShape2D_ekd0c")
+
+[node name="Raycasts" type="Node2D" parent="ShouldRotate"]
+
+[node name="FloorDetection" type="RayCast2D" parent="ShouldRotate/Raycasts"]
+position = Vector2(31, 29)
+target_position = Vector2(0, 16)
+
+[node name="WallDetection" type="RayCast2D" parent="ShouldRotate/Raycasts"]
+position = Vector2(32, 16)
+target_position = Vector2(16, 0)
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
 [node name="Attack" parent="ShouldRotate/Hitboxes" instance=ExtResource("11_vh0o5")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/Attack"]
-position = Vector2(20, 0)
+position = Vector2(28, 0)
 shape = SubResource("RectangleShape2D_g8awh")
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
 
@@ -291,16 +313,8 @@ debug_color = Color(0.6117647, 0.3647059, 1, 0.41960785)
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
 
-[node name="FloorDetection" type="RayCast2D" parent="ShouldNotRotate"]
-position = Vector2(15, 11)
-target_position = Vector2(0, 16)
-
-[node name="WallDetection" type="RayCast2D" parent="ShouldNotRotate"]
-position = Vector2(16, 0)
-target_position = Vector2(16, 0)
-
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 28)
 shape = SubResource("RectangleShape2D_7mw0q")
 
 [node name="VFXs" type="Node" parent="."]
@@ -320,8 +334,9 @@ offset_bottom = 40.0
 
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Spawn" method="_on_sprite_animations_animation_finished"]
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Attack" method="_on_sprite_animations_animation_finished"]
-[connection signal="area_entered" from="ShouldRotate/Detections/ActivateDetection" to="StateMachine/Passive" method="_on_activate_detection_area_entered"]
-[connection signal="area_entered" from="ShouldRotate/Detections/AttackInRangeDetection" to="StateMachine/Run" method="_on_attack_in_range_detection_area_entered"]
+[connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="ShouldRotate/SpriteAnimations" method="_on_frame_changed"]
+[connection signal="area_entered" from="ShouldRotate/AreaDetections/ActivateDetection" to="StateMachine/Passive" method="_on_activate_detection_area_entered"]
+[connection signal="area_entered" from="ShouldRotate/AreaDetections/AttackInRangeDetection" to="StateMachine/Run" method="_on_attack_in_range_detection_area_entered"]
 
-[editable path="ShouldRotate/Detections/ActivateDetection"]
+[editable path="ShouldRotate/AreaDetections/ActivateDetection"]
 [editable path="ShouldRotate/Hurtboxes/EnemyHurtbox"]

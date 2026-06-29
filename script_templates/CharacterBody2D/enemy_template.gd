@@ -12,11 +12,13 @@ extends CharacterEntity
 
 @onready var sprite_animations := $ShouldRotate/SpriteAnimations
 @onready var hitboxes := $ShouldRotate/Hitboxes
-@onready var hurtboxes := $ShouldRotate/Hitboxes
+@onready var hurtboxes := $ShouldRotate/Hurtboxes
 
 # Detection areas
-@onready var detections: Node2D = $ShouldRotate/Detections
-@onready var activate_detection: EnemyDetection = $ShouldRotate/Detections/ActivateDetection
+@onready var detections: Node2D = $ShouldRotate/AreaDetections
+@onready var activate_detection: EnemyDetection = $ShouldRotate/AreaDetections/ActivateDetection
+
+@onready var state_machine: EnemyStateMachine = $StateMachine
 
 var counter_hit_state := false
 

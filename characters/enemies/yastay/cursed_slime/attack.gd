@@ -2,6 +2,7 @@
 extends EnemyState
 
 func enter(_data: Dictionary) -> void:
+	enemy.velocity.x = 0
 	enemy.sprite_animations.play("attack")
 
 func state_physics_process(_delta: float) -> void:
@@ -17,4 +18,4 @@ func reset_state()  -> void:
 
 func _on_sprite_animations_animation_finished() -> void:
 	if(enemy.sprite_animations.animation == "attack"):
-		state_machine.transition_to_next_state(state_machine.IDLE)
+		state_machine.transition_to_next_state(state_machine.RUN)
