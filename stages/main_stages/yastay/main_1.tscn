@@ -41,6 +41,7 @@ position = Vector2(416, 360)
 
 [node name="CursedSlime" parent="World" instance=ExtResource("5_34y05")]
 position = Vector2(-128, 288)
+clash_strength = 1
 
 [node name="Entries" type="Node2D" parent="."]
 

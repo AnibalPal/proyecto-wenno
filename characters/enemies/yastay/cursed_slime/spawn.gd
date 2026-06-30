@@ -1,4 +1,3 @@
-@tool
 extends EnemyState
 
 func enter(_data: Dictionary) -> void:
@@ -17,4 +16,4 @@ func state_physics_process(_delta: float) -> void:
 
 func _on_sprite_animations_animation_finished() -> void:
 	if(enemy.sprite_animations.animation == "spawn"):
-		state_machine.transition_to_next_state(state_machine.RUN)
+		transition_to(state_machine.RUN)

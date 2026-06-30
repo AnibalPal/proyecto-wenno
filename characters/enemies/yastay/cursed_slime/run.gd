@@ -1,4 +1,3 @@
-@tool
 extends EnemyState
 
 func enter(_data: Dictionary) -> void:
@@ -20,4 +19,4 @@ func state_physics_process(_delta: float) -> void:
 
 # Transitions via signals here
 func _on_attack_in_range_detection_area_entered(_area: Area2D) -> void:
-	state_machine.transition_to_next_state(state_machine.ATTACK)
+	transition_to(state_machine.ATTACK)

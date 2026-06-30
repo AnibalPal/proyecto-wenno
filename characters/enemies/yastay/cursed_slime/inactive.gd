@@ -1,4 +1,3 @@
-@tool
 extends EnemyState
 
 func enter(_data: Dictionary) -> void:
@@ -18,6 +17,6 @@ func state_physics_process(_delta: float) -> void:
 
 # Transitions based on detections, should go below here
 func _on_activate_detection_area_entered(_area: Area2D) -> void:
-	state_machine.transition_to_next_state(state_machine.SPAWN,{
+	transition_to(state_machine.SPAWN,{
 		"player_position" : _area.global_position
 	})
