@@ -52,9 +52,11 @@ collision_mask = 3
 
 [node name="StateMachine" type="Node" parent="."]
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Passive" type="Node" parent="StateMachine"]
 
 [node name="Cutscene" type="Node" parent="StateMachine"]
+
+[node name="Idle" type="Node" parent="StateMachine/Cutscene"]
 
 [node name="ShouldRotate" type="Node2D" parent="."]
 
