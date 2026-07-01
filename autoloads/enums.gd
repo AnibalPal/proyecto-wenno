@@ -7,7 +7,8 @@ enum CutsceneCommonActions {
 	WALK,
 	TALK,
 	ANIMATION,
-	WAIT
+	WAIT,
+	INSTANTIATE
 }
 
 const CUTSCENE_EXPECTED_DATA = {
@@ -23,4 +24,5 @@ const CUTSCENE_EXPECTED_DATA = {
 	},
 	CutsceneCommonActions.ANIMATION : null,
 	CutsceneCommonActions.WAIT : null,
+	CutsceneCommonActions.INSTANTIATE : null
 }

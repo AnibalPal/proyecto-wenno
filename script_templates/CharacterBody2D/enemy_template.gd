@@ -71,7 +71,7 @@ func enable_hurtboxes() -> void:
 		hurtbox.enable()
 
 func disable_detections() -> void:
-	for detection : EnemyDetection in detections:
+	for detection : EnemyDetection in detections.get_children():
 		detection.disable()
 
 func enable_activation_detection() -> void:

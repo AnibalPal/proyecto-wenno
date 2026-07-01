@@ -38,7 +38,7 @@ func end_cutscene() -> void:
 	#TODO: Maybe clean this in some other way
 	# Update cutscene state to be seen
 	PlayerData.s_update_cutscene_state.emit(currently_playing_cutscene_node.id)
-	currently_playing_cutscene_node.queue_free()
+	currently_playing_cutscene_node.cutscene_complete()
 	currently_playing_cutscene_node = null
 	player_step_completed = true
 	cutscene_entitites_step_completed = true

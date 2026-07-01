@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://ck0xpx1dhvjc2"]
+[gd_scene load_steps=42 format=4 uid="uid://ck0xpx1dhvjc2"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_buxlp"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_vlr1m"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://stages/cutscenes/dialogue_bubble.tscn" id="13_epbk7"]
 [ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="13_smmjg"]
 [ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="13_vef0q"]
+[ext_resource type="PackedScene" uid="uid://crnw38l7vhmb2" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.tscn" id="17_af7qt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wos68"]
 size = Vector2(48, 80)
@@ -83,14 +84,58 @@ script = ExtResource("13_smmjg")
 entity = "TestNPC"
 action = 4
 data = {
+"text": "Voy a invocar a un enemigo",
+"width": 200
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_gh3ff"]
+script = ExtResource("13_smmjg")
+entity = "Slime1"
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_6ahtd"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_htpxw"), SubResource("Resource_gh3ff")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_5jvv7"]
+script = ExtResource("13_smmjg")
+entity = "TestNPC"
+action = 4
+data = {
+"text": "Te invoco jalea maldita!",
+"width": 240
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_875ep"]
+script = ExtResource("13_smmjg")
+entity = "Slime1"
+action = 2
+data = {
+"x": 400
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_rss2i"]
+script = ExtResource("12_wp1qa")
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_5jvv7"), SubResource("Resource_875ep")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_p0d6d"]
+script = ExtResource("13_smmjg")
+entity = "TestNPC"
+action = 4
+data = {
 "text": "Bueno chao",
 "width": 100
 }
 metadata/_custom_type_script = "uid://dk5itjx85if0m"
 
-[sub_resource type="Resource" id="Resource_6ahtd"]
+[sub_resource type="Resource" id="Resource_s3and"]
 script = ExtResource("12_wp1qa")
-actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_htpxw")])
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_p0d6d")])
 metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
 
 [sub_resource type="Resource" id="Resource_rwk2m"]
@@ -117,9 +162,15 @@ data = {
 }
 metadata/_custom_type_script = "uid://dk5itjx85if0m"
 
+[sub_resource type="Resource" id="Resource_fmgaw"]
+script = ExtResource("13_smmjg")
+entity = "Slime1"
+action = 7
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
 [sub_resource type="Resource" id="Resource_bb3b7"]
 script = ExtResource("12_wp1qa")
-actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_3rqkl")])
+actions = Array[ExtResource("13_smmjg")]([SubResource("Resource_3rqkl"), SubResource("Resource_fmgaw")])
 metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epbk7"]
@@ -195,12 +246,14 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_dfm2w")
 color = Color(0.3863936, 0.65864027, 0.3070067, 1)
 
+[node name="Enemies" type="Node2D" parent="."]
+
 [node name="Cutscenes" type="Node2D" parent="."]
 
 [node name="Cutscene1" type="Node2D" parent="Cutscenes"]
 script = ExtResource("11_8v8c7")
 id = "cutscene_1"
-cutscene_data = Array[ExtResource("12_wp1qa")]([SubResource("Resource_smmjg"), SubResource("Resource_a55il"), SubResource("Resource_p2ees"), SubResource("Resource_6ahtd"), SubResource("Resource_se88u"), SubResource("Resource_bb3b7")])
+cutscene_data = Array[ExtResource("12_wp1qa")]([SubResource("Resource_smmjg"), SubResource("Resource_a55il"), SubResource("Resource_p2ees"), SubResource("Resource_6ahtd"), SubResource("Resource_rss2i"), SubResource("Resource_s3and"), SubResource("Resource_se88u"), SubResource("Resource_bb3b7")])
 
 [node name="Entities" type="Node2D" parent="Cutscenes/Cutscene1"]
 
@@ -220,6 +273,11 @@ texture = ExtResource("13_vef0q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscenes/Cutscene1/Entities/TestNPC"]
 shape = SubResource("RectangleShape2D_epbk7")
+
+[node name="Slime1" parent="Cutscenes/Cutscene1/Entities" instance=ExtResource("17_af7qt")]
+process_mode = 4
+visible = false
+position = Vector2(752, 288)
 
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
 position = Vector2(232, 272)

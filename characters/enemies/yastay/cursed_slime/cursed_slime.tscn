@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://crnw38l7vhmb2"]
+[gd_scene load_steps=43 format=3 uid="uid://crnw38l7vhmb2"]
 
 [ext_resource type="Script" uid="uid://cn21ycnxo1ku7" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.gd" id="1_1iamu"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="2_3qsoo"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://wmbi3x2kfr6r" path="res://characters/enemies/yastay/cursed_slime/attack_params.gd" id="7_g8awh"]
 [ext_resource type="Script" uid="uid://dgp7s7kr0slaq" path="res://characters/enemies/yastay/cursed_slime/cutscene.gd" id="7_kvqkj"]
 [ext_resource type="Texture2D" uid="uid://bdysi7f1efd0g" path="res://assets/spritesheets/jalea_maldita_spritesheet.png" id="8_7y3rg"]
+[ext_resource type="Script" uid="uid://b8e2c5su2g1rg" path="res://characters/enemies/yastay/cursed_slime/idle.gd" id="8_16xxg"]
 [ext_resource type="Script" uid="uid://03aayj3emt07" path="res://characters/enemies/yastay/cursed_slime/move_left.gd" id="8_sie0e"]
 [ext_resource type="Script" uid="uid://bt33u06vwyx6k" path="res://characters/enemies/yastay/cursed_slime/move_right.gd" id="9_16xxg"]
 [ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="11_vh0o5"]
@@ -259,6 +260,9 @@ script = ExtResource("6_h8ln0")
 
 [node name="Cutscene" type="Node" parent="StateMachine"]
 script = ExtResource("7_kvqkj")
+
+[node name="Idle" type="Node" parent="StateMachine/Cutscene"]
+script = ExtResource("8_16xxg")
 
 [node name="MoveLeft" type="Node" parent="StateMachine/Cutscene"]
 script = ExtResource("8_sie0e")

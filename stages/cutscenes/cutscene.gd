@@ -1,23 +1,32 @@
 class_name Cutscene
 extends Node2D
 
+@onready var enemies: Node2D = $"../../Enemies"
+
 signal s_start_cutscene(cutscene_id: String, cutscene_node: Cutscene)
 signal s_step_complete
 
 @export var id := ""
+@export var cutscene_data : Array[CutsceneStep]
+
 @onready var entities: Node2D = $Entities
 
 var current_idx := 0
 var action_stack :Array[CutsceneAction] = []
 var expected_actions := 0
-
-@export var cutscene_data : Array[CutsceneStep]
+# Holds enemies or npcs that will still be in the game after the cutscene is done
+var persisting_nodes = []
 
 func _ready() -> void:
 	if(PlayerData.player_progression["cutscenes"].has(id) and PlayerData.player_progression["cutscenes"][id]):
 		queue_free()
-	for cutscene_entity: CutsceneEntityBase in entities.get_children():
-		cutscene_entity.s_action_complete.connect(on_action_complete)
+	for cutscene_entity in entities.get_children():
+		if(cutscene_entity is CutsceneEntityBase):
+			cutscene_entity.s_action_complete.connect(on_action_complete)
+		if(cutscene_entity is Enemy):
+			cutscene_entity.state_machine.transition_to_next_state("Cutscene")
+			cutscene_entity.state_machine.current_state.s_action_complete.connect(on_action_complete)
+			cutscene_entity.state_machine.current_state.s_persist.connect(on_persist)
 
 func _on_trigger_area_entered(_area: Area2D) -> void:
 	s_start_cutscene.emit(id, self)
@@ -43,7 +52,13 @@ func execute() -> void:
 	for action in action_stack:
 		var entity = entities.get_node_or_null(action.entity)
 		assert(entity, "ENTITY NOT FOUND")
-		entity.handle_action(action.action, action.data)
+		if(entity is CutsceneEntityBase):
+			entity.handle_action(action.action, action.data)
+		if(entity is Enemy):
+			if(entity.state_machine.current_state.name == "Cutscene"):
+				entity.state_machine.current_state.execute_cutscene_step(action.action, action.data)
+			else:
+				print("Not in cutscene state, the state is: %s" % entity.state_machine.current_state.name)
 	action_stack = []
 
 func on_action_complete() -> void:
@@ -51,3 +66,15 @@ func on_action_complete() -> void:
 	if(expected_actions <= 0):
 		expected_actions = 0
 		s_step_complete.emit()
+
+func on_persist(node: Node) -> void:
+	persisting_nodes.append(node)
+
+func cutscene_complete() -> void:
+	# Do some cleaning if needed, also instantiate nodes that should persist the cutscene, like summoned enemies
+	for node: Node in persisting_nodes:
+		#TODO: this assumes only enemies can persist, when NPCs are added this should
+		# check that case as well
+		node.state_machine.current_state.end()
+		node.reparent(enemies)
+	queue_free()
