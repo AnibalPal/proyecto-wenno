@@ -2,10 +2,10 @@ extends CutsceneState
 
 var target_position_y = null
 
-func enter(_data := {}) -> void:
+func cutscene_state_enter(_data := {}) -> void:
 	if(_data.has("y")):
 		target_position_y = _data["y"]
-	cutscene_entity.cutscene_animations.play("jump")
+	cutscene_entity.entity_animations.play("jump")
 	cutscene_entity.velocity = Vector2(0, -cutscene_entity.jump_impulse)
 
 func state_physics_process(_delta: float) -> void:

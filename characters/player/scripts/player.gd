@@ -86,12 +86,17 @@ func enter_cutscene_mode() -> void:
 	player_hurtbox.disable()
 	player_state_machine.deactivate_process()
 	cutscene_state_machine.activate_process()
+	cutscene_state_machine.transition_to_next_state(cutscene_state_machine.IDLE)
 
 func exit_cutscene_mode() -> void:
 	player_trigger_collision.set_deferred("disabled", false)
 	player_hurtbox.enable()
 	player_state_machine.activate_process()
 	cutscene_state_machine.deactivate_process()
+	if(Input.is_action_pressed("left") or Input.is_action_pressed("right")):
+		player_state_machine.transition_to_next_state(player_state_machine.state_data.RUN)
+	else:
+		player_state_machine.transition_to_next_state(player_state_machine.state_data.IDLE)
 
 # Used in combat resolution
 func on_damaged(damage: int, enemy_position: Vector2) -> void:

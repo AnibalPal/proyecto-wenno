@@ -21,6 +21,7 @@ static var transitions = {
 			ATTACK: true
 		},
 		RUN: {
+			RUN: true,
 			IDLE: true,
 			FALL: true,
 			JUMP: true,
@@ -34,6 +35,7 @@ static var transitions = {
 			AIRATTACK: true
 		},
 		JUMP: {
+			RUN: true,
 			FALL: true,
 			AIRATTACK: true
 		},
@@ -55,12 +57,10 @@ static var transitions = {
 		RECOIL: {
 			ALL: true
 		},
-		CUTSCENE: {
-			ALL: true
-		},
 		ALL: {
 			HIT: true,
 			RECOIL: true,
-			CUTSCENE: true
+			CUTSCENE: true,
+			IDLE: true
 		}
 }

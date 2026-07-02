@@ -3,7 +3,7 @@ extends CutsceneState
 var move_duration_msecs = null 
 var target_position_x = null
 
-func enter(_data := {}) -> void:
+func cutscene_state_enter(_data := {}) -> void:
 	if(_data.has("x")):
 		target_position_x = _data["x"]
 	cutscene_entity.turn_right()

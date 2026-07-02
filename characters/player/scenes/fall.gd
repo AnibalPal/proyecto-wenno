@@ -1,6 +1,6 @@
 extends CutsceneState
 
-func enter(_data := {}) -> void:
+func cutscene_state_enter(_data := {}) -> void:
 	if(cutscene_entity.velocity.y <= 0):
 		cutscene_entity.velocity.y = 0
 	cutscene_entity.entity_animations.play("fall")

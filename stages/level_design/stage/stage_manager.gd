@@ -36,7 +36,7 @@ func set_player_move_direction(direction: String, end_cutscene:= false):
 				"end": end_cutscene
 			})
 		"RIGHT":
-			player.cutscene_state_machine.transition_to_next_state("MoveRight", {
+			player.cutscene_state_machine.transition_to_next_state("Move", {
 				"x": player.global_position.x + 120,
 				"end": end_cutscene
 			})
@@ -46,7 +46,7 @@ func set_player_move_direction(direction: String, end_cutscene:= false):
 				"end": end_cutscene
 			})
 		"LEFT":
-			player.cutscene_state_machine.transition_to_next_state("MoveLeft", {
+			player.cutscene_state_machine.transition_to_next_state("Move", {
 				"x": player.global_position.x - 120,
 				"end": end_cutscene
 			})

@@ -283,7 +283,7 @@ energy = 3
 gravity = 300
 
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
-position = Vector2(232, 272)
+position = Vector2(232, 280)
 collision_layer = 0
 collision_mask = 64
 

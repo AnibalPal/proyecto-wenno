@@ -1,6 +1,6 @@
 extends CutsceneState
 
-func enter(_data := {}) -> void:
+func cutscene_state_enter(_data := {}) -> void:
 	cutscene_entity.velocity.x = 0
 	if(cutscene_entity.is_on_floor()):
 		cutscene_entity.entity_animations.play("idle")
