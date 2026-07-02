@@ -1,3 +1,4 @@
+# TODO: CHANGE THIS SCRIPT TO A CUTSCENE STATE MACHINE PATTERN
 @tool
 class_name CutsceneEntityBase
 extends CharacterEntity

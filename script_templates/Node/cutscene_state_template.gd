@@ -4,13 +4,12 @@ func enter(_data := {}) -> void:
 	#cutscene_entity.cutscene_animations
 	pass
 
-func cutscene_state_process(_delta) -> void:
-	# DO NOT USE move_and_slide
+func state_process(_delta) -> void:
+	# use end_move() somewhere here or in physics process
 	pass
 
-func cutscene_state_physics_process(_delta) -> void:
-	# DO NOT USE move_and_slide
-	# use end_move() somewhere here
+func state_physics_process(_delta) -> void:
+	# use end_move() somewhere here or in process
 	pass
 
 func reset_vars() -> void:

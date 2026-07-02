@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="11_8v8c7"]
 [ext_resource type="Script" uid="uid://bithqqv7d4idm" path="res://stages/cutscenes/cutscene_entity_base.gd" id="12_41nde"]
 [ext_resource type="Script" uid="uid://cdpg2b6dbbx0r" path="res://stages/cutscenes/resources/cutscene_step.gd" id="12_wp1qa"]
-[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://stages/cutscenes/dialogue_bubble.tscn" id="13_epbk7"]
+[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://characters/cutscenes/dialogue_bubble.tscn" id="13_epbk7"]
 [ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="13_smmjg"]
 [ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="13_vef0q"]
 [ext_resource type="PackedScene" uid="uid://crnw38l7vhmb2" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.tscn" id="17_af7qt"]
@@ -278,6 +278,9 @@ shape = SubResource("RectangleShape2D_epbk7")
 process_mode = 4
 visible = false
 position = Vector2(752, 288)
+attack_damage = 1
+energy = 3
+gravity = 300
 
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
 position = Vector2(232, 272)

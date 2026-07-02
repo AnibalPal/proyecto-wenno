@@ -28,7 +28,7 @@ func execute_step(steps := []) -> void:
 	for action in steps:
 		if(action.entity == "player"):
 			player_step_completed = false
-			player.state_machine.current_state.execute_cutscene_step(action.action, action.data)
+			player.cutscene_state_machine.execute_cutscene_step(action.action, action.data)
 		else:
 			cutscene_entitites_step_completed = false
 			currently_playing_cutscene_node.add_step_action(action)
@@ -42,9 +42,9 @@ func end_cutscene() -> void:
 	currently_playing_cutscene_node = null
 	player_step_completed = true
 	cutscene_entitites_step_completed = true
-	if(player.state_machine.current_state.name == "Cutscene"):
-		player.state_machine.current_state.s_action_complete.disconnect(on_player_step_complete)
-		player.state_machine.current_state.end()
+	if(player.cutscene_state_machine.process_active):
+		player.cutscene_state_machine.s_action_complete.disconnect(on_player_step_complete)
+		player.cutscene_state_machine.end_cutscene_mode()
 	else:
 		print("PLAYER WAS NOT IN CUTSCENE STATE WHEN TRYING TO END CUTSCENE")
 
@@ -55,8 +55,8 @@ func start_cutscene(cutscene_id: String, cutscene_node: Cutscene) -> void:
 	currently_playing_cutscene_node = cutscene_node
 	var cutscene_step_data = currently_playing_cutscene_node.get_next()
 	# Set the player state to cutscene, then move as requested by the current cutscene
-	player.state_machine.transition_to_next_state(player.state_machine.state_data.CUTSCENE)
-	player.state_machine.current_state.s_action_complete.connect(on_player_step_complete)
+	player.enter_cutscene_mode()
+	player.cutscene_state_machine.s_action_complete.connect(on_player_step_complete)
 	if(cutscene_step_data):
 		execute_step(cutscene_step_data.actions)
 	# Should also hide UI

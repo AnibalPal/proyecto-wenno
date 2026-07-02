@@ -7,3 +7,7 @@ exports/
 
 # Addons
 addons/
+
+# Godot IDE specific
+.godot_ide/
+.script_splitter/

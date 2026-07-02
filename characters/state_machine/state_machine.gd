@@ -3,6 +3,7 @@ class_name StateMachine
 extends Node
 
 @export var initial_state : State
+@export var process_active := false
 
 var current_state : State
 
@@ -10,10 +11,12 @@ func _ready() -> void:
 	state_machine_ready()
 
 func _process(delta: float) -> void:
-	current_state.state_process(delta)
+	if(process_active):
+		current_state.state_process(delta)
 
 func _physics_process(delta: float) -> void:
-	current_state.state_physics_process(delta)
+	if(process_active):
+		current_state.state_physics_process(delta)
 
 func state_machine_ready():
 	current_state = initial_state
@@ -25,3 +28,10 @@ func state_machine_ready():
 func transition_to_next_state(next_state_path: String, data := {}) -> void:
 	current_state = get_node(next_state_path)
 	current_state.enter(data)
+
+func activate_process() -> void:
+	process_active = true
+
+func deactivate_process() -> void:
+	process_active = false
+	

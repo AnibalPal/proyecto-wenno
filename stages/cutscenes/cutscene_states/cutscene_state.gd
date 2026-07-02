@@ -1,7 +1,7 @@
 class_name CutsceneState
-extends Node
+extends State
 
-@onready var cutscene_state_manager := $".."
+@onready var cutscene_state_machine := $".."
 var cutscene_entity : CharacterEntity
 var should_end := false
 
@@ -21,21 +21,13 @@ func check_if_end(_data := {}) -> void:
 func enter(_data := {}) -> void:
 	pass
 
-# Override
-func cutscene_state_process(_delta: float) -> void:
-	pass
-
-# Override
-func cutscene_state_physics_process(_delta: float) -> void:
-	pass
-
 func end_move() -> void:
 	reset_vars()
 	if(should_end):
-		cutscene_state_manager.end()
+		cutscene_state_machine.end_cutscene_mode()
 	else:
-		cutscene_state_manager.s_action_complete.emit()
-		cutscene_state_manager.cutscene_transition_to(cutscene_state_manager.IDLE)
+		cutscene_state_machine.s_action_complete.emit()
+		cutscene_state_machine.transition_to_next_state(cutscene_state_machine.IDLE)
 
 # Override
 func reset_vars() -> void:

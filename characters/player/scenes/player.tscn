@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://buc8t17kjk5nj"]
+[gd_scene load_steps=69 format=3 uid="uid://buc8t17kjk5nj"]
 
 [ext_resource type="Script" uid="uid://8joi5g8bs0lc" path="res://characters/player/scripts/player.gd" id="1_ittr2"]
 [ext_resource type="Script" uid="uid://cauv82w2xwfwa" path="res://characters/player/scripts/states/player_state_machine.gd" id="2_gy3q1"]
@@ -15,13 +15,15 @@
 [ext_resource type="Script" uid="uid://cpjguobpn02om" path="res://characters/player/scripts/states/recoil.gd" id="11_ronts"]
 [ext_resource type="PackedScene" uid="uid://duupkg4fs536n" path="res://characters/collisions/scenes/player_hurtbox.tscn" id="12_eigjl"]
 [ext_resource type="Script" uid="uid://br2dnkhwsutnn" path="res://characters/player/scripts/states/cutscene.gd" id="12_j2wwh"]
-[ext_resource type="Script" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
+[ext_resource type="Script" uid="uid://cpexqcardxntc" path="res://characters/collisions/scripts/hitbox_collision_shape.gd" id="13_inse1"]
 [ext_resource type="Script" uid="uid://dbmv5yx144i55" path="res://characters/player/scripts/cutscene_states/cutscene_idle.gd" id="13_prd1v"]
 [ext_resource type="Texture2D" uid="uid://cycgpubriivm8" path="res://assets/spritesheets/red_spritesheet_62x42.png" id="13_qgtyq"]
-[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://stages/cutscenes/dialogue_bubble.tscn" id="13_y4a5y"]
+[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://characters/cutscenes/dialogue_bubble.tscn" id="13_y4a5y"]
 [ext_resource type="Script" uid="uid://cxg2qu1sy5l77" path="res://characters/player/scripts/cutscene_states/move_right.gd" id="14_prd1v"]
+[ext_resource type="Script" uid="uid://ddlf0sev7uv16" path="res://characters/state_machine/cutscene_state_machine.gd" id="14_vob2n"]
 [ext_resource type="Script" uid="uid://dlbig83msgaj7" path="res://characters/player/scripts/cutscene_states/move_left.gd" id="15_1queg"]
 [ext_resource type="Script" uid="uid://btrgxgm0gmd3l" path="res://characters/player/scripts/cutscene_states/move_up.gd" id="16_is67l"]
+[ext_resource type="Script" uid="uid://fkp3ohlnwecw" path="res://characters/player/scripts/cutscene_states/move.gd" id="16_wudow"]
 [ext_resource type="PackedScene" uid="uid://4q871lw6yrib" path="res://characters/editor_tools/draw_jump_path.tscn" id="17_alequ"]
 [ext_resource type="Script" uid="uid://b2uq2rh3yudf0" path="res://characters/player/scenes/fall.gd" id="17_rnoiw"]
 [ext_resource type="PackedScene" uid="uid://bwuaylvvur5ge" path="res://characters/player/scenes/pause_menu.tscn" id="18_j2wwh"]
@@ -352,6 +354,7 @@ script = ExtResource("1_ittr2")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gy3q1")
 initial_state = NodePath("Idle")
+process_active = true
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_2pynv")
@@ -422,26 +425,32 @@ one_shot = true
 script = ExtResource("12_j2wwh")
 dialogue_bubble = ExtResource("13_y4a5y")
 
-[node name="Idle" type="Node" parent="StateMachine/Cutscene"]
-script = ExtResource("13_prd1v")
-
-[node name="MoveRight" type="Node" parent="StateMachine/Cutscene"]
-script = ExtResource("14_prd1v")
-
-[node name="MoveLeft" type="Node" parent="StateMachine/Cutscene"]
-script = ExtResource("15_1queg")
-
-[node name="MoveUp" type="Node" parent="StateMachine/Cutscene"]
-script = ExtResource("16_is67l")
-
-[node name="Jump" type="Node" parent="StateMachine/Cutscene"]
-
-[node name="Fall" type="Node" parent="StateMachine/Cutscene"]
-script = ExtResource("17_rnoiw")
-
 [node name="MoveDuration" type="Timer" parent="StateMachine/Cutscene"]
 wait_time = 0.8
 one_shot = true
+
+[node name="CutsceneStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("14_vob2n")
+dialogue_bubble = ExtResource("13_y4a5y")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("13_prd1v")
+
+[node name="Move" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("16_wudow")
+
+[node name="MoveRight" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("14_prd1v")
+
+[node name="MoveLeft" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("15_1queg")
+
+[node name="MoveUp" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("16_is67l")
+
+[node name="Fall" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("17_rnoiw")
 
 [node name="ShouldRotate" type="Node2D" parent="."]
 

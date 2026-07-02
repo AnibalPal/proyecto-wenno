@@ -24,9 +24,9 @@ func _ready() -> void:
 		if(cutscene_entity is CutsceneEntityBase):
 			cutscene_entity.s_action_complete.connect(on_action_complete)
 		if(cutscene_entity is Enemy):
-			cutscene_entity.state_machine.transition_to_next_state("Cutscene")
-			cutscene_entity.state_machine.current_state.s_action_complete.connect(on_action_complete)
-			cutscene_entity.state_machine.current_state.s_persist.connect(on_persist)
+			cutscene_entity.enter_cutscene_mode()
+			cutscene_entity.cutscene_state_machine.s_action_complete.connect(on_action_complete)
+			cutscene_entity.cutscene_state_machine.s_persist.connect(on_persist)
 
 func _on_trigger_area_entered(_area: Area2D) -> void:
 	s_start_cutscene.emit(id, self)
@@ -52,11 +52,11 @@ func execute() -> void:
 	for action in action_stack:
 		var entity = entities.get_node_or_null(action.entity)
 		assert(entity, "ENTITY NOT FOUND")
-		if(entity is CutsceneEntityBase):
+		if(entity is CutsceneEntityBase): # NPCs only for now
 			entity.handle_action(action.action, action.data)
 		if(entity is Enemy):
-			if(entity.state_machine.current_state.name == "Cutscene"):
-				entity.state_machine.current_state.execute_cutscene_step(action.action, action.data)
+			if(entity.cutscene_state_machine.process_active):
+				entity.cutscene_state_machine.execute_cutscene_step(action.action, action.data)
 			else:
 				print("Not in cutscene state, the state is: %s" % entity.state_machine.current_state.name)
 	action_stack = []
@@ -75,6 +75,6 @@ func cutscene_complete() -> void:
 	for node: Node in persisting_nodes:
 		#TODO: this assumes only enemies can persist, when NPCs are added this should
 		# check that case as well
-		node.state_machine.current_state.end()
+		node.exit_cutscene_mode()
 		node.reparent(enemies)
 	queue_free()

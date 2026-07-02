@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdaqgyd8khgd1"]
 
-[ext_resource type="Script" uid="uid://dx6oskrqgcgde" path="res://stages/cutscenes/dialogue_bubble.gd" id="1_5xuko"]
+[ext_resource type="Script" uid="uid://dx6oskrqgcgde" path="res://characters/cutscenes/dialogue_bubble.gd" id="1_5xuko"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_impe3"]
 bg_color = Color(1, 1, 1, 1)

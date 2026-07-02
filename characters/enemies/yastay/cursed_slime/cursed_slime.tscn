@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://crnw38l7vhmb2"]
+[gd_scene load_steps=47 format=3 uid="uid://crnw38l7vhmb2"]
 
 [ext_resource type="Script" uid="uid://cn21ycnxo1ku7" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.gd" id="1_1iamu"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="2_3qsoo"]
@@ -15,8 +15,11 @@
 [ext_resource type="Script" uid="uid://b8e2c5su2g1rg" path="res://characters/enemies/yastay/cursed_slime/idle.gd" id="8_16xxg"]
 [ext_resource type="Script" uid="uid://03aayj3emt07" path="res://characters/enemies/yastay/cursed_slime/move_left.gd" id="8_sie0e"]
 [ext_resource type="Script" uid="uid://bt33u06vwyx6k" path="res://characters/enemies/yastay/cursed_slime/move_right.gd" id="9_16xxg"]
+[ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/enemies/yastay/cursed_slime/cutscene_state_machine.gd" id="11_v8nlo"]
 [ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="11_vh0o5"]
 [ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="12_g8awh"]
+[ext_resource type="Script" uid="uid://dbmv5yx144i55" path="res://characters/player/scripts/cutscene_states/cutscene_idle.gd" id="13_wra3n"]
+[ext_resource type="Script" uid="uid://fkp3ohlnwecw" path="res://characters/player/scripts/cutscene_states/move.gd" id="14_8r8kw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hxl8y"]
 shader = ExtResource("2_3qsoo")
@@ -36,6 +39,10 @@ region = Rect2(320, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vh0o5"]
 atlas = ExtResource("8_7y3rg")
 region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxnul"]
+atlas = ExtResource("8_7y3rg")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7y3rg"]
 atlas = ExtResource("8_7y3rg")
@@ -112,6 +119,14 @@ animations = [{
 "loop": false,
 "name": &"death",
 "speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxnul")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 60.0,
@@ -269,6 +284,16 @@ script = ExtResource("8_sie0e")
 
 [node name="MoveRight" type="Node" parent="StateMachine/Cutscene"]
 script = ExtResource("9_16xxg")
+
+[node name="CutsceneStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("11_v8nlo")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("13_wra3n")
+
+[node name="Move" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("14_8r8kw")
 
 [node name="ShouldRotate" type="Node2D" parent="."]
 

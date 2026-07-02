@@ -31,22 +31,22 @@ func _ready() -> void:
 func set_player_move_direction(direction: String, end_cutscene:= false):
 	match direction:
 		"UP":
-			player.state_machine.current_state.cutscene_transition_to("MoveUp", {
+			player.cutscene_state_machine.transition_to_next_state("MoveUp", {
 				"y": player.global_position.x - 50,
 				"end": end_cutscene
 			})
 		"RIGHT":
-			player.state_machine.current_state.cutscene_transition_to("MoveRight", {
+			player.cutscene_state_machine.transition_to_next_state("MoveRight", {
 				"x": player.global_position.x + 120,
 				"end": end_cutscene
 			})
 			#player.state_machine.current_state.move_right(end_cutscene)
 		"DOWN":
-			player.state_machine.current_state.cutscene_transition_to("Fall", {
+			player.cutscene_state_machine.transition_to_next_state("Fall", {
 				"end": end_cutscene
 			})
 		"LEFT":
-			player.state_machine.current_state.cutscene_transition_to("MoveLeft", {
+			player.cutscene_state_machine.transition_to_next_state("MoveLeft", {
 				"x": player.global_position.x - 120,
 				"end": end_cutscene
 			})
@@ -63,8 +63,8 @@ func start_next_chamber_change(chamber_path: String, entry_name: String, directi
 	current_chamber_path = chamber_path
 	current_entry_name = entry_name
 	
-	player.state_machine.transition_to_next_state(player.state_machine.state_data.CUTSCENE)
-	if(player.state_machine.current_state.name == "Cutscene"):
+	player.enter_cutscene_mode()
+	if(player.cutscene_state_machine.process_active):
 		set_player_move_direction(direction)	
 	start_fade_in()
 
@@ -95,7 +95,7 @@ func add_chamber_node(chamber_instance: Chamber, entry_name: String) -> void:
 	var new_entry_node = chamber_instance.get_entry_node(entry_name)
 	assert(new_entry_node, "Error getting the player pos in the next chamber, make sure the name of the entrypoint exists, expected name: " + entry_name)
 	player.global_position = new_entry_node.global_position
-	if(player.state_machine.current_state.name == "Cutscene"):
+	if(player.cutscene_state_machine.process_active):
 		set_player_move_direction(new_entry_node.direction, true)
 
 func _on_screen_vf_xanimation_player_animation_finished(anim_name: StringName) -> void:

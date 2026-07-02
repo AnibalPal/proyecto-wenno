@@ -6,6 +6,17 @@ extends StateMachine
 
 var state_data = PlayerStateData
 
+func activate_state_machine() -> void:
+	transition_to_next_state(state_data.IDLE)
+	activate_process()
+
+func deactivate_state_machine() -> void:
+	if(Input.is_action_pressed("left") or Input.is_action_pressed("right")):
+		transition_to_next_state(state_data.RUN)
+	else:
+		transition_to_next_state(state_data.IDLE)
+	deactivate_process()
+
 func _ready() -> void:
 	prepare_hitboxes()
 	check_state_machine()

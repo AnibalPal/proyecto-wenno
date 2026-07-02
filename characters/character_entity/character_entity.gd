@@ -2,6 +2,12 @@
 class_name CharacterEntity
 extends CharacterBody2D
 
+# TODO: while it is important that this is a tool script to set the entities
+# without worrying about orientation and whatnot in the editor, this script extends 
+# many others that should also use the @tool anotation, it's really annoying 
+# having to check in those scripts what should and shouldn't run on the editor,
+# so I should try to separate the tool parts in another node
+
 # Variable used inside class children to show important data
 @export var debug_mode := false
 

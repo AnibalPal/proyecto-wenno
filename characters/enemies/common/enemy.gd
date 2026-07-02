@@ -2,7 +2,7 @@
 class_name Enemy
 extends CharacterEntity
 
-@export_group("stats")
+@export_group("Stats")
 @export var health := 1
 @export var stamina := 10
 @export var attack_damage := 1
