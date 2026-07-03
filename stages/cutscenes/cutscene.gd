@@ -21,9 +21,7 @@ func _ready() -> void:
 	if(PlayerData.player_progression["cutscenes"].has(id) and PlayerData.player_progression["cutscenes"][id]):
 		queue_free()
 	for cutscene_entity in entities.get_children():
-		if(cutscene_entity is CutsceneEntityBase):
-			cutscene_entity.s_action_complete.connect(on_action_complete)
-		if(cutscene_entity is Enemy):
+		if(cutscene_entity is NPCBase or cutscene_entity is Enemy):
 			cutscene_entity.enter_cutscene_mode()
 			cutscene_entity.cutscene_state_machine.s_action_complete.connect(on_action_complete)
 			cutscene_entity.cutscene_state_machine.s_persist.connect(on_persist)
@@ -52,9 +50,7 @@ func execute() -> void:
 	for action in action_stack:
 		var entity = entities.get_node_or_null(action.entity)
 		assert(entity, "ENTITY NOT FOUND")
-		if(entity is CutsceneEntityBase): # NPCs only for now
-			entity.handle_action(action.action, action.data)
-		if(entity is Enemy):
+		if(entity is NPCBase or entity is Enemy):
 			if(entity.cutscene_state_machine.process_active):
 				entity.cutscene_state_machine.execute_cutscene_step(action.action, action.data)
 			else:

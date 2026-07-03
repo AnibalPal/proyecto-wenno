@@ -1,11 +1,11 @@
-class_name CursedSlimeCutsceneStateMachine
+class_name BaseCutsceneStateMachine
 extends CutsceneStateMachine
 
 const IDLE := "Idle"
 const MOVE := "Move"
 
 # TODO: Change this to get the owner somewhere instead of this
-@onready var cursed_slime: CursedSlime = $".."
+@onready var entity: CharacterEntity = $".."
 
 func activate_state_machine() -> void:
 	transition_to_next_state(IDLE)
@@ -23,19 +23,19 @@ func execute_cutscene_step(action: Enums.CutsceneCommonActions, step_data = {}) 
 	# Move to cutscene state machine
 	match action:
 		Enums.CutsceneCommonActions.SHOW:
-			cursed_slime.process_mode = Node.PROCESS_MODE_INHERIT
-			cursed_slime.show()
+			entity.process_mode = Node.PROCESS_MODE_INHERIT
+			entity.show()
 			s_action_complete.emit()
 		Enums.CutsceneCommonActions.MOVE:
 			transition_to_next_state(MOVE, step_data)
 		Enums.CutsceneCommonActions.TALK:
 			instantiate_dialogue_bubble(step_data["text"])
 		Enums.CutsceneCommonActions.ANIMATION:
-			print("CURSED SLIME CUTSCENE PENDING IMPLEMENTATION ANIMATION")		
+			print("ENTITY ANIMATION PENDING IMPLEMENTATION ANIMATION")		
 		Enums.CutsceneCommonActions.WAIT:
-			print("CURSED SLIME PENDING IMPLEMENTATION WAIT")
+			print("ENTITY WAIT PENDING IMPLEMENTATION WAIT")
 		Enums.CutsceneCommonActions.INSTANTIATE:
-			s_persist.emit(cursed_slime)
+			s_persist.emit(entity)
 			s_action_complete.emit()		
 		_:
 			print("CURSED SLIME ACTION NOT FOUND: %s"% action)

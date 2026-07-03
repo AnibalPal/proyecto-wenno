@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dy3ixqemu2yxx"]
+
+[ext_resource type="Script" uid="uid://bithqqv7d4idm" path="res://stages/cutscenes/cutscene_entity_base.gd" id="1_rikop"]
+[ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="2_hwmo7"]
+[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://characters/cutscenes/dialogue_bubble.tscn" id="3_hwmo7"]
+[ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/enemies/yastay/cursed_slime/cutscene_state_machine.gd" id="3_pve2y"]
+[ext_resource type="Script" uid="uid://dbmv5yx144i55" path="res://characters/player/scripts/cutscene_states/cutscene_idle.gd" id="4_ii4y2"]
+[ext_resource type="Script" uid="uid://fkp3ohlnwecw" path="res://characters/player/scripts/cutscene_states/move.gd" id="5_j0tgu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epbk7"]
+size = Vector2(48, 48)
+
+[node name="TestNPC" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_rikop")
+speed = null
+gravity = null
+
+[node name="CutsceneStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_pve2y")
+dialogue_bubble = ExtResource("3_hwmo7")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("4_ii4y2")
+
+[node name="Move" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("5_j0tgu")
+
+[node name="ShouldRotate" type="Node2D" parent="."]
+
+[node name="CutsceneEntitySprite" type="Sprite2D" parent="ShouldRotate"]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_hwmo7")
+
+[node name="ShouldNotRotate" type="Node2D" parent="."]
+
+[node name="CutsceneBubbleAnchor" type="Node2D" parent="ShouldNotRotate"]
+position = Vector2(0, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_epbk7")

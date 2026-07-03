@@ -2,7 +2,7 @@
 class_name CursedSlime
 extends Enemy
 
-@onready var cutscene_state_machine: CursedSlimeCutsceneStateMachine = $CutsceneStateMachine
+@onready var cutscene_state_machine: BaseCutsceneStateMachine = $CutsceneStateMachine
 
 @onready var entity_animations: AttackParams = $ShouldRotate/SpriteAnimations
 

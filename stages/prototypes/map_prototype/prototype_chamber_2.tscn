@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://dfo7oohfy42y8"]
+[gd_scene load_steps=27 format=4 uid="uid://dfo7oohfy42y8"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_pc242"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="2_8n16g"]
@@ -12,11 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://d2gqqqixyioxa" path="res://assets/icons/up_arrow32x32.png" id="7_h8l5e"]
 [ext_resource type="Texture2D" uid="uid://bq8eqb3u2hukk" path="res://assets/icons/exit_sign32x32.png" id="7_n8wv1"]
 [ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="12_t4svn"]
-[ext_resource type="Script" uid="uid://bithqqv7d4idm" path="res://stages/cutscenes/cutscene_entity_base.gd" id="13_eut64"]
 [ext_resource type="Script" uid="uid://cdpg2b6dbbx0r" path="res://stages/cutscenes/resources/cutscene_step.gd" id="13_f1idr"]
-[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://characters/cutscenes/dialogue_bubble.tscn" id="14_f1idr"]
 [ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="14_fnvbt"]
-[ext_resource type="Texture2D" uid="uid://cyrbrildd7c3e" path="res://icon.svg" id="15_fnvbt"]
+[ext_resource type="PackedScene" uid="uid://dy3ixqemu2yxx" path="res://stages/prototypes/map_prototype/test_npc.tscn" id="15_t4svn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0jk"]
 size = Vector2(48, 144)
@@ -74,9 +72,6 @@ metadata/_custom_type_script = "uid://dk5itjx85if0m"
 script = ExtResource("13_f1idr")
 actions = Array[ExtResource("14_fnvbt")]([SubResource("Resource_y0lmx")])
 metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mook"]
-size = Vector2(48, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o75i0"]
 size = Vector2(64, 80)
@@ -202,22 +197,12 @@ cutscene_data = Array[ExtResource("13_f1idr")]([SubResource("Resource_ooufv"), S
 
 [node name="Entities" type="Node2D" parent="Cutscenes/Cutscene2"]
 
-[node name="TestNPC" type="CharacterBody2D" parent="Cutscenes/Cutscene2/Entities"]
+[node name="TestNPC" parent="Cutscenes/Cutscene2/Entities" instance=ExtResource("15_t4svn")]
 process_mode = 4
 visible = false
 position = Vector2(688, 288)
-collision_layer = 0
-script = ExtResource("13_eut64")
-dialogue_bubble = ExtResource("14_f1idr")
-
-[node name="ShouldRotate" type="Node2D" parent="Cutscenes/Cutscene2/Entities/TestNPC"]
-
-[node name="CutsceneEntitySprite" type="Sprite2D" parent="Cutscenes/Cutscene2/Entities/TestNPC/ShouldRotate"]
-scale = Vector2(0.375, 0.375)
-texture = ExtResource("15_fnvbt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscenes/Cutscene2/Entities/TestNPC"]
-shape = SubResource("RectangleShape2D_3mook")
+speed = 200
+gravity = 0
 
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene2"]
 position = Vector2(120, 280)
