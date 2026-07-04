@@ -24,8 +24,8 @@ func execute_cutscene_step(action: Enums.CutsceneCommonActions, step_data = {}) 
 		Enums.CutsceneCommonActions.TALK:
 			instantiate_dialogue_bubble(step_data["text"])
 		Enums.CutsceneCommonActions.ANIMATION:
-			print("CURSED SLIME CUTSCENE PENDING IMPLEMENTATION ANIMATION")		
+			print("PLAYER PENDING IMPLEMENTATION ANIMATION")		
 		Enums.CutsceneCommonActions.WAIT:
-			print("CURSED SLIME PENDING IMPLEMENTATION WAIT")		
+			print("PLAYER PENDING IMPLEMENTATION WAIT")		
 		_:
-			print("CURSED SLIME ACTION NOT FOUND: %s"% action)
+			print("PLAYER ACTION NOT FOUND: %s"% action)

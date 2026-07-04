@@ -1,6 +1,5 @@
 extends CutsceneState
 
-var move_duration_msecs = null 
 var target_position_x = null
 
 func cutscene_state_enter(_data := {}) -> void:

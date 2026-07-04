@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="11_8v8c7"]
 [ext_resource type="Script" uid="uid://cdpg2b6dbbx0r" path="res://stages/cutscenes/resources/cutscene_step.gd" id="12_wp1qa"]
 [ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="13_smmjg"]
-[ext_resource type="PackedScene" uid="uid://dy3ixqemu2yxx" path="res://stages/prototypes/map_prototype/test_npc.tscn" id="14_wp1qa"]
+[ext_resource type="PackedScene" uid="uid://dy3ixqemu2yxx" path="res://characters/npcs/test_npc.tscn" id="14_wp1qa"]
 [ext_resource type="PackedScene" uid="uid://crnw38l7vhmb2" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.tscn" id="17_af7qt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wos68"]
@@ -257,6 +257,7 @@ process_mode = 4
 visible = false
 position = Vector2(688, 288)
 speed = 200
+gravity = 0
 
 [node name="Slime1" parent="Cutscenes/Cutscene1/Entities" instance=ExtResource("17_af7qt")]
 process_mode = 4

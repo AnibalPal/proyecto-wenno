@@ -4,7 +4,6 @@ extends CutsceneStateMachine
 const IDLE := "Idle"
 const MOVE := "Move"
 
-# TODO: Change this to get the owner somewhere instead of this
 @onready var entity: CharacterEntity = $".."
 
 func activate_state_machine() -> void:

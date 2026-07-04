@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="12_t4svn"]
 [ext_resource type="Script" uid="uid://cdpg2b6dbbx0r" path="res://stages/cutscenes/resources/cutscene_step.gd" id="13_f1idr"]
 [ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="14_fnvbt"]
-[ext_resource type="PackedScene" uid="uid://dy3ixqemu2yxx" path="res://stages/prototypes/map_prototype/test_npc.tscn" id="15_t4svn"]
+[ext_resource type="PackedScene" uid="uid://dy3ixqemu2yxx" path="res://characters/npcs/test_npc.tscn" id="15_t4svn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g0jk"]
 size = Vector2(48, 144)

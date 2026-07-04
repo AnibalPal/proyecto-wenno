@@ -1,6 +1,6 @@
 extends CutsceneState
 
-func enter(_data := {}) -> void:
+func cutscene_state_enter(_data := {}) -> void:
 	#cutscene_entity.cutscene_animations
 	pass
 

@@ -15,6 +15,18 @@ signal s_persist(entity : Node)
 signal s_action_complete
 
 # Override
+func activate_state_machine() -> void:
+	pass
+
+# Override
+func deactivate_state_machine() -> void:
+	pass
+
+# Override
+func end_cutscene_mode():
+	pass
+
+# Override
 func execute_cutscene_step(_action: Enums.CutsceneCommonActions, _step_data = {}) -> void:
 	# Handle every possible case defined in the enum for actions depending
 	# on the case, for example player actions, npc actions, etc.

@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm110u5g6t4jr"]
+[gd_scene load_steps=9 format=3 uid="uid://dm110u5g6t4jr"]
 
+[ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="1_7aexb"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="1_tebo0"]
+[ext_resource type="Script" uid="uid://dbmv5yx144i55" path="res://characters/cutscenes/common_states/cutscene_idle.gd" id="2_yf0ao"]
+[ext_resource type="Script" uid="uid://fkp3ohlnwecw" path="res://characters/cutscenes/common_states/move.gd" id="3_bomdf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfvpq"]
 shader = ExtResource("1_tebo0")
@@ -54,9 +57,15 @@ collision_mask = 3
 
 [node name="Passive" type="Node" parent="StateMachine"]
 
-[node name="Cutscene" type="Node" parent="StateMachine"]
+[node name="CutsceneStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_7aexb")
+initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine/Cutscene"]
+[node name="Idle" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("2_yf0ao")
+
+[node name="Move" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("3_bomdf")
 
 [node name="ShouldRotate" type="Node2D" parent="."]
 
