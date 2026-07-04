@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://x36rp2tbxt37"]
+[gd_scene load_steps=12 format=4 uid="uid://x36rp2tbxt37"]
 
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="1_dvjcd"]
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_gnrrh"]
@@ -8,9 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://c3qgmya5ej67y" path="res://stages/level_design/camera/camera_params.tscn" id="4_f1wtg"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="5_4yjwl"]
 [ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/camera/camera_change_trigger.tscn" id="5_5q6eb"]
+[ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="8_s6pkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7iq6d"]
 size = Vector2(48, 264)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p22m8"]
+size = Vector2(64, 80)
 
 [node name="ChamberTemplate" type="Node2D"]
 script = ExtResource("1_gnrrh")
@@ -59,6 +63,21 @@ position = Vector2(616, 272)
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="Cutscenes" type="Node2D" parent="."]
+
+[node name="Cutscene1" type="Node2D" parent="Cutscenes"]
+script = ExtResource("8_s6pkm")
+
+[node name="Entities" type="Node2D" parent="Cutscenes/Cutscene1"]
+
+[node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
+position = Vector2(232, 280)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CutsceneTriggerCollisionShape" type="CollisionShape2D" parent="Cutscenes/Cutscene1/Trigger"]
+shape = SubResource("RectangleShape2D_p22m8")
+
 [node name="DebugPlayer" parent="." instance=ExtResource("5_4yjwl")]
 position = Vector2(320, 272)
 speed = 150
@@ -67,6 +86,8 @@ jump_impulse = 400
 debug_mode = true
 
 [node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]
+
+[connection signal="area_entered" from="Cutscenes/Cutscene1/Trigger" to="Cutscenes/Cutscene1" method="_on_trigger_area_entered"]
 
 [editable path="World/CameraManager/CameraParams1"]
 [editable path="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger"]
