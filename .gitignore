@@ -11,3 +11,6 @@ addons/
 # Godot IDE specific
 .godot_ide/
 .script_splitter/
+
+# Testing folders
+JUNK_TO_DELETE_LATER/

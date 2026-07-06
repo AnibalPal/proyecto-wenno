@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://rssv5rl6t0c8"]
+[gd_scene load_steps=8 format=4 uid="uid://rssv5rl6t0c8"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_2scmw"]
 [ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="2_r73r0"]
 [ext_resource type="PackedScene" uid="uid://c3qe6e0va78bl" path="res://stages/level_design/chamber/entry.tscn" id="3_iroq6"]
+[ext_resource type="PackedScene" uid="uid://crnw38l7vhmb2" path="res://characters/enemies/yastay/cursed_slime/cursed_slime.tscn" id="3_r73r0"]
 [ext_resource type="PackedScene" uid="uid://hlkos3om81d6" path="res://stages/level_design/chamber/exit_area.tscn" id="4_bn2h6"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="6_iroq6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2scmw"]
 size = Vector2(48, 256)
@@ -17,6 +19,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAoAAAABAAA
 tile_set = ExtResource("2_r73r0")
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="CursedSlime" parent="Enemies" instance=ExtResource("3_r73r0")]
+position = Vector2(456, 288)
 
 [node name="Entries" type="Node2D" parent="."]
 
@@ -43,5 +48,18 @@ position = Vector2(0, -80)
 visible = true
 position = Vector2(0, -80)
 rotation = 4.712389
+
+[node name="DebugPlayer" parent="." instance=ExtResource("6_iroq6")]
+position = Vector2(96, 240)
+speed = 150
+gravity = 850
+jump_impulse = 400
+debug_mode = true
+
+[node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
 
 [editable path="Exits/0"]

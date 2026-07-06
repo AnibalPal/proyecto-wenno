@@ -86,6 +86,10 @@ jump_impulse = 400
 debug_mode = true
 
 [node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
 
 [connection signal="area_entered" from="Cutscenes/Cutscene1/Trigger" to="Cutscenes/Cutscene1" method="_on_trigger_area_entered"]
 
