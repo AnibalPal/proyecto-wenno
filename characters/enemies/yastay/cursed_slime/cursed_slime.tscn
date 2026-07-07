@@ -253,6 +253,7 @@ stamina = 3
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_11bk6")
 initial_state = NodePath("Passive")
+process_active = true
 
 [node name="Passive" type="Node" parent="StateMachine"]
 script = ExtResource("3_lqaof")
