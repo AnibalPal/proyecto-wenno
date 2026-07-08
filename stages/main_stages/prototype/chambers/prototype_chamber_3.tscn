@@ -33,7 +33,7 @@ direction = "RIGHT"
 
 [node name="0" parent="Exits" instance=ExtResource("4_bn2h6")]
 position = Vector2(-24, 280)
-next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_2.tscn"
+next_chamber_path = "res://stages/main_stages/prototype/chambers/prototype_chamber_2.tscn"
 next_entry_name = "1"
 direction = "LEFT"
 

@@ -127,7 +127,7 @@ direction = "DOWN"
 
 [node name="0" parent="Exits" instance=ExtResource("5_ij6yv")]
 position = Vector2(-24, 256)
-next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_1.tscn"
+next_chamber_path = "res://stages/main_stages/prototype/chambers/prototype_chamber_1.tscn"
 next_entry_name = "1"
 direction = "LEFT"
 
@@ -136,7 +136,7 @@ position = Vector2(664, 248)
 collision_layer = 64
 collision_mask = 64
 script = ExtResource("5_n8wv1")
-next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_3.tscn"
+next_chamber_path = "res://stages/main_stages/prototype/chambers/prototype_chamber_3.tscn"
 next_entry_name = "0"
 direction = "RIGHT"
 metadata/_edit_group_ = true
@@ -161,7 +161,7 @@ color = Color(0.3863936, 0.65864027, 0.3070067, 1)
 
 [node name="2" parent="Exits" instance=ExtResource("5_ij6yv")]
 position = Vector2(312, 432)
-next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_4.tscn"
+next_chamber_path = "res://stages/main_stages/prototype/chambers/prototype_chamber_4.tscn"
 next_entry_name = "0"
 direction = "DOWN"
 
@@ -177,7 +177,7 @@ visible = true
 
 [node name="3" parent="Exits" instance=ExtResource("5_ij6yv")]
 position = Vector2(304, -72)
-next_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_5.tscn"
+next_chamber_path = "res://stages/main_stages/prototype/chambers/prototype_chamber_5.tscn"
 next_entry_name = "0"
 direction = "UP"
 
@@ -201,8 +201,6 @@ cutscene_data = Array[ExtResource("13_f1idr")]([SubResource("Resource_ooufv"), S
 process_mode = 4
 visible = false
 position = Vector2(688, 288)
-speed = 200
-gravity = 0
 
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene2"]
 position = Vector2(120, 280)

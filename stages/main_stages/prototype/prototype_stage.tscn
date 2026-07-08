@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://jtxhssckm7o6"]
 
-[ext_resource type="Script" uid="uid://bi0fmvnyujiwx" path="res://stages/level_design/stage/stage_manager.gd" id="1_5c64k"]
-[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_x31yq"]
-[ext_resource type="Script" uid="uid://bwjdpwc4m7osb" path="res://stages/cutscenes/cutscene_manager.gd" id="3_x31yq"]
+[ext_resource type="Script" uid="uid://bi0fmvnyujiwx" path="res://stages/level_design/stage/stage_manager.gd" id="1_hnonj"]
+[ext_resource type="Script" uid="uid://bwjdpwc4m7osb" path="res://stages/cutscenes/cutscene_manager.gd" id="2_dseug"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="3_mkjpd"]
 
 [sub_resource type="Animation" id="Animation_42shc"]
 length = 0.001
@@ -59,17 +59,17 @@ _data = {
 }
 
 [node name="PrototypeStage" type="Node2D"]
-script = ExtResource("1_5c64k")
+script = ExtResource("1_hnonj")
 stage_id = "prototype"
-initial_chamber_path = "res://stages/prototypes/map_prototype/prototype_chamber_1.tscn"
+initial_chamber_path = "res://stages/main_stages/prototype/chambers/prototype_chamber_1.tscn"
 initial_entry_name = "0"
 
 [node name="CutsceneManager" type="Node2D" parent="."]
-script = ExtResource("3_x31yq")
+script = ExtResource("2_dseug")
 
 [node name="CurrentChamber" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("2_x31yq")]
+[node name="Player" parent="." instance=ExtResource("3_mkjpd")]
 position = Vector2(320, 272)
 speed = 150
 gravity = 850
