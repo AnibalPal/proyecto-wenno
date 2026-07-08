@@ -1,0 +1,227 @@
+[gd_scene load_steps=3 format=3 uid="uid://n1crrsgj28q6"]
+
+[ext_resource type="Script" uid="uid://cm8neufswafpt" path="res://stages/level_design/map/stage_map.gd" id="1_avjxc"]
+[ext_resource type="PackedScene" uid="uid://dl3cgk23xeysc" path="res://stages/level_design/map/map_node.tscn" id="2_4y3kp"]
+
+[node name="YastayMap" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_avjxc")
+stage_map_id = "yastay"
+
+[node name="Main0" parent="." instance=ExtResource("2_4y3kp")]
+layout_mode = 0
+offset_left = -56.0
+offset_top = -8.0
+offset_right = -56.0
+offset_bottom = -8.0
+id = "main_0"
+right_open = true
+left_open = true
+
+[node name="Main1" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -88.0
+offset_top = -8.0
+offset_right = -88.0
+offset_bottom = -8.0
+id = "main_1"
+visited = false
+right_open = true
+down_open = true
+
+[node name="Main2" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -88.0
+offset_top = 16.0
+offset_right = -88.0
+offset_bottom = 16.0
+id = "main_2"
+visited = false
+up_open = true
+right_open = true
+
+[node name="Main3" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -56.0
+offset_top = 16.0
+offset_right = -56.0
+offset_bottom = 16.0
+id = "main_3"
+visited = false
+up_open = true
+left_open = true
+
+[node name="Main4" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -24.0
+offset_top = -8.0
+offset_right = -24.0
+offset_bottom = -8.0
+id = "main_4"
+visited = false
+right_open = true
+left_open = true
+
+[node name="Main5" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = -8.0
+id = "main_5"
+base_color = 1
+visited = false
+right_open = true
+left_open = true
+
+[node name="Main6" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = -8.0
+id = "main_6"
+visited = false
+up_open = true
+left_open = true
+
+[node name="Main7" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -32.0
+id = "main_7"
+visited = false
+up_open = true
+down_open = true
+
+[node name="Main8" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = -56.0
+offset_right = 40.0
+offset_bottom = -56.0
+id = "main_8"
+base_color = 1
+visited = false
+right_open = true
+down_open = true
+
+[node name="Main9" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = -56.0
+offset_right = 72.0
+offset_bottom = -56.0
+id = "main_9"
+visited = false
+right_open = true
+left_open = true
+
+[node name="Main10" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 104.0
+offset_top = -56.0
+offset_right = 104.0
+offset_bottom = -56.0
+id = "main_10"
+visited = false
+right_open = true
+left_open = true
+
+[node name="Alt0" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -88.0
+offset_top = -32.0
+offset_right = -88.0
+offset_bottom = -32.0
+id = "alt_0"
+visited = false
+down_open = true
+
+[node name="Alt1" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = -8.0
+offset_right = 72.0
+offset_bottom = -8.0
+id = "alt_1"
+visited = false
+left_open = true
+
+[node name="Alt2" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 104.0
+offset_top = -8.0
+offset_right = 104.0
+offset_bottom = -8.0
+id = "alt_2"
+visited = false
+left_open = true
+
+[node name="Alt3" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = 136.0
+offset_top = -8.0
+offset_right = 136.0
+offset_bottom = -8.0
+id = "alt_3"
+visited = false
+left_open = true
+
+[node name="Secret0" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -120.0
+offset_top = 16.0
+offset_right = -120.0
+offset_bottom = 16.0
+id = "secret_0"
+visited = false
+right_open = true
+down_open = true
+
+[node name="Secret1" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -120.0
+offset_top = 40.0
+offset_right = -120.0
+offset_bottom = 40.0
+id = "secret_1"
+visited = false
+up_open = true
+down_open = true
+
+[node name="Secret2" parent="." instance=ExtResource("2_4y3kp")]
+visible = false
+layout_mode = 0
+offset_left = -120.0
+offset_top = 64.0
+offset_right = -120.0
+offset_bottom = 64.0
+id = "secret_2"
+visited = false
+up_open = true

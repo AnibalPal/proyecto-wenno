@@ -20,7 +20,8 @@ func make_map_json() -> void:
 				}
 			}
 		var json_string = JSON.stringify(json_dict)
-		var json_file_path := "res://stages/map_data/map_jsons/%s.json"%stage_map_id
+		var file_path_no_name = "/".join(scene_file_path.split("/").slice(0, -1))
+		var json_file_path : String = file_path_no_name + "/" + stage_map_id + ".json"
 		var map_json_file := FileAccess.open(json_file_path, FileAccess.WRITE)
 		map_json_file.store_line(json_string)
 		map_json_file.close()

@@ -5,14 +5,26 @@ extends Control
 # NOTE to self: can't use dictionary because the inspector does not support fixed keys,
 # the option is to make a resource but I don't really like that option
 
+enum ColorNames {
+	NORMAL,
+	SAVE,
+	EXTRA
+}
+
+const colors : Dictionary[ColorNames, Color] = {
+	ColorNames.NORMAL: Color("#3535e6"),
+	ColorNames.SAVE: Color("31683aff"),
+	ColorNames.EXTRA: Color("a51b28ff"),
+}
+
 @export var id := ""
 
 @export_group("Style")
-@export var base_color := Color("#3535e6"):
+@export var base_color := ColorNames.NORMAL:
 	set(value):
 		base_color = value
 		if(base_color_rect):
-			base_color_rect.color = base_color
+			base_color_rect.color = colors[base_color]
 
 @export_group("Status")
 @export var visited: bool:
@@ -78,7 +90,7 @@ extends Control
 @onready var player_icon : TextureRect = $"PlayerIcon"
 
 func _ready() -> void:
-	base_color_rect.color = base_color
+	base_color_rect.color = colors[base_color]
 	up_open_wall.visible = up_open
 	right_open_wall.visible = right_open
 	down_open_wall.visible = down_open

@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjbyunlhyqeg7"]
+[gd_scene load_steps=4 format=3 uid="uid://cjbyunlhyqeg7"]
 
 [ext_resource type="Script" uid="uid://bi0fmvnyujiwx" path="res://stages/level_design/stage/stage_manager.gd" id="1_mhq01"]
+[ext_resource type="Script" uid="uid://bwjdpwc4m7osb" path="res://stages/cutscenes/cutscene_manager.gd" id="2_dm25f"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_lt88c"]
 
 [node name="YastayStage" type="Node2D"]
 script = ExtResource("1_mhq01")
 stage_id = "Yastay"
+initial_chamber_path = "main_0"
+initial_entry_name = "0"
+
+[node name="CutsceneManager" type="Node2D" parent="."]
+script = ExtResource("2_dm25f")
 
 [node name="CurrentChamber" type="Node2D" parent="."]
 
