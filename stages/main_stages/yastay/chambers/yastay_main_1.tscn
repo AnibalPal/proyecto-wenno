@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=4 uid="uid://htnd6ovtegp1"]
+
+[ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_itghk"]
+[ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="2_jr0s1"]
+[ext_resource type="PackedScene" uid="uid://bvat8fbkoepjn" path="res://stages/level_design/camera/camera_manager.tscn" id="3_3pebc"]
+[ext_resource type="PackedScene" uid="uid://c3qgmya5ej67y" path="res://stages/level_design/camera/camera_params.tscn" id="4_w1465"]
+[ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/camera/camera_change_trigger.tscn" id="5_50pkl"]
+[ext_resource type="PackedScene" uid="uid://c3qe6e0va78bl" path="res://stages/level_design/chamber/entry.tscn" id="6_eipk2"]
+[ext_resource type="PackedScene" uid="uid://hlkos3om81d6" path="res://stages/level_design/chamber/exit_area.tscn" id="7_lx5ad"]
+[ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="8_dvj27"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="9_85568"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7iq6d"]
+size = Vector2(48, 264)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p22m8"]
+size = Vector2(64, 80)
+
+[node name="YastayMain1" type="Node2D"]
+script = ExtResource("1_itghk")
+id = "main_1"
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="ForegroundMapLayer" type="TileMapLayer" parent="World"]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAABAAAAAAAAAAYAAAABAAAAAAAAAAcAAAABAAAAAAAAAAgAAAABAAAAAAAAAAkAAAABAAAAAAAAAAoAAAABAAAAAAAAAAsAAAABAAAAAAABAAsAAAABAAAAAAACAAsAAAABAAAAAAADAAsAAAABAAAAAAAEAAsAAAABAAAAAAAFAAsAAAABAAAAAAAGAAsAAAABAAAAAAAHAAsAAAABAAAAAAAIAAsAAAABAAAAAAAJAAsAAAABAAAAAAAKAAsAAAABAAAAAAALAAsAAAABAAAAAAAMAAsAAAABAAAAAAANAAsAAAABAAAAAAAOAAsAAAABAAAAAAAPAAsAAAABAAAAAAAQAAsAAAABAAAAAAARAAsAAAABAAAAAAASAAsAAAABAAAAAAATAAsAAAABAAAAAAAUAAsAAAABAAAAAAAUAAEAAAABAAAAAAAUAAAAAAABAAAAAAATAAAAAAABAAAAAAATAAEAAAABAAAAAAABAAoAAAABAAAAAAABAAkAAAABAAAAAAABAAgAAAABAAAAAAABAAcAAAABAAAAAAABAAYAAAABAAAAAAABAAUAAAABAAAAAAABAAQAAAABAAAAAAABAAMAAAABAAAAAAABAAIAAAABAAAAAAABAAEAAAABAAAAAAABAAAAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAMAAAAAAABAAAAAAANAAAAAAABAAAAAAAOAAAAAAABAAAAAAAPAAAAAAABAAAAAAAQAAAAAAABAAAAAAARAAAAAAABAAAAAAASAAAAAAABAAAAAAASAAEAAAABAAAAAAARAAEAAAABAAAAAAAQAAEAAAABAAAAAAAPAAEAAAABAAAAAAAOAAEAAAABAAAAAAANAAEAAAABAAAAAAAMAAEAAAABAAAAAAALAAEAAAABAAAAAAAKAAEAAAABAAAAAAAJAAEAAAABAAAAAAAIAAEAAAABAAAAAAAHAAEAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAEAAEAAAABAAAAAAADAAEAAAABAAAAAAACAAEAAAABAAAAAAATAAoAAAABAAAAAAAUAAoAAAABAAAAAAA=")
+tile_set = ExtResource("2_jr0s1")
+
+[node name="CameraManager" parent="World" node_paths=PackedStringArray("initial_params") instance=ExtResource("3_3pebc")]
+tween_duration = 3.0
+initial_params = NodePath("CameraParams1")
+
+[node name="CameraParams1" parent="World/CameraManager" instance=ExtResource("4_w1465")]
+position = Vector2(640, 0)
+line_color = Color(0.5756378, 0.94419235, 0.23654485, 1)
+
+[node name="TopLeft" parent="World/CameraManager/CameraParams1" index="0"]
+position = Vector2(-640, 0)
+
+[node name="BottomRight" parent="World/CameraManager/CameraParams1" index="1"]
+position = Vector2(0, 360)
+
+[node name="CameraChangeTrigger" parent="World/CameraManager/CameraParams1/CameraTriggers" index="0" instance=ExtResource("5_50pkl")]
+position = Vector2(-64, 192)
+
+[node name="CameraCollision" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_7iq6d")
+debug_color = Color(0.5756378, 0.94419235, 0.23654485, 0.2)
+
+[node name="CameraIcon" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="1"]
+modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
+
+[node name="Entries" type="Node2D" parent="."]
+
+[node name="0" parent="Entries" instance=ExtResource("6_eipk2")]
+position = Vector2(496, 296)
+direction = "LEFT"
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="0" parent="Exits" instance=ExtResource("7_lx5ad")]
+position = Vector2(616, 272)
+next_chamber_path = "res://stages/main_stages/yastay/chambers/yastay_main_0.tscn"
+next_entry_name = "0"
+direction = "RIGHT"
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Cutscenes" type="Node2D" parent="."]
+
+[node name="Cutscene1" type="Node2D" parent="Cutscenes"]
+script = ExtResource("8_dvj27")
+
+[node name="Entities" type="Node2D" parent="Cutscenes/Cutscene1"]
+
+[node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
+position = Vector2(232, 280)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CutsceneTriggerCollisionShape" type="CollisionShape2D" parent="Cutscenes/Cutscene1/Trigger"]
+shape = SubResource("RectangleShape2D_p22m8")
+
+[node name="DebugPlayer" parent="." instance=ExtResource("9_85568")]
+position = Vector2(320, 272)
+speed = 150
+gravity = 850
+jump_impulse = 400
+debug_mode = true
+
+[node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
+
+[connection signal="area_entered" from="Cutscenes/Cutscene1/Trigger" to="Cutscenes/Cutscene1" method="_on_trigger_area_entered"]
+
+[editable path="World/CameraManager/CameraParams1"]
+[editable path="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger"]

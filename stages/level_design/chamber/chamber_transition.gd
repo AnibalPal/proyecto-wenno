@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var arrow_pivot: Node2D = $ArrowPivot
 
-@export_enum("UP", "RIGHT", "DOWN", "LEFT") var direction := "":
+@export_enum("UP", "RIGHT", "DOWN", "LEFT", "NONE") var direction := "":
 	set(value):
 		direction = value
 		if not is_node_ready():
@@ -22,5 +22,7 @@ extends Node2D
 			"LEFT":
 				arrow_pivot.rotation_degrees = 270
 				arrow_pivot.show()
+			"NONE":
+				arrow_pivot.hide()
 			_:
 				arrow_pivot.hide()

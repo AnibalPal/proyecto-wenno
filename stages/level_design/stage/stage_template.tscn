@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjbyunlhyqeg7"]
+[gd_scene load_steps=8 format=3 uid="uid://c83oct35f5kqb"]
 
-[ext_resource type="Script" uid="uid://bi0fmvnyujiwx" path="res://stages/level_design/stage/stage_manager.gd" id="1_mhq01"]
-[ext_resource type="Script" uid="uid://bwjdpwc4m7osb" path="res://stages/cutscenes/cutscene_manager.gd" id="2_dm25f"]
-[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="2_lt88c"]
+[ext_resource type="Script" uid="uid://bi0fmvnyujiwx" path="res://stages/level_design/stage/stage_manager.gd" id="1_frdwe"]
+[ext_resource type="Script" uid="uid://bwjdpwc4m7osb" path="res://stages/cutscenes/cutscene_manager.gd" id="2_gojrk"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="3_weeja"]
 
 [sub_resource type="Animation" id="Animation_42shc"]
 length = 0.001
@@ -58,18 +58,15 @@ _data = {
 &"fade_out": SubResource("Animation_x31yq")
 }
 
-[node name="YastayStage" type="Node2D"]
-script = ExtResource("1_mhq01")
-stage_id = "yastay"
-initial_chamber_path = "res://stages/main_stages/yastay/chambers/yastay_main_0.tscn"
-initial_entry_name = "0"
+[node name="StageManager" type="Node2D"]
+script = ExtResource("1_frdwe")
 
 [node name="CutsceneManager" type="Node2D" parent="."]
-script = ExtResource("2_dm25f")
+script = ExtResource("2_gojrk")
 
 [node name="CurrentChamber" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("2_lt88c")]
+[node name="Player" parent="." instance=ExtResource("3_weeja")]
 position = Vector2(320, 272)
 speed = 150
 gravity = 850

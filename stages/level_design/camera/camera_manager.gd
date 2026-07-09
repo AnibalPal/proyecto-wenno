@@ -2,14 +2,22 @@ extends Node
 class_name CameraManager
 
 @export var tween_duration := 2.0
-@export var player_camera : Camera2D
+var player_camera : Camera2D
 @export var initial_params : CameraParams
 
 var current_tween
 
 func _ready() -> void:
 	assert(initial_params, "ERROR: CameraManager - no inital camera params set")
-	assert(player_camera, "ERROR: CameraManager - no player camera set")
+	
+	# Find the camera from the true player or the Debug player depending on if the
+	# Chamber is being tested only for this stage or is the actual stage being played
+	# TODO: Improve this
+	player_camera = get_tree().root.get_node_or_null("YastayStage/Player/PlayerCamera")
+	if(!player_camera):
+		player_camera = get_node_or_null("../../DebugPlayer/PlayerCamera")
+	assert(player_camera, "ERROR: CameraManager - no player camera set or found")
+	
 	for child in get_children():
 		assert(child is CameraParams, "ERROR: CameraManager must have only CameraParam type childs")
 		child.camera_triggers.owner.s_camera_params_changed.connect(on_player_camera_entered)

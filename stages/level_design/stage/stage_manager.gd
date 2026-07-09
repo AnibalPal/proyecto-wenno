@@ -50,6 +50,12 @@ func set_player_move_direction(direction: String, end_cutscene:= false):
 				"x": player.global_position.x - 120,
 				"end": end_cutscene
 			})
+		"NONE":
+			# TODO CREATE THE "ANIMATION" CUTSCENE STATE AND ADD IT HERE
+			player.cutscene_state_machine.transition_to_next_state("Move", {
+				"x": player.global_position.x,
+				"end": end_cutscene
+			})
 		_:
 			print("Unrecognized direction: " + direction)
 
@@ -95,6 +101,7 @@ func add_chamber_node(chamber_instance: Chamber, entry_name: String) -> void:
 	var new_entry_node = chamber_instance.get_entry_node(entry_name)
 	assert(new_entry_node, "Error getting the player pos in the next chamber, make sure the name of the entrypoint exists, expected name: " + entry_name)
 	player.global_position = new_entry_node.global_position
+	player.enter_cutscene_mode()
 	if(player.cutscene_state_machine.process_active):
 		set_player_move_direction(new_entry_node.direction, true)
 
