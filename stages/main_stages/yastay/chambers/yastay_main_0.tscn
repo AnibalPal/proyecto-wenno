@@ -371,17 +371,17 @@ id = "main_0"
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Background" type="Sprite2D" parent="World"]
+[node name="Background2" type="Sprite2D" parent="World"]
 texture_repeat = 2
 position = Vector2(392, 176)
 texture = ExtResource("2_6qxlj")
 region_enabled = true
 region_rect = Rect2(0, 0, 1435.887, 346.5)
 
-[node name="MiddleGroundLayerParallax" type="Parallax2D" parent="World"]
+[node name="Background1" type="Parallax2D" parent="World"]
 scroll_scale = Vector2(0.2, 0.2)
 
-[node name="Sprite2D" type="Sprite2D" parent="World/MiddleGroundLayerParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="World/Background1"]
 texture_repeat = 2
 position = Vector2(304, 176)
 texture = ExtResource("3_ewis2")
@@ -423,17 +423,17 @@ debug_color = Color(0.5756378, 0.94419235, 0.23654485, 0.2)
 modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
 position = Vector2(0, 96)
 
-[node name="Entries" type="Node2D" parent="."]
+[node name="Entries" type="Node2D" parent="World"]
 
-[node name="0" parent="Entries" instance=ExtResource("6_1b5is")]
+[node name="0" parent="World/Entries" instance=ExtResource("6_1b5is")]
 position = Vector2(272, 296)
 direction = "NONE"
 
-[node name="Exits" type="Node2D" parent="."]
+[node name="Exits" type="Node2D" parent="World"]
 
-[node name="0" parent="Exits" instance=ExtResource("7_ry3sd")]
+[node name="0" parent="World/Exits" instance=ExtResource("7_ry3sd")]
 position = Vector2(-272, 272)
-next_chamber_path = "res://stages/main_stages/yastay/chambers/yastay_main_1.tscn"
+next_chamber_path = "uid://htnd6ovtegp1"
 next_entry_name = "0"
 direction = "LEFT"
 

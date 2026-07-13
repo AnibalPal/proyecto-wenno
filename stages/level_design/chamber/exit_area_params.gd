@@ -2,7 +2,7 @@
 class_name ChamberExit
 extends ChamberTransition
 
-@export var next_chamber_path := ""
+@export_file("*.tscn") var next_chamber_path := ""
 @export_tool_button("Open Scene")
 var open_scene_button = editor_open_scene
 @export var next_entry_name := ""
@@ -16,4 +16,4 @@ func _ready() -> void:
 
 func editor_open_scene() -> void:
 	if(next_chamber_path):
-		EditorInterface.open_scene_from_path(next_chamber_path)
+		EditorInterface.call_deferred("open_scene_from_path",next_chamber_path)

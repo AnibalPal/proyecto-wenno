@@ -61,7 +61,7 @@ direction = "LEFT"
 
 [node name="0" parent="Exits" instance=ExtResource("7_lx5ad")]
 position = Vector2(616, 272)
-next_chamber_path = "res://stages/main_stages/yastay/chambers/yastay_main_0.tscn"
+next_chamber_path = "uid://b6kfv0nq8wo8d"
 next_entry_name = "0"
 direction = "RIGHT"
 
