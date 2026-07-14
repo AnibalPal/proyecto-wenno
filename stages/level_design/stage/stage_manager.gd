@@ -40,7 +40,6 @@ func set_player_move_direction(direction: String, end_cutscene:= false):
 				"x": player.global_position.x + 120,
 				"end": end_cutscene
 			})
-			#player.state_machine.current_state.move_right(end_cutscene)
 		"DOWN":
 			player.cutscene_state_machine.transition_to_next_state("Fall", {
 				"end": end_cutscene

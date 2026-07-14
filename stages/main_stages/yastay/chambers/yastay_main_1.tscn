@@ -51,15 +51,15 @@ debug_color = Color(0.5756378, 0.94419235, 0.23654485, 0.2)
 [node name="CameraIcon" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="1"]
 modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
 
-[node name="Entries" type="Node2D" parent="."]
+[node name="Entries" type="Node2D" parent="World"]
 
-[node name="0" parent="Entries" instance=ExtResource("6_eipk2")]
+[node name="0" parent="World/Entries" instance=ExtResource("6_eipk2")]
 position = Vector2(496, 296)
 direction = "LEFT"
 
-[node name="Exits" type="Node2D" parent="."]
+[node name="Exits" type="Node2D" parent="World"]
 
-[node name="0" parent="Exits" instance=ExtResource("7_lx5ad")]
+[node name="0" parent="World/Exits" instance=ExtResource("7_lx5ad")]
 position = Vector2(616, 272)
 next_chamber_path = "uid://b6kfv0nq8wo8d"
 next_entry_name = "0"

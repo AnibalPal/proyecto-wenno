@@ -179,22 +179,24 @@ size = Vector2(64, 80)
 script = ExtResource("1_buxlp")
 id = "1"
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="World" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World"]
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAABAAAAAAAAAAYAAAABAAAAAAAAAAcAAAABAAAAAAAAAAgAAAABAAAAAAAAAAkAAAABAAAAAAAAAAoAAAABAAAAAAAAAAsAAAABAAAAAAABAAsAAAABAAAAAAACAAsAAAABAAAAAAADAAsAAAABAAAAAAAEAAsAAAABAAAAAAAFAAsAAAABAAAAAAAGAAsAAAABAAAAAAAHAAsAAAABAAAAAAAIAAsAAAABAAAAAAAJAAsAAAABAAAAAAAKAAsAAAABAAAAAAALAAsAAAABAAAAAAAMAAsAAAABAAAAAAANAAsAAAABAAAAAAAOAAsAAAABAAAAAAAPAAsAAAABAAAAAAAQAAsAAAABAAAAAAARAAsAAAABAAAAAAASAAsAAAABAAAAAAATAAsAAAABAAAAAAAUAAsAAAABAAAAAAAUAAEAAAABAAAAAAAUAAAAAAABAAAAAAATAAAAAAABAAAAAAATAAEAAAABAAAAAAABAAoAAAABAAAAAAABAAkAAAABAAAAAAABAAgAAAABAAAAAAABAAcAAAABAAAAAAABAAYAAAABAAAAAAABAAUAAAABAAAAAAABAAQAAAABAAAAAAABAAMAAAABAAAAAAABAAIAAAABAAAAAAABAAEAAAABAAAAAAABAAAAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAMAAAAAAABAAAAAAANAAAAAAABAAAAAAAOAAAAAAABAAAAAAAPAAAAAAABAAAAAAAQAAAAAAABAAAAAAARAAAAAAABAAAAAAASAAAAAAABAAAAAAASAAEAAAABAAAAAAARAAEAAAABAAAAAAAQAAEAAAABAAAAAAAPAAEAAAABAAAAAAAOAAEAAAABAAAAAAANAAEAAAABAAAAAAAMAAEAAAABAAAAAAALAAEAAAABAAAAAAAKAAEAAAABAAAAAAAJAAEAAAABAAAAAAAIAAEAAAABAAAAAAAHAAEAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAEAAEAAAABAAAAAAADAAEAAAABAAAAAAACAAEAAAABAAAAAAATAAoAAAABAAAAAAAUAAoAAAABAAAAAAAVAAoAAAABAAAAAAAWAAoAAAABAAAAAAAXAAoAAAABAAAAAAAYAAoAAAABAAAAAAAYAAsAAAABAAAAAAAXAAsAAAABAAAAAAAWAAsAAAABAAAAAAAVAAsAAAABAAAAAAAZAAoAAAABAAAAAAAaAAoAAAABAAAAAAAaAAsAAAABAAAAAAAZAAsAAAABAAAAAAAVAAAAAAABAAAAAAAWAAAAAAABAAAAAAAWAAEAAAABAAAAAAAXAAAAAAABAAAAAAAYAAAAAAABAAAAAAAYAAEAAAABAAAAAAAXAAEAAAABAAAAAAAZAAAAAAABAAAAAAAZAAEAAAABAAAAAAAaAAAAAAABAAAAAAAaAAEAAAABAAAAAAAVAAEAAAABAAAAAAA=")
 tile_set = ExtResource("1_vlr1m")
 
-[node name="Entries" type="Node2D" parent="."]
+[node name="Entries" type="Node2D" parent="World"]
 
-[node name="0" parent="Entries" instance=ExtResource("3_grbin")]
+[node name="0" parent="World/Entries" instance=ExtResource("3_grbin")]
 position = Vector2(104, 288)
 direction = "RIGHT"
 
-[node name="1" type="Node2D" parent="Entries"]
+[node name="1" type="Node2D" parent="World/Entries"]
 position = Vector2(704, 296)
 script = ExtResource("3_wos68")
 direction = "LEFT"
 
-[node name="PositionMarker" type="Sprite2D" parent="Entries/1"]
+[node name="PositionMarker" type="Sprite2D" parent="World/Entries/1"]
 modulate = Color(0, 0.5921569, 1, 1)
 scale = Vector2(3, 3)
 texture = ExtResource("2_7tcn1")
@@ -202,19 +204,19 @@ script = ExtResource("3_buxlp")
 color = Color(0, 0.5921569, 1, 1)
 metadata/_edit_lock_ = true
 
-[node name="ArrowPivot" type="Node2D" parent="Entries/1"]
+[node name="ArrowPivot" type="Node2D" parent="World/Entries/1"]
 rotation = 4.712389
 
-[node name="DirectionalArrow" parent="Entries/1/ArrowPivot" instance=ExtResource("5_6h84v")]
+[node name="DirectionalArrow" parent="World/Entries/1/ArrowPivot" instance=ExtResource("5_6h84v")]
 modulate = Color(0.32941177, 0.5882353, 0.8901961, 1)
 position = Vector2(0, -16)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_dfm2w")
 color = Color(0.32941177, 0.5882353, 0.8901961, 1)
 
-[node name="Exits" type="Node2D" parent="."]
+[node name="Exits" type="Node2D" parent="World"]
 
-[node name="0" type="Area2D" parent="Exits"]
+[node name="0" type="Area2D" parent="World/Exits"]
 position = Vector2(664, 280)
 collision_layer = 64
 collision_mask = 64
@@ -224,18 +226,18 @@ next_entry_name = "0"
 direction = "RIGHT"
 metadata/_edit_group_ = true
 
-[node name="ExitAreaCollision" type="CollisionShape2D" parent="Exits/0"]
+[node name="ExitAreaCollision" type="CollisionShape2D" parent="World/Exits/0"]
 shape = SubResource("RectangleShape2D_wos68")
 
-[node name="EditorIcon" parent="Exits/0" instance=ExtResource("5_6h84v")]
+[node name="EditorIcon" parent="World/Exits/0" instance=ExtResource("5_6h84v")]
 scale = Vector2(2, 2)
 texture = ExtResource("7_wos68")
 color = Color(1, 1, 1, 1)
 
-[node name="ArrowPivot" type="Node2D" parent="Exits/0"]
+[node name="ArrowPivot" type="Node2D" parent="World/Exits/0"]
 rotation = 1.5707964
 
-[node name="DirectionalArrow" parent="Exits/0/ArrowPivot" instance=ExtResource("5_6h84v")]
+[node name="DirectionalArrow" parent="World/Exits/0/ArrowPivot" instance=ExtResource("5_6h84v")]
 modulate = Color(0.3863936, 0.65864027, 0.3070067, 1)
 position = Vector2(0, -16)
 scale = Vector2(1.5, 1.5)
