@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmggim1y57eok"]
+
+[ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_hrqr4"]
+[ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="1_iole4"]
+[ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/comic_step.gd" id="2_83nyl"]
+
+[sub_resource type="Resource" id="Resource_oiuvo"]
+script = ExtResource("2_83nyl")
+metadata/_custom_type_script = "uid://bujbvms10y3by"
+
+[node name="Comic" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hrqr4")
+cutscene_data = Array[ExtResource("2_83nyl")]([SubResource("Resource_oiuvo")])
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iole4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -104.0
+grow_horizontal = 2
+grow_vertical = 0
