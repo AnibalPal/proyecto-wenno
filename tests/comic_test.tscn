@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnrhioyg41mns"]
+
+[ext_resource type="PackedScene" uid="uid://bmggim1y57eok" path="res://comic/comic.tscn" id="1_sfgfq"]
+[ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/comic_step.gd" id="2_ypn57"]
+[ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="3_1f2ih"]
+[ext_resource type="Texture2D" uid="uid://c3vehluhoon47" path="res://assets/placeholders/ocean_640x360.jpg" id="4_0iqtl"]
+
+[sub_resource type="Resource" id="Resource_dwk04"]
+script = ExtResource("2_ypn57")
+start_transition = 2
+end_transition = 1
+background_image = ExtResource("3_1f2ih")
+text = "Esta es la cutscene de prueba, las imagenes son falsas"
+metadata/_custom_type_script = "uid://bujbvms10y3by"
+
+[sub_resource type="Resource" id="Resource_x6661"]
+script = ExtResource("2_ypn57")
+start_transition = 2
+end_transition = 1
+background_image = ExtResource("4_0iqtl")
+text = "Despues de esta imagen empieza el juego"
+metadata/_custom_type_script = "uid://bujbvms10y3by"
+
+[node name="ComicTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Comic" parent="." instance=ExtResource("1_sfgfq")]
+layout_mode = 1
+comic_data = Array[ExtResource("2_ypn57")]([SubResource("Resource_dwk04"), SubResource("Resource_x6661")])
+comic_end_path = "uid://jtxhssckm7o6"

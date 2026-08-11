@@ -1,12 +1,60 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmggim1y57eok"]
+[gd_scene load_steps=8 format=3 uid="uid://bmggim1y57eok"]
 
 [ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_hrqr4"]
 [ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="1_iole4"]
-[ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/comic_step.gd" id="2_83nyl"]
+[ext_resource type="Script" uid="uid://bdv5nwptk0mf7" path="res://comic/comic_transition_effects.gd" id="4_oiuvo"]
 
-[sub_resource type="Resource" id="Resource_oiuvo"]
-script = ExtResource("2_83nyl")
-metadata/_custom_type_script = "uid://bujbvms10y3by"
+[sub_resource type="Animation" id="Animation_83nyl"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oiuvo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ksot6"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxlre"]
+_data = {
+&"RESET": SubResource("Animation_oiuvo"),
+&"fade_in": SubResource("Animation_83nyl"),
+&"fade_out": SubResource("Animation_ksot6")
+}
 
 [node name="Comic" type="Control"]
 layout_mode = 3
@@ -16,7 +64,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hrqr4")
-cutscene_data = Array[ExtResource("2_83nyl")]([SubResource("Resource_oiuvo")])
+text_speed = 10
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -27,12 +75,35 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_iole4")
 
-[node name="Label" type="Label" parent="."]
+[node name="ImageText" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -104.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = -16.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
+text = "SAMPLE TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ComicTransitionEffects" type="CanvasLayer" parent="."]
+script = ExtResource("4_oiuvo")
+
+[node name="ColorRect" type="ColorRect" parent="ComicTransitionEffects"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="TransitionEffectsPlayer" type="AnimationPlayer" parent="ComicTransitionEffects"]
+libraries = {
+&"": SubResource("AnimationLibrary_lxlre")
+}
+
+[connection signal="animation_finished" from="ComicTransitionEffects/TransitionEffectsPlayer" to="ComicTransitionEffects" method="_on_transition_effects_player_animation_finished"]
