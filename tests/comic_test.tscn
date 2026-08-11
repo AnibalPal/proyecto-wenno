@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnrhioyg41mns"]
+[gd_scene load_steps=11 format=3 uid="uid://dnrhioyg41mns"]
 
 [ext_resource type="PackedScene" uid="uid://bmggim1y57eok" path="res://comic/comic.tscn" id="1_sfgfq"]
 [ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/comic_step.gd" id="2_ypn57"]
 [ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="3_1f2ih"]
 [ext_resource type="Texture2D" uid="uid://c3vehluhoon47" path="res://assets/placeholders/ocean_640x360.jpg" id="4_0iqtl"]
+[ext_resource type="Texture2D" uid="uid://d216c3b3rs0yw" path="res://assets/placeholders/snow_mountain900x506.jpg" id="4_1f2ih"]
 
 [sub_resource type="Resource" id="Resource_dwk04"]
 script = ExtResource("2_ypn57")
@@ -13,9 +14,34 @@ background_image = ExtResource("3_1f2ih")
 text = "Esta es la cutscene de prueba, las imagenes son falsas"
 metadata/_custom_type_script = "uid://bujbvms10y3by"
 
-[sub_resource type="Resource" id="Resource_x6661"]
+[sub_resource type="Resource" id="Resource_0iqtl"]
 script = ExtResource("2_ypn57")
 start_transition = 2
+background_image = ExtResource("4_1f2ih")
+text = "Probando imagen mas grande"
+metadata/_custom_type_script = "uid://bujbvms10y3by"
+
+[sub_resource type="Resource" id="Resource_1f2ih"]
+script = ExtResource("2_ypn57")
+camera_effect = 1
+camera_effect_params = {
+"x_offset": 30.0,
+"y_offset": 0.0
+}
+metadata/_custom_type_script = "uid://bujbvms10y3by"
+
+[sub_resource type="Resource" id="Resource_qt3yu"]
+script = ExtResource("2_ypn57")
+camera_effect = 2
+camera_effect_params = {
+"panning_speed": 1.0,
+"x_offset": -30.0,
+"y_offset": 0.0
+}
+metadata/_custom_type_script = "uid://bujbvms10y3by"
+
+[sub_resource type="Resource" id="Resource_x6661"]
+script = ExtResource("2_ypn57")
 end_transition = 1
 background_image = ExtResource("4_0iqtl")
 text = "Despues de esta imagen empieza el juego"
@@ -31,5 +57,5 @@ grow_vertical = 2
 
 [node name="Comic" parent="." instance=ExtResource("1_sfgfq")]
 layout_mode = 1
-comic_data = Array[ExtResource("2_ypn57")]([SubResource("Resource_dwk04"), SubResource("Resource_x6661")])
+comic_data = Array[ExtResource("2_ypn57")]([SubResource("Resource_dwk04"), SubResource("Resource_0iqtl"), SubResource("Resource_1f2ih"), SubResource("Resource_qt3yu"), SubResource("Resource_x6661")])
 comic_end_path = "uid://jtxhssckm7o6"

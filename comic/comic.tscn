@@ -1,23 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmggim1y57eok"]
+[gd_scene load_steps=9 format=3 uid="uid://bmggim1y57eok"]
 
 [ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_hrqr4"]
 [ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="1_iole4"]
+[ext_resource type="Script" uid="uid://dalutrgbmnw0x" path="res://comic/comic_camera.gd" id="2_oiuvo"]
 [ext_resource type="Script" uid="uid://bdv5nwptk0mf7" path="res://comic/comic_transition_effects.gd" id="4_oiuvo"]
-
-[sub_resource type="Animation" id="Animation_83nyl"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_oiuvo"]
 length = 0.001
@@ -32,6 +18,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_83nyl"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ksot6"]
@@ -66,23 +67,22 @@ grow_vertical = 2
 script = ExtResource("1_hrqr4")
 text_speed = 10
 
-[node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ComicCamera" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("2_oiuvo")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
 texture = ExtResource("1_iole4")
 
-[node name="ImageText" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+[node name="TextLayer" type="CanvasLayer" parent="."]
+
+[node name="ImageText" type="Label" parent="TextLayer"]
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -88.0
+offset_top = 272.0
 offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
