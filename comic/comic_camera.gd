@@ -1,9 +1,9 @@
 extends Camera2D
 class_name ComicCamera
 
-const CameraEffects = ComicStep.CameraEffects
-
 signal s_camera_effect_done
+
+const CameraEffects = ComicStep.CameraEffects
 
 func _ready() -> void:
 	pass

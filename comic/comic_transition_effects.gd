@@ -1,11 +1,11 @@
 extends CanvasLayer
 class_name ComicTransitionEffects
 
+signal s_transition_finished(start_transition : bool)
+
 const Transitions = ComicStep.Transitions
 
 @onready var transition_effects_player: AnimationPlayer = $TransitionEffectsPlayer
-
-signal s_transition_finished(start_transition : bool)
 
 var start_transition := false
 

@@ -10,6 +10,7 @@
 script = ExtResource("2_ypn57")
 start_transition = 2
 end_transition = 1
+text_effect = 1
 background_image = ExtResource("3_1f2ih")
 text = "Esta es la cutscene de prueba, las imagenes son falsas"
 metadata/_custom_type_script = "uid://bujbvms10y3by"
