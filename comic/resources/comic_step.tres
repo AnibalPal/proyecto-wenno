@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ComicStep" load_steps=3 format=3 uid="uid://bgp4fed5dysp7"]
+
+[ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/resources/comic_effect_data.gd" id="1_y3gi1"]
+[ext_resource type="Script" uid="uid://d2gkky6f5csp" path="res://comic/resources/comic_step.gd" id="2_hm0xv"]
+
+[resource]
+script = ExtResource("2_hm0xv")

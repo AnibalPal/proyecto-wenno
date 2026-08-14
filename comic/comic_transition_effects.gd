@@ -3,7 +3,7 @@ class_name ComicTransitionEffects
 
 signal s_transition_finished(start_transition : bool)
 
-const Transitions = ComicStep.Transitions
+const Transitions = ComicTransitionEffectData.Transitions
 
 @onready var transition_effects_player: AnimationPlayer = $TransitionEffectsPlayer
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmggim1y57eok"]
+[gd_scene load_steps=11 format=3 uid="uid://bmggim1y57eok"]
 
 [ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_hrqr4"]
 [ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="1_iole4"]
 [ext_resource type="Script" uid="uid://dalutrgbmnw0x" path="res://comic/comic_camera.gd" id="2_oiuvo"]
 [ext_resource type="Script" uid="uid://dkfv20agwc7wc" path="res://comic/comic_text_effects.gd" id="4_ksot6"]
+[ext_resource type="Script" uid="uid://dfn20djjcsog" path="res://comic/comic_background.gd" id="4_lxlre"]
 [ext_resource type="Script" uid="uid://bdv5nwptk0mf7" path="res://comic/comic_transition_effects.gd" id="4_oiuvo"]
 
 [sub_resource type="Animation" id="Animation_oiuvo"]
@@ -74,11 +75,13 @@ script = ExtResource("2_oiuvo")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
 texture = ExtResource("1_iole4")
+script = ExtResource("4_lxlre")
 
 [node name="ComicTextLayer" type="CanvasLayer" parent="."]
 script = ExtResource("4_ksot6")
 
 [node name="ImageText" type="Label" parent="ComicTextLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

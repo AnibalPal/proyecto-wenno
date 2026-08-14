@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ComicBackgroundEffect" load_steps=2 format=3 uid="uid://dp10115mo2lqx"]
+
+[ext_resource type="Script" uid="uid://bmiq63t60p8ex" path="res://comic/resources/comic_background_effect_data.gd" id="1_w8tc8"]
+
+[resource]
+script = ExtResource("1_w8tc8")

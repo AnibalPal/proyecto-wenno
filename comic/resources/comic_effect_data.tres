@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ComicEffect" load_steps=2 format=3 uid="uid://cybjefstjnvrl"]
+
+[ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/resources/comic_effect_data.gd" id="1_6fulh"]
+
+[resource]
+script = ExtResource("1_6fulh")

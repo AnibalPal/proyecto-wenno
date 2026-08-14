@@ -5,8 +5,8 @@ class_name Comic
 @export_file("*.tscn") var comic_end_path := ""
 
 @onready var comic_transition_effects: CanvasLayer = $ComicTransitionEffects
-@onready var comic_camera: ComicCamera = $ComicCamera
-@onready var background_image: Sprite2D = $Background
+@onready var comic_camera: ComicCameraEffect = $ComicCamera
+@onready var background_image: ComicBackgroundEffect = $Background
 
 @onready var comic_text_layer: ComicTextEffects = $ComicTextLayer
 
@@ -14,6 +14,7 @@ var comic_idx := 0
 var transition_effect_playing := false
 var camera_effect_playing := false
 var text_playing := false
+var background_effect_playing := false
 var comic_done := false
 
 func _ready() -> void:
@@ -25,22 +26,28 @@ func setup_signals() -> void:
 	comic_transition_effects.s_transition_finished.connect(on_transition_finished)
 	comic_camera.s_camera_effect_done.connect(on_camera_effect_finished)
 	comic_text_layer.s_text_effect_finished.connect(on_text_effect_finished)
+	background_image.s_background_effect_done.connect(on_background_effect_finished)
+
+func on_background_effect_finished() -> void:
+	background_effect_playing = false
 
 func on_text_effect_finished() -> void:
 	text_playing = false
 
-func on_transition_finished(start_transition := false) -> void:
+func on_transition_finished(is_end_transition := false) -> void:
 	transition_effect_playing = false
-	if(start_transition):
+	if(not is_end_transition):
 		# Place what I want to happen here after the start transition if needed, for example move text
-		pass
+		play_effects()
 	else:
-		comic_idx += 1
-		if(comic_idx >= len(comic_data)):
-			end()
-		else:
-			start_comic_step()
+		advance_to_next_step()
 
+func advance_to_next_step() -> void:
+	comic_idx += 1
+	if(comic_idx >= len(comic_data)):
+		end()
+	else:
+		start_comic_step()
 
 func on_camera_effect_finished() -> void:
 	camera_effect_playing = false
@@ -51,45 +58,55 @@ func _process(_delta: float) -> void:
 			next()
 
 func are_effects_playing() -> bool:
-	return text_playing or transition_effect_playing or camera_effect_playing
+	return text_playing or transition_effect_playing or camera_effect_playing or background_effect_playing
 
 func next() -> void:
 	end_comic_step()
 
 func start_comic_step() -> void:
 	var current_step_data = comic_data[comic_idx]
-	
-	# Set background
-	if(current_step_data.background_image):
-		background_image.texture = current_step_data.background_image
-	
-	play_start_transition()
-	play_camera_effect()
-	play_text_effect()
+	if(current_step_data.start_transition):
+		play_transition_effect(current_step_data.start_transition, false)
+	else:
+		play_effects()
 
 func end_comic_step() -> void:
-	play_end_transition()
-
-func play_start_transition() -> void:
-	transition_effect_playing = true
 	var current_step_data = comic_data[comic_idx]
-	comic_transition_effects.play_transition_effect(current_step_data.start_transition, true)
+	if(current_step_data.end_transition):
+		play_transition_effect(current_step_data.end_transition, true)
+	else:
+		advance_to_next_step()
+		
 
-func play_end_transition() -> void:
+func play_transition_effect(step_data : ComicTransitionEffectData, is_end_transition := false) -> void:
 	transition_effect_playing = true
-	var current_step_data = comic_data[comic_idx]
-	comic_transition_effects.play_transition_effect(current_step_data.end_transition, false)
+	comic_transition_effects.play_transition_effect(step_data.transition_effect, is_end_transition)
 
-func play_text_effect() -> void:
+func play_text_effect(effect_data : ComicTextEffectData) -> void:
 	text_playing = true
-	var current_step_data = comic_data[comic_idx]
-	comic_text_layer.set_text(current_step_data.text)
-	comic_text_layer.play_text_effect(current_step_data.text_effect)
+	comic_text_layer.play_text_effect(effect_data)
 
-func play_camera_effect() -> void:
+func play_camera_effect(effect_data : ComicCameraEffectData) -> void:
 	camera_effect_playing = true
-	var current_step_data = comic_data[comic_idx]
-	comic_camera.play_camera_effect(current_step_data.camera_effect, current_step_data.camera_effect_params)
+	comic_camera.play_camera_effect(effect_data.camera_effect, effect_data.camera_effect_params)
+
+func play_background_effect(effect_data : ComicBackgroundEffectData) -> void:
+	background_effect_playing = true
+	background_image.play_background_effect(effect_data.background_effect, effect_data.new_background_image)
+
+func play_effects() -> void:
+	var current_step_effects_data := comic_data[comic_idx].comic_effects
+	for effect_data in current_step_effects_data:
+		if(effect_data is ComicTextEffectData):
+			play_text_effect(effect_data)
+		elif(effect_data is ComicBackgroundEffectData):
+			play_background_effect(effect_data)
+		elif(effect_data is ComicTransitionEffectData):
+			play_transition_effect(effect_data)
+		elif(effect_data is ComicCameraEffectData):
+			play_camera_effect(effect_data)
+		else:
+			print("UNRECOGNIZED EFFECT")
 
 func end() -> void:
 	comic_done = true

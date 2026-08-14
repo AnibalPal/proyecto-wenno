@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b3cit4gjaxxy"]
+
+[ext_resource type="Script" uid="uid://cuabsrcy3f2j5" path="res://comic/resources/comic_camera_effect_data.gd" id="1_2vywh"]
+
+[resource]
+script = ExtResource("1_2vywh")
