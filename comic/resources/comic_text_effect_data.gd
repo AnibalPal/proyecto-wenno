@@ -2,6 +2,7 @@ extends ComicEffectData
 class_name ComicTextEffectData
 
 enum TextEffects {
+	NONE,
 	TYPING,
 	FADE_IN
 }

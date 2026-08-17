@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dnrhioyg41mns"]
+[gd_scene load_steps=30 format=3 uid="uid://dnrhioyg41mns"]
 
 [ext_resource type="PackedScene" uid="uid://bmggim1y57eok" path="res://comic/comic.tscn" id="1_sfgfq"]
 [ext_resource type="Script" uid="uid://d2gkky6f5csp" path="res://comic/resources/comic_step.gd" id="2_a3y61"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://cuabsrcy3f2j5" path="res://comic/resources/comic_camera_effect_data.gd" id="5_0iqtl"]
 [ext_resource type="Texture2D" uid="uid://d216c3b3rs0yw" path="res://assets/placeholders/snow_mountain900x506.jpg" id="6_x6661"]
 [ext_resource type="Script" uid="uid://bmiq63t60p8ex" path="res://comic/resources/comic_background_effect_data.gd" id="7_qt3yu"]
+[ext_resource type="Texture2D" uid="uid://bet1oa66swr5l" path="res://assets/placeholders/2 guys talking.jpg" id="9_qt3yu"]
+[ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="10_dw6ml"]
 
 [sub_resource type="Resource" id="Resource_0iqtl"]
 script = ExtResource("4_1f2ih")
@@ -16,7 +18,6 @@ metadata/_custom_type_script = "uid://bn8a4cow01we0"
 
 [sub_resource type="Resource" id="Resource_dwk04"]
 script = ExtResource("5_0iqtl")
-camera_effect = 1
 camera_effect_params = {
 "panning_speed": 1.0,
 "x_offset": 30.0,
@@ -40,15 +41,81 @@ start_transition = SubResource("Resource_1f2ih")
 comic_effects = Array[ExtResource("2_ypn57")]([SubResource("Resource_0iqtl"), SubResource("Resource_dwk04"), SubResource("Resource_dw6ml")])
 metadata/_custom_type_script = "uid://d2gkky6f5csp"
 
-[sub_resource type="Resource" id="Resource_xahoq"]
+[sub_resource type="Resource" id="Resource_pnujr"]
+script = ExtResource("7_qt3yu")
+new_background_image = ExtResource("9_qt3yu")
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
+
+[sub_resource type="Resource" id="Resource_nn146"]
 script = ExtResource("5_0iqtl")
 camera_effect = 2
+camera_effect_params = {
+"panning_speed": 1.0,
+"x_offset": 30.0,
+"y_offset": -350.0
+}
+metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
+
+[sub_resource type="Resource" id="Resource_4id1n"]
+script = ExtResource("4_1f2ih")
+text = "Hola como estas"
+metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_i7ou1"]
+script = ExtResource("2_a3y61")
+comic_effects = Array[ExtResource("2_ypn57")]([SubResource("Resource_pnujr"), SubResource("Resource_nn146"), SubResource("Resource_4id1n")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
+[sub_resource type="Resource" id="Resource_dpmoo"]
+script = ExtResource("5_0iqtl")
+camera_effect_params = {
+"x_offset": -420.0,
+"y_offset": -250.0
+}
+metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
+
+[sub_resource type="Resource" id="Resource_oro3i"]
+script = ExtResource("5_0iqtl")
+camera_effect = 4
+camera_effect_params = {
+"zoom_intensity": 3.0
+}
+metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
+
+[sub_resource type="Resource" id="Resource_twba7"]
+script = ExtResource("4_1f2ih")
+text = "Alejese de mi"
+text_effect = 0
+metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_m0sey"]
+script = ExtResource("5_0iqtl")
+camera_effect = 5
+camera_effect_params = {
+"shake_decay": 8.0,
+"shake_strength": 20.0
+}
+metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
+
+[sub_resource type="Resource" id="Resource_2ht3e"]
+script = ExtResource("2_a3y61")
+comic_effects = Array[ExtResource("2_ypn57")]([SubResource("Resource_dpmoo"), SubResource("Resource_oro3i"), SubResource("Resource_twba7"), SubResource("Resource_m0sey")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
+[sub_resource type="Resource" id="Resource_xahoq"]
+script = ExtResource("5_0iqtl")
+camera_effect = 0
 metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
 
 [sub_resource type="Resource" id="Resource_gufmp"]
 script = ExtResource("4_1f2ih")
 text = "Aca comienza la historia en una montaña"
 metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_vi2fr"]
+script = ExtResource("7_qt3yu")
+new_background_image = ExtResource("10_dw6ml")
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
 [sub_resource type="Resource" id="Resource_x6661"]
 script = ExtResource("4_ypn57")
@@ -57,7 +124,7 @@ metadata/_custom_type_script = "uid://o4n8ls203asg"
 
 [sub_resource type="Resource" id="Resource_qt3yu"]
 script = ExtResource("2_a3y61")
-comic_effects = Array[ExtResource("2_ypn57")]([SubResource("Resource_xahoq"), SubResource("Resource_gufmp")])
+comic_effects = Array[ExtResource("2_ypn57")]([SubResource("Resource_xahoq"), SubResource("Resource_gufmp"), SubResource("Resource_vi2fr")])
 end_transition = SubResource("Resource_x6661")
 metadata/_custom_type_script = "uid://d2gkky6f5csp"
 
@@ -71,5 +138,5 @@ grow_vertical = 2
 
 [node name="Comic" parent="." instance=ExtResource("1_sfgfq")]
 layout_mode = 1
-comic_data = Array[ExtResource("2_a3y61")]([SubResource("Resource_ypn57"), SubResource("Resource_qt3yu")])
+comic_data = Array[ExtResource("2_a3y61")]([SubResource("Resource_ypn57"), SubResource("Resource_i7ou1"), SubResource("Resource_2ht3e"), SubResource("Resource_qt3yu")])
 comic_end_path = "uid://jtxhssckm7o6"

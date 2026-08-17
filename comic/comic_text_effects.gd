@@ -32,11 +32,15 @@ func play_text_effect(text_effect_data: ComicTextEffectData) -> void:
 	if(text_effect_data.text):
 		set_text(text_effect_data.text)
 		match text_effect_data.text_effect:
+			TextEffects.NONE:
+				image_text.visible_characters = -1
+				s_text_effect_finished.emit()
 			TextEffects.TYPING:
 				reset_text_typing()
 				is_text_playing = true
 			TextEffects.FADE_IN:
-				pass
+				print("TODO TEXT FADE IN IMPLEMENTATION")
+				s_text_effect_finished.emit()
 			_:
 				print("NON EXISTENT TEXT EFFECT " + str(text_effect_data.text_effect))
 	else:
