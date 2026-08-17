@@ -6,6 +6,7 @@ enum CameraEffects {
 	PANNING,
 	CENTER,
 	ZOOM,
+	SCREEN_SHAKE
 }
 
 @export var camera_effect := CameraEffects.SET_POSITION

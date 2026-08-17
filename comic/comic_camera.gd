@@ -19,6 +19,8 @@ func play_camera_effect(effect : CameraEffects, params := {}) -> void:
 			s_camera_effect_done.emit()
 		CameraEffects.ZOOM:
 			print("TODO ZOOM EFFECT")
+		CameraEffects.SCREEN_SHAKE:
+			print("TODO SCREEN SHAKE")
 		_:
 			print("NO CAMERA EFFECT IMPLEMENTATION FOR THE EFFECT: " + str(effect))
 
