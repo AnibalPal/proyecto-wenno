@@ -11,11 +11,14 @@ var current_offset : Vector2
 
 func _process(delta: float) -> void:
 	if(shake_strength > 0):
-		shake_strength = lerp(shake_strength, -1.0, 10 * delta)
+		shake_strength = lerp(shake_strength, -1.0, shake_decay * delta)
 		offset = current_offset + Vector2(randf_range(-shake_strength, shake_strength), randf_range(-shake_strength, shake_strength))
-		
+		if(shake_strength <= 0):
+			s_camera_effect_done.emit()
 
-func play_camera_effect(effect : CameraEffects, params := {}) -> void:
+func play_camera_effect(effect_data : ComicCameraEffectData) -> void:
+	var params = effect_data.camera_effect_params
+	var effect = effect_data.camera_effect
 	match effect:
 		CameraEffects.RESET:
 			reset_camera_params()
@@ -35,7 +38,6 @@ func play_camera_effect(effect : CameraEffects, params := {}) -> void:
 			s_camera_effect_done.emit()
 		CameraEffects.SCREEN_SHAKE:
 			start_shake(params["shake_strength"], params["shake_decay"])
-			s_camera_effect_done.emit()
 		_:
 			print("NO CAMERA EFFECT IMPLEMENTATION FOR THE EFFECT: " + str(effect))
 

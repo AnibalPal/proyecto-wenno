@@ -13,7 +13,11 @@
 
 [sub_resource type="Resource" id="Resource_0iqtl"]
 script = ExtResource("4_1f2ih")
-text = "Probando la wea"
+text = "A continuación se van a probar todos los efectos que se pueden utilizar por el momento en este comic."
+text_effect = 1
+text_effect_params = {
+"typing_speed": 50.0
+}
 metadata/_custom_type_script = "uid://bn8a4cow01we0"
 
 [sub_resource type="Resource" id="Resource_dwk04"]
@@ -33,6 +37,9 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 [sub_resource type="Resource" id="Resource_1f2ih"]
 script = ExtResource("4_ypn57")
 transition_effect = 2
+transition_params = {
+"duration": 0.5
+}
 metadata/_custom_type_script = "uid://o4n8ls203asg"
 
 [sub_resource type="Resource" id="Resource_ypn57"]
@@ -59,6 +66,10 @@ metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
 [sub_resource type="Resource" id="Resource_4id1n"]
 script = ExtResource("4_1f2ih")
 text = "Hola como estas"
+text_effect = 1
+text_effect_params = {
+"typing_speed": 5.0
+}
 metadata/_custom_type_script = "uid://bn8a4cow01we0"
 
 [sub_resource type="Resource" id="Resource_i7ou1"]
@@ -78,21 +89,20 @@ metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
 script = ExtResource("5_0iqtl")
 camera_effect = 4
 camera_effect_params = {
-"zoom_intensity": 3.0
+"zoom_intensity": 2.0
 }
 metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
 
 [sub_resource type="Resource" id="Resource_twba7"]
 script = ExtResource("4_1f2ih")
 text = "Alejese de mi"
-text_effect = 0
 metadata/_custom_type_script = "uid://bn8a4cow01we0"
 
 [sub_resource type="Resource" id="Resource_m0sey"]
 script = ExtResource("5_0iqtl")
 camera_effect = 5
 camera_effect_params = {
-"shake_decay": 8.0,
+"shake_decay": 3.0,
 "shake_strength": 20.0
 }
 metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
@@ -109,7 +119,11 @@ metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
 
 [sub_resource type="Resource" id="Resource_gufmp"]
 script = ExtResource("4_1f2ih")
-text = "Aca comienza la historia en una montaña"
+text = "Ahora solo falta la transicion al gameplay, esta ocurre a continuación."
+text_effect = 1
+text_effect_params = {
+"typing_speed": 50.0
+}
 metadata/_custom_type_script = "uid://bn8a4cow01we0"
 
 [sub_resource type="Resource" id="Resource_vi2fr"]
@@ -120,6 +134,9 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 [sub_resource type="Resource" id="Resource_x6661"]
 script = ExtResource("4_ypn57")
 transition_effect = 1
+transition_params = {
+"duration": 3.0
+}
 metadata/_custom_type_script = "uid://o4n8ls203asg"
 
 [sub_resource type="Resource" id="Resource_qt3yu"]
@@ -138,5 +155,6 @@ grow_vertical = 2
 
 [node name="Comic" parent="." instance=ExtResource("1_sfgfq")]
 layout_mode = 1
+initial_background = ExtResource("6_x6661")
 comic_data = Array[ExtResource("2_a3y61")]([SubResource("Resource_ypn57"), SubResource("Resource_i7ou1"), SubResource("Resource_2ht3e"), SubResource("Resource_qt3yu")])
 comic_end_path = "uid://jtxhssckm7o6"

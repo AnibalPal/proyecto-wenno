@@ -1,6 +1,7 @@
 extends Control
 class_name Comic
 
+@export var initial_background : Texture2D
 @export var comic_data : Array[ComicStep] = []
 @export_file("*.tscn") var comic_end_path := ""
 
@@ -14,10 +15,13 @@ var transition_effect_playing := false
 var camera_effect_playing := false
 var text_playing := false
 var background_effect_playing := false
-var comic_done := false
+
+var expected_effect_amount := 0
 
 func _ready() -> void:
 	assert(len(comic_data) > 0, "COMIC HAS NO DATA")
+	if(initial_background):
+		background_image.texture = initial_background
 	setup_signals()
 	start_comic_step()
 
@@ -32,9 +36,9 @@ func _process(_delta: float) -> void:
 # Signal related functions
 func setup_signals() -> void:
 	comic_transition_effects.s_transition_finished.connect(on_transition_finished)
-	comic_camera.s_camera_effect_done.connect(on_camera_effect_finished)
-	comic_text_layer.s_text_effect_finished.connect(on_text_effect_finished)
-	background_image.s_background_effect_done.connect(on_background_effect_finished)
+	comic_camera.s_camera_effect_done.connect(on_effect_finished)
+	comic_text_layer.s_text_effect_finished.connect(on_effect_finished)
+	background_image.s_background_effect_done.connect(on_effect_finished)
 
 func on_transition_finished(is_end_transition := false) -> void:
 	transition_effect_playing = false
@@ -43,18 +47,10 @@ func on_transition_finished(is_end_transition := false) -> void:
 		play_effects()
 	else:
 		advance_to_next_step()
-		
-func on_camera_effect_finished() -> void:
-	camera_effect_playing = false
+
+func on_effect_finished() -> void:
+	expected_effect_amount -= 1
 	check_if_show_caret()
-	
-func on_text_effect_finished() -> void:
-	text_playing = false
-	check_if_show_caret()
-	
-func on_background_effect_finished() -> void:
-	background_effect_playing = false
-	check_if_show_caret()	
 
 func check_if_show_caret() -> void:
 	if(not are_effects_playing()):
@@ -69,10 +65,13 @@ func advance_to_next_step() -> void:
 		start_comic_step()
 
 func are_effects_playing() -> bool:
-	return text_playing or transition_effect_playing or camera_effect_playing or background_effect_playing
+	return transition_effect_playing or expected_effect_amount > 0
 
 func start_comic_step() -> void:
 	var current_step_data = comic_data[comic_idx]
+	if(not current_step_data.enabled):
+		advance_to_next_step()
+	expected_effect_amount = len(current_step_data.comic_effects)
 	if(current_step_data.start_transition):
 		play_transition_effect(current_step_data.start_transition, false)
 	else:
@@ -86,7 +85,6 @@ func end_comic_step() -> void:
 		advance_to_next_step()
 		
 func end() -> void:
-	comic_done = true
 	get_tree().change_scene_to_file(comic_end_path)
 
 # Effect playing functions
@@ -106,7 +104,7 @@ func play_effects() -> void:
 
 func play_transition_effect(step_data : ComicTransitionEffectData, is_end_transition := false) -> void:
 	transition_effect_playing = true
-	comic_transition_effects.play_transition_effect(step_data.transition_effect, is_end_transition)
+	comic_transition_effects.play_transition_effect(step_data, is_end_transition)
 
 func play_text_effect(effect_data : ComicTextEffectData) -> void:
 	text_playing = true
@@ -114,7 +112,7 @@ func play_text_effect(effect_data : ComicTextEffectData) -> void:
 
 func play_camera_effect(effect_data : ComicCameraEffectData) -> void:
 	camera_effect_playing = true
-	comic_camera.play_camera_effect(effect_data.camera_effect, effect_data.camera_effect_params)
+	comic_camera.play_camera_effect(effect_data)
 
 func play_background_effect(effect_data : ComicBackgroundEffectData) -> void:
 	background_effect_playing = true

@@ -9,9 +9,8 @@ const TextEffects := ComicTextEffectData.TextEffects
 @onready var next_comic_caret: TextureRect = $ImageText/NextComicCaret
 @onready var caret_animation_player: AnimationPlayer = $ImageText/NextComicCaret/CaretAnimationPlayer
 
-var typing_duration := 1
 
-@export var typing_speed := 20.0
+var typing_speed := 20.0
 var visible_chars := 0.0
 var is_text_playing := false
 
@@ -37,6 +36,7 @@ func play_text_effect(text_effect_data: ComicTextEffectData) -> void:
 				s_text_effect_finished.emit()
 			TextEffects.TYPING:
 				reset_text_typing()
+				typing_speed = text_effect_data.text_effect_params["typing_speed"]
 				is_text_playing = true
 			TextEffects.FADE_IN:
 				print("TODO TEXT FADE IN IMPLEMENTATION")

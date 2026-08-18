@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmggim1y57eok"]
+[gd_scene load_steps=11 format=3 uid="uid://bmggim1y57eok"]
 
 [ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_hrqr4"]
 [ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="1_iole4"]
@@ -44,58 +44,6 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_cfgbx"),
 &"moving": SubResource("Animation_ccmy2")
-}
-
-[sub_resource type="Animation" id="Animation_oiuvo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_83nyl"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ksot6"]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxlre"]
-_data = {
-&"RESET": SubResource("Animation_oiuvo"),
-&"fade_in": SubResource("Animation_83nyl"),
-&"fade_out": SubResource("Animation_ksot6")
 }
 
 [node name="Comic" type="Control"]
@@ -156,15 +104,8 @@ libraries = {
 [node name="ComicTransitionEffects" type="CanvasLayer" parent="."]
 script = ExtResource("4_oiuvo")
 
-[node name="ColorRect" type="ColorRect" parent="ComicTransitionEffects"]
+[node name="BlackScreen" type="ColorRect" parent="ComicTransitionEffects"]
 modulate = Color(1, 1, 1, 0)
 offset_right = 640.0
 offset_bottom = 360.0
 color = Color(0, 0, 0, 1)
-
-[node name="TransitionEffectsPlayer" type="AnimationPlayer" parent="ComicTransitionEffects"]
-libraries = {
-&"": SubResource("AnimationLibrary_lxlre")
-}
-
-[connection signal="animation_finished" from="ComicTransitionEffects/TransitionEffectsPlayer" to="ComicTransitionEffects" method="_on_transition_effects_player_animation_finished"]
