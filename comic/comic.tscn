@@ -103,9 +103,3 @@ libraries = {
 
 [node name="ComicTransitionEffects" type="CanvasLayer" parent="."]
 script = ExtResource("4_oiuvo")
-
-[node name="BlackScreen" type="ColorRect" parent="ComicTransitionEffects"]
-modulate = Color(1, 1, 1, 0)
-offset_right = 640.0
-offset_bottom = 360.0
-color = Color(0, 0, 0, 1)

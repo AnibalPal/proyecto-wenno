@@ -10,8 +10,8 @@ extends Node2D
 @onready var player: Player = $Player
 @onready var cutscene_manager: CutsceneManager = $CutsceneManager
 @onready var current_chamber: Node2D = $CurrentChamber
-@onready var fade_effect: CanvasLayer = $FadeEffect
-@onready var screen_vfx_animation_player: AnimationPlayer = $FadeEffect/ScreenVFXanimationPlayer
+
+@onready var transition_effect_duration := 0.5
 
 var current_chamber_path := ""
 var current_entry_name := ""
@@ -19,10 +19,10 @@ var current_entry_name := ""
 func _ready() -> void:
 	assert(stage_id, "No stage id set!")
 	assert(initial_chamber_path, stage_id + ": No inital chamber path set!")
+	GlobalTransitionEffects.s_transition_finished.connect(on_transition_effect_finished)
 	PlayerData.s_update_player_status.emit("current_stage_id", stage_id)
 	var map_tab_node = player.find_child("MapTab")
 	map_tab_node.load_stage_map()
-	fade_effect.show()
 	current_chamber_path = initial_chamber_path
 	current_entry_name = initial_entry_name
 	start_fade_out()
@@ -59,10 +59,10 @@ func set_player_move_direction(direction: String, end_cutscene:= false):
 			print("Unrecognized direction: " + direction)
 
 func start_fade_out() -> void:
-	screen_vfx_animation_player.play("fade_out")
+	GlobalTransitionEffects.fade_out(transition_effect_duration)
 
 func start_fade_in() -> void:
-	screen_vfx_animation_player.play("fade_in")
+	GlobalTransitionEffects.fade_in(transition_effect_duration)
 
 func start_next_chamber_change(chamber_path: String, entry_name: String, direction: String) -> void:
 	current_chamber_path = chamber_path
@@ -104,7 +104,7 @@ func add_chamber_node(chamber_instance: Chamber, entry_name: String) -> void:
 	if(player.cutscene_state_machine.process_active):
 		set_player_move_direction(new_entry_node.direction, true)
 
-func _on_screen_vf_xanimation_player_animation_finished(anim_name: StringName) -> void:
-	if(anim_name == "fade_in"):
+func on_transition_effect_finished(effect_name: String) -> void:
+	if(effect_name == "fade_in"):
 		remove_chamber()
 		call_deferred("load_chamber")

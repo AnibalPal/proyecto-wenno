@@ -23,6 +23,7 @@ Helpers="*res://autoloads/helpers.gd"
 Settings="*res://autoloads/settings.gd"
 PlayerData="*res://autoloads/player_data.gd"
 Enums="*res://autoloads/enums.gd"
+GlobalTransitionEffects="*res://autoloads/global_transition_effects.tscn"
 
 [display]
 
