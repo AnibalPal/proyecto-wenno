@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dt4y3oq2k8212" path="res://autoloads/global_transition_effects.gd" id="1_00s07"]
 
 [node name="GlobalTransitionEffects" type="CanvasLayer"]
-layer = 100
+layer = 5
 script = ExtResource("1_00s07")
 
 [node name="BlackScreen" type="ColorRect" parent="."]

@@ -9,6 +9,7 @@ class_name Comic
 @onready var comic_camera: ComicCameraEffect = $ComicCamera
 @onready var background_image: ComicBackgroundEffect = $Background
 @onready var comic_text_layer: ComicTextEffects = $ComicTextLayer
+@onready var cutscene_skip_menu: CutsceneSkipMenu = $CutsceneSkipMenu
 
 var comic_idx := 0
 var transition_effect_playing := false
@@ -18,6 +19,10 @@ var background_effect_playing := false
 
 var expected_effect_amount := 0
 
+var cutscene_skipped := false
+
+var next_press_cancel = false
+
 func _ready() -> void:
 	assert(len(comic_data) > 0, "COMIC HAS NO DATA")
 	if(initial_background):
@@ -26,12 +31,24 @@ func _ready() -> void:
 	start_comic_step()
 
 func _process(_delta: float) -> void:
-	if(Input.is_action_just_pressed("cutscene_next")):
-		if(comic_text_layer.is_text_playing):
-			comic_text_layer.complete_text()
-		else:
-			if(not are_effects_playing()):
-				end_comic_step()
+	if(!cutscene_skipped):
+		if(Input.is_action_just_pressed("cutscene_skip") and not transition_effect_playing):
+			pause_cutscene()
+		
+		if(Input.is_action_just_pressed("cutscene_next")):
+			if(next_press_cancel):
+				next_press_cancel = false
+				return
+			if(comic_text_layer.is_text_playing):
+				comic_text_layer.complete_text()
+			else:
+				if(not are_effects_playing()):
+					end_comic_step()
+
+func pause_cutscene() -> void:
+	next_press_cancel = true
+	cutscene_skip_menu.show()
+	get_tree().paused = true	
 
 # Signal related functions
 func setup_signals() -> void:
@@ -39,8 +56,12 @@ func setup_signals() -> void:
 	comic_camera.s_camera_effect_done.connect(on_effect_finished)
 	comic_text_layer.s_text_effect_finished.connect(on_effect_finished)
 	background_image.s_background_effect_done.connect(on_effect_finished)
+	cutscene_skip_menu.s_cutscene_skipped.connect(skip_cutscene)
 
 func on_transition_finished(is_end_transition := false) -> void:
+	if(cutscene_skipped):
+		end()
+		return
 	transition_effect_playing = false
 	if(not is_end_transition):
 		# Place what I want to happen here after the start transition if needed, for example move text
@@ -86,6 +107,11 @@ func end_comic_step() -> void:
 		
 func end() -> void:
 	get_tree().change_scene_to_file(comic_end_path)
+
+func skip_cutscene() -> void:
+	cutscene_skipped = true
+	GlobalTransitionEffects.fade_in()
+	comic_idx = len(comic_data)
 
 # Effect playing functions
 func play_effects() -> void:
