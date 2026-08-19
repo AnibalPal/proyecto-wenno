@@ -1,4 +1,5 @@
 @tool
+@icon("res://assets/icons/built_in/CameraAttributesPractical.svg")
 extends ComicEffectData
 class_name ComicCameraEffectData
 

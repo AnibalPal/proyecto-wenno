@@ -1,4 +1,5 @@
 @tool
+@icon("res://assets/icons/built_in/ArrowRight.svg")
 extends ComicEffectData
 class_name ComicTransitionEffectData
 

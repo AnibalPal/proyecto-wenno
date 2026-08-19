@@ -1,4 +1,5 @@
 @tool
+@icon("res://assets/icons/built_in/Font.svg")
 extends ComicEffectData
 class_name ComicTextEffectData
 

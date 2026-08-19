@@ -1,3 +1,4 @@
+@icon("res://assets/icons/built_in/CanvasTexture.svg")
 extends ComicEffectData
 class_name ComicBackgroundEffectData
 

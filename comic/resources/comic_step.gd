@@ -1,3 +1,4 @@
+@icon("res://assets/icons/built_in/CameraAttributes.svg")
 extends Resource
 class_name ComicStep
 
