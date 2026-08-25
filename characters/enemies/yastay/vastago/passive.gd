@@ -1,7 +1,6 @@
 @tool
 extends EnemyState
 
-@onready var vastago: Vastago = $"../.."
 @onready var active_wait_time: Timer = $ActiveWaitTime
 @onready var move_time: Timer = $MoveTime
 @onready var stop_time: Timer = $StopTime
@@ -12,7 +11,7 @@ var is_stopped := true
 
 func enter(_data: Dictionary) -> void:
 	activate_detection.enable()
-	vastago.sprite_animations.play("idle")
+	enemy.sprite_animations.play("idle")
 	move_time.start()
 	reset_state()
 
@@ -21,10 +20,10 @@ func state_process(_delta: float) -> void:
 
 func state_physics_process(_delta: float) -> void:
 	if(active):
-		if(!vastago.is_on_floor()):
+		if(!enemy.is_on_floor()):
 			enemy.enable_gravity(_delta)
 		if(!is_stopped):
-			enemy.move_forward(vastago.speed / 2.0)
+			enemy.move_forward(enemy.speed / 2.0)
 		else:
 			enemy.velocity.x = 0
 		handle_turn_around()
@@ -32,17 +31,17 @@ func state_physics_process(_delta: float) -> void:
 		enemy.move_and_slide()
 
 func  handle_turn_around():
-	if(vastago.is_on_floor() and not vastago.is_floor_colliding()):
-		vastago.turn_around()
-	if(vastago.is_wall_colliding()):			
-		vastago.turn_around()
+	if(enemy.is_on_floor() and not enemy.is_floor_colliding()):
+		enemy.turn_around()
+	if(enemy.is_wall_colliding()):			
+		enemy.turn_around()
 
 func wait() -> void:
 	is_stopped = true
-	var stop_duration = randf_range(vastago.min_stop_time_secs, vastago.max_stop_time_secs)
+	var stop_duration = randf_range(enemy.min_stop_time_secs, enemy.max_stop_time_secs)
 	stop_time.wait_time = stop_duration
 	stop_time.start()
-	vastago.sprite_animations.play("idle")
+	enemy.sprite_animations.play("idle")
 
 func handle_transitions() -> void:
 	pass
@@ -57,9 +56,9 @@ func _on_stop_time_timeout() -> void:
 	is_stopped = false
 	var turn_around_choice = randf() < 0.5
 	if(turn_around_choice):
-		vastago.turn_around()
-	vastago.sprite_animations.play("run")
-	var move_duration = randf_range(vastago.min_move_time_secs, vastago.max_move_time_secs)
+		enemy.turn_around()
+	enemy.sprite_animations.play("run")
+	var move_duration = randf_range(enemy.min_move_time_secs, enemy.max_move_time_secs)
 	move_time.wait_time = move_duration
 	move_time.start()
 
@@ -73,13 +72,13 @@ func _on_activate_detection_area_entered(_area: Area2D) -> void:
 		activate_detection.disable()
 		active_wait_time.start()
 		print("SHOW EXCLAMATION")
-		vastago.sprite_animations.play("idle")
-		vastago.velocity.x = 0.0
+		enemy.sprite_animations.play("idle")
+		enemy.velocity.x = 0.0
 
 func _on_active_wait_time_timeout() -> void:
 	move_time.stop()
 	stop_time.stop()
-	vastago.turn_towards(player_ref.global_position)
+	enemy.turn_towards(player_ref.global_position)
 	transition_to(state_machine.ACTIVE,{
 		"player" : player_ref
 	})

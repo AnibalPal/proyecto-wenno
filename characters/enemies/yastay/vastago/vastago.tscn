@@ -163,7 +163,7 @@ region = Rect2(3120, 800, 260, 400)
 [sub_resource type="SpriteFrames" id="SpriteFrames_vun51"]
 animations = [{
 "frames": [{
-"duration": 20.0,
+"duration": 40.0,
 "texture": SubResource("AtlasTexture_ugq0t")
 }, {
 "duration": 40.0,
@@ -356,7 +356,6 @@ script = ExtResource("1_nusy5")
 min_stop_time_secs = 1.0
 max_stop_time_secs = 2.0
 max_move_time_secs = 2.0
-speed = null
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_nfe8a")
@@ -404,7 +403,7 @@ script = ExtResource("3_gdvff")
 material = SubResource("ShaderMaterial_hfvpq")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_vun51")
-animation = &"run"
+animation = &"bite"
 
 [node name="AreaDetections" type="Node2D" parent="ShouldRotate"]
 
@@ -463,6 +462,8 @@ offset_bottom = 40.0
 [connection signal="timeout" from="StateMachine/Passive/ActiveWaitTime" to="StateMachine/Passive" method="_on_active_wait_time_timeout"]
 [connection signal="timeout" from="StateMachine/Passive/MoveTime" to="StateMachine/Passive" method="_on_move_time_timeout"]
 [connection signal="timeout" from="StateMachine/Passive/StopTime" to="StateMachine/Passive" method="_on_stop_time_timeout"]
+[connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Bite" method="_on_sprite_animations_animation_finished"]
+[connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="StateMachine/Bite" method="_on_sprite_animations_frame_changed"]
 [connection signal="area_entered" from="ShouldRotate/AreaDetections/ActivateDetection" to="StateMachine/Passive" method="_on_activate_detection_area_entered"]
 [connection signal="area_exited" from="ShouldRotate/AreaDetections/ChaseArea" to="StateMachine/Active" method="_on_chase_area_area_exited"]
 

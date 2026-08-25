@@ -6,8 +6,8 @@ extends EnemyState
 var player_ref = null
 
 func enter(_data: Dictionary) -> void:
-	if(_data.has("player_position")):
-		player_ref = _data["player_position"]
+	if(_data.has("player")):
+		player_ref = _data["player"]
 	enemy.move_forward(vastago.speed)
 	vastago.sprite_animations.play("run")
 	reset_state()
@@ -19,6 +19,7 @@ func state_physics_process(_delta: float) -> void:
 	if(active):
 		enemy.enable_gravity(_delta)
 		handle_transitions()
+		select_attack()
 		enemy.move_and_slide()
 
 func handle_transitions() -> void:
@@ -29,17 +30,16 @@ func reset_state()  -> void:
 	pass
 
 func select_attack() -> void:
-	if(abs(vastago.global_position.distance_to(player_ref.global_position)) < 200):
-		vastago.turn_towards(player_ref.global_position)
-		jump()
-	elif(abs(vastago.global_position.distance_to(player_ref.global_position)) < 100):
+	#if(abs(vastago.global_position.distance_to(player_ref.global_position)) < 200):
+		#vastago.turn_towards(player_ref.global_position)
+		#jump()
+	if(abs(enemy.global_position.distance_to(player_ref.global_position)) < 100):
 		vastago.turn_towards(player_ref.global_position)
 		bite()
 		
 
 func bite() -> void:
-	print("BITE")
-	pass
+	transition_to(state_machine.ATTACK_1)
 
 func jump() -> void:
 	pass

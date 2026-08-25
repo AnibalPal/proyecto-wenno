@@ -65,6 +65,9 @@ func move_forward(speed: float) -> void:
 	else:
 		velocity.x = -speed
 
+func stop() -> void:
+	velocity.x = 0
+
 func move_backwards(speed: float) -> void:
 	if(facing_right):
 		velocity.x = -speed
