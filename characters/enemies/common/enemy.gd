@@ -8,6 +8,9 @@ extends CharacterEntity
 @export var attack_damage := 1
 @export var energy := 3
 
+@export_group("Movement Related")
+@export var speed := 100
+
 @export var gravity := 300
 
 @onready var sprite_animations := $ShouldRotate/SpriteAnimations

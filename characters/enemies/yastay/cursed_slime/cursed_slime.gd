@@ -10,9 +10,6 @@ extends Enemy
 @onready var floor_detection: RayCast2D = $ShouldRotate/Raycasts/FloorDetection
 @onready var wall_detection: RayCast2D = $ShouldRotate/Raycasts/WallDetection
 
-@export_group("Movement vars")
-@export var speed := 100
-
 @export_group("Attack stats")
 @export var clash_strength := 1
 # TODO: add a variable that is a list of fight data, maybe create a resource. 

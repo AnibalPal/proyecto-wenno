@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm110u5g6t4jr"]
+[gd_scene load_steps=11 format=3 uid="uid://dm110u5g6t4jr"]
 
 [ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="1_7aexb"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="1_tebo0"]
 [ext_resource type="Script" uid="uid://dbmv5yx144i55" path="res://characters/cutscenes/common_states/cutscene_idle.gd" id="2_yf0ao"]
 [ext_resource type="Script" uid="uid://fkp3ohlnwecw" path="res://characters/cutscenes/common_states/move.gd" id="3_bomdf"]
+[ext_resource type="PackedScene" uid="uid://bs1c2ojq0mv8s" path="res://characters/enemies/common/enemy_detection.tscn" id="5_yf0ao"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfvpq"]
 shader = ExtResource("1_tebo0")
@@ -11,6 +12,9 @@ shader_parameter/counter_state = false
 shader_parameter/hit_effect = false
 shader_parameter/offset = 0.0
 shader_parameter/aura_color = Color(1, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bomdf"]
+size = Vector2(432, 120)
 
 [sub_resource type="Animation" id="Animation_y7tp8"]
 length = 0.001
@@ -72,7 +76,22 @@ script = ExtResource("3_bomdf")
 [node name="SpriteAnimations" type="AnimatedSprite2D" parent="ShouldRotate"]
 material = SubResource("ShaderMaterial_hfvpq")
 
-[node name="Detections" type="Node2D" parent="ShouldRotate"]
+[node name="AreaDetections" type="Node2D" parent="ShouldRotate"]
+
+[node name="ActivateDetection" parent="ShouldRotate/AreaDetections" instance=ExtResource("5_yf0ao")]
+
+[node name="CollisionShape2D" parent="ShouldRotate/AreaDetections/ActivateDetection" index="0"]
+shape = SubResource("RectangleShape2D_bomdf")
+
+[node name="Raycasts" type="Node2D" parent="ShouldRotate"]
+
+[node name="FloorDetection" type="RayCast2D" parent="ShouldRotate/Raycasts"]
+position = Vector2(31, 29)
+target_position = Vector2(0, 16)
+
+[node name="WallDetection" type="RayCast2D" parent="ShouldRotate/Raycasts"]
+position = Vector2(32, 16)
+target_position = Vector2(16, 0)
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
@@ -81,6 +100,8 @@ material = SubResource("ShaderMaterial_hfvpq")
 [node name="Other" type="Node2D" parent="ShouldRotate"]
 
 [node name="ShouldNotRotate" type="Node2D" parent="."]
+
+[node name="CutsceneBubbleAnchor" type="Node2D" parent="ShouldNotRotate"]
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 
@@ -98,3 +119,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="EditorTools" type="Node2D" parent="."]
+
+[editable path="ShouldRotate/AreaDetections/ActivateDetection"]

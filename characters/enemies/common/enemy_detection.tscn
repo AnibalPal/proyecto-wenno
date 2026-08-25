@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwfia1da70qfw" path="res://characters/enemies/common/enemy_detection.gd" id="1_gy1ng"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6gb5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy1ng"]
 size = Vector2(432, 120)
 
 [node name="EnemyDetection" type="Area2D"]
@@ -12,4 +12,4 @@ script = ExtResource("1_gy1ng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -52)
-shape = SubResource("RectangleShape2D_u6gb5")
+shape = SubResource("RectangleShape2D_gy1ng")
