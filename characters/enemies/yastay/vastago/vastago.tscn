@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c8nx6bpwwdkel"]
+[gd_scene load_steps=58 format=3 uid="uid://c8nx6bpwwdkel"]
 
 [ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="1_2j5pt"]
 [ext_resource type="Script" uid="uid://3qh2stywkrq8" path="res://characters/enemies/yastay/vastago/vastago.gd" id="1_nusy5"]
@@ -12,7 +12,11 @@
 [ext_resource type="Script" uid="uid://b6aqf5g28fcvl" path="res://characters/enemies/yastay/vastago/bite.gd" id="5_e0lrv"]
 [ext_resource type="Script" uid="uid://dnse8iism0mu3" path="res://characters/enemies/yastay/vastago/jump.gd" id="6_4owu6"]
 [ext_resource type="Texture2D" uid="uid://cyxgt63ry04lu" path="res://assets/prototype/prototype_bot_animations 260x400.png" id="8_hhktr"]
+[ext_resource type="Script" uid="uid://dsxowskfy37ie" path="res://characters/enemies/yastay/vastago/clash.gd" id="8_mumsi"]
 [ext_resource type="PackedScene" uid="uid://bs1c2ojq0mv8s" path="res://characters/enemies/common/enemy_detection.tscn" id="9_hhktr"]
+[ext_resource type="Script" uid="uid://cpaqtj8d5ighf" path="res://characters/enemies/yastay/vastago/hit.gd" id="9_y4k0u"]
+[ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="14_4owu6"]
+[ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="14_oy0dh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfvpq"]
 shader = ExtResource("4_nfe8a")
@@ -280,8 +284,14 @@ size = Vector2(408, 124)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0lrv"]
 size = Vector2(592, 144)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfycc"]
+size = Vector2(40, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oy0dh"]
+size = Vector2(64, 40)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hhktr"]
-size = Vector2(8, 72)
+size = Vector2(56, 24)
 
 [sub_resource type="Animation" id="Animation_y7tp8"]
 length = 0.001
@@ -327,6 +337,9 @@ script = ExtResource("1_nusy5")
 min_stop_time_secs = 1.0
 max_stop_time_secs = 2.0
 max_move_time_secs = 2.0
+clash_strength = null
+health = 2
+stamina = 1
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_nfe8a")
@@ -365,6 +378,12 @@ script = ExtResource("5_e0lrv")
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("6_4owu6")
 
+[node name="Clash" type="Node" parent="StateMachine"]
+script = ExtResource("8_mumsi")
+
+[node name="Damaged" type="Node" parent="StateMachine"]
+script = ExtResource("9_y4k0u")
+
 [node name="CutsceneStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_2j5pt")
 initial_state = NodePath("Idle")
@@ -381,7 +400,7 @@ script = ExtResource("3_gdvff")
 material = SubResource("ShaderMaterial_hfvpq")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_vun51")
-animation = &"run"
+animation = &"idle"
 
 [node name="AreaDetections" type="Node2D" parent="ShouldRotate"]
 
@@ -400,16 +419,30 @@ disabled = true
 
 [node name="Hitboxes" type="Node2D" parent="ShouldRotate"]
 
+[node name="BiteHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("14_oy0dh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/BiteHitbox"]
+position = Vector2(36, 20)
+shape = SubResource("RectangleShape2D_yfycc")
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
 [node name="Hurtboxes" type="Node2D" parent="ShouldRotate"]
+
+[node name="EnemyHurtbox" parent="ShouldRotate/Hurtboxes" instance=ExtResource("14_4owu6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hurtboxes/EnemyHurtbox"]
+position = Vector2(8, 28)
+shape = SubResource("RectangleShape2D_oy0dh")
+debug_color = Color(0.6117647, 0.3647059, 1, 0.41960785)
 
 [node name="Raycasts" type="Node2D" parent="ShouldRotate"]
 
 [node name="FloorDetection" type="RayCast2D" parent="ShouldRotate/Raycasts"]
-position = Vector2(16, 48)
+position = Vector2(8, 48)
 target_position = Vector2(0, 16)
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate/Raycasts"]
-position = Vector2(16, 8)
+position = Vector2(40, 24)
 target_position = Vector2(16, 0)
 
 [node name="Other" type="Node2D" parent="ShouldRotate"]
@@ -419,7 +452,7 @@ target_position = Vector2(16, 0)
 [node name="CutsceneBubbleAnchor" type="Node2D" parent="ShouldNotRotate"]
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
-position = Vector2(4, 12)
+position = Vector2(4, 36)
 shape = SubResource("RectangleShape2D_hhktr")
 
 [node name="VFXs" type="Node" parent="."]

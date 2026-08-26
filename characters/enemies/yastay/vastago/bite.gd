@@ -1,10 +1,13 @@
 @tool
 extends EnemyState
 
+@onready var bite_hitbox: EnemyHitbox = $"../../ShouldRotate/Hitboxes/BiteHitbox"
+
 var slide_forward := false
 var deceleration_rate := 0.9
 
 func enter(_data: Dictionary) -> void:
+	bite_hitbox.disable()
 	enemy.stop()
 	enemy.sprite_animations.play("bite")
 	reset_state()
@@ -35,6 +38,7 @@ func _on_sprite_animations_frame_changed() -> void:
 	if(state_machine.current_state.name == state_machine.BITE):
 		if(enemy.sprite_animations.animation == "bite"):
 			if(enemy.sprite_animations.frame == 1):
+				bite_hitbox.enable()
 				enemy.move_forward(enemy.speed * 3)
 				slide_forward = true
 			else:

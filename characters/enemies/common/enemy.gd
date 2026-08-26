@@ -25,6 +25,11 @@ extends CharacterEntity
 
 var counter_hit_state := false
 
+# Common VFXs
+@onready var on_damaged_vfx: AnimationPlayer = $VFXs/OnDamagedVFX
+
+# Common SFXs
+
 # Functions to override
 func character_ready() -> void:
 	# PATCH: Add this line to allow copy pasting without repeating the effect when an enemy is hit
@@ -34,6 +39,8 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func on_damaged(damage: int, _other_entity_position: Vector2) -> void:
+	on_damaged_vfx.play("hit_effect")
+	turn_towards(_other_entity_position)
 	if(counter_hit_state):
 		health -= damage * 2
 		stamina -= damage * 3

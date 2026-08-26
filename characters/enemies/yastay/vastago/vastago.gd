@@ -11,6 +11,8 @@ extends Enemy
 @export var min_move_time_secs := 1.0
 @export var max_move_time_secs := 1.5
 
+@export var clash_strength := 1
+
 var floor_colliding := false
 var wall_colliding := false
 
@@ -28,7 +30,12 @@ func _physics_process(_delta: float) -> void:
 			wall_colliding = true
 		else:
 			wall_colliding = false
-	
+
+func on_clash(_other_collision_position: Vector2) -> void:
+	state_machine.transition_to_next_state(state_machine.CLASH, {
+		"player_position": _other_collision_position
+	})
+
 func is_floor_colliding() -> bool:
 	return floor_colliding	
 
