@@ -1,12 +1,11 @@
 @tool
 extends EnemyState
 
-@onready var attack_cooldown: Timer = $AttackRecovery
-
 func enter(_data: Dictionary) -> void:
-	enemy.counter_hit_state = false
-	enemy.stop()
-	attack_cooldown.start()
+	enemy.disable_hurtboxes()
+	enemy.disable_hitboxes()
+	enemy.sprite_animations.play("death")
+	enemy.velocity = Vector2.ZERO
 	reset_state()
 
 func state_process(_delta: float) -> void:
@@ -14,7 +13,7 @@ func state_process(_delta: float) -> void:
 
 func state_physics_process(_delta: float) -> void:
 	if(active):
-		enemy.enable_gravity(_delta)
+		# enemy.enable_gravity(_delta)
 		handle_transitions()
 		enemy.move_and_slide()
 
@@ -26,6 +25,6 @@ func reset_state()  -> void:
 	pass
 
 # Transitions via signals here
-func _on_attack_cooldown_timeout() -> void:
-	if(state_machine.current_state.name == state_machine.RECOVERY):	
-		transition_to(state_machine.ACTIVE)
+func _on_sprite_animations_animation_finished() -> void:
+	if(enemy.sprite_animations.animation == "death"):
+		queue_free()

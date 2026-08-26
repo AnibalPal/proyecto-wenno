@@ -10,6 +10,8 @@ var player_ref = null
 var is_stopped := true
 
 func enter(_data: Dictionary) -> void:
+	enemy.counter_hit_state = false
+	enemy.disable_hitboxes()
 	activate_detection.enable()
 	enemy.sprite_animations.play("idle")
 	move_time.start()

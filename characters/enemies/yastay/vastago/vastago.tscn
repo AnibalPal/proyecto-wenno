@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://c8nx6bpwwdkel"]
+[gd_scene load_steps=60 format=3 uid="uid://c8nx6bpwwdkel"]
 
 [ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="1_2j5pt"]
 [ext_resource type="Script" uid="uid://3qh2stywkrq8" path="res://characters/enemies/yastay/vastago/vastago.gd" id="1_nusy5"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dsxowskfy37ie" path="res://characters/enemies/yastay/vastago/clash.gd" id="8_mumsi"]
 [ext_resource type="PackedScene" uid="uid://bs1c2ojq0mv8s" path="res://characters/enemies/common/enemy_detection.tscn" id="9_hhktr"]
 [ext_resource type="Script" uid="uid://cpaqtj8d5ighf" path="res://characters/enemies/yastay/vastago/hit.gd" id="9_y4k0u"]
+[ext_resource type="Script" uid="uid://b635qhgkeb66g" path="res://characters/enemies/yastay/vastago/death.gd" id="10_y4k0u"]
 [ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="14_4owu6"]
 [ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="14_oy0dh"]
 
@@ -287,6 +288,9 @@ size = Vector2(592, 144)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfycc"]
 size = Vector2(40, 24)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mumsi"]
+size = Vector2(112, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oy0dh"]
 size = Vector2(64, 40)
 
@@ -337,7 +341,6 @@ script = ExtResource("1_nusy5")
 min_stop_time_secs = 1.0
 max_stop_time_secs = 2.0
 max_move_time_secs = 2.0
-clash_strength = null
 health = 2
 stamina = 1
 
@@ -384,6 +387,9 @@ script = ExtResource("8_mumsi")
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("9_y4k0u")
 
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("10_y4k0u")
+
 [node name="CutsceneStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_2j5pt")
 initial_state = NodePath("Idle")
@@ -400,7 +406,7 @@ script = ExtResource("3_gdvff")
 material = SubResource("ShaderMaterial_hfvpq")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_vun51")
-animation = &"idle"
+animation = &"death"
 
 [node name="AreaDetections" type="Node2D" parent="ShouldRotate"]
 
@@ -424,6 +430,13 @@ disabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/BiteHitbox"]
 position = Vector2(36, 20)
 shape = SubResource("RectangleShape2D_yfycc")
+debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
+
+[node name="JumpHitbox" parent="ShouldRotate/Hitboxes" instance=ExtResource("14_oy0dh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShouldRotate/Hitboxes/JumpHitbox"]
+position = Vector2(0, 48)
+shape = SubResource("RectangleShape2D_mumsi")
 debug_color = Color(0.96862745, 0.15294118, 0.26666668, 0.41960785)
 
 [node name="Hurtboxes" type="Node2D" parent="ShouldRotate"]
@@ -477,6 +490,7 @@ offset_bottom = 40.0
 [connection signal="timeout" from="StateMachine/Recovery/AttackRecovery" to="StateMachine/Recovery" method="_on_attack_cooldown_timeout"]
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Bite" method="_on_sprite_animations_animation_finished"]
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Jump" method="_on_sprite_animations_animation_finished"]
+[connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Death" method="_on_sprite_animations_animation_finished"]
 [connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="StateMachine/Bite" method="_on_sprite_animations_frame_changed"]
 [connection signal="area_entered" from="ShouldRotate/AreaDetections/ActivateDetection" to="StateMachine/Passive" method="_on_activate_detection_area_entered"]
 [connection signal="area_exited" from="ShouldRotate/AreaDetections/ChaseArea" to="StateMachine/Active" method="_on_chase_area_area_exited"]

@@ -36,6 +36,9 @@ func on_clash(_other_collision_position: Vector2) -> void:
 		"player_position": _other_collision_position
 	})
 
+func death():
+	state_machine.transition_to_next_state(state_machine.DEATH)
+
 func is_floor_colliding() -> bool:
 	return floor_colliding	
 

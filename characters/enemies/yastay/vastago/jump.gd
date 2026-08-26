@@ -1,9 +1,12 @@
 @tool
 extends EnemyState
 
+@onready var jump_hitbox: EnemyHitbox = $"../../ShouldRotate/Hitboxes/JumpHitbox"
+
 var jump_direction := 0
 
 func enter(_data: Dictionary) -> void:
+	enemy.counter_hit_state = true
 	if(_data.has("jump_direction")):
 		jump_direction = _data["jump_direction"]
 	else:
@@ -21,6 +24,7 @@ func state_physics_process(_delta: float) -> void:
 		handle_transitions()
 		enemy.move_and_slide()
 		if(enemy.is_on_floor() and enemy.sprite_animations.animation == "jump_hold"):
+			jump_hitbox.enable()
 			enemy.sprite_animations.play("jump_end")
 			transition_to(state_machine.RECOVERY)
 
@@ -35,6 +39,6 @@ func reset_state()  -> void:
 func _on_sprite_animations_animation_finished() -> void:
 	if(state_machine.current_state.name == state_machine.JUMP):
 		if(enemy.sprite_animations.animation == "jump_start"):
-			enemy.velocity.x = 150 * jump_direction
-			enemy.velocity.y = -300
+			enemy.velocity.x = 200 * jump_direction
+			enemy.velocity.y = -200
 			enemy.sprite_animations.play("jump_hold")

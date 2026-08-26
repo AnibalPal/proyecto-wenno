@@ -8,6 +8,7 @@ var jump_available := true
 var player_ref = null
 
 func enter(_data: Dictionary) -> void:
+	enemy.counter_hit_state = false
 	enemy.disable_hitboxes()
 	if(player_ref):
 		enemy.turn_towards(player_ref.global_position)

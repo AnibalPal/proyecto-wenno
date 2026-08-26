@@ -7,6 +7,7 @@ var slide_forward := false
 var deceleration_rate := 0.9
 
 func enter(_data: Dictionary) -> void:
+	enemy.counter_hit_state = true
 	bite_hitbox.disable()
 	enemy.stop()
 	enemy.sprite_animations.play("bite")
