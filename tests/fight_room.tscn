@@ -24,10 +24,10 @@ tile_set = ExtResource("2_5vm70")
 [node name="Enemies" type="Node2D" parent="ChamberTemplate"]
 
 [node name="Vastago" parent="ChamberTemplate/Enemies" instance=ExtResource("4_5vm70")]
-position = Vector2(256, 152)
+position = Vector2(88, 232)
 
 [node name="DebugPlayer" parent="ChamberTemplate" instance=ExtResource("3_i5xrs")]
-position = Vector2(120, 280)
+position = Vector2(416, 264)
 speed = 150
 gravity = 850
 jump_impulse = 400

@@ -95,5 +95,5 @@ func turn_towards(objective_position: Vector2) -> void:
 	else:
 		turn_right()
 		
-func enable_gravity(_delta: float):
-	velocity.y += gravity * _delta
+func enable_gravity(_delta: float, gravity_scale := 1):
+	velocity.y += gravity * gravity_scale * _delta

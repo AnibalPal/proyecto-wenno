@@ -6,10 +6,13 @@ extends EnemyState
 var player_ref = null
 
 func enter(_data: Dictionary) -> void:
+	if(player_ref):
+		enemy.turn_towards(player_ref.global_position)
 	if(_data.has("player")):
 		player_ref = _data["player"]
 	enemy.move_forward(vastago.speed)
 	vastago.sprite_animations.play("run")
+	select_attack()
 	reset_state()
 
 func state_process(_delta: float) -> void:
@@ -30,19 +33,22 @@ func reset_state()  -> void:
 	pass
 
 func select_attack() -> void:
-	#if(abs(vastago.global_position.distance_to(player_ref.global_position)) < 200):
-		#vastago.turn_towards(player_ref.global_position)
-		#jump()
-	if(abs(enemy.global_position.distance_to(player_ref.global_position)) < 100):
+	var distance_to_player = abs(vastago.global_position.distance_to(player_ref.global_position))
+	if(distance_to_player < 180 and distance_to_player > 120):
+		vastago.turn_towards(player_ref.global_position)
+		jump()
+	elif(distance_to_player <= 120):
 		vastago.turn_towards(player_ref.global_position)
 		bite()
 		
 
 func bite() -> void:
-	transition_to(state_machine.ATTACK_1)
+	transition_to(state_machine.BITE)
 
 func jump() -> void:
-	pass
+	transition_to(state_machine.JUMP, {
+		"jump_direction": sign(enemy.global_position.direction_to(player_ref.global_position).x)
+	})
 
 # Transitions via signals here
 func _on_chase_area_area_exited(_area: Area2D) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c8nx6bpwwdkel"]
+[gd_scene load_steps=57 format=3 uid="uid://c8nx6bpwwdkel"]
 
 [ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="1_2j5pt"]
 [ext_resource type="Script" uid="uid://3qh2stywkrq8" path="res://characters/enemies/yastay/vastago/vastago.gd" id="1_nusy5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://xclk4s0l6hgc" path="res://characters/enemies/yastay/vastago/passive.gd" id="3_vun51"]
 [ext_resource type="Shader" uid="uid://bfexeo3hl5ffw" path="res://assets/shaders/enemy_effects.gdshader" id="4_nfe8a"]
 [ext_resource type="Script" uid="uid://d377hi6ge1emk" path="res://characters/enemies/yastay/vastago/active.gd" id="4_p62sl"]
+[ext_resource type="Script" uid="uid://dt7avfl2tc1x5" path="res://characters/enemies/yastay/vastago/recovery.gd" id="5_4owu6"]
 [ext_resource type="Script" uid="uid://b6aqf5g28fcvl" path="res://characters/enemies/yastay/vastago/bite.gd" id="5_e0lrv"]
 [ext_resource type="Script" uid="uid://dnse8iism0mu3" path="res://characters/enemies/yastay/vastago/jump.gd" id="6_4owu6"]
 [ext_resource type="Texture2D" uid="uid://cyxgt63ry04lu" path="res://assets/prototype/prototype_bot_animations 260x400.png" id="8_hhktr"]
@@ -163,10 +164,10 @@ region = Rect2(3120, 800, 260, 400)
 [sub_resource type="SpriteFrames" id="SpriteFrames_vun51"]
 animations = [{
 "frames": [{
-"duration": 40.0,
+"duration": 30.0,
 "texture": SubResource("AtlasTexture_ugq0t")
 }, {
-"duration": 40.0,
+"duration": 50.0,
 "texture": SubResource("AtlasTexture_qbrki")
 }],
 "loop": false,
@@ -230,9 +231,9 @@ animations = [{
 "duration": 30.0,
 "texture": SubResource("AtlasTexture_wfjei")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_end",
-"speed": 5.0
+"speed": 60.0
 }, {
 "frames": [{
 "duration": 30.0,
@@ -240,13 +241,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump_hold",
-"speed": 5.0
+"speed": 60.0
 }, {
 "frames": [{
 "duration": 30.0,
 "texture": SubResource("AtlasTexture_8ger2")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_start",
 "speed": 60.0
 }, {
@@ -378,7 +379,10 @@ one_shot = true
 [node name="Active" type="Node" parent="StateMachine"]
 script = ExtResource("4_p62sl")
 
-[node name="AttackCooldown" type="Timer" parent="StateMachine/Active"]
+[node name="Recovery" type="Node" parent="StateMachine"]
+script = ExtResource("5_4owu6")
+
+[node name="AttackCooldown" type="Timer" parent="StateMachine/Recovery"]
 one_shot = true
 
 [node name="Bite" type="Node" parent="StateMachine"]
@@ -462,7 +466,9 @@ offset_bottom = 40.0
 [connection signal="timeout" from="StateMachine/Passive/ActiveWaitTime" to="StateMachine/Passive" method="_on_active_wait_time_timeout"]
 [connection signal="timeout" from="StateMachine/Passive/MoveTime" to="StateMachine/Passive" method="_on_move_time_timeout"]
 [connection signal="timeout" from="StateMachine/Passive/StopTime" to="StateMachine/Passive" method="_on_stop_time_timeout"]
+[connection signal="timeout" from="StateMachine/Recovery/AttackCooldown" to="StateMachine/Recovery" method="_on_attack_cooldown_timeout"]
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Bite" method="_on_sprite_animations_animation_finished"]
+[connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Jump" method="_on_sprite_animations_animation_finished"]
 [connection signal="frame_changed" from="ShouldRotate/SpriteAnimations" to="StateMachine/Bite" method="_on_sprite_animations_frame_changed"]
 [connection signal="area_entered" from="ShouldRotate/AreaDetections/ActivateDetection" to="StateMachine/Passive" method="_on_activate_detection_area_entered"]
 [connection signal="area_exited" from="ShouldRotate/AreaDetections/ChaseArea" to="StateMachine/Active" method="_on_chase_area_area_exited"]
