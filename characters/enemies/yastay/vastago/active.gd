@@ -2,7 +2,9 @@
 extends EnemyState
 
 @onready var vastago: Vastago = $"../.."
+@onready var jump_cooldown: Timer = $JumpCooldown
 
+var jump_available := true
 var player_ref = null
 
 func enter(_data: Dictionary) -> void:
@@ -35,8 +37,9 @@ func reset_state()  -> void:
 func select_attack() -> void:
 	var distance_to_player = abs(vastago.global_position.distance_to(player_ref.global_position))
 	if(distance_to_player < 180 and distance_to_player > 120):
-		vastago.turn_towards(player_ref.global_position)
-		jump()
+		if(jump_available):
+			vastago.turn_towards(player_ref.global_position)
+			jump()
 	elif(distance_to_player <= 120):
 		vastago.turn_towards(player_ref.global_position)
 		bite()
@@ -46,6 +49,8 @@ func bite() -> void:
 	transition_to(state_machine.BITE)
 
 func jump() -> void:
+	jump_available = false
+	jump_cooldown.start()
 	transition_to(state_machine.JUMP, {
 		"jump_direction": sign(enemy.global_position.direction_to(player_ref.global_position).x)
 	})
@@ -55,3 +60,6 @@ func _on_chase_area_area_exited(_area: Area2D) -> void:
 	if(state_machine.current_state == state_machine.ACTIVE):			
 		player_ref = null
 		transition_to(state_machine.PASSIVE)
+
+func _on_jump_cooldown_timeout() -> void:
+	jump_available = true

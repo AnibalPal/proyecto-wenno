@@ -36,5 +36,5 @@ func _on_sprite_animations_animation_finished() -> void:
 	if(state_machine.current_state.name == state_machine.JUMP):
 		if(enemy.sprite_animations.animation == "jump_start"):
 			enemy.velocity.x = 150 * jump_direction
-			enemy.velocity.y = -250
+			enemy.velocity.y = -300
 			enemy.sprite_animations.play("jump_hold")

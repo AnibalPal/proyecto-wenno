@@ -1,7 +1,7 @@
 @tool
 extends EnemyState
 
-@onready var attack_cooldown: Timer = $AttackCooldown
+@onready var attack_cooldown: Timer = $AttackRecovery
 
 func enter(_data: Dictionary) -> void:
 	enemy.stop()
