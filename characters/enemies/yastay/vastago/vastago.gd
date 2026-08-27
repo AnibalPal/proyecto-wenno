@@ -32,6 +32,7 @@ func _physics_process(_delta: float) -> void:
 			wall_colliding = false
 
 func on_clash(_other_collision_position: Vector2) -> void:
+	GlobalVFXs.hitstop()
 	state_machine.transition_to_next_state(state_machine.CLASH, {
 		"player_position": _other_collision_position
 	})

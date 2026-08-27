@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://carevutadyf7v"]
+
+[ext_resource type="Texture2D" uid="uid://u2pf2oh0xlr7" path="res://assets/items/spirit_energy16x16.png" id="1_0h6bf"]
+[ext_resource type="Script" uid="uid://btn52dslraqxp" path="res://items/spirit_energy.gd" id="1_5khno"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5khno"]
+size = Vector2(6, 6)
+
+[node name="SpiritEnergy" type="Node2D"]
+script = ExtResource("1_5khno")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(24, 24)
+scale = Vector2(2, 2)
+texture = ExtResource("1_0h6bf")
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("RectangleShape2D_5khno")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 4.0
+default_color = Color(0.7372549, 0.2901961, 0.60784316, 1)

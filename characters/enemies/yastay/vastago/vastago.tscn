@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://c8nx6bpwwdkel"]
+[gd_scene load_steps=63 format=3 uid="uid://c8nx6bpwwdkel"]
 
 [ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="1_2j5pt"]
 [ext_resource type="Script" uid="uid://3qh2stywkrq8" path="res://characters/enemies/yastay/vastago/vastago.gd" id="1_nusy5"]
@@ -334,6 +334,42 @@ _data = {
 &"hit_effect": SubResource("Animation_hfvpq")
 }
 
+[sub_resource type="Animation" id="Animation_y4k0u"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/SpriteAnimations:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.6666667, 0.6666667, 0.6666667, 1), Color(0.33333334, 0.33333334, 0.33333334, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gbhyy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/SpriteAnimations:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4taa"]
+_data = {
+&"RESET": SubResource("Animation_gbhyy"),
+&"death": SubResource("Animation_y4k0u")
+}
+
 [node name="Vastago" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 3
@@ -473,6 +509,11 @@ shape = SubResource("RectangleShape2D_hhktr")
 [node name="OnDamagedVFX" type="AnimationPlayer" parent="VFXs"]
 libraries = {
 &"": SubResource("AnimationLibrary_7aexb")
+}
+
+[node name="DeathVFX" type="AnimationPlayer" parent="VFXs"]
+libraries = {
+&"": SubResource("AnimationLibrary_g4taa")
 }
 
 [node name="UI" type="Control" parent="."]
