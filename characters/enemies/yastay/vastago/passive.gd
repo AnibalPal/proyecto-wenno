@@ -71,6 +71,7 @@ func _on_activate_detection_area_entered(_area: Area2D) -> void:
 	if(state_machine.current_state.name == state_machine.PASSIVE):
 		is_stopped = true
 		player_ref = _area.owner
+		owner.player_ref = _area.owner
 		activate_detection.disable()
 		active_wait_time.start()
 		print("SHOW EXCLAMATION")

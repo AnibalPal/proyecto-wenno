@@ -14,6 +14,7 @@ func enter(_data: Dictionary) -> void:
 		enemy.turn_towards(player_ref.global_position)
 	if(_data.has("player")):
 		player_ref = _data["player"]
+		owner.player_ref = _data["player"]
 	enemy.move_forward(vastago.speed)
 	vastago.sprite_animations.play("run")
 	select_attack()

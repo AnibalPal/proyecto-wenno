@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://c8nx6bpwwdkel"]
+[gd_scene load_steps=64 format=3 uid="uid://c8nx6bpwwdkel"]
 
 [ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="1_2j5pt"]
 [ext_resource type="Script" uid="uid://3qh2stywkrq8" path="res://characters/enemies/yastay/vastago/vastago.gd" id="1_nusy5"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://b635qhgkeb66g" path="res://characters/enemies/yastay/vastago/death.gd" id="10_y4k0u"]
 [ext_resource type="PackedScene" uid="uid://c1ju3d0glq21y" path="res://characters/collisions/scenes/enemy_hurtbox.tscn" id="14_4owu6"]
 [ext_resource type="PackedScene" uid="uid://dnq80a7tl7wqt" path="res://characters/collisions/scenes/enemy_hitbox.tscn" id="14_oy0dh"]
+[ext_resource type="PackedScene" uid="uid://djon0u4xhvtmr" path="res://items/spirit_energy_spawner.tscn" id="19_gbhyy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfvpq"]
 shader = ExtResource("4_nfe8a")
@@ -334,21 +335,6 @@ _data = {
 &"hit_effect": SubResource("Animation_hfvpq")
 }
 
-[sub_resource type="Animation" id="Animation_y4k0u"]
-resource_name = "death"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../ShouldRotate/SpriteAnimations:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(0.6666667, 0.6666667, 0.6666667, 1), Color(0.33333334, 0.33333334, 0.33333334, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_gbhyy"]
 length = 0.001
 tracks/0/type = "value"
@@ -362,6 +348,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y4k0u"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ShouldRotate/SpriteAnimations:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.6666667, 0.6666667, 0.6666667, 1), Color(0.33333334, 0.33333334, 0.33333334, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g4taa"]
@@ -500,6 +501,14 @@ target_position = Vector2(16, 0)
 
 [node name="CutsceneBubbleAnchor" type="Node2D" parent="ShouldNotRotate"]
 
+[node name="EnergyReward" parent="ShouldNotRotate" instance=ExtResource("19_gbhyy")]
+
+[node name="TopLeft" parent="ShouldNotRotate/EnergyReward/SpawnArea" index="0"]
+position = Vector2(-8, -40)
+
+[node name="BottomRight" parent="ShouldNotRotate/EnergyReward/SpawnArea" index="1"]
+position = Vector2(8, 48)
+
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 position = Vector2(4, 36)
 shape = SubResource("RectangleShape2D_hhktr")
@@ -538,3 +547,5 @@ offset_bottom = 40.0
 
 [editable path="ShouldRotate/AreaDetections/ActivateDetection"]
 [editable path="ShouldRotate/AreaDetections/ChaseArea"]
+[editable path="ShouldNotRotate/EnergyReward"]
+[editable path="ShouldNotRotate/EnergyReward/SpawnArea"]

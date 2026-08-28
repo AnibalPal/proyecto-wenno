@@ -157,7 +157,7 @@ click={
 2d_physics/layer_5="enemy_hurtbox"
 2d_physics/layer_6="enemy_hitbox"
 2d_physics/layer_7="player_trigger"
-2d_physics/layer_8="layer 8"
+2d_physics/layer_8="collectible"
 
 [rendering]
 

@@ -1,10 +1,12 @@
 @tool
 extends EnemyState
 
+@onready var energy_reward: SpiritEnergySpawner = $"../../ShouldNotRotate/EnergyReward"
 @onready var death_vfx: AnimationPlayer = $"../../VFXs/DeathVFX"
 
 func enter(_data: Dictionary) -> void:
 	death_vfx.play("death")
+	energy_reward.begin(owner.player_ref)
 	enemy.disable_hurtboxes()
 	enemy.disable_hitboxes()
 	enemy.sprite_animations.play("death")

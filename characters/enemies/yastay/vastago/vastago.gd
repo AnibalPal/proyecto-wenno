@@ -16,6 +16,8 @@ extends Enemy
 var floor_colliding := false
 var wall_colliding := false
 
+var player_ref : Player = null
+
 func character_ready() -> void:
 	sprite_animations.play("idle")
 

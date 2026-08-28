@@ -10,12 +10,13 @@ size = Vector2(6, 6)
 script = ExtResource("1_5khno")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(24, 24)
 scale = Vector2(2, 2)
 texture = ExtResource("1_0h6bf")
 metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
+collision_layer = 0
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
 shape = SubResource("RectangleShape2D_5khno")
@@ -23,3 +24,5 @@ shape = SubResource("RectangleShape2D_5khno")
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
 default_color = Color(0.7372549, 0.2901961, 0.60784316, 1)
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
