@@ -70,7 +70,7 @@ script = ExtResource("2_dm25f")
 [node name="CurrentChamber" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_lt88c")]
-position = Vector2(320, 272)
+position = Vector2(240, 136)
 speed = 150
 gravity = 850
 jump_impulse = 400

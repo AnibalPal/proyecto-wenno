@@ -28,6 +28,7 @@ func _ready() -> void:
 	player_camera.limit_left = initial_camera_params["left"]
 
 func reset_limits_to_current_view(camera_to_change: Camera2D, camera_params: Dictionary) -> void:
+	print("CHANGE CAMERA LIMITS")
 	var canvas_transform = get_viewport().get_canvas_transform()
 	var viewport_rect = get_viewport().get_visible_rect()
 	

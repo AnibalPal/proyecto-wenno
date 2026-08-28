@@ -27,7 +27,11 @@ func _ready() -> void:
 			cutscene_entity.cutscene_state_machine.s_persist.connect(on_persist)
 
 func _on_trigger_area_entered(_area: Area2D) -> void:
-	s_start_cutscene.emit(id, self)
+	if(id):
+		s_start_cutscene.emit(id, self)
+	else:
+		print("NO CUTSCENE ID SET")
+		queue_free()
 
 # Returns Dictionary or null
 func get_next() -> Variant:

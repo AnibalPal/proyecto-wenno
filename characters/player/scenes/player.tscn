@@ -350,6 +350,7 @@ collision_mask = 3
 floor_constant_speed = true
 floor_snap_length = 5.0
 script = ExtResource("1_ittr2")
+jump_impulse = 180
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gy3q1")

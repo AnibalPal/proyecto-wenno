@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=4 uid="uid://b6kfv0nq8wo8d"]
+[gd_scene load_steps=18 format=4 uid="uid://b6kfv0nq8wo8d"]
 
 [ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_givki"]
-[ext_resource type="Texture2D" uid="uid://cfsaymro1en1h" path="res://assets/external_assets/itchio/gandalfhardcore/backgrounds/GandalfHardcore Background layers_layer 5.png" id="2_6qxlj"]
+[ext_resource type="Texture2D" uid="uid://xyul471sp3h1" path="res://assets/backgrounds/desert/sky.png" id="2_6qxlj"]
 [ext_resource type="Texture2D" uid="uid://8deueggdcbt1" path="res://assets/external_assets/itchio/gandalfhardcore/tilesheets/floor_tiles32x32.png" id="2_givki"]
 [ext_resource type="Texture2D" uid="uid://dpckgxdv1204b" path="res://assets/external_assets/itchio/gandalfhardcore/tilesheets/house_tiles32x32.png" id="3_6qxlj"]
-[ext_resource type="Texture2D" uid="uid://dn0frl0041ra3" path="res://assets/external_assets/itchio/gandalfhardcore/backgrounds/GandalfHardcore Background layers_layer 1.png" id="3_ewis2"]
+[ext_resource type="Texture2D" uid="uid://cllcv163q3mwm" path="res://assets/backgrounds/desert/mountain_1.png" id="3_ewis2"]
 [ext_resource type="PackedScene" uid="uid://bvat8fbkoepjn" path="res://stages/level_design/camera/camera_manager.tscn" id="3_xtgks"]
 [ext_resource type="PackedScene" uid="uid://c3qgmya5ej67y" path="res://stages/level_design/camera/camera_params.tscn" id="4_ewis2"]
+[ext_resource type="Texture2D" uid="uid://rn43j6yvjywa" path="res://assets/backgrounds/desert/mountain_2.png" id="4_sc1rw"]
 [ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/camera/camera_change_trigger.tscn" id="5_6qxlj"]
+[ext_resource type="Texture2D" uid="uid://2evdpyv08xv8" path="res://assets/backgrounds/desert/desert_with_plants.png" id="5_sc1rw"]
 [ext_resource type="PackedScene" uid="uid://c3qe6e0va78bl" path="res://stages/level_design/chamber/entry.tscn" id="6_1b5is"]
 [ext_resource type="PackedScene" uid="uid://hlkos3om81d6" path="res://stages/level_design/chamber/exit_area.tscn" id="7_ry3sd"]
 [ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="9_e7c0e"]
@@ -371,31 +373,56 @@ id = "main_0"
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Background2" type="Sprite2D" parent="World"]
+[node name="ParallaxBackground" type="Node2D" parent="World"]
+
+[node name="Sky" type="Parallax2D" parent="World/ParallaxBackground"]
+scroll_scale = Vector2(0.2, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/ParallaxBackground/Sky"]
 texture_repeat = 2
-position = Vector2(392, 176)
+position = Vector2(280, 136)
 texture = ExtResource("2_6qxlj")
 region_enabled = true
-region_rect = Rect2(0, 0, 1435.887, 346.5)
+region_rect = Rect2(-344.71848, 0.6579361, 1156.6394, 269.16034)
 
-[node name="Background1" type="Parallax2D" parent="World"]
-scroll_scale = Vector2(0.2, 0.2)
+[node name="Mountain1" type="Parallax2D" parent="World/ParallaxBackground"]
+scroll_scale = Vector2(0.4, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="World/Background1"]
+[node name="Sprite2D" type="Sprite2D" parent="World/ParallaxBackground/Mountain1"]
 texture_repeat = 2
-position = Vector2(304, 176)
+position = Vector2(280, 136)
 texture = ExtResource("3_ewis2")
 region_enabled = true
-region_rect = Rect2(-159.68317, 0, 1849.0012, 346)
+region_rect = Rect2(-344.71848, 0.6579361, 1156.6394, 269.16034)
+
+[node name="Mountain2" type="Parallax2D" parent="World/ParallaxBackground"]
+scroll_scale = Vector2(0.6, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/ParallaxBackground/Mountain2"]
+texture_repeat = 2
+position = Vector2(280, 136)
+texture = ExtResource("4_sc1rw")
+region_enabled = true
+region_rect = Rect2(-344.71848, 0.6579361, 1156.6394, 269.16034)
+
+[node name="Desert" type="Parallax2D" parent="World/ParallaxBackground"]
+scroll_scale = Vector2(0.8, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/ParallaxBackground/Desert"]
+texture_repeat = 2
+position = Vector2(280, 136)
+texture = ExtResource("5_sc1rw")
+region_enabled = true
+region_rect = Rect2(-344.71848, 0.6579361, 1346.9724, 269.16034)
 
 [node name="MiddleGroundLayer" type="TileMapLayer" parent="World"]
 position = Vector2(-96, -160)
 scale = Vector2(1.5, 1.5)
-tile_map_data = PackedByteArray("AAAHAAcAAAACAAQAAAAIAAcAAAACAAUAAAAJAAcAAAACAAQAAAAKAAcAAAAFAAIAAAAGAAcAAAABAAIAAAAGAAgAAAABAAQAAAAGAAkAAAABAAUAAAAHAAgAAAACAAUAAAAIAAgAAAACAAUAAAAJAAgAAAACAAUAAAAJAAkAAAACAAUAAAAIAAkAAAACAAUAAAAHAAkAAAACAAUAAAAKAAkAAAAFAAUAAAAKAAgAAAAFAAQAAAAGAAYAAAABAAEAAAAHAAUAAAACAAAAAAAHAAYAAAACAAEAAAAIAAUAAAADAAAAAAAIAAYAAAADAAEAAAAJAAUAAAAEAAAAAAAJAAYAAAAEAAEAAAAKAAYAAAAFAAEAAAAFAAcAAAAAAAIAAAALAAcAAAAGAAIAAAA=")
+tile_map_data = PackedByteArray("AAAGAAgAAAABAAUAAAAGAAcAAAABAAQAAAA=")
 tile_set = SubResource("TileSet_ewis2")
 
 [node name="ForegroundMapLayer" type="TileMapLayer" parent="World"]
-tile_map_data = PackedByteArray("AAD3/woAAQABAAAAAAD4/woAAQABAAAAAAD5/woAAQABAAAAAAD6/woAAQABAAAAAAD7/woAAQABAAAAAAD8/woAAQABAAAAAAD9/woAAQABAAAAAAD+/woAAQABAAAAAAD//woAAQABAAAAAAAAAAoAAQABAAAAAAABAAoAAQABAAAAAAACAAoAAQABAAAAAAADAAoAAQABAAAAAAAEAAoAAQABAAAAAAAFAAoAAQABAAAAAAAGAAoAAQABAAAAAAAHAAoAAQABAAAAAAAIAAoAAQABAAAAAAAJAAoAAQABAAAAAAAKAAoAAQABAAAAAAALAAoAAQABAAAAAAAMAAoAAQABAAAAAAANAAoAAQABAAAAAAAOAAoAAQABAAAAAAAPAAoAAQABAAAAAAAQAAoAAQABAAAAAAARAAoAAQABAAAAAAASAAoAAQABAAAAAAATAAoAAQABAAAAAAAUAAoAAQABAAAAAAAVAAoAAQABAAAAAAAWAAoAAQABAAAAAAAXAAoAAQABAAAAAAAYAAoAAQABAAAAAAAZAAoAAQABAAAAAAAaAAoAAQABAAAAAAAbAAoAAQABAAAAAAAcAAoAAQABAAAAAAAdAAoAAQABAAAAAAAeAAoAAQABAAAAAAAfAAoAAQABAAAAAAAgAAoAAQABAAAAAAAhAAoAAQABAAAAAAD2/woAAQABAAAAAAD2/wsAAQABAAEAAAD3/wsAAQABAAEAAAD4/wsAAQABAAEAAAD5/wsAAQABAAEAAAD6/wsAAQABAAEAAAD7/wsAAQABAAEAAAD8/wsAAQABAAEAAAD9/wsAAQABAAEAAAD+/wsAAQABAAEAAAD//wsAAQABAAEAAAAAAAsAAQABAAEAAAABAAsAAQABAAEAAAACAAsAAQABAAEAAAADAAsAAQABAAEAAAAEAAsAAQABAAEAAAAFAAsAAQABAAEAAAAGAAsAAQABAAEAAAAHAAsAAQABAAEAAAAIAAsAAQABAAEAAAAJAAsAAQABAAEAAAAKAAsAAQABAAEAAAALAAsAAQABAAEAAAAMAAsAAQABAAEAAAANAAsAAQABAAEAAAAOAAsAAQABAAEAAAAPAAsAAQABAAEAAAAQAAsAAQABAAEAAAARAAsAAQABAAEAAAASAAsAAQABAAEAAAATAAsAAQABAAEAAAAUAAsAAQABAAEAAAAVAAsAAQABAAEAAAAWAAsAAQABAAEAAAAXAAsAAQABAAEAAAAYAAsAAQABAAEAAAAZAAsAAQABAAEAAAAaAAsAAQABAAEAAAAbAAsAAQABAAEAAAAcAAsAAQABAAEAAAAdAAsAAQABAAEAAAAeAAsAAQABAAEAAAAfAAsAAQABAAEAAAAgAAsAAQABAAEAAAAhAAsAAQABAAEAAAA=")
+tile_map_data = PackedByteArray("AAD2/wgAAQABAAAAAAD2/wkAAQABAAEAAAD3/wgAAQABAAAAAAD3/wkAAQABAAEAAAD4/wgAAQABAAAAAAD4/wkAAQABAAEAAAD5/wgAAQABAAAAAAD5/wkAAQABAAEAAAD6/wgAAQABAAAAAAD6/wkAAQABAAEAAAD7/wgAAQABAAAAAAD7/wkAAQABAAEAAAD8/wgAAQABAAAAAAD8/wkAAQABAAEAAAD9/wgAAQABAAAAAAD9/wkAAQABAAEAAAD+/wgAAQABAAAAAAD+/wkAAQABAAEAAAD//wgAAQABAAAAAAD//wkAAQABAAEAAAAAAAgAAQABAAAAAAAAAAkAAQABAAEAAAABAAgAAQABAAAAAAABAAkAAQABAAEAAAACAAgAAQABAAAAAAACAAkAAQABAAEAAAADAAgAAQABAAAAAAADAAkAAQABAAEAAAAEAAgAAQABAAAAAAAEAAkAAQABAAEAAAAFAAgAAQABAAAAAAAFAAkAAQABAAEAAAAGAAgAAQABAAAAAAAGAAkAAQABAAEAAAAHAAgAAQABAAAAAAAHAAkAAQABAAEAAAAIAAgAAQABAAAAAAAIAAkAAQABAAEAAAAJAAgAAQABAAAAAAAJAAkAAQABAAEAAAAKAAgAAQABAAAAAAAKAAkAAQABAAEAAAALAAgAAQABAAAAAAALAAkAAQABAAEAAAAMAAgAAQABAAAAAAAMAAkAAQABAAEAAAANAAgAAQABAAAAAAANAAkAAQABAAEAAAAOAAgAAQABAAAAAAAOAAkAAQABAAEAAAAPAAgAAQABAAAAAAAPAAkAAQABAAEAAAAQAAgAAQABAAAAAAAQAAkAAQABAAEAAAARAAgAAQABAAAAAAARAAkAAQABAAEAAAASAAgAAQABAAAAAAASAAkAAQABAAEAAAATAAgAAQABAAAAAAATAAkAAQABAAEAAAAUAAgAAQABAAAAAAAUAAkAAQABAAEAAAAVAAgAAQABAAAAAAAVAAkAAQABAAEAAAAWAAgAAQABAAAAAAAWAAkAAQABAAEAAAAXAAgAAQABAAAAAAAXAAkAAQABAAEAAAAYAAgAAQABAAAAAAAYAAkAAQABAAEAAAAZAAgAAQABAAAAAAAZAAkAAQABAAEAAAAaAAgAAQABAAAAAAAaAAkAAQABAAEAAAAbAAgAAQABAAAAAAAbAAkAAQABAAEAAAAcAAgAAQABAAAAAAAcAAkAAQABAAEAAAAdAAgAAQABAAAAAAAdAAkAAQABAAEAAAAeAAgAAQABAAAAAAAeAAkAAQABAAEAAAAfAAgAAQABAAAAAAAfAAkAAQABAAEAAAAgAAgAAQABAAAAAAAgAAkAAQABAAEAAAAhAAgAAQACAAAAAAAhAAkAAQACAAEAAADy/wgAAQAAAAAAAADz/wgAAQABAAAAAAD0/wgAAQABAAAAAAD1/wgAAQABAAAAAAD1/wkAAQABAAEAAAD0/wkAAQABAAEAAADz/wkAAQABAAEAAADy/wkAAQAAAAEAAAA=")
 tile_set = SubResource("TileSet_xtgks")
 
 [node name="CameraManager" parent="World" node_paths=PackedStringArray("initial_params") instance=ExtResource("3_xtgks")]
@@ -403,17 +430,16 @@ tween_duration = 3.0
 initial_params = NodePath("CameraParams1")
 
 [node name="CameraParams1" parent="World/CameraManager" instance=ExtResource("4_ewis2")]
-position = Vector2(640, 0)
 line_color = Color(0.5756378, 0.94419235, 0.23654485, 1)
 
 [node name="TopLeft" parent="World/CameraManager/CameraParams1" index="0"]
-position = Vector2(-928, 0)
+position = Vector2(-400, 0)
 
 [node name="BottomRight" parent="World/CameraManager/CameraParams1" index="1"]
-position = Vector2(416, 360)
+position = Vector2(1072, 270)
 
 [node name="CameraChangeTrigger" parent="World/CameraManager/CameraParams1/CameraTriggers" index="0" instance=ExtResource("5_6qxlj")]
-position = Vector2(-368, 200)
+position = Vector2(272, 40)
 
 [node name="CameraCollision" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="0"]
 position = Vector2(0, 98)
@@ -426,13 +452,13 @@ position = Vector2(0, 96)
 [node name="Entries" type="Node2D" parent="World"]
 
 [node name="0" parent="World/Entries" instance=ExtResource("6_1b5is")]
-position = Vector2(272, 296)
+position = Vector2(272, 240)
 direction = "NONE"
 
 [node name="Exits" type="Node2D" parent="World"]
 
 [node name="0" parent="World/Exits" instance=ExtResource("7_ry3sd")]
-position = Vector2(-272, 272)
+position = Vector2(-376, 192)
 next_chamber_path = "uid://htnd6ovtegp1"
 next_entry_name = "0"
 direction = "LEFT"
@@ -442,7 +468,7 @@ direction = "LEFT"
 [node name="Cutscenes" type="Node2D" parent="."]
 
 [node name="DebugPlayer" parent="." instance=ExtResource("9_e7c0e")]
-position = Vector2(320, 272)
+position = Vector2(320, 224)
 speed = 150
 gravity = 850
 jump_impulse = 400
