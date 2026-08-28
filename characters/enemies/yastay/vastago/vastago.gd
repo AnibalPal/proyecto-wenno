@@ -20,6 +20,7 @@ var wall_colliding := false
 var player_ref : Player = null
 
 func character_ready() -> void:
+	sprite_animations.material = sprite_animations.material.duplicate(true)
 	sprite_animations.play("idle")
 
 func _physics_process(_delta: float) -> void:

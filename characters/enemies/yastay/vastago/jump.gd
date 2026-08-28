@@ -25,6 +25,7 @@ func state_physics_process(_delta: float) -> void:
 		handle_transitions()
 		enemy.move_and_slide()
 		if(enemy.is_on_floor() and enemy.sprite_animations.animation == "jump_hold"):
+			enemy.velocity.x = 0
 			jump_hitbox.enable()
 			enemy.sprite_animations.play("jump_end")
 			attack_duration.start()
