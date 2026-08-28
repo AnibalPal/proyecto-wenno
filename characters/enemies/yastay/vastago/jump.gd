@@ -2,6 +2,7 @@
 extends EnemyState
 
 @onready var jump_hitbox: EnemyHitbox = $"../../ShouldRotate/Hitboxes/JumpHitbox"
+@onready var attack_duration: Timer = $AttackDuration
 
 var jump_direction := 0
 
@@ -26,7 +27,7 @@ func state_physics_process(_delta: float) -> void:
 		if(enemy.is_on_floor() and enemy.sprite_animations.animation == "jump_hold"):
 			jump_hitbox.enable()
 			enemy.sprite_animations.play("jump_end")
-			transition_to(state_machine.RECOVERY)
+			attack_duration.start()
 
 func handle_transitions() -> void:
 	pass
@@ -42,3 +43,7 @@ func _on_sprite_animations_animation_finished() -> void:
 			enemy.velocity.x = 200 * jump_direction
 			enemy.velocity.y = -200
 			enemy.sprite_animations.play("jump_hold")
+
+func _on_attack_duration_timeout() -> void:
+	if(state_machine.current_state.name == state_machine.JUMP):
+		transition_to(state_machine.RECOVERY)

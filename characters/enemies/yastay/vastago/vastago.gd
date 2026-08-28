@@ -12,6 +12,7 @@ extends Enemy
 @export var max_move_time_secs := 1.5
 
 @export var clash_strength := 1
+@onready var attack_duration: Timer = $StateMachine/Jump/AttackDuration
 
 var floor_colliding := false
 var wall_colliding := false
@@ -40,6 +41,7 @@ func on_clash(_other_collision_position: Vector2) -> void:
 	})
 
 func death():
+	attack_duration.stop()
 	state_machine.transition_to_next_state(state_machine.DEATH)
 
 func is_floor_colliding() -> bool:

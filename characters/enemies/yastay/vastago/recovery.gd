@@ -4,6 +4,8 @@ extends EnemyState
 @onready var attack_cooldown: Timer = $AttackRecovery
 
 func enter(_data: Dictionary) -> void:
+	enemy.sprite_animations.play("idle")
+	enemy.disable_hitboxes()
 	enemy.counter_hit_state = false
 	enemy.stop()
 	attack_cooldown.start()

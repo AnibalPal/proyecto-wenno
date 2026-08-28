@@ -26,6 +26,10 @@ func state_process(_delta: float) -> void:
 func state_physics_process(_delta: float) -> void:
 	if(active):
 		enemy.enable_gravity(_delta)
+		if(enemy.is_wall_colliding()):
+			enemy.sprite_animations.play("idle")
+		else:
+			enemy.sprite_animations.play("run")
 		handle_transitions()
 		select_attack()
 		enemy.move_and_slide()

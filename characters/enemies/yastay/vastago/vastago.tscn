@@ -418,6 +418,10 @@ script = ExtResource("5_e0lrv")
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("6_4owu6")
 
+[node name="AttackDuration" type="Timer" parent="StateMachine/Jump"]
+wait_time = 0.4
+one_shot = true
+
 [node name="Clash" type="Node" parent="StateMachine"]
 script = ExtResource("8_mumsi")
 
@@ -443,7 +447,7 @@ script = ExtResource("3_gdvff")
 material = SubResource("ShaderMaterial_hfvpq")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_vun51")
-animation = &"death"
+animation = &"idle"
 
 [node name="AreaDetections" type="Node2D" parent="ShouldRotate"]
 
@@ -492,8 +496,8 @@ position = Vector2(8, 48)
 target_position = Vector2(0, 16)
 
 [node name="WallDetection" type="RayCast2D" parent="ShouldRotate/Raycasts"]
-position = Vector2(40, 24)
-target_position = Vector2(16, 0)
+position = Vector2(24, 32)
+target_position = Vector2(24, 0)
 
 [node name="Other" type="Node2D" parent="ShouldRotate"]
 
@@ -538,6 +542,7 @@ offset_bottom = 40.0
 [connection signal="timeout" from="StateMachine/Passive/StopTime" to="StateMachine/Passive" method="_on_stop_time_timeout"]
 [connection signal="timeout" from="StateMachine/Active/JumpCooldown" to="StateMachine/Active" method="_on_jump_cooldown_timeout"]
 [connection signal="timeout" from="StateMachine/Recovery/AttackRecovery" to="StateMachine/Recovery" method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="StateMachine/Jump/AttackDuration" to="StateMachine/Jump" method="_on_attack_duration_timeout"]
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Bite" method="_on_sprite_animations_animation_finished"]
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Jump" method="_on_sprite_animations_animation_finished"]
 [connection signal="animation_finished" from="ShouldRotate/SpriteAnimations" to="StateMachine/Death" method="_on_sprite_animations_animation_finished"]
