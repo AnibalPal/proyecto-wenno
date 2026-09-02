@@ -24,11 +24,15 @@ func state_physics_process(_delta: float) -> void:
 		enemy.move_and_slide()
 
 func handle_transitions() -> void:
-	if(Helpers.is_equal_custom(enemy.velocity.x, 0.0, 5)):
-		transition_to(state_machine.ACTIVE)
+	if(Helpers.is_equal_custom(enemy.velocity.x, 0.0, 5) and enemy.is_on_floor()):
+		if(enemy.stamina <= 0):
+			transition_to(state_machine.STUN)
+		else:
+			transition_to(state_machine.ACTIVE)
 
 # Use if there are variables that should be reset when entering this state
 func reset_state()  -> void:
+	enemy.counter_hit_state = false
 	player_position = null
 	enemy.disable_hitboxes()
 

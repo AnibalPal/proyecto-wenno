@@ -13,6 +13,8 @@ extends CharacterEntity
 
 @export var gravity := 300
 
+@onready var initial_stamina := stamina
+
 @onready var sprite_animations := $ShouldRotate/SpriteAnimations
 @onready var hitboxes := $ShouldRotate/Hitboxes
 @onready var hurtboxes := $ShouldRotate/Hurtboxes
@@ -42,7 +44,7 @@ func on_damaged(damage: int, _other_entity_position: Vector2) -> void:
 	on_damaged_vfx.play("hit_effect")
 	turn_towards(_other_entity_position)
 	if(counter_hit_state):
-		GlobalVFXs.hitstop(0.5)
+		GlobalVFXs.hitstop(0.2)
 		health -= damage * 2
 		stamina -= damage * 3
 	else:

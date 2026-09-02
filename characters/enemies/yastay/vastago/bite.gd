@@ -35,14 +35,21 @@ func reset_state()  -> void:
 	slide_forward = false
 
 # Transitions via signals here
+func _on_sprite_animations_animation_changed() -> void:
+	if(state_machine.current_state.name == state_machine.BITE):
+		if(enemy.sprite_animations.animation == "bite"):
+			enemy.move_backwards(enemy.speed / 2.0)
+			slide_forward = true
+
 func _on_sprite_animations_frame_changed() -> void:
 	if(state_machine.current_state.name == state_machine.BITE):
 		if(enemy.sprite_animations.animation == "bite"):
 			if(enemy.sprite_animations.frame == 1):
 				bite_hitbox.enable()
-				enemy.move_forward(enemy.speed * 3)
+				enemy.move_forward(enemy.speed * 4)
 				slide_forward = true
 			else:
+				bite_hitbox.disable()
 				slide_forward = false
 
 func _on_sprite_animations_animation_finished() -> void:

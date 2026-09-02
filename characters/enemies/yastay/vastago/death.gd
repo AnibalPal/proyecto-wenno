@@ -29,7 +29,7 @@ func handle_transitions() -> void:
 func reset_state()  -> void:
 	pass
 
-# Transitions via signals here
-func _on_sprite_animations_animation_finished() -> void:
-	if(enemy.sprite_animations.animation == "death"):
-		queue_free()
+func _on_death_vfx_animation_finished(anim_name: StringName) -> void:
+	if(anim_name == "death"):
+		state_machine.process_active = false
+		call_deferred("queue_free")

@@ -36,8 +36,29 @@ func _physics_process(_delta: float) -> void:
 		else:
 			wall_colliding = false
 
+func on_damaged(damage: int, _other_entity_position: Vector2) -> void:
+	on_damaged_vfx.play("hit_effect")
+	turn_towards(_other_entity_position)
+	if(counter_hit_state):
+		GlobalVFXs.hitstop(0.2)
+		health -= damage * 2
+		stamina -= damage * 3
+	else:
+		GlobalVFXs.hitstop(0.1)
+		health -= damage
+		stamina -= damage * 2
+	if(health <= 0):
+		death()
+		return
+	if(counter_hit_state):
+		#Counter hit reaction
+		state_machine.transition_to_next_state(state_machine.CLASH, {
+			"player_position": _other_entity_position
+		})
+
 func on_clash(_other_collision_position: Vector2) -> void:
-	GlobalVFXs.hitstop()
+	stamina -= 1
+	GlobalVFXs.hitstop(0.1)
 	state_machine.transition_to_next_state(state_machine.CLASH, {
 		"player_position": _other_collision_position
 	})

@@ -1,13 +1,55 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmggim1y57eok"]
+[gd_scene load_steps=22 format=3 uid="uid://c14iy271s58eq"]
 
-[ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_hrqr4"]
-[ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="1_iole4"]
-[ext_resource type="Script" uid="uid://dalutrgbmnw0x" path="res://comic/comic_camera.gd" id="2_oiuvo"]
-[ext_resource type="Script" uid="uid://dkfv20agwc7wc" path="res://comic/comic_text_effects.gd" id="4_ksot6"]
-[ext_resource type="Script" uid="uid://dfn20djjcsog" path="res://comic/comic_background.gd" id="4_lxlre"]
-[ext_resource type="Script" uid="uid://bdv5nwptk0mf7" path="res://comic/comic_transition_effects.gd" id="4_oiuvo"]
-[ext_resource type="Texture2D" uid="uid://ds0isxq4yufma" path="res://assets/icons/down_caret.png" id="6_ccmy2"]
-[ext_resource type="Script" uid="uid://bpaj8xtjkmwtd" path="res://comic/cutscene_skip_menu.gd" id="8_cfgbx"]
+[ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_titjr"]
+[ext_resource type="Script" uid="uid://dalutrgbmnw0x" path="res://comic/comic_camera.gd" id="2_esnqj"]
+[ext_resource type="Script" uid="uid://d2gkky6f5csp" path="res://comic/resources/comic_step.gd" id="2_qs7ha"]
+[ext_resource type="Texture2D" uid="uid://ix7cr6l40esw" path="res://assets/placeholders/mountain_640x360__pixel_art__by_leprekhaun_da5ekfb-fullview.jpg" id="3_1t8cr"]
+[ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/resources/comic_effect_data.gd" id="3_qe6pt"]
+[ext_resource type="Script" uid="uid://dfn20djjcsog" path="res://comic/comic_background.gd" id="4_88yuv"]
+[ext_resource type="Script" uid="uid://dkfv20agwc7wc" path="res://comic/comic_text_effects.gd" id="5_cvrni"]
+[ext_resource type="Script" uid="uid://bmiq63t60p8ex" path="res://comic/resources/comic_background_effect_data.gd" id="5_qxqge"]
+[ext_resource type="Script" uid="uid://bn8a4cow01we0" path="res://comic/resources/comic_text_effect_data.gd" id="6_ha4by"]
+[ext_resource type="Texture2D" uid="uid://ds0isxq4yufma" path="res://assets/icons/down_caret.png" id="6_qs7ha"]
+[ext_resource type="Script" uid="uid://o4n8ls203asg" path="res://comic/resources/comic_transition_effect_data.gd" id="7_f3ewl"]
+[ext_resource type="Script" uid="uid://bdv5nwptk0mf7" path="res://comic/comic_transition_effects.gd" id="7_qe6pt"]
+[ext_resource type="Script" uid="uid://bpaj8xtjkmwtd" path="res://comic/cutscene_skip_menu.gd" id="8_qxqge"]
+
+[sub_resource type="Resource" id="Resource_83p4j"]
+script = ExtResource("5_qxqge")
+new_background_image = ExtResource("3_1t8cr")
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
+
+[sub_resource type="Resource" id="Resource_xq138"]
+script = ExtResource("6_ha4by")
+text = "Texto placeholder"
+text_effect = 1
+text_effect_params = {
+"typing_speed": 20.0
+}
+metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_lh4kj"]
+script = ExtResource("7_f3ewl")
+transition_effect = 1
+transition_params = {
+"duration": 1.0
+}
+metadata/_custom_type_script = "uid://o4n8ls203asg"
+
+[sub_resource type="Resource" id="Resource_tgiv3"]
+script = ExtResource("7_f3ewl")
+transition_effect = 2
+transition_params = {
+"duration": 1.0
+}
+metadata/_custom_type_script = "uid://o4n8ls203asg"
+
+[sub_resource type="Resource" id="Resource_8gv0s"]
+script = ExtResource("2_qs7ha")
+start_transition = SubResource("Resource_tgiv3")
+comic_effects = Array[ExtResource("3_qe6pt")]([SubResource("Resource_83p4j"), SubResource("Resource_xq138")])
+end_transition = SubResource("Resource_lh4kj")
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
 
 [sub_resource type="Animation" id="Animation_cfgbx"]
 length = 0.001
@@ -47,27 +89,29 @@ _data = {
 &"moving": SubResource("Animation_ccmy2")
 }
 
-[node name="Comic" type="Control"]
+[node name="IntroComicPostulacionFondo" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hrqr4")
+script = ExtResource("1_titjr")
+comic_data = Array[ExtResource("2_qs7ha")]([SubResource("Resource_8gv0s")])
+comic_end_path = "uid://cjbyunlhyqeg7"
 
 [node name="ComicCamera" type="Camera2D" parent="."]
 position = Vector2(240, 135)
-script = ExtResource("2_oiuvo")
+script = ExtResource("2_esnqj")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(240, 135.00002)
-scale = Vector2(0.75, 0.75000006)
-texture = ExtResource("1_iole4")
-script = ExtResource("4_lxlre")
+position = Vector2(239.5, 135)
+scale = Vector2(0.7484375, 0.75)
+texture = ExtResource("3_1t8cr")
+script = ExtResource("4_88yuv")
 
 [node name="ComicTextLayer" type="CanvasLayer" parent="."]
-script = ExtResource("4_ksot6")
+script = ExtResource("5_cvrni")
 
 [node name="ImageText" type="Label" parent="ComicTextLayer"]
 visible = false
@@ -97,7 +141,7 @@ offset_left = 77.894745
 offset_top = 32.666664
 offset_right = 77.894745
 offset_bottom = 32.665657
-texture = ExtResource("6_ccmy2")
+texture = ExtResource("6_qs7ha")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -107,13 +151,13 @@ libraries = {
 }
 
 [node name="ComicTransitionEffects" type="CanvasLayer" parent="."]
-script = ExtResource("4_oiuvo")
+script = ExtResource("7_qe6pt")
 
 [node name="CutsceneSkipMenu" type="CanvasLayer" parent="."]
 process_mode = 2
 layer = 100
 visible = false
-script = ExtResource("8_cfgbx")
+script = ExtResource("8_qxqge")
 
 [node name="Background" type="ColorRect" parent="CutsceneSkipMenu"]
 anchors_preset = 15
