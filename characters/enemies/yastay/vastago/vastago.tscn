@@ -378,8 +378,8 @@ script = ExtResource("1_nusy5")
 min_stop_time_secs = 1.0
 max_stop_time_secs = 2.0
 max_move_time_secs = 2.0
-health = 2
-stamina = 1
+health = 5
+stamina = 3
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_nfe8a")
