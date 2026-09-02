@@ -6,8 +6,8 @@ signal s_text_effect_finished
 const TextEffects := ComicTextEffectData.TextEffects
 
 @onready var image_text: Label = $ImageText
-@onready var next_comic_caret: TextureRect = $ImageText/NextComicCaret
-@onready var caret_animation_player: AnimationPlayer = $ImageText/NextComicCaret/CaretAnimationPlayer
+@onready var next_comic_caret: TextureRect = $NextComicCaret
+@onready var caret_animation_player: AnimationPlayer = $NextComicCaret/CaretAnimationPlayer
 
 
 var typing_speed := 20.0

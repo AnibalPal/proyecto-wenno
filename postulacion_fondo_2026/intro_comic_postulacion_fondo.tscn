@@ -1,0 +1,305 @@
+[gd_scene load_steps=39 format=3 uid="uid://c14iy271s58eq"]
+
+[ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_8pagy"]
+[ext_resource type="Script" uid="uid://d2gkky6f5csp" path="res://comic/resources/comic_step.gd" id="2_lyywt"]
+[ext_resource type="Script" uid="uid://bujbvms10y3by" path="res://comic/resources/comic_effect_data.gd" id="3_r2gxf"]
+[ext_resource type="Texture2D" uid="uid://c7s0io2kdlf6k" path="res://assets/comics/prologo_1.png" id="4_d0ust"]
+[ext_resource type="Script" uid="uid://bmiq63t60p8ex" path="res://comic/resources/comic_background_effect_data.gd" id="5_0qbsg"]
+[ext_resource type="Script" uid="uid://bn8a4cow01we0" path="res://comic/resources/comic_text_effect_data.gd" id="6_yhfb6"]
+[ext_resource type="Script" uid="uid://o4n8ls203asg" path="res://comic/resources/comic_transition_effect_data.gd" id="7_0qhgp"]
+[ext_resource type="Texture2D" uid="uid://c2w5yg41humgh" path="res://assets/comics/prologo_2.png" id="8_8pagy"]
+[ext_resource type="Script" uid="uid://dalutrgbmnw0x" path="res://comic/comic_camera.gd" id="8_cxdoo"]
+[ext_resource type="Texture2D" uid="uid://c5a36vc70t1r4" path="res://assets/comics/prologo_3.png" id="9_lyywt"]
+[ext_resource type="Script" uid="uid://dfn20djjcsog" path="res://comic/comic_background.gd" id="10_1oyaa"]
+[ext_resource type="Texture2D" uid="uid://b6f5jmj0gwwtr" path="res://assets/comics/prologo_4.png" id="10_r2gxf"]
+[ext_resource type="Script" uid="uid://dkfv20agwc7wc" path="res://comic/comic_text_effects.gd" id="11_u8i6f"]
+[ext_resource type="Texture2D" uid="uid://ds0isxq4yufma" path="res://assets/icons/down_caret.png" id="12_4kodd"]
+[ext_resource type="Script" uid="uid://bdv5nwptk0mf7" path="res://comic/comic_transition_effects.gd" id="13_ammo5"]
+[ext_resource type="Texture2D" uid="uid://6411704bw3ep" path="res://assets/comics/prologo_5.png" id="14_0qbsg"]
+[ext_resource type="Script" uid="uid://bpaj8xtjkmwtd" path="res://comic/cutscene_skip_menu.gd" id="14_bvyj5"]
+
+[sub_resource type="Resource" id="Resource_83p4j"]
+script = ExtResource("5_0qbsg")
+new_background_image = ExtResource("4_d0ust")
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
+
+[sub_resource type="Resource" id="Resource_xq138"]
+script = ExtResource("6_yhfb6")
+text = "Cada cierta cantidad de años, un terremoto azota a la tierra"
+text_effect = 1
+text_effect_params = {
+"typing_speed": 20.0
+}
+metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_tgiv3"]
+script = ExtResource("7_0qhgp")
+transition_effect = 2
+transition_params = {
+"duration": 1.0
+}
+metadata/_custom_type_script = "uid://o4n8ls203asg"
+
+[sub_resource type="Resource" id="Resource_8gv0s"]
+script = ExtResource("2_lyywt")
+start_transition = SubResource("Resource_tgiv3")
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_83p4j"), SubResource("Resource_xq138")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
+[sub_resource type="Resource" id="Resource_lyywt"]
+script = ExtResource("5_0qbsg")
+new_background_image = ExtResource("8_8pagy")
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
+
+[sub_resource type="Resource" id="Resource_76s7g"]
+script = ExtResource("2_lyywt")
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_lyywt")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
+[sub_resource type="Resource" id="Resource_r2gxf"]
+script = ExtResource("5_0qbsg")
+new_background_image = ExtResource("9_lyywt")
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
+
+[sub_resource type="Resource" id="Resource_d0ust"]
+script = ExtResource("2_lyywt")
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_r2gxf")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
+[sub_resource type="Resource" id="Resource_0qbsg"]
+script = ExtResource("5_0qbsg")
+new_background_image = ExtResource("10_r2gxf")
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
+
+[sub_resource type="Resource" id="Resource_yhfb6"]
+script = ExtResource("6_yhfb6")
+text = "En sus grietas yace una energía cosmica"
+text_effect = 1
+text_effect_params = {
+"typing_speed": 20.0
+}
+metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_0qhgp"]
+script = ExtResource("2_lyywt")
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_0qbsg"), SubResource("Resource_yhfb6")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
+[sub_resource type="Resource" id="Resource_cxdoo"]
+script = ExtResource("5_0qbsg")
+background_effect = 1
+metadata/_custom_type_script = "uid://bmiq63t60p8ex"
+
+[sub_resource type="Resource" id="Resource_564r5"]
+script = ExtResource("2_lyywt")
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_cxdoo")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bfei"]
+atlas = ExtResource("14_0qbsg")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djnpi"]
+atlas = ExtResource("14_0qbsg")
+region = Rect2(480, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg5ek"]
+atlas = ExtResource("14_0qbsg")
+region = Rect2(960, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76we3"]
+atlas = ExtResource("14_0qbsg")
+region = Rect2(1440, 0, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yhfb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bfei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djnpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg5ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76we3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg5ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djnpi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_cfgbx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(440, 232)]
+}
+
+[sub_resource type="Animation" id="Animation_ccmy2"]
+resource_name = "moving"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(440, 232), Vector2(440, 240)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxrr1"]
+_data = {
+&"RESET": SubResource("Animation_cfgbx"),
+&"moving": SubResource("Animation_ccmy2")
+}
+
+[node name="IntroComicPostulacionFondo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8pagy")
+comic_data = Array[ExtResource("2_lyywt")]([SubResource("Resource_8gv0s"), SubResource("Resource_76s7g"), SubResource("Resource_d0ust"), SubResource("Resource_0qhgp"), SubResource("Resource_564r5")])
+comic_end_path = "uid://cjbyunlhyqeg7"
+
+[node name="ComicCamera" type="Camera2D" parent="."]
+position = Vector2(240, 135)
+script = ExtResource("8_cxdoo")
+
+[node name="Backgrounds" type="Node2D" parent="."]
+script = ExtResource("10_1oyaa")
+
+[node name="StaticBackground" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(240, 135.00002)
+texture = ExtResource("4_d0ust")
+
+[node name="AnimatedBackground" type="AnimatedSprite2D" parent="Backgrounds"]
+visible = false
+position = Vector2(240, 135.00002)
+sprite_frames = SubResource("SpriteFrames_yhfb6")
+
+[node name="ComicTextLayer" type="CanvasLayer" parent="."]
+script = ExtResource("11_u8i6f")
+
+[node name="ImageText" type="Label" parent="ComicTextLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 219.5
+offset_right = -16.0
+offset_bottom = -27.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SAMPLE TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NextComicCaret" type="TextureRect" parent="ComicTextLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = 97.0
+offset_right = 216.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_4kodd")
+expand_mode = 1
+
+[node name="CaretAnimationPlayer" type="AnimationPlayer" parent="ComicTextLayer/NextComicCaret"]
+libraries = {
+&"": SubResource("AnimationLibrary_xxrr1")
+}
+
+[node name="ComicTransitionEffects" type="CanvasLayer" parent="."]
+script = ExtResource("13_ammo5")
+
+[node name="CutsceneSkipMenu" type="CanvasLayer" parent="."]
+process_mode = 2
+layer = 100
+visible = false
+script = ExtResource("14_bvyj5")
+
+[node name="Background" type="ColorRect" parent="CutsceneSkipMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.50980395)
+
+[node name="Options" type="Control" parent="CutsceneSkipMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainContainer" type="VBoxContainer" parent="CutsceneSkipMenu/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkipCutsceneLabe" type="Label" parent="CutsceneSkipMenu/Options/MainContainer"]
+layout_mode = 2
+text = "Skip cutscene?"
+
+[node name="OptionsContainer" type="HBoxContainer" parent="CutsceneSkipMenu/Options/MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 13
+
+[node name="Yes" type="Button" parent="CutsceneSkipMenu/Options/MainContainer/OptionsContainer"]
+layout_mode = 2
+focus_neighbor_right = NodePath("../No")
+text = "Yes"
+
+[node name="No" type="Button" parent="CutsceneSkipMenu/Options/MainContainer/OptionsContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Yes")
+text = "No
+"
+
+[connection signal="button_down" from="CutsceneSkipMenu/Options/MainContainer/OptionsContainer/Yes" to="CutsceneSkipMenu" method="_on_yes_button_down"]
+[connection signal="button_down" from="CutsceneSkipMenu/Options/MainContainer/OptionsContainer/No" to="CutsceneSkipMenu" method="_on_no_button_down"]

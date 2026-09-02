@@ -3,7 +3,8 @@ extends ComicEffectData
 class_name ComicBackgroundEffectData
 
 enum BackgroundEffects {
-	CHANGE
+	CHANGE,
+	ANIMATED_CHANGE
 }
 
 @export var background_effect := BackgroundEffects.CHANGE

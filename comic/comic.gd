@@ -7,7 +7,7 @@ class_name Comic
 
 @onready var comic_transition_effects: CanvasLayer = $ComicTransitionEffects
 @onready var comic_camera: ComicCameraEffect = $ComicCamera
-@onready var background_image: ComicBackgroundEffect = $Background
+@onready var backgrounds: ComicBackgroundEffect = $Backgrounds
 @onready var comic_text_layer: ComicTextEffects = $ComicTextLayer
 @onready var cutscene_skip_menu: CutsceneSkipMenu = $CutsceneSkipMenu
 
@@ -26,7 +26,7 @@ var next_press_cancel = false
 func _ready() -> void:
 	assert(len(comic_data) > 0, "COMIC HAS NO DATA")
 	if(initial_background):
-		background_image.texture = initial_background
+		backgrounds.texture = initial_background
 	setup_signals()
 	start_comic_step()
 
@@ -55,7 +55,7 @@ func setup_signals() -> void:
 	comic_transition_effects.s_transition_finished.connect(on_transition_finished)
 	comic_camera.s_camera_effect_done.connect(on_effect_finished)
 	comic_text_layer.s_text_effect_finished.connect(on_effect_finished)
-	background_image.s_background_effect_done.connect(on_effect_finished)
+	backgrounds.s_background_effect_done.connect(on_effect_finished)
 	cutscene_skip_menu.s_cutscene_skipped.connect(skip_cutscene)
 
 func on_transition_finished(is_end_transition := false) -> void:
@@ -142,4 +142,4 @@ func play_camera_effect(effect_data : ComicCameraEffectData) -> void:
 
 func play_background_effect(effect_data : ComicBackgroundEffectData) -> void:
 	background_effect_playing = true
-	background_image.play_background_effect(effect_data.background_effect, effect_data.new_background_image)
+	backgrounds.play_background_effect(effect_data.background_effect, effect_data.new_background_image)
