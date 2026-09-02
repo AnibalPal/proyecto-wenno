@@ -71,7 +71,7 @@ direction = "RIGHT"
 [node name="Cutscenes" type="Node2D" parent="."]
 
 [node name="DebugPlayer" parent="." instance=ExtResource("9_85568")]
-position = Vector2(224, 184)
+position = Vector2(192, 192)
 speed = 150
 gravity = 850
 jump_impulse = 400
