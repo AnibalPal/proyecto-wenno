@@ -251,12 +251,13 @@ initial_params = NodePath("CameraParams1")
 
 [node name="CameraParams1" parent="World/CameraManager" instance=ExtResource("4_ewis2")]
 line_color = Color(0.5756378, 0.94419235, 0.23654485, 1)
+instant = true
 
 [node name="TopLeft" parent="World/CameraManager/CameraParams1" index="0"]
 position = Vector2(-400, 0)
 
 [node name="BottomRight" parent="World/CameraManager/CameraParams1" index="1"]
-position = Vector2(1072, 270)
+position = Vector2(952, 270)
 
 [node name="CameraChangeTrigger" parent="World/CameraManager/CameraParams1/CameraTriggers" index="0" instance=ExtResource("5_6qxlj")]
 position = Vector2(272, 40)
@@ -269,19 +270,34 @@ debug_color = Color(0.5756378, 0.94419235, 0.23654485, 0.2)
 modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
 position = Vector2(0, 96)
 
+[node name="CameraChangeTrigger2" parent="World/CameraManager/CameraParams1/CameraTriggers" index="1" instance=ExtResource("5_6qxlj")]
+position = Vector2(864, 40)
+
+[node name="CameraCollision" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger2" index="0"]
+position = Vector2(0, 98)
+debug_color = Color(0.5756378, 0.94419235, 0.23654485, 0.2)
+
+[node name="CameraIcon" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger2" index="1"]
+modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
+position = Vector2(0, 96)
+
 [node name="Entries" type="Node2D" parent="World"]
 
 [node name="0" parent="World/Entries" instance=ExtResource("6_1b5is")]
 position = Vector2(272, 240)
 direction = "NONE"
 
+[node name="1" parent="World/Entries" instance=ExtResource("6_1b5is")]
+position = Vector2(864, 240)
+direction = "LEFT"
+
 [node name="Exits" type="Node2D" parent="World"]
 
 [node name="0" parent="World/Exits" instance=ExtResource("7_ry3sd")]
-position = Vector2(-376, 192)
+position = Vector2(920, 192)
 next_chamber_path = "uid://htnd6ovtegp1"
 next_entry_name = "0"
-direction = "LEFT"
+direction = "RIGHT"
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -299,3 +315,4 @@ limit_bottom = 360
 
 [editable path="World/CameraManager/CameraParams1"]
 [editable path="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger"]
+[editable path="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger2"]

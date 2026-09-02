@@ -9,11 +9,13 @@ class_name CameraParams
 @export var line_color := Color.GREEN
 @export var line_width := 3
 
+@export var instant := false
+
 @onready var top_left: Node2D = $TopLeft
 @onready var bottom_right: Node2D = $BottomRight
 @onready var camera_triggers: Node2D = $CameraTriggers
 
-signal s_camera_params_changed(params: Dictionary)
+signal s_camera_params_changed(params: Dictionary, instant : bool)
 
 func _ready() -> void:
 	for camera_change_trigger: CameraChangeTrigger in camera_triggers.get_children():
@@ -58,4 +60,4 @@ func get_bounds():
 	}
 
 func _on_camera_change_trigger_area_entered(_area: Area2D) -> void:
-	s_camera_params_changed.emit(get_bounds())
+	s_camera_params_changed.emit(get_bounds(), instant)

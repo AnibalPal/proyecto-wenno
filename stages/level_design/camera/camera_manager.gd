@@ -28,7 +28,7 @@ func _ready() -> void:
 	player_camera.limit_left = initial_camera_params["left"]
 
 func reset_limits_to_current_view(camera_to_change: Camera2D, camera_params: Dictionary) -> void:
-	print("CHANGE CAMERA LIMITS")
+	print(camera_params)
 	var canvas_transform = get_viewport().get_canvas_transform()
 	var viewport_rect = get_viewport().get_visible_rect()
 	
@@ -44,13 +44,20 @@ func reset_limits_to_current_view(camera_to_change: Camera2D, camera_params: Dic
 	if(!is_equal_approx(camera_to_change.limit_left, camera_params["left"])):
 		camera_to_change.limit_left = int(top_left.x)
 
-func on_player_camera_entered(camera_params: Dictionary):	
+func on_player_camera_entered(camera_params: Dictionary, instant: bool):	
 	reset_limits_to_current_view(player_camera, camera_params)
 	
 	if(current_tween):
 		current_tween.kill()
-	current_tween = get_tree().create_tween()
-	current_tween.parallel().tween_property(player_camera, "limit_top", camera_params["top"], tween_duration)
-	current_tween.parallel().tween_property(player_camera, "limit_right", camera_params["right"], tween_duration)
-	current_tween.parallel().tween_property(player_camera, "limit_bottom", camera_params["bottom"], tween_duration)
-	current_tween.parallel().tween_property(player_camera, "limit_left", camera_params["left"], tween_duration)
+	
+	if(instant):
+		player_camera.limit_top = camera_params["top"]
+		player_camera.limit_right = camera_params["right"]
+		player_camera.limit_bottom = camera_params["bottom"]
+		player_camera.limit_left = camera_params["left"]
+	else:
+		current_tween = get_tree().create_tween()
+		current_tween.parallel().tween_property(player_camera, "limit_top", camera_params["top"], tween_duration)
+		current_tween.parallel().tween_property(player_camera, "limit_right", camera_params["right"], tween_duration)
+		current_tween.parallel().tween_property(player_camera, "limit_bottom", camera_params["bottom"], tween_duration)
+		current_tween.parallel().tween_property(player_camera, "limit_left", camera_params["left"], tween_duration)
