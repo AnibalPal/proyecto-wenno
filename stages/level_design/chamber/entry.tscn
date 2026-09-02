@@ -8,6 +8,7 @@
 
 [node name="Entry" type="Node2D"]
 script = ExtResource("1_b1tg7")
+direction = ""
 
 [node name="PositionMarker" type="Sprite2D" parent="."]
 modulate = Color(0, 0.5921569, 1, 1)

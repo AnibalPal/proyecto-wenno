@@ -1,0 +1,149 @@
+[gd_scene load_steps=21 format=4 uid="uid://c83nmn214sib6"]
+
+[ext_resource type="Script" uid="uid://ca35i2c1q5i2f" path="res://stages/level_design/chamber/chamber.gd" id="1_fd6a0"]
+[ext_resource type="TileSet" uid="uid://b1t0wtgv2by8d" path="res://assets/prototype/tile_sets/world_prototype.tres" id="2_ipy0h"]
+[ext_resource type="PackedScene" uid="uid://bvat8fbkoepjn" path="res://stages/level_design/camera/camera_manager.tscn" id="3_vmeme"]
+[ext_resource type="PackedScene" uid="uid://c3qgmya5ej67y" path="res://stages/level_design/camera/camera_params.tscn" id="4_mgg26"]
+[ext_resource type="PackedScene" uid="uid://od3k0e66dcie" path="res://stages/level_design/camera/camera_change_trigger.tscn" id="5_phi8k"]
+[ext_resource type="PackedScene" uid="uid://c3qe6e0va78bl" path="res://stages/level_design/chamber/entry.tscn" id="6_loejc"]
+[ext_resource type="Script" uid="uid://dyxs65bmut2yr" path="res://stages/cutscenes/cutscene.gd" id="8_8bher"]
+[ext_resource type="PackedScene" uid="uid://x6ecqk2p0sow" path="res://characters/npcs/yastay_npc.tscn" id="8_fd6a0"]
+[ext_resource type="Script" uid="uid://cdpg2b6dbbx0r" path="res://stages/cutscenes/resources/cutscene_step.gd" id="8_vmeme"]
+[ext_resource type="PackedScene" uid="uid://buc8t17kjk5nj" path="res://characters/player/scenes/player.tscn" id="9_1nrvd"]
+[ext_resource type="Script" uid="uid://dk5itjx85if0m" path="res://stages/cutscenes/resources/cutscene_action.gd" id="9_mgg26"]
+[ext_resource type="PackedScene" uid="uid://c8nx6bpwwdkel" path="res://characters/enemies/yastay/vastago/vastago.tscn" id="11_mgg26"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7iq6d"]
+size = Vector2(48, 264)
+
+[sub_resource type="Resource" id="Resource_phi8k"]
+script = ExtResource("9_mgg26")
+entity = "YastayNPC"
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_loejc"]
+script = ExtResource("9_mgg26")
+entity = "YastayNPC"
+action = 4
+data = {
+"text": "Cagaste ctm",
+"width": 150
+}
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_ioeeg"]
+script = ExtResource("8_vmeme")
+actions = Array[ExtResource("9_mgg26")]([SubResource("Resource_phi8k"), SubResource("Resource_loejc")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="Resource" id="Resource_mgg26"]
+script = ExtResource("9_mgg26")
+entity = "Vastago"
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_8bher"]
+script = ExtResource("9_mgg26")
+entity = "Vastago"
+action = 7
+metadata/_custom_type_script = "uid://dk5itjx85if0m"
+
+[sub_resource type="Resource" id="Resource_1nrvd"]
+script = ExtResource("8_vmeme")
+actions = Array[ExtResource("9_mgg26")]([SubResource("Resource_mgg26"), SubResource("Resource_8bher")])
+metadata/_custom_type_script = "uid://cdpg2b6dbbx0r"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p22m8"]
+size = Vector2(64, 80)
+
+[node name="YastayMain2" type="Node2D"]
+script = ExtResource("1_fd6a0")
+id = "main_2"
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="ForegroundMapLayer" type="TileMapLayer" parent="World"]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAcAAAABAAAAAAAAAAgAAAABAAAAAAABAAgAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAMAAAAAAABAAAAAAANAAAAAAABAAAAAAAOAAAAAAABAAAAAAACAAgAAAABAAAAAAADAAgAAAABAAAAAAAEAAgAAAABAAAAAAAFAAgAAAABAAAAAAAGAAgAAAABAAAAAAAHAAgAAAABAAAAAAAIAAgAAAABAAAAAAAJAAgAAAABAAAAAAAKAAgAAAABAAAAAAALAAgAAAABAAAAAAAMAAgAAAABAAAAAAANAAgAAAABAAAAAAAOAAgAAAABAAAAAAAAAAYAAAABAAAAAAAAAAUAAAABAAAAAAAAAAQAAAABAAAAAAAAAAMAAAABAAAAAAAPAAgAAAABAAAAAAAQAAgAAAABAAAAAAARAAgAAAABAAAAAAASAAgAAAABAAAAAAATAAgAAAABAAAAAAAUAAgAAAABAAAAAAAVAAgAAAABAAAAAAAWAAgAAAABAAAAAAAPAAAAAAABAAAAAAAQAAAAAAABAAAAAAARAAAAAAABAAAAAAASAAAAAAABAAAAAAATAAAAAAABAAAAAAAUAAAAAAABAAAAAAAVAAAAAAABAAAAAAAWAAAAAAABAAAAAAAOAAcAAAABAAAAAAAOAAYAAAABAAAAAAAOAAUAAAABAAAAAAAOAAQAAAABAAAAAAAOAAMAAAABAAAAAAAOAAIAAAABAAAAAAAOAAEAAAABAAAAAAAPAAEAAAABAAAAAAAPAAIAAAABAAAAAAAPAAMAAAABAAAAAAAPAAQAAAABAAAAAAAPAAUAAAABAAAAAAAPAAYAAAABAAAAAAAPAAcAAAABAAAAAAA=")
+tile_set = ExtResource("2_ipy0h")
+
+[node name="CameraManager" parent="World" node_paths=PackedStringArray("initial_params") instance=ExtResource("3_vmeme")]
+tween_duration = 3.0
+initial_params = NodePath("CameraParams1")
+
+[node name="CameraParams1" parent="World/CameraManager" instance=ExtResource("4_mgg26")]
+position = Vector2(640, 0)
+line_color = Color(0.5756378, 0.94419235, 0.23654485, 1)
+instant = true
+
+[node name="TopLeft" parent="World/CameraManager/CameraParams1" index="0"]
+position = Vector2(-640, 0)
+
+[node name="BottomRight" parent="World/CameraManager/CameraParams1" index="1"]
+position = Vector2(-160, 270)
+
+[node name="CameraChangeTrigger" parent="World/CameraManager/CameraParams1/CameraTriggers" index="0" instance=ExtResource("5_phi8k")]
+position = Vector2(-552, 128)
+
+[node name="CameraCollision" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_7iq6d")
+debug_color = Color(0.5756378, 0.94419235, 0.23654485, 0.2)
+
+[node name="CameraIcon" parent="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger" index="1"]
+modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
+
+[node name="Entries" type="Node2D" parent="World"]
+
+[node name="0" parent="World/Entries" instance=ExtResource("6_loejc")]
+position = Vector2(72, 232)
+direction = "RIGHT"
+
+[node name="Exits" type="Node2D" parent="World"]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Cutscenes" type="Node2D" parent="."]
+
+[node name="Cutscene1" type="Node2D" parent="Cutscenes"]
+script = ExtResource("8_8bher")
+id = "yastay_1"
+cutscene_data = Array[ExtResource("8_vmeme")]([SubResource("Resource_ioeeg"), SubResource("Resource_1nrvd")])
+
+[node name="Entities" type="Node2D" parent="Cutscenes/Cutscene1"]
+
+[node name="YastayNPC" parent="Cutscenes/Cutscene1/Entities" instance=ExtResource("8_fd6a0")]
+process_mode = 4
+visible = false
+position = Vector2(384, 216)
+
+[node name="Vastago" parent="Cutscenes/Cutscene1/Entities" instance=ExtResource("11_mgg26")]
+process_mode = 4
+visible = false
+position = Vector2(376, 200)
+facing_right = false
+
+[node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]
+position = Vector2(232, 280)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CutsceneTriggerCollisionShape" type="CollisionShape2D" parent="Cutscenes/Cutscene1/Trigger"]
+position = Vector2(-80, -64)
+shape = SubResource("RectangleShape2D_p22m8")
+
+[node name="DebugPlayer" parent="." instance=ExtResource("9_1nrvd")]
+position = Vector2(152, 120)
+speed = 150
+gravity = 850
+jump_impulse = 400
+debug_mode = true
+
+[node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
+
+[connection signal="area_entered" from="Cutscenes/Cutscene1/Trigger" to="Cutscenes/Cutscene1" method="_on_trigger_area_entered"]
+
+[editable path="World/CameraManager/CameraParams1"]
+[editable path="World/CameraManager/CameraParams1/CameraTriggers/CameraChangeTrigger"]

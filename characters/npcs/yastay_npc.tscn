@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://x6ecqk2p0sow"]
+
+[ext_resource type="Script" uid="uid://bithqqv7d4idm" path="res://characters/npcs/npc_base.gd" id="1_uufvl"]
+[ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="2_hmhlv"]
+[ext_resource type="PackedScene" uid="uid://cdaqgyd8khgd1" path="res://characters/cutscenes/dialogue_bubble.tscn" id="3_6eecq"]
+[ext_resource type="Script" uid="uid://dbmv5yx144i55" path="res://characters/cutscenes/common_states/cutscene_idle.gd" id="4_n5fle"]
+[ext_resource type="Script" uid="uid://fkp3ohlnwecw" path="res://characters/cutscenes/common_states/move.gd" id="5_7dl2g"]
+[ext_resource type="Texture2D" uid="uid://bwatorvv8hpf2" path="res://assets/spritesheets/yastay_human_32x48.png" id="6_gtjgm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcju0"]
+atlas = ExtResource("6_gtjgm")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1llct"]
+atlas = ExtResource("6_gtjgm")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcuqt"]
+atlas = ExtResource("6_gtjgm")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkyut"]
+atlas = ExtResource("6_gtjgm")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6rmx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcju0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1llct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcuqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkyut")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epbk7"]
+size = Vector2(16, 40)
+
+[node name="YastayNPC" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_uufvl")
+
+[node name="CutsceneStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_hmhlv")
+dialogue_bubble = ExtResource("3_6eecq")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("4_n5fle")
+
+[node name="Move" type="Node" parent="CutsceneStateMachine"]
+script = ExtResource("5_7dl2g")
+
+[node name="ShouldRotate" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShouldRotate"]
+scale = Vector2(2, 1.6666667)
+sprite_frames = SubResource("SpriteFrames_a6rmx")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.7152239
+
+[node name="ShouldNotRotate" type="Node2D" parent="."]
+
+[node name="CutsceneBubbleAnchor" type="Node2D" parent="ShouldNotRotate"]
+position = Vector2(0, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_epbk7")

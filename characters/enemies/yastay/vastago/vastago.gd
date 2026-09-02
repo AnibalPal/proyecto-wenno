@@ -13,6 +13,7 @@ extends Enemy
 
 @export var clash_strength := 1
 @onready var attack_duration: Timer = $StateMachine/Jump/AttackDuration
+@onready var cutscene_state_machine: BaseCutsceneStateMachine = $CutsceneStateMachine
 
 var floor_colliding := false
 var wall_colliding := false
@@ -50,3 +51,13 @@ func is_floor_colliding() -> bool:
 
 func is_wall_colliding() -> bool:
 	return wall_colliding
+
+func enter_cutscene_mode() -> void:
+	activate_detection.disable()
+	state_machine.deactivate_process()
+	cutscene_state_machine.activate_process()
+	
+func exit_cutscene_mode() -> void:
+	state_machine.activate_process()
+	state_machine.transition_to_next_state(state_machine.PASSIVE)
+	cutscene_state_machine.deactivate_process()

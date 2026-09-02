@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var arrow_pivot: Node2D = $ArrowPivot
 
-@export_enum("UP", "RIGHT", "DOWN", "LEFT", "NONE") var direction := "":
+@export_enum("UP", "RIGHT", "DOWN", "LEFT", "NONE") var direction := "NONE":
 	set(value):
 		direction = value
 		if not is_node_ready():

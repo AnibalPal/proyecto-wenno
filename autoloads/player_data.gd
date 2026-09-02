@@ -23,7 +23,8 @@ var player_progression := {
 		"cutscene_3": false,
 		"cutscene_4": false,
 		"cutscene_5": false,
-		"cutscene_6": false
+		"cutscene_6": false,
+		"yastay_1": false
 	},
 }
 
