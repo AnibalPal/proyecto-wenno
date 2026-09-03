@@ -37,7 +37,7 @@ entity = "YastayNPC"
 action = 4
 data = {
 "text": "Intruso!",
-"width": 150
+"width": 120
 }
 metadata/_custom_type_script = "uid://dk5itjx85if0m"
 
@@ -52,7 +52,7 @@ entity = "YastayNPC"
 action = 4
 data = {
 "text": "!!Los invoco espiritus puma!!",
-"width": 240
+"width": 180
 }
 metadata/_custom_type_script = "uid://dk5itjx85if0m"
 
@@ -82,7 +82,7 @@ entity = "YastayNPC"
 action = 4
 data = {
 "text": "Acaben con él!",
-"width": 240
+"width": 120
 }
 metadata/_custom_type_script = "uid://dk5itjx85if0m"
 

@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+@onready var start_game_button: Button = $MainMenuPostulacionFondo/StartGameButton
+
+func _ready() -> void:
+	start_game_button.grab_focus()
+
 func _on_start_game_button_button_down() -> void:
 	GlobalTransitionEffects.fade_in()
 	layer = 0
