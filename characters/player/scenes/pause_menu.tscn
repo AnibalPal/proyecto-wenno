@@ -14,14 +14,14 @@ script = ExtResource("1_fa0bt")
 layout_mode = 0
 offset_left = -8.0
 offset_top = -8.0
-offset_right = 648.0
-offset_bottom = 368.0
+offset_right = 488.0
+offset_bottom = 280.0
 color = Color(0, 0, 0, 1)
 
 [node name="Content" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 640.0
-offset_bottom = 360.0
+offset_right = 480.0
+offset_bottom = 272.0
 
 [node name="Options" type="HBoxContainer" parent="Content"]
 layout_mode = 2
@@ -61,13 +61,13 @@ size_flags_vertical = 3
 
 [node name="SlidingContainer" type="Control" parent="Content/Display"]
 anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 285.0
+offset_right = 1440.0
+offset_bottom = 202.5
 
 [node name="Status" type="VBoxContainer" parent="Content/Display/SlidingContainer"]
 layout_mode = 0
-offset_right = 640.0
-offset_bottom = 285.0
+offset_right = 480.0
+offset_bottom = 202.5
 
 [node name="Title" type="Label" parent="Content/Display/SlidingContainer/Status"]
 layout_mode = 2
@@ -76,13 +76,14 @@ text = "Status Menu"
 [node name="MapTab" parent="Content/Display/SlidingContainer" instance=ExtResource("2_uu8gt")]
 layout_mode = 0
 offset_left = 640.0
-offset_right = 1280.0
+offset_right = 1120.0
+offset_bottom = 202.5
 
 [node name="Settings" type="VBoxContainer" parent="Content/Display/SlidingContainer"]
 layout_mode = 0
 offset_left = 1280.0
-offset_right = 1920.0
-offset_bottom = 285.0
+offset_right = 1760.0
+offset_bottom = 202.5
 
 [node name="Title" type="Label" parent="Content/Display/SlidingContainer/Settings"]
 layout_mode = 2

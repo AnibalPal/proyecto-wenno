@@ -26,7 +26,7 @@ func prepare_cutscene_areas(chamber_node: Chamber) -> void:
 
 func execute_step(steps := []) -> void:
 	for action in steps:
-		if(action.entity == "player"):
+		if(action.entity == "Player"):
 			player_step_completed = false
 			player.cutscene_state_machine.execute_cutscene_step(action.action, action.data)
 		else:

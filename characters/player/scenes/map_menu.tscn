@@ -25,8 +25,8 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [node name="MapTab" type="MarginContainer"]
-offset_right = 640.0
-offset_bottom = 285.0
+offset_right = 480.0
+offset_bottom = 270.0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8

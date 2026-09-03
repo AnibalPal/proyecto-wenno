@@ -24,7 +24,8 @@ var player_progression := {
 		"cutscene_4": false,
 		"cutscene_5": false,
 		"cutscene_6": false,
-		"yastay_1": false
+		"yastay_1": false,
+		"yastay_2": false
 	},
 }
 
@@ -52,7 +53,7 @@ var map_progression := {
 	"yastay": {
 		"selectable": false,
 		"clear": false,
-		"alt_0":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":false}},"alt_1":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"alt_2":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"alt_3":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"main_0":{"visited":true,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_1":{"visited":false,"walls":{"down":true,"left":false,"right":true,"up":false}},"main_10":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_2":{"visited":false,"walls":{"down":false,"left":false,"right":true,"up":true}},"main_3":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":true}},"main_4":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_5":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_6":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":true}},"main_7":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":true}},"main_8":{"visited":false,"walls":{"down":true,"left":false,"right":true,"up":false}},"main_9":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"secret_0":{"visited":false,"walls":{"down":true,"left":false,"right":true,"up":false}},"secret_1":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":true}},"secret_2":{"visited":false,"walls":{"down":false,"left":false,"right":false,"up":true}}
+		"alt_0":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":false}},"alt_1":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"alt_2":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"alt_3":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"main_0":{"visited":true,"walls":{"down":false,"left":false,"right":true,"up":false}},"main_1":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_10":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_2":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":false}},"main_3":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":true}},"main_4":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_5":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"main_6":{"visited":false,"walls":{"down":false,"left":true,"right":false,"up":true}},"main_7":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":true}},"main_8":{"visited":false,"walls":{"down":true,"left":false,"right":true,"up":false}},"main_9":{"visited":false,"walls":{"down":false,"left":true,"right":true,"up":false}},"secret_0":{"visited":false,"walls":{"down":true,"left":false,"right":true,"up":false}},"secret_1":{"visited":false,"walls":{"down":true,"left":false,"right":false,"up":true}},"secret_2":{"visited":false,"walls":{"down":false,"left":false,"right":false,"up":true}}
 	}
 }
 

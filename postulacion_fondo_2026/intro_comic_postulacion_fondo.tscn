@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c14iy271s58eq"]
+[gd_scene load_steps=43 format=3 uid="uid://c14iy271s58eq"]
 
 [ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_8pagy"]
 [ext_resource type="Script" uid="uid://d2gkky6f5csp" path="res://comic/resources/comic_step.gd" id="2_lyywt"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c5a36vc70t1r4" path="res://assets/comics/prologo_3.png" id="9_lyywt"]
 [ext_resource type="Script" uid="uid://dfn20djjcsog" path="res://comic/comic_background.gd" id="10_1oyaa"]
 [ext_resource type="Texture2D" uid="uid://b6f5jmj0gwwtr" path="res://assets/comics/prologo_4.png" id="10_r2gxf"]
+[ext_resource type="Script" uid="uid://cuabsrcy3f2j5" path="res://comic/resources/comic_camera_effect_data.gd" id="11_0qbsg"]
 [ext_resource type="Script" uid="uid://dkfv20agwc7wc" path="res://comic/comic_text_effects.gd" id="11_u8i6f"]
 [ext_resource type="Texture2D" uid="uid://ds0isxq4yufma" path="res://assets/icons/down_caret.png" id="12_4kodd"]
 [ext_resource type="Script" uid="uid://bdv5nwptk0mf7" path="res://comic/comic_transition_effects.gd" id="13_ammo5"]
@@ -80,9 +81,18 @@ text_effect_params = {
 }
 metadata/_custom_type_script = "uid://bn8a4cow01we0"
 
+[sub_resource type="Resource" id="Resource_1oyaa"]
+script = ExtResource("11_0qbsg")
+camera_effect = 5
+camera_effect_params = {
+"shake_decay": 5.0,
+"shake_strength": 10.0
+}
+metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
+
 [sub_resource type="Resource" id="Resource_0qhgp"]
 script = ExtResource("2_lyywt")
-comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_0qbsg"), SubResource("Resource_yhfb6")])
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_0qbsg"), SubResource("Resource_yhfb6"), SubResource("Resource_1oyaa")])
 metadata/_custom_type_script = "uid://d2gkky6f5csp"
 
 [sub_resource type="Resource" id="Resource_cxdoo"]
@@ -90,9 +100,27 @@ script = ExtResource("5_0qbsg")
 background_effect = 1
 metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
+[sub_resource type="Resource" id="Resource_4kodd"]
+script = ExtResource("6_yhfb6")
+text = "Causando que todas las leyendas tomen forma física ..."
+text_effect = 1
+text_effect_params = {
+"typing_speed": 20.0
+}
+metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_u8i6f"]
+script = ExtResource("7_0qhgp")
+transition_effect = 1
+transition_params = {
+"duration": 1.0
+}
+metadata/_custom_type_script = "uid://o4n8ls203asg"
+
 [sub_resource type="Resource" id="Resource_564r5"]
 script = ExtResource("2_lyywt")
-comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_cxdoo")])
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_cxdoo"), SubResource("Resource_4kodd")])
+end_transition = SubResource("Resource_u8i6f")
 metadata/_custom_type_script = "uid://d2gkky6f5csp"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bfei"]

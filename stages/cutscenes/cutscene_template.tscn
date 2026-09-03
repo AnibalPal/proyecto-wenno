@@ -10,8 +10,8 @@ script = ExtResource("1_5nt0i")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Trigger" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 0
+collision_layer = 0
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
 shape = SubResource("RectangleShape2D_qff8p")

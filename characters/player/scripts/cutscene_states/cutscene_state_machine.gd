@@ -22,7 +22,10 @@ func execute_cutscene_step(action: Enums.CutsceneCommonActions, step_data = {}) 
 		Enums.CutsceneCommonActions.MOVE:
 			transition_to_next_state(MOVE, step_data)
 		Enums.CutsceneCommonActions.TALK:
-			instantiate_dialogue_bubble(step_data["text"])
+			if(step_data.has("width")):
+				instantiate_dialogue_bubble(step_data["text"], step_data["width"])
+			else:
+				instantiate_dialogue_bubble(step_data["text"])
 		Enums.CutsceneCommonActions.ANIMATION:
 			print("PLAYER PENDING IMPLEMENTATION ANIMATION")		
 		Enums.CutsceneCommonActions.WAIT:

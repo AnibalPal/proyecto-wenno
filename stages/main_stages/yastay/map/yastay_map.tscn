@@ -23,31 +23,29 @@ offset_right = -56.0
 offset_bottom = -8.0
 id = "main_0"
 right_open = true
-left_open = true
 
 [node name="Main1" parent="." instance=ExtResource("2_4y3kp")]
 visible = false
 layout_mode = 0
-offset_left = -88.0
+offset_left = -24.0
 offset_top = -8.0
-offset_right = -88.0
+offset_right = -24.0
 offset_bottom = -8.0
 id = "main_1"
 visited = false
 right_open = true
-down_open = true
+left_open = true
 
 [node name="Main2" parent="." instance=ExtResource("2_4y3kp")]
 visible = false
 layout_mode = 0
-offset_left = -88.0
-offset_top = 16.0
-offset_right = -88.0
-offset_bottom = 16.0
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = -8.0
 id = "main_2"
 visited = false
-up_open = true
-right_open = true
+left_open = true
 
 [node name="Main3" parent="." instance=ExtResource("2_4y3kp")]
 visible = false

@@ -94,7 +94,7 @@ modulate = Color(0.5756378, 0.94419235, 0.23654485, 1)
 [node name="Entries" type="Node2D" parent="World"]
 
 [node name="0" parent="World/Entries" instance=ExtResource("6_loejc")]
-position = Vector2(72, 232)
+position = Vector2(48, 232)
 direction = "RIGHT"
 
 [node name="Exits" type="Node2D" parent="World"]
@@ -105,7 +105,7 @@ direction = "RIGHT"
 
 [node name="Cutscene1" type="Node2D" parent="Cutscenes"]
 script = ExtResource("8_8bher")
-id = "yastay_1"
+id = "yastay_2"
 cutscene_data = Array[ExtResource("8_vmeme")]([SubResource("Resource_ioeeg"), SubResource("Resource_1nrvd")])
 
 [node name="Entities" type="Node2D" parent="Cutscenes/Cutscene1"]
@@ -127,7 +127,7 @@ collision_layer = 0
 collision_mask = 64
 
 [node name="CutsceneTriggerCollisionShape" type="CollisionShape2D" parent="Cutscenes/Cutscene1/Trigger"]
-position = Vector2(-80, -64)
+position = Vector2(-104, -64)
 shape = SubResource("RectangleShape2D_p22m8")
 
 [node name="DebugPlayer" parent="." instance=ExtResource("9_1nrvd")]
