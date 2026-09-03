@@ -119,6 +119,7 @@ position = Vector2(384, 216)
 process_mode = 4
 visible = false
 position = Vector2(376, 200)
+energy = 10
 facing_right = false
 
 [node name="Trigger" type="Area2D" parent="Cutscenes/Cutscene1"]

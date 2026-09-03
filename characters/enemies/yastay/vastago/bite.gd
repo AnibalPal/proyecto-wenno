@@ -46,7 +46,7 @@ func _on_sprite_animations_frame_changed() -> void:
 		if(enemy.sprite_animations.animation == "bite"):
 			if(enemy.sprite_animations.frame == 1):
 				bite_hitbox.enable()
-				enemy.move_forward(enemy.speed * 4)
+				enemy.move_forward(enemy.speed * 5)
 				slide_forward = true
 			else:
 				bite_hitbox.disable()
