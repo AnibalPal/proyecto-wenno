@@ -27,7 +27,7 @@ var wall_colliding := false
 var player_ref : Player = null
 
 func character_ready() -> void:
-	energy_reward.s_reward_complete.connect(death)
+	energy_reward.s_reward_complete.connect(queue_free)
 	sprite_animations.material = sprite_animations.material.duplicate(true)
 	sprite_animations.play("idle")
 
@@ -71,6 +71,7 @@ func on_clash(_other_collision_position: Vector2) -> void:
 	})
 
 func death():
+	s_enemy_defeated.emit()
 	attack_duration.stop()
 	state_machine.transition_to_next_state(state_machine.DEATH)
 

@@ -8,6 +8,11 @@ signal s_reward_complete
 
 @onready var spawn_area: BoxArea = $SpawnArea	
 
+var current_spirit_amount := 0
+
+func _ready() -> void:
+	current_spirit_amount = spirit_amount
+
 func begin(target : Node2D) -> void:
 	for i in range(spirit_amount):
 		var spawn_pos = spawn_area.sample_point()
@@ -23,6 +28,6 @@ func spawn_energy(spawn_pos : Vector2, new_target : Node2D) -> void:
 	(spirit_instance as SpiritEnergy).begin_move_to_target(new_target)
 
 func on_spirit_consumed() -> void:
-	spirit_amount -= 1
-	if(spirit_amount >= 0):
+	current_spirit_amount -= 1
+	if(current_spirit_amount <= 0):
 		s_reward_complete.emit()
