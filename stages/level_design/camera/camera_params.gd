@@ -5,6 +5,7 @@ class_name CameraParams
 @export var draw_guideline := true
 @export var guideline_color := Color.RED
 @export var guideline_width := 6
+@export var camera_change_duration_secs := 2.0
 
 @export var line_color := Color.GREEN
 @export var line_width := 3
@@ -60,4 +61,6 @@ func get_bounds():
 	}
 
 func _on_camera_change_trigger_area_entered(_area: Area2D) -> void:
-	s_camera_params_changed.emit(get_bounds(), instant)
+	var camera_params = get_bounds()
+	camera_params["move_duration"] = camera_change_duration_secs
+	s_camera_params_changed.emit(camera_params, instant)

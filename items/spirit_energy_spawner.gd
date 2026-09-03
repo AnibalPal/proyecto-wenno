@@ -1,6 +1,8 @@
 extends Node2D
 class_name SpiritEnergySpawner
 
+signal s_reward_complete
+
 @export var spirit_scene : PackedScene
 @export var spirit_amount := 0
 
@@ -23,4 +25,4 @@ func spawn_energy(spawn_pos : Vector2, new_target : Node2D) -> void:
 func on_spirit_consumed() -> void:
 	spirit_amount -= 1
 	if(spirit_amount >= 0):
-		queue_free()
+		s_reward_complete.emit()

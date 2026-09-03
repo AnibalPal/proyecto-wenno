@@ -38,4 +38,4 @@ func execute_cutscene_step(action: Enums.CutsceneCommonActions, step_data = {}) 
 			s_persist.emit(entity)
 			s_action_complete.emit()
 		_:
-			print("CURSED SLIME ACTION NOT FOUND: %s"% action)
+			print("ENTITY ACTION NOT FOUND: %s"% action)

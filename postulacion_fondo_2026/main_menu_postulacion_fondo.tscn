@@ -1,9 +1,74 @@
-[gd_scene format=3 uid="uid://clxq8ngh85xpg"]
+[gd_scene load_steps=2 format=3 uid="uid://clxq8ngh85xpg"]
 
-[node name="MainMenuPostulacionFondo" type="Control"]
+[ext_resource type="Script" uid="uid://8u32n4e6pq5r" path="res://postulacion_fondo_2026/main_menu_postulacion_fondo.gd" id="1_s8tkr"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 6
+script = ExtResource("1_s8tkr")
+
+[node name="MainMenuPostulacionFondo" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="MainMenuPostulacionFondo"]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="MainMenuPostulacionFondo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.5
+offset_top = -95.0
+offset_right = 164.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Proyecto weño prototipo de 
+mecanicas principales
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGameButton" type="Button" parent="MainMenuPostulacionFondo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = 17.0
+offset_right = 62.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Comenzar juego"
+
+[node name="Salir" type="Button" parent="MainMenuPostulacionFondo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = 65.0
+offset_right = 62.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Salir"
+
+[connection signal="button_down" from="MainMenuPostulacionFondo/StartGameButton" to="." method="_on_start_game_button_button_down"]
+[connection signal="button_down" from="MainMenuPostulacionFondo/Salir" to="." method="_on_salir_button_down"]

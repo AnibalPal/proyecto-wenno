@@ -6,6 +6,7 @@ extends EnemyState
 
 func enter(_data: Dictionary) -> void:
 	death_vfx.play("death")
+	energy_reward.reparent(get_tree().root)
 	energy_reward.begin(owner.player_ref)
 	enemy.disable_hurtboxes()
 	enemy.disable_hitboxes()
@@ -30,6 +31,6 @@ func reset_state()  -> void:
 	pass
 
 func _on_death_vfx_animation_finished(anim_name: StringName) -> void:
-	if(anim_name == "death"):
-		state_machine.process_active = false
-		call_deferred("queue_free")
+	if(state_machine.current_state.name == state_machine.DEATH):
+		if(anim_name == "death"):
+			state_machine.process_active = false

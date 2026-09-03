@@ -2,6 +2,8 @@
 class_name Enemy
 extends CharacterEntity
 
+signal s_enemy_defeated
+
 @export_group("Stats")
 @export var health := 1
 @export var stamina := 10
@@ -63,6 +65,7 @@ func no_stamina_reaction():
 
 func death():
 	# Call a death animation and do whatever else is needed
+	s_enemy_defeated.emit()
 	queue_free()
 
 func on_clash(_other_collision_position: Vector2) -> void:

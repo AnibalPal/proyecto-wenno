@@ -56,7 +56,7 @@ func on_player_camera_entered(camera_params: Dictionary, instant: bool):
 		player_camera.limit_left = camera_params["left"]
 	else:
 		current_tween = get_tree().create_tween()
-		current_tween.parallel().tween_property(player_camera, "limit_top", camera_params["top"], tween_duration)
-		current_tween.parallel().tween_property(player_camera, "limit_right", camera_params["right"], tween_duration)
-		current_tween.parallel().tween_property(player_camera, "limit_bottom", camera_params["bottom"], tween_duration)
-		current_tween.parallel().tween_property(player_camera, "limit_left", camera_params["left"], tween_duration)
+		current_tween.parallel().tween_property(player_camera, "limit_top", camera_params["top"], camera_params["move_duration"])
+		current_tween.parallel().tween_property(player_camera, "limit_right", camera_params["right"], camera_params["move_duration"])
+		current_tween.parallel().tween_property(player_camera, "limit_bottom", camera_params["bottom"], camera_params["move_duration"])
+		current_tween.parallel().tween_property(player_camera, "limit_left", camera_params["left"], camera_params["move_duration"])

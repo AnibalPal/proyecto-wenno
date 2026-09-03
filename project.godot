@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Proyecto Weño"
-run/main_scene="uid://dryfdt66ntr3p"
+run/main_scene="uid://clxq8ngh85xpg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

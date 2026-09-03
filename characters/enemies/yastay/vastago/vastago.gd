@@ -15,12 +15,19 @@ extends Enemy
 @onready var attack_duration: Timer = $StateMachine/Jump/AttackDuration
 @onready var cutscene_state_machine: BaseCutsceneStateMachine = $CutsceneStateMachine
 
+@onready var energy_reward: SpiritEnergySpawner = $ShouldNotRotate/EnergyReward
+
+# TODO: Hack so the cutscene state machine works, there is a sprite_animations 
+# var in the Enemy class
+@onready var entity_animations: AnimatedSprite2D = $ShouldRotate/SpriteAnimations
+
 var floor_colliding := false
 var wall_colliding := false
 
 var player_ref : Player = null
 
 func character_ready() -> void:
+	energy_reward.s_reward_complete.connect(death)
 	sprite_animations.material = sprite_animations.material.duplicate(true)
 	sprite_animations.play("idle")
 

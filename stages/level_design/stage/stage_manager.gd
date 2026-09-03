@@ -12,6 +12,7 @@ extends Node2D
 @onready var current_chamber: Node2D = $CurrentChamber
 
 @onready var transition_effect_duration := 0.5
+@onready var game_over_menu: CanvasLayer = $GameOverMenu
 
 var current_chamber_path := ""
 var current_entry_name := ""
@@ -21,6 +22,7 @@ func _ready() -> void:
 	assert(initial_chamber_path, stage_id + ": No inital chamber path set!")
 	GlobalTransitionEffects.s_transition_finished.connect(on_transition_effect_finished)
 	PlayerData.s_update_player_status.emit("current_stage_id", stage_id)
+	player.s_game_over.connect(on_game_over)
 	var map_tab_node = player.find_child("MapTab")
 	map_tab_node.load_stage_map()
 	current_chamber_path = initial_chamber_path
@@ -108,3 +110,6 @@ func on_transition_effect_finished(effect_name: String) -> void:
 	if(effect_name == "fade_in"):
 		remove_chamber()
 		call_deferred("load_chamber")
+
+func on_game_over():
+	game_over_menu.show()

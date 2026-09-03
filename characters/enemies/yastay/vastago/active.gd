@@ -42,14 +42,15 @@ func reset_state()  -> void:
 	pass
 
 func select_attack() -> void:
-	var distance_to_player = abs(vastago.global_position.distance_to(player_ref.global_position))
-	if(distance_to_player < 180 and distance_to_player > 120):
-		if(jump_available):
+	if(player_ref):
+		var distance_to_player = abs(vastago.global_position.distance_to(player_ref.global_position))
+		if(distance_to_player < 180 and distance_to_player > 120):
+			if(jump_available):
+				vastago.turn_towards(player_ref.global_position)
+				jump()
+		elif(distance_to_player <= 120):
 			vastago.turn_towards(player_ref.global_position)
-			jump()
-	elif(distance_to_player <= 120):
-		vastago.turn_towards(player_ref.global_position)
-		bite()
+			bite()
 		
 
 func bite() -> void:
