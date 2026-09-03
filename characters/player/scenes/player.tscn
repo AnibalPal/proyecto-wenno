@@ -353,6 +353,7 @@ floor_snap_length = 5.0
 safe_margin = 0.05
 script = ExtResource("1_ittr2")
 jump_impulse = 180
+currency = null
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gy3q1")
@@ -581,8 +582,8 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
-offset_right = 88.0
-offset_bottom = 56.0
+offset_right = 104.0
+offset_bottom = 80.0
 color = Color(0, 0, 0, 0.34509805)
 
 [node name="HealthContainer" type="HBoxContainer" parent="UI/Game"]
@@ -599,6 +600,21 @@ text = "Vida: "
 [node name="Amount" type="Label" parent="UI/Game/HealthContainer"]
 layout_mode = 2
 text = "5"
+
+[node name="CurrencyContainer" type="HBoxContainer" parent="UI/Game"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 73.0
+offset_bottom = 80.0
+
+[node name="Currency" type="Label" parent="UI/Game/CurrencyContainer"]
+layout_mode = 2
+text = "Dinero: "
+
+[node name="Amount" type="Label" parent="UI/Game/CurrencyContainer"]
+layout_mode = 2
+text = "0"
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("18_j2wwh")]
 process_mode = 2

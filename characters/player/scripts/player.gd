@@ -25,6 +25,8 @@ signal s_game_over
 		jump_impulse = value
 		tool_update_jump_trayectory()
 
+@export var currency := 0
+
 @onready var floor_detection: RayCast2D = $ShouldNotRotate/FloorDetection
 @onready var player_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations
 @onready var entity_animations: AnimatedSprite2D = $ShouldRotate/PlayerAnimations
@@ -34,6 +36,7 @@ signal s_game_over
 @onready var player_hurtbox: PlayerHurtbox = $ShouldRotate/Hurtbox
 
 @onready var health_amount: Label = $UI/Game/HealthContainer/Amount
+@onready var currency_amount_label: Label = $UI/Game/CurrencyContainer/Amount
 
 @onready var player_state_machine: PlayerStateMachine = $StateMachine
 @onready var cutscene_state_machine: PlayerCutsceneStateMachine = $CutsceneStateMachine
@@ -97,6 +100,10 @@ func exit_cutscene_mode() -> void:
 		player_state_machine.transition_to_next_state(player_state_machine.state_data.RUN)
 	else:
 		player_state_machine.transition_to_next_state(player_state_machine.state_data.IDLE)
+
+func add_currency(amount: int):
+	currency += amount
+	currency_amount_label.text = str(currency)
 
 # Used in combat resolution
 func on_damaged(damage: int, enemy_position: Vector2) -> void:

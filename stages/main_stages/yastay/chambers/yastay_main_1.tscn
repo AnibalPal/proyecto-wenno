@@ -75,6 +75,7 @@ position = Vector2(192, 192)
 speed = 150
 gravity = 850
 jump_impulse = 400
+currency = 0
 debug_mode = true
 
 [node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]

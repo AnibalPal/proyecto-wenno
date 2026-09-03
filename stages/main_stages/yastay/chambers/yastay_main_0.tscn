@@ -285,7 +285,6 @@ tween_duration = 3.0
 initial_params = NodePath("CameraParams1")
 
 [node name="CameraParams1" parent="World/CameraManager" instance=ExtResource("4_ewis2")]
-camera_change_duration_secs = null
 line_color = Color(0.5756378, 0.94419235, 0.23654485, 1)
 instant = true
 
@@ -331,7 +330,7 @@ direction = "LEFT"
 
 [node name="0" parent="World/Exits" instance=ExtResource("7_ry3sd")]
 position = Vector2(488, 192)
-next_chamber_path = "uid://c83nmn214sib6"
+next_chamber_path = "uid://htnd6ovtegp1"
 next_entry_name = "0"
 direction = "RIGHT"
 
@@ -359,6 +358,7 @@ position = Vector2(-104, 224)
 speed = 150
 gravity = 850
 jump_impulse = 400
+currency = 0
 
 [node name="PlayerCamera" type="Camera2D" parent="DebugPlayer"]
 limit_top = 0

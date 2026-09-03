@@ -21,6 +21,7 @@ position = Vector2(240, 136)
 speed = 180
 gravity = 850
 jump_impulse = 400
+currency = 0
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 

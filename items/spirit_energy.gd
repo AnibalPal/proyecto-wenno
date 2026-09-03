@@ -32,4 +32,5 @@ func begin_move_to_target(new_target: Node2D) -> void:
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	s_spirit_consumed.emit()
+	_area.owner.add_currency(1)
 	queue_free()
