@@ -201,6 +201,8 @@ direction = "RIGHT"
 
 [node name="Exits" type="Node2D" parent="World"]
 
+[node name="Events" type="Node" parent="."]
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Cutscenes" type="Node2D" parent="."]
