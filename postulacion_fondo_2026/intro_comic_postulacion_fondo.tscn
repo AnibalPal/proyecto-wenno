@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c14iy271s58eq"]
+[gd_scene load_steps=45 format=3 uid="uid://c14iy271s58eq"]
 
 [ext_resource type="Script" uid="uid://nl6psaosiat" path="res://comic/comic.gd" id="1_8pagy"]
 [ext_resource type="Script" uid="uid://d2gkky6f5csp" path="res://comic/resources/comic_step.gd" id="2_lyywt"]
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
 [sub_resource type="Resource" id="Resource_xq138"]
 script = ExtResource("6_yhfb6")
-text = "Cada cierta cantidad de años, un terremoto azota a la tierra"
+text = "Un dia cualquiera ocurrió un terremoto de tal magnitud"
 text_effect = 1
 text_effect_params = {
 "typing_speed": 20.0
@@ -74,7 +74,7 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
 [sub_resource type="Resource" id="Resource_yhfb6"]
 script = ExtResource("6_yhfb6")
-text = "En sus grietas yace una energía cosmica"
+text = "Que creó grietas en el suelo"
 text_effect = 1
 text_effect_params = {
 "typing_speed": 20.0
@@ -85,8 +85,8 @@ metadata/_custom_type_script = "uid://bn8a4cow01we0"
 script = ExtResource("11_0qbsg")
 camera_effect = 5
 camera_effect_params = {
-"shake_decay": 5.0,
-"shake_strength": 10.0
+"shake_decay": 3.0,
+"shake_strength": 20.0
 }
 metadata/_custom_type_script = "uid://cuabsrcy3f2j5"
 
@@ -102,14 +102,28 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
 [sub_resource type="Resource" id="Resource_4kodd"]
 script = ExtResource("6_yhfb6")
-text = "Causando que todas las leyendas tomen forma física ..."
+text = "En estas yace una energía cosmica"
 text_effect = 1
 text_effect_params = {
 "typing_speed": 20.0
 }
 metadata/_custom_type_script = "uid://bn8a4cow01we0"
 
+[sub_resource type="Resource" id="Resource_564r5"]
+script = ExtResource("2_lyywt")
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_cxdoo"), SubResource("Resource_4kodd")])
+metadata/_custom_type_script = "uid://d2gkky6f5csp"
+
 [sub_resource type="Resource" id="Resource_u8i6f"]
+script = ExtResource("6_yhfb6")
+text = "Causando que las leyendas tengan forma física..."
+text_effect = 1
+text_effect_params = {
+"typing_speed": 20.0
+}
+metadata/_custom_type_script = "uid://bn8a4cow01we0"
+
+[sub_resource type="Resource" id="Resource_ammo5"]
 script = ExtResource("7_0qhgp")
 transition_effect = 1
 transition_params = {
@@ -117,10 +131,10 @@ transition_params = {
 }
 metadata/_custom_type_script = "uid://o4n8ls203asg"
 
-[sub_resource type="Resource" id="Resource_564r5"]
+[sub_resource type="Resource" id="Resource_bvyj5"]
 script = ExtResource("2_lyywt")
-comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_cxdoo"), SubResource("Resource_4kodd")])
-end_transition = SubResource("Resource_u8i6f")
+comic_effects = Array[ExtResource("3_r2gxf")]([SubResource("Resource_u8i6f")])
+end_transition = SubResource("Resource_ammo5")
 metadata/_custom_type_script = "uid://d2gkky6f5csp"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bfei"]
@@ -211,7 +225,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8pagy")
-comic_data = Array[ExtResource("2_lyywt")]([SubResource("Resource_8gv0s"), SubResource("Resource_76s7g"), SubResource("Resource_d0ust"), SubResource("Resource_0qhgp"), SubResource("Resource_564r5")])
+comic_data = Array[ExtResource("2_lyywt")]([SubResource("Resource_8gv0s"), SubResource("Resource_76s7g"), SubResource("Resource_d0ust"), SubResource("Resource_0qhgp"), SubResource("Resource_564r5"), SubResource("Resource_bvyj5")])
 comic_end_path = "uid://cjbyunlhyqeg7"
 
 [node name="ComicCamera" type="Camera2D" parent="."]
