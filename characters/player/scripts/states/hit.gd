@@ -56,6 +56,7 @@ func start_invincible() -> void:
 func end_invincible() -> void:
 	damaged_invul_effect.stop()
 	player_hurtbox.enable()
+	player.player_animations.modulate = Color.WHITE
 
 func _on_pushback_duration_timeout() -> void:
 	start_invincible()

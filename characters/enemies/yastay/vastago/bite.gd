@@ -38,7 +38,7 @@ func reset_state()  -> void:
 func _on_sprite_animations_animation_changed() -> void:
 	if(state_machine.current_state.name == state_machine.BITE):
 		if(enemy.sprite_animations.animation == "bite"):
-			enemy.move_backwards(enemy.speed / 2.0)
+			enemy.move_backwards(enemy.speed)
 			slide_forward = true
 
 func _on_sprite_animations_frame_changed() -> void:
@@ -46,7 +46,7 @@ func _on_sprite_animations_frame_changed() -> void:
 		if(enemy.sprite_animations.animation == "bite"):
 			if(enemy.sprite_animations.frame == 1):
 				bite_hitbox.enable()
-				enemy.move_forward(enemy.speed * 5)
+				enemy.move_forward(enemy.speed * 6)
 				slide_forward = true
 			else:
 				bite_hitbox.disable()

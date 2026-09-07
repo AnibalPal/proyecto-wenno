@@ -34,8 +34,10 @@ func state_physics_process(_delta: float) -> void:
 
 func handle_turn_around():
 	if(enemy.is_on_floor() and not enemy.is_floor_colliding()):
+		print("ON FLOOR AND NOT COLLIDING")
 		enemy.turn_around()
 	if(enemy.is_wall_colliding()):			
+		print("WALL COLLIDING")
 		enemy.turn_around()
 
 func wait() -> void:

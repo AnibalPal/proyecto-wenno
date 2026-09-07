@@ -6,6 +6,7 @@ func _ready() -> void:
 	start_game_button.grab_focus()
 	PlayerData.player_progression["cutscenes"]["yastay_1"] = false
 	PlayerData.player_progression["cutscenes"]["yastay_2"] = false
+	PlayerData.player_progression["cutscenes"]["yastay_3"] = false
 
 func _on_start_game_button_button_down() -> void:
 	GlobalTransitionEffects.fade_in()
