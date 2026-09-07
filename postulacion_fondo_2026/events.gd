@@ -12,7 +12,6 @@ func _ready() -> void:
 	vastago_2.s_enemy_defeated.connect(on_enemy_defeated)
 
 func on_enemy_defeated() -> void:
-	print("ENEMY DEFEATED")
 	remaining_enemies -= 1
 	check_all_enemies_defeated()
 
