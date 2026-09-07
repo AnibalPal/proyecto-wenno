@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
 [sub_resource type="Resource" id="Resource_xq138"]
 script = ExtResource("6_yhfb6")
-text = "Un dia cualquiera ocurrió un terremoto de tal magnitud"
+text = "Un día cualquiera ocurrió un terremoto de tal magnitud"
 text_effect = 1
 text_effect_params = {
 "typing_speed": 20.0
@@ -74,7 +74,7 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
 [sub_resource type="Resource" id="Resource_yhfb6"]
 script = ExtResource("6_yhfb6")
-text = "Que creó grietas en el suelo"
+text = "Que creó grietas por todas partes"
 text_effect = 1
 text_effect_params = {
 "typing_speed": 20.0
@@ -102,7 +102,7 @@ metadata/_custom_type_script = "uid://bmiq63t60p8ex"
 
 [sub_resource type="Resource" id="Resource_4kodd"]
 script = ExtResource("6_yhfb6")
-text = "En estas yace una energía cosmica"
+text = "En estas yace una energía cósmica"
 text_effect = 1
 text_effect_params = {
 "typing_speed": 20.0
@@ -116,7 +116,7 @@ metadata/_custom_type_script = "uid://d2gkky6f5csp"
 
 [sub_resource type="Resource" id="Resource_u8i6f"]
 script = ExtResource("6_yhfb6")
-text = "Causando que las leyendas tengan forma física..."
+text = "Causando que las leyendas tomen forma física..."
 text_effect = 1
 text_effect_params = {
 "typing_speed": 20.0

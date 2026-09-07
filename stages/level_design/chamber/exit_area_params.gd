@@ -15,5 +15,7 @@ func _ready() -> void:
 
 
 func editor_open_scene() -> void:
-	if(next_chamber_path):
-		EditorInterface.call_deferred("open_scene_from_path",next_chamber_path)
+	pass
+	#if(Engine.is_editor_hint()):
+		#if(next_chamber_path):
+			#EditorInterface.call_deferred("open_scene_from_path",next_chamber_path)
