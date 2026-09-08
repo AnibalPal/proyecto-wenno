@@ -86,6 +86,7 @@ func pause_game(tab_position := 0):
 
 func enter_cutscene_mode() -> void:
 	player_trigger_collision.set_deferred("disabled", true)
+	disable_hitboxes()
 	player_hurtbox.disable()
 	player_state_machine.deactivate_process()
 	cutscene_state_machine.activate_process()

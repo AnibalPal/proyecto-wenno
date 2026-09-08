@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b1t0wtgv2by8d"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://b1t0wtgv2by8d"]
 
 [ext_resource type="Texture2D" uid="uid://doha7ysfejs78" path="res://assets/prototype/prototype_tilemap32x32.png" id="1_ammu0"]
 [ext_resource type="PackedScene" uid="uid://bpso0ne2h4hid" path="res://stages/prototypes/world_prototype/scenes/breakable_wall.tscn" id="2_8fbk5"]
+[ext_resource type="PackedScene" uid="uid://e5jt7xnwm6q6" path="res://postulacion_fondo_2026/breakable_wall.tscn" id="3_8fbk5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trair"]
 texture = ExtResource("1_ammu0")
@@ -39,6 +40,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hruo8"]
 scenes/1/scene = ExtResource("2_8fbk5")
+scenes/2/scene = ExtResource("3_8fbk5")
 
 [resource]
 tile_size = Vector2i(32, 32)

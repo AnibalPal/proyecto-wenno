@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://x6ecqk2p0sow"]
+[gd_scene load_steps=14 format=3 uid="uid://x6ecqk2p0sow"]
 
 [ext_resource type="Script" uid="uid://bithqqv7d4idm" path="res://characters/npcs/npc_base.gd" id="1_uufvl"]
 [ext_resource type="Script" uid="uid://lsywa2qfk4rf" path="res://characters/cutscenes/base_cutscene_state_machine.gd" id="2_hmhlv"]
@@ -46,6 +46,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epbk7"]
 size = Vector2(16, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uufvl"]
+size = Vector2(48, 72)
+
 [node name="YastayNPC" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_uufvl")
@@ -79,3 +82,13 @@ position = Vector2(0, -40)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_epbk7")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_uufvl")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

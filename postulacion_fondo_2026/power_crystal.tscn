@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8ugk5nirbd7t"]
+
+[ext_resource type="Texture2D" uid="uid://bqsf2nvpj27mr" path="res://assets/items/energy_cristal_24x24.png" id="1_cw5rr"]
+[ext_resource type="Script" uid="uid://871oovvcabd2" path="res://postulacion_fondo_2026/power_crystal.gd" id="1_fu7sd"]
+[ext_resource type="PackedScene" uid="uid://djon0u4xhvtmr" path="res://items/spirit_energy_spawner.tscn" id="2_teyvn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fu7sd"]
+atlas = ExtResource("1_cw5rr")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teyvn"]
+atlas = ExtResource("1_cw5rr")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hc7kj"]
+atlas = ExtResource("1_cw5rr")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xth8y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fu7sd")
+}],
+"loop": true,
+"name": &"cracked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teyvn")
+}],
+"loop": true,
+"name": &"more_cracked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hc7kj")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fu7sd"]
+size = Vector2(32, 32)
+
+[node name="EnergyCrystal" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_fu7sd")
+
+[node name="SpiritEnergySpawner" parent="." instance=ExtResource("2_teyvn")]
+spirit_amount = 10
+
+[node name="TopLeft" parent="SpiritEnergySpawner/SpawnArea" index="0"]
+position = Vector2(-24, -24)
+
+[node name="BottomRight" parent="SpiritEnergySpawner/SpawnArea" index="1"]
+position = Vector2(24, 24)
+
+[node name="SpiritEnergySpawner2" parent="." instance=ExtResource("2_teyvn")]
+spirit_amount = 10
+
+[node name="SpiritEnergySpawner3" parent="." instance=ExtResource("2_teyvn")]
+spirit_amount = 10
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xth8y")
+animation = &"normal"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fu7sd")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+
+[editable path="SpiritEnergySpawner"]
+[editable path="SpiritEnergySpawner/SpawnArea"]
+[editable path="SpiritEnergySpawner2"]
+[editable path="SpiritEnergySpawner3"]

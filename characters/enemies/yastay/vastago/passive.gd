@@ -34,10 +34,8 @@ func state_physics_process(_delta: float) -> void:
 
 func handle_turn_around():
 	if(enemy.is_on_floor() and not enemy.is_floor_colliding()):
-		print("ON FLOOR AND NOT COLLIDING")
 		enemy.turn_around()
 	if(enemy.is_wall_colliding()):			
-		print("WALL COLLIDING")
 		enemy.turn_around()
 
 func wait() -> void:
@@ -71,14 +69,15 @@ func _on_move_time_timeout() -> void:
 
 func _on_activate_detection_area_entered(_area: Area2D) -> void:
 	if(state_machine.current_state.name == state_machine.PASSIVE):
-		is_stopped = true
-		player_ref = _area.owner
-		owner.player_ref = _area.owner
-		activate_detection.disable()
-		active_wait_time.start()
-		print("SHOW EXCLAMATION")
-		enemy.sprite_animations.play("idle")
-		enemy.velocity.x = 0.0
+		if(_area.owner is Player):
+			is_stopped = true
+			player_ref = _area.owner
+			owner.player_ref = _area.owner
+			activate_detection.disable()
+			active_wait_time.start()
+			print("SHOW EXCLAMATION")
+			enemy.sprite_animations.play("idle")
+			enemy.velocity.x = 0.0
 
 func _on_active_wait_time_timeout() -> void:
 	move_time.stop()

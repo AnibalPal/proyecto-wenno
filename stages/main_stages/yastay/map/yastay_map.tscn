@@ -45,19 +45,19 @@ offset_right = 8.0
 offset_bottom = -8.0
 id = "main_2"
 visited = false
+down_open = true
 left_open = true
 
 [node name="Main3" parent="." instance=ExtResource("2_4y3kp")]
 visible = false
 layout_mode = 0
-offset_left = -56.0
+offset_left = 8.0
 offset_top = 16.0
-offset_right = -56.0
+offset_right = 8.0
 offset_bottom = 16.0
 id = "main_3"
 visited = false
 up_open = true
-left_open = true
 
 [node name="Main4" parent="." instance=ExtResource("2_4y3kp")]
 visible = false

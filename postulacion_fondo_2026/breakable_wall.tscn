@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://e5jt7xnwm6q6"]
+
+[ext_resource type="Script" uid="uid://bfqcqgpreb3wm" path="res://stages/prototypes/world_prototype/scripts/breakable_wall.gd" id="1_ek6dw"]
+[ext_resource type="Texture2D" uid="uid://beb7etuqceo7u" path="res://assets/prototype/single32x32tile.png" id="2_ek6dw"]
+[ext_resource type="Script" uid="uid://cb0tywgdqk0ua" path="res://characters/collisions/scripts/enemy_hurtbox.gd" id="3_1g8m4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oao1w"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek6dw"]
+size = Vector2(32, 32)
+
+[node name="BreakableWall" type="StaticBody2D"]
+script = ExtResource("1_ek6dw")
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oao1w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ek6dw")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("3_1g8m4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_ek6dw")
+debug_color = Color(0.6117647, 0.3647059, 1, 0.41960785)
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

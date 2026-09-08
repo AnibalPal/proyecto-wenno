@@ -28,6 +28,12 @@ var player_progression := {
 		"yastay_2": false,
 		"yastay_3": false
 	},
+	"energy_crystals": {
+		"1": false,
+		"2": false,
+		"3": false,
+		"4": false
+	}
 }
 
 var map_progression := {
