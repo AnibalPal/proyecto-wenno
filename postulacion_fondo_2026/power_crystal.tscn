@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b8ugk5nirbd7t"]
 
-[ext_resource type="Texture2D" uid="uid://bqsf2nvpj27mr" path="res://assets/items/energy_cristal_24x24.png" id="1_cw5rr"]
+[ext_resource type="Texture2D" uid="uid://bqsf2nvpj27mr" path="res://assets/items/energy_crystal_24x24.png" id="1_cw5rr"]
 [ext_resource type="Script" uid="uid://871oovvcabd2" path="res://postulacion_fondo_2026/power_crystal.gd" id="1_fu7sd"]
 [ext_resource type="PackedScene" uid="uid://djon0u4xhvtmr" path="res://items/spirit_energy_spawner.tscn" id="2_teyvn"]
 
